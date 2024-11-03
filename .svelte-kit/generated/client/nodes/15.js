@@ -1,0 +1,1 @@
+export { default as component } from "../../../../src/routes/penyampaian-lppd/+page.svelte";
