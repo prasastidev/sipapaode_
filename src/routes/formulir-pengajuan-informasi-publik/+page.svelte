@@ -14,7 +14,7 @@
 <br/><br/>
 
 <div class="container">
-    <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Formulir Pengajuan Informasi oleh Publik dan Tata Cara Pengajuan</Heading>
+    <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Formulir Pengajuan Informasi oleh Publik dan Tata Cara Pengajuan</Heading>
     <br/>
  <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Formulir Permohonan dan Pengajuan</Heading>
    Dibawah ini adalah Formulir Pengajuan Informasi. <br/><br/>

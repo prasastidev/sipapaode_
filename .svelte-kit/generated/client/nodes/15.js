@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/penyampaian-lppd/+page.svelte";
+export { default as component } from "../../../../src/routes/formulir-pengajuan-informasi-publik/+page.svelte";

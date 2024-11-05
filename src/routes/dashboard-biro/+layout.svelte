@@ -59,22 +59,22 @@
                       <span class="inline-flex justify-center items-center p-3 ms-3 w-3 h-3 text-sm font-medium text-primary-600 bg-primary-200 rounded-full dark:bg-primary-900 dark:text-primary-200"> 3 </span>
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Lanskap Sultra">
+                  <SidebarItem label="Lanskap Sultra" href="/dashboard-biro/lanskap-sultra">
                     <svelte:fragment slot="icon">
                       <DrawSquareSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Laporan LPPD">
+                  <SidebarItem label="Laporan LPPD" href="/dashboard-biro/laporan-lppd">
                     <svelte:fragment slot="icon">
                       <FileCopyAltSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Banner Info">
+                  <SidebarItem label="Banner Info" href="/dashboard-biro/banner-info">
                     <svelte:fragment slot="icon">
                       <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                <SidebarItem label="Info Users">
+                <SidebarItem label="Info Users" href="/dashboard-biro/info-users">
                   <svelte:fragment slot="icon">
                     <UserCircleSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>

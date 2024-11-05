@@ -96,7 +96,7 @@ Sulawesi Tenggara <br/>Tahun 2024</Heading>
         <TableBodyCell class="whitespace-break-spaces">Berkala</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">Hardcopy dan Softcopy</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">Selama Berlaku</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces"><EyeOutline class="w-4 h-4 align-middle inline" /> Lihat</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces"><a href="/daftar-informasi-publik" style="border-bottom:2px dotted #1251d1;color:#1251d1;"><EyeOutline class="w-4 h-4 align-middle inline" /> Lihat</a></TableBodyCell>
       </TableBodyRow>
       <TableBodyRow>
         <TableBodyCell>7</TableBodyCell>

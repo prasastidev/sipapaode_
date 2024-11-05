@@ -11,11 +11,11 @@
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Koord. Otonomi Daerah</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Banner Info</Heading>
     <br/>
 
 
-Dashboard Koord. Otonomi Daerah...dd
+Dashboard Banner Info ...
 
   <br/> <br/>
 </div>

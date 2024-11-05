@@ -229,7 +229,7 @@ function onWindowClick(e) {
 				Informasi Luas Wilayah di Sulawesi Tenggara secara keseluruhan 
 			  </div>
 			</Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🧑🏽‍🤝‍🧑🏽 Jumlah Penduduk</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -240,7 +240,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Penduduk di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🌆 Kabupaten</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -251,7 +251,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kabupaten di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">15</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏙️ Kota</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -262,7 +262,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kota di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">2</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏘️ Kecamatan</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -273,7 +273,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kecamatan di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏡 Kelurahan / Desa</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -284,7 +284,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kecamatan / Desa di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏞️ Gunung</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -295,7 +295,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Gunung di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏝️ Pulau</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -306,7 +306,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Pulau di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🌳 Hutan</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -317,7 +317,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Hutan di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight">111.222</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">111.222</p></Card>
 		</div>
 	</div>
 	<br/><br/>
@@ -391,8 +391,8 @@ function onWindowClick(e) {
 		</td>
         <td>2.958,69 km2 </td>
         <td class="hidekolom">243.842  </td>
-		<td class="hidekolom">12  </td>
-		<td class="hidekolom">4  </td>
+		<td class="hidekolom">Tidak Spesifik  </td>
+		<td class="hidekolom">26  </td>
 		<td class="hidekolom">--  </td>
          <td class="hidekolom">4°S 121.6°E </td>
 		 <td> 
@@ -426,8 +426,8 @@ function onWindowClick(e) {
 		</td>
         <td>2.958,69 km2 </td>
         <td class="hidekolom">243.842  </td>
-		<td class="hidekolom">12  </td>
-		<td class="hidekolom">4  </td>
+		<td class="hidekolom">Tidak Spesifik  </td>
+		<td class="hidekolom">11  </td>
 		<td class="hidekolom">--  </td>
          <td class="hidekolom">4°S 121.6°E </td>
          <td> 
@@ -462,8 +462,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		<td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		<td class="hidekolom">15  </td>
 		<td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -497,8 +497,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		<td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		<td class="hidekolom">38  </td>
 		<td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -533,8 +533,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		<td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		<td class="hidekolom">29  </td>
 		<td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -569,8 +569,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		<td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		<td class="hidekolom">14  </td>
 		<td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -605,8 +605,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		   <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		   <td class="hidekolom">--  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -641,8 +641,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		   <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		   <td class="hidekolom">11  </td>
 	    	<td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -677,8 +677,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		 <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		 <td class="hidekolom">6  </td>
 		  <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -713,8 +713,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">3  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -749,8 +749,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">29  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -785,8 +785,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">72  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -821,8 +821,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">167  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -857,8 +857,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">35  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -893,8 +893,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">142  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -929,8 +929,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">18  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 
@@ -965,8 +965,8 @@ function onWindowClick(e) {
 			</td>
 			<td>2.958,69 km2 </td>
 			<td class="hidekolom">243.842  </td>
-			<td class="hidekolom">12  </td>
-		    <td class="hidekolom">4  </td>
+			<td class="hidekolom">Tidak Spesifik  </td>
+		    <td class="hidekolom">1  </td>
 		    <td class="hidekolom">--  </td>
 			 <td class="hidekolom">4°S 121.6°E </td>
 			 <td> 

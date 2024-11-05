@@ -8,7 +8,6 @@
 
 <header>
 
-
 	<Navbar class="fixed w-full z-20 top-0 start-0  py-0.6 border-b-indigo-500" style="background-color: var(--color-bg-1);
     background-size: 100vw 100vh;
     background-image: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);">		
@@ -27,7 +26,7 @@
 			<DropdownItem href="/profil/#Bidang" class="text-[#4a494d]">Bidang-Bidang</DropdownItem>
 			<DropdownItem href="/profil/#Visi" class="text-[#4a494d]">Visi Misi</DropdownItem>
 			<DropdownItem href="/profil/#Struktur" class="text-[#4a494d]">Struktur Organisasi</DropdownItem>
-			<DropdownItem href="/profil" class="text-[#4a494d]">Profil Pimpinan</DropdownItem>
+			<DropdownItem href="/profil-pimpinan" class="text-[#4a494d]">Profil Pimpinan</DropdownItem>
 			<DropdownDivider />
 			<DropdownItem href="/gallery" class="text-[#4a494d]">Gallery Foto & Kegiatan</DropdownItem>
 		   </Dropdown>
@@ -38,7 +37,7 @@
 			<DropdownItem href="/penyampaian-lppd" class="text-[#4a494d]">Penyampaian LPPD dan LPKJ</DropdownItem>
 			<DropdownItem href="/daftar-informasi-publik" class="text-[#4a494d]">Daftar Informasi Publik</DropdownItem>
 			<DropdownItem href="/formulir-pengajuan-informasi-publik" class="text-[#4a494d]">Formulir Pengajuan Informasi oleh Publik</DropdownItem>
-			<DropdownItem href="/profil" class="text-[#4a494d]">Regulasi / Produk Hukum</DropdownItem>
+			<DropdownItem href="/regulasi-produk" class="text-[#4a494d]">Regulasi / Produk Hukum</DropdownItem>
 		   </Dropdown>
 		  <NavLi href="/login" style="border: 2px solid #808a93;padding: 2px 14px;border-radius: 5px;vertical-align: middle;margin-top: -5px;">Masuk</NavLi>
 		</NavUl>	

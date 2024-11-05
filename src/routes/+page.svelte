@@ -7,7 +7,13 @@
 	import ImageKSwasta from '$lib/images/Kerjasama-Pihak-Swasta.webp';
 	import ImageKAinstansi from '$lib/images/Kerjasama-Antar-Instansipemerintah.webp';
 	import ImageKLuarNegeri from '$lib/images/Kerjasama-Luar-Negeri.webp';
-	import ReportKerjasama from '$lib/images/Report-Kerjasama.webp';
+	import PenataanWilayahimg from '$lib/images/Penataan-wilayah.webp';
+	import KodeWilayahimg from '$lib/images/Kode-Wilayah.webp';
+	import Otonomiimg from '$lib/images/otonomi.webp';
+	import regionimg from '$lib/images/region.webp';
+	import laporanimg from '$lib/images/laporan.webp';
+	import Inventarisasiotonomi from '$lib/images/inventarisasi-otonomi-baru.webp';
+	import penerbitanSKimg from '$lib/images/SK.webp';
 	import ImagelogoSultra from '$lib/images/Sultra-Logo.webp';
 	import UlaSiolaLogo from '$lib/images/Ula-Siola.webp';
 	import SILPPDLogo from '$lib/images/SILPPD.webp';
@@ -144,6 +150,24 @@
       opacity: 1
     }
   };
+
+  
+function ReadMore() {
+  var dots = document.getElementById("dots");
+  var moreText = document.getElementById("more");
+  var btnText = document.getElementById("ReadMore");
+
+  if (dots.style.display === "none") {
+    dots.style.display = "inline";
+    btnText.innerHTML = "[+] Lihat Lebih Banyak"; 
+    moreText.style.display = "none";
+  } else {
+    dots.style.display = "none";
+    btnText.innerHTML = "[-] Lihat Lebih Sedikit"; 
+    moreText.style.display = "inline";
+  }
+}
+
 	
 </script>
 
@@ -177,6 +201,7 @@
 						Semoga acara ini memberikan manfaat yang besar bagi kita semua. <br/>
 					</p>
 					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Wassalamu’alaikum warahmatullahi wabarakatuh.</p>
+					
 					<svelte:fragment slot="footer">
 					  <Button href="/profil">Lanjut, Lihat Profil Biro Pemerintahan & Otonomi Daerah - Sultra</Button>
 					  <Button color="alternative">Tutup</Button>
@@ -184,7 +209,7 @@
 				  </Modal>
 
 				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang di Biro Pemerintahan & Otonomi Daerah, meliputi:</span> <br/>
-				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1">Memfasilitasi Administrasi Kerjasama Badan Usaha/Swasta maupun Antar Pemerintah Dalam dan Luar Negeri</Popover>
+				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah Dalam dan Luar Negeri</Popover>
                   <Button color="light" pill id="b2" style="background:transparent;margin:2px;"> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2">Informasi Standar Pelayanan Minimal (SPM), Informasi dan Koordinasi Pelaksanaan monitoring, Evaluasi dan Pelaporan di Bidang Pemerintahan Umum, Kode dan Data Wilayah serta Pembentukan Daerah Otonomi Baru.</Popover>
 				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3">Pengkoordinasian Administrasi Kepala Daerah dan DPRD, Penerbitan SK Gubernur tentang usul Pengangkatan Pj Bupati/Walikota, Penerbitan SK Gubernur Pemberhentian, Pengganti Antar Waktu, Serta Administrasi Evaluasi Kinerja Daerah.</Popover>
               </div>
@@ -197,6 +222,7 @@
 	   </div>
     </div>
     <br/><br/>
+	<!--
 	<div style="text-align:center;margin:10px 0px;padding:14px;width:100%;">
 		{#if visibleBanner}
         <div id="banner" tabindex="-1" class="flex z-50 gap-8 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800">
@@ -205,9 +231,8 @@
          <CloseButton class="border-2" on:click={() => (visibleBanner = false)} />
          </div>
          {/if}
-
-	</div>
-	  <br/><br/>
+	</div>  -->
+	  <br/><br/> 
 </section>
 	<!--End  Section TOP Header -->  
 
@@ -222,12 +247,10 @@
 	  <Popover triggeredBy="#panduaninfo" class="w-72 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Status Layanan</h3>
-		  <Badge color="green" rounded class="px-2.5 py-0.5 mb-2 place-items-start">
-		  <Indicator color="green" size="xs" class="me-1" />Online</Badge> - <label style="color:blue;">Via Online</label> <br/>
-		   Layanan bertanda ini akan dilakukan secara online, Anda bisa mensubmit berkas permohonan secara online dan diproses melalui online, Anda akan menerima notifikasi melalui Email atau No WA. <br/>
-		   <Badge color="dark" rounded class="px-2.5 py-0.5 mb-2 place-items-start">
-			<Indicator color="dark" size="xs" class="me-1" />Offline</Badge> - <label style="color:blue;">Via Langsung (Kantor)</label> <br/>
-		   Layananan bertanda ini akan dilakukan secara Offline atau melalui Via langsung Kantor Biro Pemerintahan & Otonomi Daerah Sultra dan di proses di Kantor Biro Pemerintahan & Otda Sulawesi Tenggara.
+		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
+		  Layanan dapat dilakukan dan diproses secara online. Anda dapat mengisi Formulir yang disediakan secara online, Petugas Biro yang ditunjuk akan menghubungi Anda melalui online, baik via Email ataupun No. Contact. <br/>
+		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
+		   Layanan dapat dilakukan secara langsung di Kantor Biro Pemerintahan dan Otda Sultra, Petugas yang ditunjuk akan memberikan Informasi kepada Anda secara langsung.
 		</div>
 	  </Popover>
 	
@@ -249,10 +272,11 @@
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="#">Fasilitas Kerjasama & PKS dengan Pihak Ketiga / Badan Usaha (Swasta)</a>
+				  <a href="/kerjasama-pihak-ketiga">Fasilitas Kerjasama dengan Pihak Ketiga / Swasta</a>
 				</h3>
 				<p class="textKetFitur">
-				   <a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+				   <a href="/kerjasama-pihak-ketiga/#TABLE_KSPK" style="text-decoration:underline;">>> Lihat Data Kerjasama</a> <br/><br/>
+				   <a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
@@ -266,10 +290,11 @@
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="#">Fasilitas Kerjasama & PKS antar Pemerintah Daerah dan K/L</a>
+				  <a href="/kerjasama-antar-pemerintah-daerah-kl">Fasilitas Kerjasama antar Pemerintah Daerah dan K/L</a>
 				</h3>
 				<p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+					<a href="/kerjasama-antar-pemerintah-daerah-kl/#TABLE_KSAPD" style="text-decoration:underline;">>> Lihat Data Kerjasama</a> <br/><br/>
+					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  
@@ -282,10 +307,11 @@
 				  </div>
 				</div>
 				<h3 class="title text-sm font-bold" style="line-height:normal;">
-				  <a href="#">Fasilitas Kerjasama & PKS dengan Pihak Asing / Luar Negeri</a>
+				  <a href="/kerjasama-luar-negeri">Fasilitas Kerjasama dengan Pihak Asing / Luar Negeri</a>
 				</h3>
 				<p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+					<a href="/kerjasama-luar-negeri/#TABLE_KSLN" style="text-decoration:underline;">>> Lihat Data Kerjasama</a> <br/><br/>
+					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
 			
@@ -297,60 +323,60 @@
 			Pilih layanan Koordinator Pemerintahan sesuai dengan yang akan Anda lakukan. Silahkan Baca Prosedur sebelum melakukan proses Pengajuan.
 		  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">  <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;">  <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/> 
 				<div class="imgBox">
-				<!--  <img src={ImageKSwasta} alt="kerjasama pihak swasta"> -->
+				  <img src={ PenataanWilayahimg } alt="kerjasama pihak swasta"> 
 				  <div class="img-blur">
-					<a href="#">Lanjutkan ></a>
+					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="#">Fasilitas Penataan Wilayah Pemerintahan (HUT RI, HUT SULTRA)</a>
+				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan (HUT RI, HUT SULTRA)</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>   
 				<div class="imgBox">
-				<!--   <img src={ImageKAinstansi} alt="kerjasama instansi"> -->
+				   <img src={regionimg} alt="kerjasama instansi"> 
 				  <div class="img-blur">
-					<a href="#">Lanjutkan ></a>
+					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="#">Fasilitas Penegasan Batas Daerah</a>
+				  <a href="/coming-soon">Fasilitas Penegasan Batas Daerah</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>   
 				<div class="imgBox">
-				<!--   <img src={ImageKLuarNegeri} alt="Kerjasama Luar Negeri"> -->
+			      <img src={ Otonomiimg } alt="Kerjasama Luar Negeri"> 
 				  <div class="img-blur">
-					<a href="#">Lanjutkan ></a>
+					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-sm font-bold" style="line-height:normal;">
-				  <a href="#">Pembentukan Daerah Otonomi Baru</a>
+				  <a href="/coming-soon">Pembentukan Daerah Otonomi Baru</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>   
 				<div class="imgBox">
-				<!--   <img src={ReportKerjasama} alt="Report Kerjasama">  -->
+				  <img src={ KodeWilayahimg } alt="Report Kerjasama"> 
 				  <div class="img-blur">
-					<a href="#">Lanjutkan ></a>
+					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="#">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</a>
+				  <a href="/coming-soon">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
@@ -366,18 +392,17 @@
 		  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;"> 
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
 				<br/>
 				  <div class="imgBox">
-				  <!--  <img src={ImageKSwasta} alt="kerjasama pihak swasta"> -->
+				  <img src={ penerbitanSKimg } alt="kerjasama pihak swasta"> 
 					<div class="img-blur">
-					  <a href="#">Lanjutkan ></a>
+					  <a href="/coming-soon">Lanjutkan ></a>
 					</div>
 				  </div>
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
-					<a href="#">Penerbitan Surat & SK Gubernur Pejabat Negara & Legistlatif</a>
+					<a href="/coming-soon">Penerbitan Surat & SK Gubernur Pejabat Negara & Legistlatif</a>
 				  </h3>
 				  <p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
@@ -386,7 +411,7 @@
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
 				<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
 				  <div class="imgBox">
-				  <!--   <img src={ImageKAinstansi} alt="kerjasama instansi"> -->
+				    <img src={ laporanimg } alt="kerjasama instansi"> 
 					<div class="img-blur">
 					  <a href="#">Lanjutkan ></a>
 					</div>
@@ -401,13 +426,13 @@
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
 				  <div class="imgBox">
-				  <!--   <img src={ImageKLuarNegeri} alt="Kerjasama Luar Negeri"> -->
+				    <img src={ Inventarisasiotonomi } alt="Kerjasama Luar Negeri"> 
 					<div class="img-blur">
-					  <a href="#">Lanjutkan ></a>
+					  <a href="/coming-soon">Lanjutkan ></a>
 					</div>
 				  </div>
 				  <h3 class="title text-sm font-bold" style="line-height:normal;">
-					<a href="#">Inventarisasi Penataan Urusan Daerah Otonomi Baru</a>
+					<a href="/coming-soon">Inventarisasi Penataan Urusan Daerah Otonomi Baru</a>
 				  </h3>
 				  <p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
@@ -437,7 +462,8 @@
 	 <RectangleListOutline class="w-6 h-6 text-blue-500 dark:text-blue-500" />
    </span>
  </svelte:fragment>
- <p class="alurlayanan mb-4 text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius: 8px;box-shadow: #e9edf4 7px 7px;">Pengguna Layanan menyampaikan Surat Permohonan baik secara Online ataupun Offline. Layanan berstatus Online atau Offline sesuai dengan Pengajuan layanan. Jika layanan berstatus online Anda bisa mengajukan permohonan secara Online. dan layanan berstatus offline, Anda bisa mengajukan surat permohonan di tujukan ke Alamat Biro Pemerintahan dan Otda Sultra. Jl. xxx Sulawesi Tenggara.</p>
+ <p class="alurlayanan mb-4 text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius: 8px;box-shadow: #e9edf4 7px 7px;">
+	Pemohon atau Pengguna layanan, menyampaikan Permohonan baik via Online ataupun Offline (Kantor), yang terdapat pada Fitur Layanan. Pengajuan Informasi oleh Publik dapat mendownload Formulir pada halaman Laporan dan Informasi.</p>
 </TimelineItem>
 <TimelineItem title=" Mekanisme">
  <svelte:fragment slot="icon">
@@ -446,11 +472,16 @@
    </span>
  </svelte:fragment>
  <p class="alurlayanan text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius: 8px;box-shadow: #e9edf4 7px 7px;">
-	<b>&#10162;</b> Pengguna Layanan mengajukan atau menyampaikan surat resmi ditujukan kepada Kepala Biro Pemerintahan dan Otda Sulawesi Tenggara, baik via online maupun via Offline (langsung). 
- <br/><b>&#10162;</b> Kepala Biro Pemerintahan dan Otda Sulawesi tenggara mendisposisikan surat permohonan melalui kepada Kepala Bagian Otonomi Daerah. Selanjutnya,
- <br/><b>&#10162;</b> Kepala Bagian Otonomi daerah akan menugaskan Pejabat/Pegawai berkompeten untuk memberikan data dan Informasi.
- <br/><b>&#10162;</b> Pejabat atau Pegawai yang ditunjuk melaksanakan tugas memberikan data dan informasi ke pengguna layanan.
- <br/><b>&#10162;</b> Pengguna layanan akan menerima informasi baik melalui online atau data langsung ke Kantor Biro Pemerintahan dan Otda Sultra dan selanjutnya mengisi buku tamu.</p>
+	<b>&#10162;</b> Pengguna layanan mengajukan Permohonan melalui Online atau Offline (Kantor).  
+ <br/><b>&#10162;</b> Petugas yang telah ditunjuk oleh Kepala Biro Pemerintahan dan Otda Sultra Akan menerima Informasi Anda, memverifikasi dan memproses permohonan yang Anda ajukan.
+ <br/>
+ <span id="dots" style="margin-left:4px;"> &nbsp;</span><span id="more" style="display: none;">
+ <b>&#10162;</b> Petugas layanan akan meneruskan permohonan Anda kepada Kepala Biro Pemerintahan dan Otda Sultra, lalu Kepala Biro Pemerintahan dan Otda Sultra menugaskan Pejabat/Pegawai berkompeten memberikan data dan informasi sesuai dengan permohonan yang Anda sampaikan.
+ <br/><b>&#10162;</b> Pejabat atau Pegawai yang ditunjuk melaksanakan tugas memberikan data dan Informasi kepada Pengguna Layanan.
+ <br/><b>&#10162;</b> Pengguna layanan akan menerima informasi baik secara online ataupun via Kantor dan selanjutnya menandatangani buku tamu yang telah disediakan.<br/>
+</span><span on:click={ReadMore} id="ReadMore" style="text-decoration:underline;margin-top:-10px;cursor:pointer;font-weight: 600;">[+] Lihat Lebih Banyak</span>
+</p>
+
 </TimelineItem>
 <TimelineItem title=" Waktu Penyelesaian">
  <svelte:fragment slot="icon">
@@ -459,7 +490,7 @@
    </span>
  </svelte:fragment>
  <p class="alurlayanan text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius:8px;box-shadow: #e9edf4 7px 7px;">
-	Informasi akan disampaikan maksimal 3 hari sejak surat permohonan diterima. Bisa berlangsung hingga 1 jam, Jika Permohonan dilakukan secara offline (langsung).</p>
+	Waktu penyelesaian bisa berlangsung dalam 1 jam ataupun selama 3-5 hari. Sesuai dengan Permohonan yang diajukan.</p>
 </TimelineItem>
 <TimelineItem title=" Output / Hasil">
 	<svelte:fragment slot="icon">
@@ -468,7 +499,7 @@
 	  </span>
 	</svelte:fragment>
 	<p class="alurlayanan text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius: 8px;box-shadow: #e9edf4 7px 7px;">
-		Output atau hasil bisa berupa pdf berisi Informasi atau kebijakan.</p>
+		Output dapat berupa Informasi ataupun Surat Keputusan dari Penyelenggara.</p>
    </TimelineItem>
    <TimelineItem title=" Info Hot Line">
 	<svelte:fragment slot="icon">
@@ -477,7 +508,7 @@
 	  </span>
 	</svelte:fragment>
 	<p class="alurlayanan text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius: 8px;box-shadow: #e9edf4 7px 7px;">
-		Bisa konsultasi langsung atau melalui Contact (+6200000)</p>
+		Informasi Pertanyaan dapat melalui langsung di Kantor Biro Pemerintahan dan Otda Sultra atau melalui contact: (+0600)</p>
    </TimelineItem>
 </Timeline> 
 		 </div>
@@ -486,10 +517,9 @@
 			</h2>
 			<p style="padding: 4px 4px 16px 8px;border-radius:8px;background: rgb(255,255,255);
 background: linear-gradient(147deg, rgba(255,255,255,1) 38%, rgba(254,254,255,1) 73%, rgba(226,237,255,1) 99%, rgba(229,231,235,1) 100%);">
-Informasi pengajuan layanan pada Biro Pemerintahan dan Otonomi Daerah Sultra dapat dilakukan melalui Fitur Layanan yang terdapat pada Tab kolom layanan di atas. <br/> <br/>
-Jika Status layanan berlangsung Online, Layanan bisa langsung di ajukan secara Online 
-dengan melihat informasi sehubungan dengan informasi yang akan diajukan pada kolom tab layanan tersebut. Jika layanan berstatus offline Anda bisa langsung datang ke Kantor Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara untuk menerima informasi tentang layanan.
-<br/><br/>  <b>Verifikasi Layanan:</b> <br/>
+Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan Informasi dapat dilakukan secara online ataupun melalui offline (via kantor) dengan mendatangi langsung Kantor Biro Pemerintahan dan Otda Sulawesi Tenggara. 
+<br/><br/>Pengajuan Informasi oleh Publik dapat mendownload Formulir Pengajuan Informasi pada <a href="/formulir-pengajuan-informasi-publik" style="text-decoration:underline;">halaman Laporan dan Informasi</a> pada layanan ini. 
+<br/><br/>  <b>Jam Kerja Verifikasi Informasi:</b> <br/>
 			<b>Senin - Kamis</b> (Pukul 08.00 - 15.00) <br/>
 			<b>Jumat</b> (Pukul 08.00 - 12.00)	<br/>		
 			</p> <br/> <br/>
@@ -498,10 +528,9 @@ dengan melihat informasi sehubungan dengan informasi yang akan diajukan pada kol
 			<p style="padding:10px;background:white;">
 			<b>Email:</b> hotline@gmail.com <br/><br/>
 			
-		    <b>HotLine:</b> +62000000 <br/><br/>
 			<b>Alamat:</b> <br/>
 			<b>Biro Pemerintahan dan Otonomi Daerah Sultra</b><br/>
-			Kompleks Bumi Praja Anduonohu, <br/>Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>
+			Kompleks Bumi Praja Anduonohu, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>
 			</p>
 		 </div>             
 	 </div>
