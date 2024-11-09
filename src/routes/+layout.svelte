@@ -2,7 +2,7 @@
 import '../app.css';
 import { Footer, FooterCopyright, FooterLinkGroup, FooterLink, FooterBrand } from 'flowbite-svelte';
 import logo from '$lib/images/SipapaOde-logo.webp';
-import { MapPinAltOutline } from 'flowbite-svelte-icons';
+import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 </script>
 
 <div class="app">
@@ -23,9 +23,9 @@ import { MapPinAltOutline } from 'flowbite-svelte-icons';
 	</div>
 	<hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 	<FooterCopyright href="/" by="SiPapaOde" /> 
-	<center style="color: #6b7280;font-size: small;"> Biro Pemerintahan & Otonomi Daerah - Sulawesi Tenggara 
+	<span class="block text-sm text-gray-500 sm:text-center" style="color: #6b7280;"> <BuildingOutline class="w-4 h-4 align-middle inline" /> Biro Pemerintahan & Otonomi Daerah - Sulawesi Tenggara 
     <br/> <MapPinAltOutline class="w-4 h-4 align-middle inline" /> <span>Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, Kota Kendari, Sulawesi Tenggara 93231</span>
-	</center>
+	</span>
 
   </Footer>
 

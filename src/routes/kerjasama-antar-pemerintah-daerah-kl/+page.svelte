@@ -1,8 +1,9 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data;
-    import { Heading, Chart, Card } from 'flowbite-svelte';
+    import { Heading, Chart, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
     import { ArrowDownToBracketOutline } from 'flowbite-svelte-icons';
+    import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
   
     const options = {
     series: [52.8, 36.8, 10.4],
@@ -94,6 +95,20 @@
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama antar Pemerintah Daerah dan K/L</Heading>
 <br/>
+Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara  ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> dengan mengisi formulir pada link di bawah berikut.
+<br/>
+<GradientButton id="ButtonFormulir" href="/kerjasama" outline color="redToYellow" class="inline-flex w-64 h-12 mt-4">Formulir</GradientButton>
+<Tooltip triggeredBy="#ButtonFormulir">Formulir Pengajuan Kerjasama melalui Online</Tooltip>
+<br/><br/><br/>
+Lihat Prosedur Kerjasama hingga Approval, dapat dilihat pada link berikut:
+<br/>
+<GradientButton id="ButtonProsedur" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-64 h-12 mr-4 mt-4">Baca Prosedur</GradientButton> 
+<Tooltip triggeredBy="#ButtonProsedur">Gambar Alur Prosedur</Tooltip>
+<GradientButton id="ButtonTatacara" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-64 h-12 mr-4 mt-4">Tata Cara Kerjasama</GradientButton>
+<Tooltip triggeredBy="#ButtonTatacara">Peraturan Menteri Dalam Negeri Nomor 22 Tahun 2020</Tooltip>
+<br/><br/><br/>
+Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antar Pemerintah Daerah dan K/L.
+<br/><br/>
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Statistik</Heading>
 <br/>
 
@@ -145,63 +160,51 @@
 
 <br/>
 
-<table id="TABLE_KSAPD" class="ArsipTable table-striped" style="width:100%;display: block;background-color: white;padding: 7px;border-radius: 8px;">
+<table id="TABLE_KSAPD" class="ArsipTable table-striped" style="width:100%;display:block;overflow-wrap: anywhere;background-color: white;padding: 7px;border-radius: 8px;">
     <thead style="background:#ecf4fb;">
     <tr>
-    <th style="width:2%;white-space: break-spaces;">No</th>
-    <th style="width:3%;white-space: break-spaces;">Jenis Kerjasama</th>
-    <th style="width:40%;white-space: break-spaces;">Subjek</th>
-    <th style="width:15%;white-space: break-spaces;">Hal</th>
+    <th style="width:6%;white-space: break-spaces;" class="hidekolom">No</th>
+    <th style="width:8%;white-space: break-spaces;" class="hidekolom">Jenis</th>
+    <th style="width:32%;white-space: break-spaces;">Subjek</th>
+    <th style="width:15%;white-space: break-spaces;" class="hidekolom">Hal</th>
     <th style="width:15%;white-space: break-spaces;">Mitra</th>
-    <th style="width:10%;white-space: break-spaces;">Tanggal Mulai</th>
-    <th style="width:10%;white-space: break-spaces;">Tanggal Selesai</th>
-    <th style="width:5%;white-space: break-spaces;">Doc</th>
+    <th style="width:10%;white-space: break-spaces;" class="hidekolom">Tanggal Mulai</th>
+    <th style="width:10%;white-space: break-spaces;" class="hidekolom">Tanggal Selesai</th>
+    <th style="width:4%;white-space: break-spaces;">Doc</th>
     </tr>
     </thead>
     <tbody>  
     <tr>
-    <td>1</td>
-    <td>PKS</td>
+    <td class="hidekolom">1</td>
+    <td class="hidekolom">PKS</td>
     <td>
     Peraturan Presiden No. 38 Tahun 2015 tentang Kerjasama Pemerintah dengan Badan Usaha dalam Penyediaan Infrastruktur
     </td>
-    <td>Tentang sdfskjdfksjk sdjfksj dfkjksdjfkjsdf </td>
+    <td class="hidekolom">Tentang sdfskjdfksjk sdjfksj dfkjksdjfkjsdf </td>
     <td>PT Antara Jaya</td>
-    <td>20 December 2021</td>
-    <td>22 December 2021</td>
+    <td class="hidekolom">20 December 2021</td>
+    <td class="hidekolom">22 December 2021</td>
     <td style="color:#3f83f8;"> 
      <ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> 
     </td>
     </tr>
     <tr>
-    <td>2</td>
-    <td>PKS</td>
+    <td class="hidekolom">2</td>
+    <td class="hidekolom">PKS</td>
     <td>Peraturan Presiden No. 38 Tahun 2015 tentang Kerjasama Pemerintah dengan Badan Usaha dalam Penyediaan Infrastruktur
     </td>
-    <td>Tentang sdfskjdfksjk sdjfksj dfkjksdjfkjsdf </td>
+    <td class="hidekolom">Tentang sdfskjdfksjk sdjfksj dfkjksdjfkjsdf </td>
     <td>PT Samdoria</td>
-    <td>20 December 2021</td>
-    <td>22 December 2021</td>
+    <td class="hidekolom">20 December 2021</td>
+    <td class="hidekolom">22 December 2021</td>
     <td style="color:#3f83f8;"> 
      <ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> 
     </td>
     </tr>
-    <tr>
-    <td>3</td>
-    <td>PKS</td>
-    <td>Peraturan Presiden No. 38 Tahun 2015 tentang Kerjasama Pemerintah dengan Badan Usaha dalam Penyediaan Infrastruktur
-    </td>
-    <td>Tentang sdfskjdfksjk sdjfksj dfkjksdjfkjsdf </td>
-    <td>Akademi Pemasyarakatan</td>
-    <td>20 December 2021</td>
-    <td>22 December 2021</td>
-    <td style="color:#3f83f8;"> 
-    <ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> 
-    </td></tr>
 
     </tbody>
     </table>
-  <br/> Total Entries: 3 Baris <br/><br/>
+  <br/> Total Entries: 2 Baris <br/><br/>
   <span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/><br/>
 </div>
 
@@ -221,5 +224,11 @@
     tr:nth-child(even) {
       background-color: #f2f2f2;
     }
+
+    @media screen and (max-width:767px) {
+		.hidekolom {
+			display:none;
+		}
+	}
     
 </style>

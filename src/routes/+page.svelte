@@ -24,6 +24,8 @@
 	import mapKendari from '$lib/images/Kota-Kendari-Map.webp';
 	import mapKonawe from '$lib/images/Konawe-Map.webp';
 	import mapKonaweUtara from '$lib/images/Konawe-Utara-Map.webp';
+	import PicProfileM from '$lib/images/ProfileM.webp';
+	import PicProfileF from '$lib/images/ProfileF.webp';
 
 	let ModalmapBombana, ModalmapWakatobi, ModalmapKendari, ModalmapKonawe, ModalmapKonaweUtara = false;
 	 
@@ -210,7 +212,7 @@ function ReadMore() {
 
 				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang di Biro Pemerintahan & Otonomi Daerah, meliputi:</span> <br/>
 				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah Dalam dan Luar Negeri</Popover>
-                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2">Informasi Standar Pelayanan Minimal (SPM), Informasi dan Koordinasi Pelaksanaan monitoring, Evaluasi dan Pelaporan di Bidang Pemerintahan Umum, Kode dan Data Wilayah serta Pembentukan Daerah Otonomi Baru.</Popover>
+                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2">Bagian Tata Pemerintahan dan Administrasi Wilayah Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode dan Data Wilayah Pemerintahan serta rupa bumi).</Popover>
 				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3">Pengkoordinasian Administrasi Kepala Daerah dan DPRD, Penerbitan SK Gubernur tentang usul Pengangkatan Pj Bupati/Walikota, Penerbitan SK Gubernur Pemberhentian, Pengganti Antar Waktu, Serta Administrasi Evaluasi Kinerja Daerah.</Popover>
               </div>
 		  
@@ -246,7 +248,7 @@ function ReadMore() {
 	  </div>
 	  <Popover triggeredBy="#panduaninfo" class="w-72 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
-		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Status Layanan</h3>
+		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Keterangan Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
 		  Layanan dapat dilakukan dan diproses secara online. Anda dapat mengisi Formulir yang disediakan secara online, Petugas Biro yang ditunjuk akan menghubungi Anda melalui online, baik via Email ataupun No. Contact. <br/>
 		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
@@ -268,14 +270,13 @@ function ReadMore() {
 				<div class="imgBox">
 				  <img src={ImageKSwasta} alt="kerjasama pihak swasta">
 				  <div class="img-blur">
-					<a href="/kerjasama">Lanjutkan ></a>
+					<a href="/kerjasama-pihak-ketiga">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/kerjasama-pihak-ketiga">Fasilitas Kerjasama dengan Pihak Ketiga / Swasta</a>
 				</h3>
 				<p class="textKetFitur">
-				   <a href="/kerjasama-pihak-ketiga/#TABLE_KSPK" style="text-decoration:underline;">>> Lihat Data Kerjasama</a> <br/><br/>
 				   <a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
@@ -286,14 +287,13 @@ function ReadMore() {
 				<div class="imgBox">
 				  <img src={ImageKAinstansi} alt="kerjasama instansi"> 
 				  <div class="img-blur">
-					<a href="#">Lanjutkan ></a>
+					<a href="/kerjasama-antar-pemerintah-daerah-kl">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/kerjasama-antar-pemerintah-daerah-kl">Fasilitas Kerjasama antar Pemerintah Daerah dan K/L</a>
 				</h3>
 				<p class="textKetFitur">
-					<a href="/kerjasama-antar-pemerintah-daerah-kl/#TABLE_KSAPD" style="text-decoration:underline;">>> Lihat Data Kerjasama</a> <br/><br/>
 					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
@@ -303,14 +303,13 @@ function ReadMore() {
 				<div class="imgBox">
 				  <img src={ImageKLuarNegeri} alt="Kerjasama Luar Negeri">
 				  <div class="img-blur">
-					<a href="#">Lanjutkan ></a>
+					<a href="/kerjasama-luar-negeri">Lanjutkan ></a>
 				  </div>
 				</div>
 				<h3 class="title text-sm font-bold" style="line-height:normal;">
 				  <a href="/kerjasama-luar-negeri">Fasilitas Kerjasama dengan Pihak Asing / Luar Negeri</a>
 				</h3>
 				<p class="textKetFitur">
-					<a href="/kerjasama-luar-negeri/#TABLE_KSLN" style="text-decoration:underline;">>> Lihat Data Kerjasama</a> <br/><br/>
 					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
@@ -797,7 +796,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                     </div>
                     <div class="staff_info">
                         <div class="staff_image">
-                            <img src="https://miro.medium.com/fit/c/256/256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" class="card-img-top" />
+                            <img src={PicProfileM} class="card-img-top" />
                         </div>
                         <div class="staff_name_container">
 							Muliadi, S.ST
@@ -808,7 +807,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                    
                     <li>
                         <div style="width:260px !important;padding:6px;"> 
-							<img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" style="width:60px;height:60px;border-radius:50%;" />
+							<img src={ PicProfileF } style="width:60px;height:60px;border-radius:50%;" />
 						
                             <div>Kasubag. Tata Usaha</div>
                         </div>
@@ -824,7 +823,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                             </div>
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" class="card-img-top" />
+                                    <img src={ PicProfileM } class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">
 									Hidayat Agung Wibowo.S.STP
@@ -841,7 +840,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                             </div>
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://miro.medium.com/fit/c/256/256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" class="card-img-top" />
+                                    <img src={ PicProfileM } class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">               
 									Dudi Cahyanto, S.Sos
@@ -857,7 +856,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                             </div>
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src="https://miro.medium.com/fit/c/256/256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" class="card-img-top" />
+                                    <img src={ PicProfileM } class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">
 									Syahrin Ramadhan,S.STP.M.A
@@ -927,7 +926,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 <Heading tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">PERTANYAAN SERING DIAJUKAN (F.A.Q)</Span></Heading> <br/>
 <Accordion class="w-full" activeClass="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800" inactiveClass="text-gray-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
 	<AccordionItem class="font-semibold text-lg" open>
-	  <span slot="header">Apa itu Sipapaode - Biro Pemerintahan</span>
+	  <span slot="header">Apa itu Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi tenggara</span>
 	  <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
@@ -935,11 +934,11 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 	  <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
-		<span slot="header">Bagaimana Pengajuan Proses Fasilitas Kerjasama Antar Pemerintah Dalam dan Luar Negeri atau Badan Usaha / Swasta.</span>
+		<span slot="header">Dibagian mana menemukan informasi tentang Kode data wilayah pemerintahan, Pulau dan Rupa Bumi di Sulawesi Tenggara.</span>
 		<p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
 	  </AccordionItem>
 	  <AccordionItem class="font-semibold text-lg">
-		<span slot="header">Bagaimana Pengajuan Proses Fasilitas Kerjasama Antar Pemerintah Dalam dan Luar Negeri atau Badan Usaha / Swasta.</span>
+		<span slot="header">Apa saja bidang di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara.</span>
 		<p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
 	  </AccordionItem>
   </Accordion>

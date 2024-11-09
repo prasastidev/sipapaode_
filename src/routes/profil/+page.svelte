@@ -3,6 +3,8 @@
     export let data;
     import { Heading, Tabs, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
     import { ArrowRightAltOutline, MoonOutline, BuildingSolid } from 'flowbite-svelte-icons';
+    import PicProfileM from '$lib/images/ProfileM.webp';
+	import PicProfileF from '$lib/images/ProfileF.webp';
 </script>
 
 <svelte:head>
@@ -16,77 +18,70 @@
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Profil</Heading>
 <br/>
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Selayang Pandang</Heading>
-sdfj s dfkaj sdfkja skd jfkasjdfkajs dkfj ajsda <br/>
-asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
+Biro Pemerintahan dan Otonomi Daerah Sekretariat Daerah Provinsi Sulawesi Tenggara dipimpin oleh Kepala Biro yang berkedudukan dibawah dan bertanggung jawab kepada Gubernur melalui Sekretaris Deaerah yang dibentuk berdasarkan 
+Peraturan Daerah Provinsi Sulawesi Tenggara Nomor 11 Tahun 2012 Tentang Organisasi dan Tata Kerja Sekretariat Daerah Provinsi dan Tata Kerja Sekretariat Dewan Perwakilan Rakyat Daerah Provinsi Sulawesi Tenggara, dan
+dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentang Kedudukan, Susunan Organisasi, Tugas dan Fungsi, Serta Tata Kerja Biro Pemerintahan dan Otonomi Daerah.
+ <br/><br/> <hr/>
+
+ <Heading id="Visi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Visi Misi</Heading>
+ <br/>
+ <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Visi</Heading>
+ Pembangunan Sulawesi Tenggara periode Pemerintahan tahun 2018-2023 adalah terwujudnya Sulawesi Tenggara yang aman, maju, sejahtera dan bermartabat. <br/><br/>
+ 
+ <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Misi</Heading>
+ 1. Meningkatkan kualitas hidup masyarakat agar dapat berdaulat dan aman dalam bidang ekonomi, pangan, lingkungan, politik serta iman dan taqwa. <br/>
+ 2. Memajukan daya saing wilayah melalui penguatan ekonomi lokal dan peningkatan investasi. <br/>
+ 3. Mewujudkan birokrasi pemerintahan provinsi yang modern, tata kelola pemerintahan desa yang baik (good village governance) serta pengingkatan kapasitas pemerintahan kecamatan dan kelurahan sebagai pusat pelayanan pemerintahan. <br/>
+ 4. Meningkatkan konektivitas dan kemitraan antara pemerintah, swasta dan masyarakat dalam rangka pengingkatan daya saing daerah melalui pembangunan dan perbaikan infrastruktur, social ekonomi. <br/>
+ 5. Pembangunan yang bertumpu pada pelestarian sumber daya alam dan peningkatan nilai tambah dalam rangka peningkatan daya saing daerah.
+ <br/><br/>
+ <hr/>
+
+ <Heading id="Visi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Tupoksi</Heading> 
+ <Tabs class="mt-4">
+    <TabItem open title="Tugas Pokok">
+      <p class="text-2sm text-gray-500 dark:text-gray-400">
+        Biro Pemerintahan dan Otonomi Daerah mempunyai tugas antara lain: <br/><br/>
+        a. Membantu Asisten Pemerintahan dan Kesejahteraan Rakyat dalam penyiapan perumusan kebijakan daerah, pengkoordinasian pelaksanaan tugas Perangkat Deaerah, pemantauan dan Evaluasi
+        pelaksanaan kebijakan di bidang pemerintahan, otonomi daerah dan kerjasama. <br/>
+        b. Menyiapkan bahan perumusan kebijakan daerah, pengkoordinasian perumusan kebijakan daerah, pengkoordinasian pelaksanaan tugas perangkat dearah,
+        pemantauan dan evaluasi pelaksanaan kebijakan daerah di bidang administrasi pemerintahan dan fasilitasi penataan wilayah, pemerintahan umum dan melaksanakan
+        urusan tata usaha biro. <br/>
+        c. Menyiapkan bahan perumusan kebijakan daerah, pengkoordinasian pelaksanaan tugas perangkat daerah, pemantauan dan evaluasi pelaksanaan kebijakan daerah di bidang administrasi kepala daerah dan
+        DPRD, pengembangan otonomi daerah dan penataan urusan, evaluasi dan penyelenggaraan pemerintahan. <br/>
+        d. Menyiapkan bahan perumusan kebijakan daerah, pengkoordinasian perumusan kebijakan daerah, pengkoordinasian perumusan kebijakan daerah, pengkoordinasian pelaksaan tugas perangkata daerah,
+        pemantauan dan evaluasi pelaksanaan kebijakan daerah di bidang kerjasama antar pemerintah, kerjasama badan usaha/swasta, serta evaluasi pelaksanaan kerjasama.
+      </p>
+    </TabItem>
+    <TabItem title="Fungsi">
+      <p class="text-2sm text-gray-500 dark:text-gray-400">
+       Biro Pemerintahan dan Otonomi Daerah menyelenggarakan fungsi: <br/><br/>
+       a. Penyiapan perumusan kebijakan daerah di bidang pemerintahan, otonomi daerah dan kerjasama; <br/>
+       b. Penyiapan pengkoordinasian pelaksanaan tugas perangkat daerah di bidang pemerintahan, otonomi daerah dan kerjasama. <br/>
+       c. Penyiapan pemantauan dan evaluasi pelaksanaan kebijakan di bidang pemeritahan, otonomi daerah dan kerjasama; <br/>
+       d. Penyiapan bahan perumusan kebijakan daerah di bidang administrasi pemerintahan dan fasilitasi penataan wilayah serta pemerintahan umum; <br/>
+       e. Penyiapan bahan pengkoordinasian perumusan kebijakan daerah di bidang administrasi pemerintahan dan fasilitasi penataan wilayah serta pemerintahan umum; <br/>
+       f. Penyiapan bahan pemantauan dan evaluasi pelaksanaan kebijakan daerah di bidang administrasi pemerintahan dan fasilitasi penataan wilayah serta pemerintahan umum; <br/>
+       g. Pelaksaan urusan tata usaha; <br/>
+       h. Penyiapan bahan perumusan kebijakan daerah di bidang administrasi kepala daerah dan DPRD, pengembangan otonomi daerah dan penataan urusan, evaluasi dan penyelenggaran pemerintahan; <br/>
+       i. Penyiapan bahan pengkoordinasian pelaksaan tugas Perangkat Daerah di bidang administrasi kepala daerah dan DPRD, pengembangan otonomi daerah dan penataan urusan, evaluasi dan penyelenggaraan pemerintahan; <br/>
+       j. Penyiapan bahan pemantauan dan evaluasi pelaksanaan kebijakan daerah di bidang administrasi kepala daerah dan DPRD, pengembangan otonomi daerah dan penataan urusan, evaluasi dan penyelenggaraan pemerintahan; <br/>
+       k. Penyiapan bahan perumusan kebijakan daerah di bidang kerjasama antar pemerintah kerjasama badan usaha/swasta, evaluasi pelaksanaan kerjasama; <br/>
+       l. Penyiapan bahan pengkoordinasian perumusan kebijakan daerah di bidang kerjasama antar pemerintah kerjasama badan usaha/swasta, evaluasi pelaksanaan kerjama <br/>
+       m. Penyiapan bahan pengkoordinasian pelaksanaan tugas perangkat daerah di bidang kerjasama antara pemerintah kerjasama badan usaha/swasta, evaluasi pelaksanaan kerjasama; <br/>
+       n. Penyiapan bahan pemantauan dan evaluasi pelaksanaan kebijakan daerah di bidang kerjasama antar pemerintah kerjasama badan usaha/swasta, evaluasi pelaksanaan kerjasama; <br/>
+       o. Pelaksanaan fungsi lain yang diberikan oleh Asisten Bidang Pemerintahan dan Kesejahteraan Masyarakat sesuai dengan tugas dan fungsinya.
+      </p>
+    </TabItem>
+  </Tabs> <br/><br/>
+ <hr/>
 
 <Heading id="Bidang" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Bidang-Bidang</Heading>
 <br/>
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Bagian Kerjasama</Heading>
-sdfj s dfkaj sdfkja skd jfkasjdfkajs dkfj ajsda <br/>
-asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/>
-<Tabs class="mt-4">
-    <TabItem open title="Tugas">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Profile:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </TabItem>
-    <TabItem title="Fungsi">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Settings:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </TabItem>
-  </Tabs> <br/><br/>
-
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Pemerintahan</Heading>
-sdfj s dfkaj sdfkja skd jfkasjdfkajs dkfj ajsda <br/>
-asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
-<Tabs class="mt-4">
-    <TabItem open title="Tugas">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Profile:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </TabItem>
-    <TabItem title="Fungsi">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Settings:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </TabItem>
-  </Tabs> <br/><br/>
-
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Otonomi Daerah</Heading>
-sdfj s dfkaj sdfkja skd jfkasjdfkajs dkfj ajsda <br/>
-asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
-<Tabs class="mt-4">
-    <TabItem open title="Tugas">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Profile:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </TabItem>
-    <TabItem title="Fungsi">
-      <p class="text-sm text-gray-500 dark:text-gray-400">
-        <b>Settings:</b>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </TabItem>
-  </Tabs> <br/><br/>
-
-<hr/>
-
-<Heading id="Visi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Visi Misi</Heading>
-<br/>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Visi</Heading>
-sdfj s dfkaj sdfkja skd jfkasjdfkajs dkfj ajsda <br/>
-asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
-
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Misi</Heading>
-sdfj s dfkaj sdfkja skd jfkasjdfkajs dkfj ajsda <br/>
-asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
-<hr/>
+<br/><br/><hr/>
 
 <Heading id="Struktur" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Struktur Organisasi</Heading>
 <br/>
@@ -100,7 +95,7 @@ asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
                 </div>
                 <div class="staff_info">
                     <div class="staff_image">
-                        <img src="https://miro.medium.com/fit/c/256/256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" class="card-img-top" />
+                        <img src={ PicProfileM } class="card-img-top" />
                     </div>
                     <div class="staff_name_container">
           Muliadi, S.ST
@@ -111,7 +106,7 @@ asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
                
                 <li>
                     <div style="width:280px !important;padding:6px;height:100px;"> 
-          <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" style="width:60px;height:60px;border-radius:50%;" />
+          <img src={ PicProfileF } style="width:60px;height:60px;border-radius:50%;" />
         
                         <div>Kasubag. Tata Usaha <br><label style="font-weight: 100;">Irma Fitayanti Baso, S.Kom</label></div>
                     </div>
@@ -127,7 +122,7 @@ asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
                         </div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src="https://cdn-icons-png.flaticon.com/512/219/219983.png" class="card-img-top" />
+                                <img src={ PicProfileM } class="card-img-top" />
                             </div>
                             <div class="staff_name_container">
               Hidayat Agung Wibowo.S.STP
@@ -146,7 +141,7 @@ asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
                         </div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src="https://miro.medium.com/fit/c/256/256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" class="card-img-top" />
+                                <img src={ PicProfileM } class="card-img-top" />
                             </div>
                             <div class="staff_name_container">               
               Dudi Cahyanto, S.Sos
@@ -163,7 +158,7 @@ asdjfa sdfksdjfasjdf asj asdfjasdfj a kfaj sdfj asdf <br/><br/>
                         </div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src="https://miro.medium.com/fit/c/256/256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" class="card-img-top" />
+                                <img src={ PicProfileM } class="card-img-top" />
                             </div>
                             <div class="staff_name_container">
               Syahrin Ramadhan,S.STP.M.A
