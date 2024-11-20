@@ -29,7 +29,8 @@ export const nodes = [
 	() => import('./nodes/25'),
 	() => import('./nodes/26'),
 	() => import('./nodes/27'),
-	() => import('./nodes/28')
+	() => import('./nodes/28'),
+	() => import('./nodes/29')
 ];
 
 export const server_loads = [];
@@ -41,26 +42,27 @@ export const dictionary = {
 		"/daftar-informasi-publik": [6],
 		"/dashboard-biro": [7,[2]],
 		"/dashboard-biro/banner-info": [8,[2]],
-		"/dashboard-biro/info-users": [9,[2]],
-		"/dashboard-biro/kerjasama": [10,[2]],
+		"/dashboard-biro/data-rekap-kerjasama": [9,[2]],
+		"/dashboard-biro/info-users": [10,[2]],
 		"/dashboard-biro/lanskap-sultra": [11,[2]],
 		"/dashboard-biro/laporan-lppd": [12,[2]],
 		"/dashboard-biro/otonomi-daerah": [13,[2]],
 		"/dashboard-biro/pemerintahan": [14,[2]],
-		"/formulir-pengajuan-informasi-publik": [15],
-		"/gallery": [16],
-		"/kerjasama-antar-pemerintah-daerah-kl": [18],
-		"/kerjasama-luar-negeri": [19],
-		"/kerjasama-pihak-ketiga": [20],
-		"/kerjasama": [~17],
-		"/login": [21],
-		"/maps-sultra": [22],
-		"/penyampaian-lppd": [23],
-		"/profil-pimpinan": [25],
-		"/profil": [24],
-		"/regulasi-produk": [26],
-		"/sverdle": [~27],
-		"/sverdle/how-to-play": [28]
+		"/dashboard-biro/status-layanan": [15,[2]],
+		"/formulir-pengajuan-informasi-publik": [16],
+		"/gallery": [17],
+		"/kerjasama-antar-pemerintah-daerah-kl": [19],
+		"/kerjasama-luar-negeri": [20],
+		"/kerjasama-pihak-ketiga": [21],
+		"/kerjasama": [~18],
+		"/login": [22],
+		"/maps-sultra": [23],
+		"/penyampaian-lppd": [24],
+		"/profil-pimpinan": [26],
+		"/profil": [25],
+		"/regulasi-produk": [27],
+		"/sverdle": [~28],
+		"/sverdle/how-to-play": [29]
 	};
 
 export const hooks = {

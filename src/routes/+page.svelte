@@ -3,7 +3,7 @@
 	let clickOutsideModal = false;
 	import { cascade } from 'svelte-typewriter';
 	import {slide } from 'svelte/transition';
-	import { ArrowRightOutline, CalendarWeekSolid, RectangleListOutline, DrawSquareOutline, InfoCircleOutline, FileCheckOutline, UserHeadsetOutline } from 'flowbite-svelte-icons';
+	import { ArrowRightOutline, CalendarWeekSolid, RectangleListOutline, DrawSquareOutline, InfoCircleOutline, QuestionCircleOutline, FileCheckOutline, UserHeadsetOutline } from 'flowbite-svelte-icons';
 	import ImageKSwasta from '$lib/images/Kerjasama-Pihak-Swasta.webp';
 	import ImageKAinstansi from '$lib/images/Kerjasama-Antar-Instansipemerintah.webp';
 	import ImageKLuarNegeri from '$lib/images/Kerjasama-Luar-Negeri.webp';
@@ -26,6 +26,8 @@
 	import mapKonaweUtara from '$lib/images/Konawe-Utara-Map.webp';
 	import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
+	import Berakhlak from '$lib/images/Berakhlak.webp';
+	import Karo from '$lib/images/Karo.webp';
 
 	let ModalmapBombana, ModalmapWakatobi, ModalmapKendari, ModalmapKonawe, ModalmapKonaweUtara = false;
 	 
@@ -187,7 +189,7 @@ function ReadMore() {
   <div class="container">
 	 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
 		<div class="col-span-2 rounded-xl pr-3">
-		<Heading tag="h3" class="mb-4" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl">Sistem Informasi Pelayanan Pemerintahan & Otonomi Daerah Berbasis Digital di <Span gradient><b use:cascade={{ interval: 100 }}><b>Provinsi Sulawesi Tenggara</b></b></Span></Heading>
+		<Heading tag="h3" class="mb-4" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl">Sistem Informasi Pelayanan Biro Pemerintahan & Otonomi Daerah Berbasis Digital di <Span gradient><b use:cascade={{ interval: 100 }}><b>Provinsi Sulawesi Tenggara</b></b></Span></Heading>
 			<br/><h2 class="text-3xl font-extrabold">SIPAPAODE</h2>
 		        <span class="morenext flex flex-wrap items-center gap-2 w-64">
 				 <label style="border-bottom:1px dotted;margin-left:4px;">Lihat Profile</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
@@ -210,13 +212,14 @@ function ReadMore() {
 					</svelte:fragment>
 				  </Modal>
 
-				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang di Biro Pemerintahan & Otonomi Daerah, meliputi:</span> <br/>
-				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah Dalam dan Luar Negeri</Popover>
-                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2">Bagian Tata Pemerintahan dan Administrasi Wilayah Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode dan Data Wilayah Pemerintahan serta rupa bumi).</Popover>
-				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3">Pengkoordinasian Administrasi Kepala Daerah dan DPRD, Penerbitan SK Gubernur tentang usul Pengangkatan Pj Bupati/Walikota, Penerbitan SK Gubernur Pemberhentian, Pengganti Antar Waktu, Serta Administrasi Evaluasi Kinerja Daerah.</Popover>
+				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang pada Biro Pemerintahan & Otonomi Daerah, meliputi:</span> <br/>
+				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah Dalam dan Luar Negeri</Popover>
+                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Bagian Tata Pemerintahan dan Administrasi Wilayah Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode dan Data Wilayah Pemerintahan serta rupa bumi).</Popover>
+				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Pengkoordinasian Administrasi Kepala Daerah dan DPRD, Penerbitan SK Gubernur tentang usul Pengangkatan Pj Bupati/Walikota, Penerbitan SK Gubernur Pemberhentian, Pengganti Antar Waktu, Serta Administrasi Evaluasi Kinerja Daerah.</Popover>
               </div>
 		  
 	     <div class="rounded-xl"><center>
+			<img src={Berakhlak} alt="berakhlak" style="width:80%;height:100%;margin-bottom:10px;" />
 		  <iframe width="100%" height="315" src="https://www.youtube.com/embed/xqm5f9mQQxw?si=_HsZkcpDKZOhKtMd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen 
 			style="border-radius:20px;"></iframe><span class="text-xs text-gray-900 dark:text-white">Lihat Video Tentang SipapaOde</span>
 			</center>
@@ -248,7 +251,7 @@ function ReadMore() {
 	  </div>
 	  <Popover triggeredBy="#panduaninfo" class="w-72 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
-		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Keterangan Layanan</h3>
+		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
 		  Layanan dapat dilakukan dan diproses secara online. Anda dapat mengisi Formulir yang disediakan secara online, Petugas Biro yang ditunjuk akan menghubungi Anda melalui online, baik via Email ataupun No. Contact. <br/>
 		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
@@ -879,7 +882,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 	<h3 class="justify-start font-semibold text-3xl mb-4">Quote Hari ini:</h3>
 <div class="textquote grid grid-cols-4" style="width: 100%;height: 330px;background-color: aliceblue;margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px darkslategray;box-sizing: border-box;">
 	<div class="rounded-xl pr-2">
-	  <Avatar src="https://miro.medium.com/v2/resize:fill:256:256/1*7oNrN58deYJ7G2k8P5iljQ.jpeg" size="xl" /><br/>
+	  <Avatar src={ Karo } size="xl" /><br/>
 	  <div style="font-family:Libre Franklin, sans-serif;font-weight: 300;vertical-align: middle;margin-top: 10px;display: inline-block;padding-left: 20px;font-size: 18px;color: darkslategray;"><span>Muliadi, S.ST</span></div>
 	</div>
 	<div class="col-span-3 rounded-xl">

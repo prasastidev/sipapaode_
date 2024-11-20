@@ -1,6 +1,6 @@
 <script>
-import { Heading, Tooltip, Popover, Button, Avatar, Chart, Card, Modal } from 'flowbite-svelte';
-import { InfoCircleOutline, UsersGroupOutline, ArrowUpOutline, ChevronDownOutline, ChevronRightOutline } from 'flowbite-svelte-icons';
+import { Heading, Popover, Button, Avatar, Chart, Card, Modal, Tabs, TabItem } from 'flowbite-svelte';
+import { InfoCircleOutline } from 'flowbite-svelte-icons';
 import { tooltip } from './toolTipicon.js';
 import mapSultrapng from '$lib/images/Map-sultra.webp';
 import ImagelogoSultra from '$lib/images/Sultra-Logo.webp';
@@ -320,25 +320,32 @@ function onWindowClick(e) {
 	</div>
 	<br/><br/>
 	<Heading tag="h4" class="mb-4 mt-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Maps Sulawesi Tenggara</Heading>
-	<img src={mapSultrapng} alt="Logo" style="width:100%;height:100%;border-radius: 16px;padding: 4px;border: 1px solid #cfcfd8;" />
-    Gambar: Map Sultra (Source: <a href="https://www.google.com/maps/place/Sulawesi+Tenggara/@-4.4942734,121.4209727,8z/data=!3m1!4b1!4m6!3m5!1s0x2d98ecde0b6b7183:0x621d7c439f04a4ed!8m2!3d-4.14491!4d122.174605!16zL20vMDJiZGox?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Sultra</a>)
-	<br/><br/>
+	<Tabs>
+		<TabItem open title="Maps Sultra">
+		 <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=provinsi%20sulawesi%20tenggara+(My%20Business%20Name)&amp;t=&amp;z=8&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
+		</TabItem>
+		<TabItem title="Screenshot">
+			<img src={mapSultrapng} alt="Logo" style="width:100%;height:100%;border-radius: 16px;padding: 4px;border: 1px solid #cfcfd8;" />
+			Gambar: Map Sultra (Source: <a href="https://www.google.com/maps/place/Sulawesi+Tenggara/@-4.4942734,121.4209727,8z/data=!3m1!4b1!4m6!3m5!1s0x2d98ecde0b6b7183:0x621d7c439f04a4ed!8m2!3d-4.14491!4d122.174605!16zL20vMDJiZGox?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Sultra</a>)
+			
+		</TabItem>
+	  </Tabs>
+	 <br/><br/>
 	<Heading id="TabelOtonomi" tag="h4" class="mb-4 mt-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Tabel Kabupaten/Kota Sulawesi Tenggara</Heading>
 	<p class="pb-3">
 		Dibawah berikut ini adalah Peta Wilayah dan Informasi Pemerintahan di Wilayah Sulawesi Tenggara terdiri dari Kota dan Kabupaten. 
 	</p>
 
 	  <Modal title="Map Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
-		<img src={mapBombana} alt="Logo" style="width:100%;height:300px;" />
-		Gambar: Map Kabupaten Bombana (Source: <a href="https://www.google.com/maps/place/Sulawesi+Tenggara/@-4.4942734,121.4209727,8z/data=!3m1!4b1!4m6!3m5!1s0x2d98ecde0b6b7183:0x621d7c439f04a4ed!8m2!3d-4.14491!4d122.174605!16zL20vMDJiZGox?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Bombana</a>)
+        <div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kabupaten%20bombana+(My%20Business%20Name)&amp;t=&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps devices</a></iframe></div>
+		
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Kabupaten Bombana terletak di jazirah tenggara Pulau Sulawesi, secara geografis terletak di bagian selatan garis khatulistiwa, memanjang dari utara ke selatan di antara antara 4°30' – 6°25' Lintang Selatan dan membentang dari barat ke timur antara 120°82' – 122°20' Bujur Timur.</p>
 		<svelte:fragment slot="footer">
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
 	   <Modal title="Map Kabupaten Buton" bind:open={ModalmapButon} autoclose>
-		<img src={mapButon} alt="Logo" style="width:100%;height:300px;" />
-		Gambar: Map Kabupaten Buton (Source: <a href="https://www.google.com/maps/place/Kabupaten+Buton,+Sulawesi+Tenggara/@-5.3224,123.6794745,9z/data=!4m6!3m5!1s0x2da3f5668552c07b:0x3030bfbcaf77180!8m2!3d-5.3096355!4d122.9888319!16s%2Fg%2F11b5v3q35f?entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Buton</a>)
+		<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kabupaten%20buton+(My%20Business%20Name)&amp;t=&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps devices</a></iframe></div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			Kabupaten Buton memiliki wilayah daratan seluas ± 2.488,71 km² atau 248.871 ha dan wilayah perairan laut diperkirakan seluas ± 21.054 km², berbatasan dengan:<br/>
 		    <b>Utara:</b> Kabupaten Buton Utara <br/><b>Timur:</b> Kabupaten Wakatobi<br/><b>Selatan:</b> Laut Flores Kabupaten Buton Selatan<br/><b>Barat:</b> Kota Baubau

@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/kerjasama-luar-negeri/+page.svelte";
+export { default as component } from "../../../../src/routes/kerjasama-antar-pemerintah-daerah-kl/+page.svelte";

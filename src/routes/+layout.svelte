@@ -1,5 +1,6 @@
 <script>import Header from './Header.svelte';
 import '../app.css';
+import { user } from '$lib/user';
 import { Footer, FooterCopyright, FooterLinkGroup, FooterLink, FooterBrand } from 'flowbite-svelte';
 import logo from '$lib/images/SipapaOde-logo.webp';
 import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
@@ -7,6 +8,7 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 
 <div class="app">
 	<Header></Header>
+	
 
 	<main>
 		<slot></slot>
@@ -26,7 +28,15 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 	<span class="block text-sm text-gray-500 sm:text-center" style="color: #6b7280;"> <BuildingOutline class="w-4 h-4 align-middle inline" /> Biro Pemerintahan & Otonomi Daerah - Sulawesi Tenggara 
     <br/> <MapPinAltOutline class="w-4 h-4 align-middle inline" /> <span>Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, Kota Kendari, Sulawesi Tenggara 93231</span>
 	</span>
-
+<br/>
+{#if $user}
+	<div>Anda telah login sebagai 
+		<span>{$user.name}</span>
+		<button type="button" on:click={user.logout}>Logout</button>		
+	</div> 
+	{:else}
+	  <p>Hello Anda belum login</p>
+	{/if}
   </Footer>
 
 </div>

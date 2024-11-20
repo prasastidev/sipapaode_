@@ -1,1 +1,1 @@
-export { default as component } from "../../../../src/routes/dashboard-biro/kerjasama/+page.svelte";
+export { default as component } from "../../../../src/routes/dashboard-biro/info-users/+page.svelte";

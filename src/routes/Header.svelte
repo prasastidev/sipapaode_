@@ -1,5 +1,6 @@
 <script>
 	import { page } from '$app/stores';
+	import { user } from '$lib/user';
 	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem, DropdownDivider } from 'flowbite-svelte';
 	import logo from '$lib/images/LogoSultradan-Sipapode.webp';
 	import sultraicon from '$lib/images/Sultra-Icon.webp';
@@ -8,7 +9,7 @@
 </script>
 
 <header>
-
+	
 	<Navbar class="fixed w-full z-20 top-0 start-0  py-0.6 border-b-indigo-500" style="background-color: var(--color-bg-1);
     background-size: 100vw 100vh;
     background-image: radial-gradient(50% 50% at 50% 50%, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0) 100%), linear-gradient(180deg, var(--color-bg-0) 0%, var(--color-bg-1) 15%, var(--color-bg-2) 50%);">		
@@ -40,11 +41,18 @@
 			<DropdownItem href="/formulir-pengajuan-informasi-publik" class="text-[#4a494d]">Formulir Pengajuan Informasi oleh Publik</DropdownItem>
 			<DropdownItem href="/regulasi-produk" class="text-[#4a494d]">Regulasi / Produk Hukum</DropdownItem>
 		   </Dropdown>
-		  <NavLi href="/login" style="font-size:15px;border: 2px solid #808a93;padding: 2px 14px;border-radius: 5px;vertical-align: middle;margin-top: -5px;">Masuk</NavLi>
+
+		   {#if $user}
+	  <div>Hi, <a href="/dashboard-biro">{$user.name}</a>		
+	  </div> 
+	  {:else}
+	  <NavLi href="/login" style="border: 2px solid #808a93;padding: 2px 14px;border-radius: 5px;vertical-align: middle;">Dashboard</NavLi>
+	  {/if}
+		
 		</NavUl>	
 	  </Navbar>
 
-
+	
 
 </header>
 

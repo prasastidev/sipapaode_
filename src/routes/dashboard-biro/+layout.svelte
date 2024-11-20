@@ -1,14 +1,15 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data;
-    import {  Sidebar, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup } from 'flowbite-svelte';
-    import { ChartPieSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
+    import { user } from '$lib/user';
+    import {  Sidebar, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
+    import { ChartPieSolid, BadgeCheckSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
 
   let site = {
     name: 'SIPAPAODE',
     href: '/dashboard-biro',
-    img: 'http://localhost:5173/src/lib/images/SipapaOde-logo.webp'
+    img: '/src/lib/images/SipapaOde-logo.webp'
   };
 
 </script>
@@ -20,12 +21,12 @@
 
 
 <br/><br/>
-<div class="container">
+<div class="container max-w-full">
 
 
-<div class="grid grid-cols-12 gap-4">
-
-    <div class="col-span-4">
+<div class="grid grid-cols-12 gap-1 w-full">
+ 
+    <div class="col-span-3 w-full">
         <Sidebar>
             <SidebarWrapper>
               <SidebarGroup>
@@ -35,14 +36,13 @@
                     <ChartPieSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
                 </SidebarItem>
-                <SidebarItem label="Bag. Kerjasama" {spanClass} href="/dashboard-biro/kerjasama">
+                <SidebarDropdownWrapper label="Bag. Kerjasama">
                   <svelte:fragment slot="icon">
                     <UsersSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                  <svelte:fragment slot="subtext">
-                    <span class="inline-flex justify-center items-center p-3 ms-3 w-3 h-3 text-sm font-medium text-primary-600 bg-primary-200 rounded-full dark:bg-primary-900 dark:text-primary-200"> 3 </span>
-                  </svelte:fragment>
-                </SidebarItem>
+                  <SidebarDropdownItem label="Data Formulir Penawaran Kerjasama Secara Online" />
+                  <SidebarDropdownItem label="Data Rekapitulasi Kerjasama Tahun Berjalan" href="/dashboard-biro/data-rekap-kerjasama" />
+                </SidebarDropdownWrapper>
                 <SidebarItem label="Koord. Pemerintahan" {spanClass} href="/dashboard-biro/pemerintahan">
                     <svelte:fragment slot="icon">
                       <LandmarkSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -69,6 +69,11 @@
                       <FileCopyAltSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
+                  <SidebarItem label="Status Layanan" href="/dashboard-biro/status-layanan">
+                    <svelte:fragment slot="icon">
+                      <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    </svelte:fragment>
+                  </SidebarItem>
                   <SidebarItem label="Banner Info" href="/dashboard-biro/banner-info">
                     <svelte:fragment slot="icon">
                       <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -81,7 +86,7 @@
                 </SidebarItem>
             </SidebarGroup>
               <SidebarGroup border>
-                <SidebarItem label="Keluar (Log Out)">
+                <SidebarItem label="Keluar (Log Out)" on:click={user.logout}>
                   <svelte:fragment slot="icon">
                     <ArrowLeftToBracketOutline class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
@@ -92,7 +97,7 @@
         
     </div>
 
-    <div class="col-span-8"><slot></slot></div>
+    <div class="col-span-9 w-full" style="margin-left:34px;"><slot></slot></div>
 
 </div>
 
