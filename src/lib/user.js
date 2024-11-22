@@ -32,7 +32,7 @@ const createUser = () => {
 		if (!isBrowser) return;
 		await account.createEmailPasswordSession(email, password);
 		await init();
-		goto('/'); // Redirect to home page after login
+		goto('/dashboard-biro'); // Redirect to home page after login
 	}
 
 	async function logout() {

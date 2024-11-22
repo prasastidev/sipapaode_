@@ -6,6 +6,8 @@
     import { ChartPieSolid, BadgeCheckSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
 
+
+
   let site = {
     name: 'SIPAPAODE',
     href: '/dashboard-biro',
@@ -40,23 +42,18 @@
                   <svelte:fragment slot="icon">
                     <UsersSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                  <SidebarDropdownItem label="Data Formulir Penawaran Kerjasama Secara Online" />
+                  <SidebarDropdownItem label="Data Formulir Penawaran Kerjasama Secara Online" href="/dashboard-biro/data-formulir-online-kerjasama" />
                   <SidebarDropdownItem label="Data Rekapitulasi Kerjasama Tahun Berjalan" href="/dashboard-biro/data-rekap-kerjasama" />
                 </SidebarDropdownWrapper>
                 <SidebarItem label="Koord. Pemerintahan" {spanClass} href="/dashboard-biro/pemerintahan">
                     <svelte:fragment slot="icon">
                       <LandmarkSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
-                    <svelte:fragment slot="subtext">
-                      <span class="inline-flex justify-center items-center p-3 ms-3 w-3 h-3 text-sm font-medium text-primary-600 bg-primary-200 rounded-full dark:bg-primary-900 dark:text-primary-200"> 3 </span>
-                    </svelte:fragment>
+                    
                   </SidebarItem>
                   <SidebarItem label="Koord. Otonomi Daerah" {spanClass} href="/dashboard-biro/otonomi-daerah">
                     <svelte:fragment slot="icon">
                       <BuildingSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                    </svelte:fragment>
-                    <svelte:fragment slot="subtext">
-                      <span class="inline-flex justify-center items-center p-3 ms-3 w-3 h-3 text-sm font-medium text-primary-600 bg-primary-200 rounded-full dark:bg-primary-900 dark:text-primary-200"> 3 </span>
                     </svelte:fragment>
                   </SidebarItem>
                   <SidebarItem label="Lanskap Sultra" href="/dashboard-biro/lanskap-sultra">

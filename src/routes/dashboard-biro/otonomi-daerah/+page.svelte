@@ -12,10 +12,15 @@
 
 <div class="container">
     <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Koord. Otonomi Daerah</Heading>
-    <br/>
+    <br/><br/>
+
+    <h2> Koordinator Otonomi Daerah Mencakup </h2> <br/><br/>
+
+    >> Penerbitan Surat & SK Gubernur Pejabat Negara & Legistlatif<br/>
+    >> Laporan dan Evaluasi: LPKJ, LPPD & LPJ<br/>
+    >> Inventarisasi Penataan Urusan Daerah Otonomi Baru<br/>
 
 
-Dashboard Koord. Otonomi Daerah...dd
 
   <br/> <br/>
 </div>

@@ -1,5 +1,5 @@
 <script>
-	import { Tabs, TabItem, Heading, P, Span, Marquee, Button, Modal, Popover, Avatar, Timeline, TimelineItem, Chart, Card, Indicator, Badge, CloseButton, AccordionItem, Accordion} from 'flowbite-svelte';
+	import { Tabs, TabItem, Heading, P, Span, Marquee, Button, Modal, Popover, Avatar, Timeline, TimelineItem, Chart, Card, Indicator, Badge, CloseButton, AccordionItem, Accordion, Video} from 'flowbite-svelte';
 	let clickOutsideModal = false;
 	import { cascade } from 'svelte-typewriter';
 	import {slide } from 'svelte/transition';
@@ -13,17 +13,13 @@
 	import regionimg from '$lib/images/region.webp';
 	import laporanimg from '$lib/images/laporan.webp';
 	import Inventarisasiotonomi from '$lib/images/inventarisasi-otonomi-baru.webp';
+	import videoURL from '$lib/videos/Sipapaode-Sultra.mp4';
 	import penerbitanSKimg from '$lib/images/SK.webp';
 	import ImagelogoSultra from '$lib/images/Sultra-Logo.webp';
 	import UlaSiolaLogo from '$lib/images/Ula-Siola.webp';
 	import SILPPDLogo from '$lib/images/SILPPD.webp';
 	import laporLogo from '$lib/images/Lapor.webp';
 	import sultraprovLogo from '$lib/images/Sultraprov.webp';
-	import mapBombana from '$lib/images/Bombana-Map.webp';
-	import mapWakatobi from '$lib/images/Wakatobi-Map.webp';
-	import mapKendari from '$lib/images/Kota-Kendari-Map.webp';
-	import mapKonawe from '$lib/images/Konawe-Map.webp';
-	import mapKonaweUtara from '$lib/images/Konawe-Utara-Map.webp';
 	import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
 	import Berakhlak from '$lib/images/Berakhlak.webp';
@@ -220,8 +216,11 @@ function ReadMore() {
 		  
 	     <div class="rounded-xl"><center>
 			<img src={Berakhlak} alt="berakhlak" style="width:80%;height:100%;margin-bottom:10px;" />
-		  <iframe width="100%" height="315" src="https://www.youtube.com/embed/xqm5f9mQQxw?si=_HsZkcpDKZOhKtMd" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen 
-			style="border-radius:20px;"></iframe><span class="text-xs text-gray-900 dark:text-white">Lihat Video Tentang SipapaOde</span>
+			<div style="margin-top:22px;">
+				<iframe width="100%" height="290" src={videoURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen 
+				style="border-radius:20px;"></iframe>
+				</div>
+			<span class="text-xs text-gray-900 dark:text-white">Lihat Video Tentang SipapaOde</span>
 			</center>
 		  </div>
 	   </div>
@@ -542,16 +541,14 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 
 <!--  Map Modal -->  
   <Modal title="Map Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
-	<img src={mapBombana} alt="Logo" style="width:100%;height:300px;" />
-	Gambar: Map Kabupaten Bombana (Source: <a href="https://www.google.com/maps/place/Sulawesi+Tenggara/@-4.4942734,121.4209727,8z/data=!3m1!4b1!4m6!3m5!1s0x2d98ecde0b6b7183:0x621d7c439f04a4ed!8m2!3d-4.14491!4d122.174605!16zL20vMDJiZGox?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Bombana</a>)
+	<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kabupaten%20bombana+(My%20Business%20Name)&amp;t=&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Kabupaten Bombana terletak di jazirah tenggara Pulau Sulawesi, secara geografis terletak di bagian selatan garis khatulistiwa, memanjang dari utara ke selatan di antara antara 4°30' – 6°25' Lintang Selatan dan membentang dari barat ke timur antara 120°82' – 122°20' Bujur Timur.</p>
 	<svelte:fragment slot="footer">
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
   <Modal title="Map Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
-	<img src={mapWakatobi} alt="Logo" style="width:100%;height:300px;" />
-	Gambar: Map Kabupaten Wakatobi (Source: <a href="https://www.google.com/maps/place/Kabupaten+Wakatobi/@-5.6700935,123.1344553,9z/data=!3m1!4b1!4m6!3m5!1s0x2da132c009d62f91:0x27e60d480afc1529!8m2!3d-5.6326806!4d123.8902463!16zL20vMGQyYndj?entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Wakatobi</a>)
+	<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kabupaten%20wakatobi+(My%20Business%20Name)&amp;t=&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps vehicle tracker</a></iframe></div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		Kabupaten Wakatobi berbentuk kepulauan dan terletak di tenggara Pulau Sulawesi. Secara astronomis, Kabupaten Wakatobi berada di selatan garis khatulistiwa, membujur dari 5,00º sampai 6,25º Lintang Selatan (sepanjang ± 160 km) dan melintang dari 123,34º sampai 124.64º Bujur Timur (sepanjang ± 120 km).</p>
 	<svelte:fragment slot="footer">
@@ -559,8 +556,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 	</svelte:fragment>
   </Modal>
   <Modal title="Map Kota Kendari" bind:open={ModalmapKendari} autoclose>
-	<img src={mapKendari} alt="map kendari" style="width:100%;height:300px;" />
-	Gambar: Map Kota Kendari (Source: <a href="https://www.google.com/maps/place/Kendari,+Kota+Kendari,+Sulawesi+Tenggara/data=!4m2!3m1!1s0x2d98ecde0b6b7183:0x1397347f9e562fc7?sa=X&ved=1t:242&ictx=111" style="color:blue;text-decoration:underline;">GoogleMaps Kendari</a>)
+	<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kota%20kendari+(My%20Business%20Name)&amp;t=&amp;z=11&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		Kota Kendari terletak di jazirah Tenggara Pulau Sulawesi. Wilayah daratannya sebagian besar terdapat di daratan, mengelilingi Teluk Kendari dan terdapat satu pulau, yaitu Pulau Bungkutoko, secara geografis terletak di bagian selatan garis khatulistiwa, berada di antara 3º54’30” - 4º3’11” Lintang Selatan dan 122º23’ - 122º39’ Bujur Timur.</p>
 	<svelte:fragment slot="footer">
@@ -568,8 +564,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 	</svelte:fragment>
   </Modal>
   <Modal title="Map Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
-	<img src={mapKonawe} alt="map konawe" style="width:100%;height:300px;" />
-	Gambar: Map Kabupaten Konawe (Source: <a href="https://www.google.com/maps/place/Kabupaten+Konawe,+Sulawesi+Tenggara/@-3.4664963,121.4289399,9.26z/data=!4m6!3m5!1s0x2d99b7c9063c2883:0x3030bfbcaf771b0!8m2!3d-3.9380432!4d122.0837445!16s%2Fm%2F0g56mg6?entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Konawe</a>)
+	<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kabupaten%20konawe+(My%20Business%20Name)&amp;t=&amp;z=8&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps tracker sport</a></iframe></div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		Kabupaten Konawe ibu kotanya adalah Unaaha yang berjarak sekitar 73 km dari Kota Kendari, secara geografis terletak dibagian selatan Katulistiwa, memanjang dari utara ke selatan di antara antara 3°00' – 4°25' Lintang Selatan dan membentang dari barat ke timur antara 121°73' – 123°15' Bujur Timur dengan batas wilayah.</p>
 	<svelte:fragment slot="footer">
@@ -577,8 +572,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 	</svelte:fragment>
   </Modal>
   <Modal title="Map Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
-	<img src={mapKonaweUtara} alt="map konawe" style="width:100%;height:300px;" />
-	Gambar: Map Kabupaten Konawe utara (Source: <a href="https://www.google.com/maps/place/Kabupaten+Konawe+Utara,+Sulawesi+Tenggara/@-3.4163503,119.8010381,8z/data=!3m1!4b1!4m6!3m5!1s0x2d999f1690a5fca9:0xdd75d90ad4943502!8m2!3d-3.3803291!4d122.0837445!16s%2Fm%2F0gh63gk?entry=ttu&g_ep=EgoyMDI0MTAyOS4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Konawe Utara</a>)
+	<div style="width: 100%"><iframe width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=400&amp;hl=en&amp;q=kabupaten%20konawe%20utara+(My%20Business%20Name)&amp;t=&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		Secara geografis, Kabupaten Konawe Utara terletak pada 2°97' - 3°86' Lintang Selatan dan 121°49' - 112°49' Bujur Timur. Topografi wilayahnya mulai dari kepulauan, pesisir, dataran rendah, hingga pegunungan dengan ketinggian wilayah antara 0-2.400 meter di atas permukaan air laut (mdpl). Termasuk beberapa pulau di Laut Banda diantaranya yaitu Pulau Labengki Besar, Pulau Labengki Kecil, Pulau Bawulu, Pulau Manui, dan lain-lain. Kabupaten Konawe Utara memiliki 24 daerah aliran sungai (DAS) dan sungai terbesarnya adalah Sungai Lasolo. Gunung tertingginya adalah Gunung Osu Nondoto (2.421 mdpl).</p>
 	<svelte:fragment slot="footer">

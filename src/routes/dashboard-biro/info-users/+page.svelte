@@ -11,12 +11,16 @@
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Info User</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Informasi User</Heading>
   <br/>
   
   <Button color="blue" class="float-right"> <PlusOutline class="inline-flex w-4 h-4 mr-2 text-white-500 dark:text-white-400" /> Add User</Button> 
   <br/><br/>
-  <Table hoverable={true} class="table-fixed w-max whitespace-break-spaces mt-2">
+ 
+ 
+
+
+  <Table shadow hoverable={true} class="table-fixed w-max whitespace-break-spaces mt-2">
     <TableHead>
       <TableHeadCell style="font-size: larger;" class="py-4">Nama</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Email</TableHeadCell>

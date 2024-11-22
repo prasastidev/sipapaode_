@@ -1,10 +1,12 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data;
-    import { Heading, Chart, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
+    import { Heading, Button, Chart, Modal, Textarea, Radio, Input, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
     import { ArrowDownToBracketOutline, BuildingSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
   
+    let ModalFormulir = false;
+
     const options = {
     series: [52.8, 36.8, 10.4],
     colors: ['#1C64F2', '#16BDCA', '#9061F9'],
@@ -92,6 +94,41 @@
 
 <br/><br/> 
 
+<Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir}  autoclose={false}>
+  <form class="space-y-6" method="post" >
+    <h2 style="font-weight:600;margin-bottom:8px;color:green;">Silahkan Isi data Formulir di bawah berikut:</h2>
+   <label class="text-sm">Kategori Kerjasama:</label>
+    <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+      <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama Pihak Ketiga / Swasta" disabled>Kerjasama Pihak Ketiga / Swasta</Radio></li>
+      <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama Antar Pemerintah Daerah dan K/L" checked>Kerjasama Antar Pemerintah Daerah dan K/L</Radio></li>
+      <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama dengan Pihak Asing / Luar Negeri" disabled>Kerjasama dengan Pihak Asing / Luar Negeri</Radio></li>
+    </ul>  
+    <FloatingLabelInput style="filled" id="namaOPD" name="namaOPD" type="text">
+      Nama:
+    </FloatingLabelInput>
+    <FloatingLabelInput style="filled" id="subjekKS" name="subjekKS" type="email">
+      Email:
+    </FloatingLabelInput>
+    <FloatingLabelInput style="filled" id="subjekKS" name="subjekKS" type="text">
+      Contact Person:
+    </FloatingLabelInput>
+    <FloatingLabelInput style="filled" id="No_kerjasama" name="No_kerjasama" type="text">
+      Instansi:
+    </FloatingLabelInput>
+    <FloatingLabelInput style="filled" id="namaOPD" name="namaOPD" type="text">
+      Tentang:
+    </FloatingLabelInput>
+    <Textarea id="tentangKS" placeholder="Catatan" rows="2" name="tentangKS" />
+    <div>
+      <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim Permohonan</button>
+    </div>     
+  </form>  
+  <svelte:fragment slot="footer">
+    <Button color="alternative" on:click={()=> ModalFormulir = !ModalFormulir} >Batal</Button>
+  </svelte:fragment>
+</Modal>
+
+
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama antar Pemerintah Daerah dan K/L</Heading>
 <br/>
@@ -100,7 +137,7 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
   <div style="padding: 14px;border-radius: 16px;border: 4px solid green;"><Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> <br/>
     <br/> Isi melalui Formulir dibawah berikut: 
-    <GradientButton id="ButtonFormulir" href="/kerjasama" outline color="redToYellow" class="inline-flex w-64 h-12 mt-4">Formulir</GradientButton>
+    <GradientButton id="ButtonFormulir" on:click={() => (ModalFormulir = true)} outline color="redToYellow" class="inline-flex w-64 h-12 mt-4">Formulir</GradientButton>
     <Tooltip triggeredBy="#ButtonFormulir">Formulir Pengajuan Kerjasama melalui Online</Tooltip>
     <br/><br/><br/>
     Lihat Prosedur Kerjasama hingga Approval, dapat dilihat pada link berikut:
