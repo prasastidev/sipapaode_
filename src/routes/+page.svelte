@@ -24,7 +24,9 @@
 	import PicProfileF from '$lib/images/ProfileF.webp';
 	import Berakhlak from '$lib/images/Berakhlak.webp';
 	import Karo from '$lib/images/Karo.webp';
+	import { databases } from '$lib/appwrite';
 
+	
 	let ModalmapBombana, ModalmapWakatobi, ModalmapKendari, ModalmapKonawe, ModalmapKonaweUtara = false;
 	 
     export let visibleBanner = true;
@@ -168,7 +170,12 @@ function ReadMore() {
   }
 }
 
-	
+export let data=[];
+
+let OnlineKSpihakKetiga  = data.TableDatasLayananOnline.documents[9];
+let OnlineKSpemerintahdaerahkl  = data.TableDatasLayananOnline.documents[8];
+let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
+
 </script>
 
 <svelte:window on:click={onWindowClick} />
@@ -178,7 +185,10 @@ function ReadMore() {
 	<meta name="description" content="sipapaode" />
 </svelte:head>
 
+
+
 <!--  Section TOP Header -->
+
 <section>
 	<br/><br/><br/>
 
@@ -239,7 +249,7 @@ function ReadMore() {
 	  <br/><br/> 
 </section>
 	<!--End  Section TOP Header -->  
-
+	
 	<!--  Section Fitur Layanan -->  
  <section>
 	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR LAYANAN BIRO</Span></Heading> <br/>
@@ -266,7 +276,9 @@ function ReadMore() {
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
-				<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  
+				
+				{#if OnlineKSpihakKetiga.Status_raw }<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>
+				 {/if} 
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
@@ -283,7 +295,7 @@ function ReadMore() {
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
-				<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  
+				{#if OnlineKSpemerintahdaerahkl.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> {/if}  
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
@@ -299,7 +311,8 @@ function ReadMore() {
 					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;"> <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;">
+				{#if OnlineKSluarnegeri.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
@@ -769,7 +782,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 				  </div>
 				</div>
 	
-				<Chart {options} />
+				<Chart {options} /> 
 			  </Card>
 		</div>
 	  </div>

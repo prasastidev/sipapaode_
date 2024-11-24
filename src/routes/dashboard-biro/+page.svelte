@@ -10,12 +10,11 @@
 	<meta name="description" content="Dashboard Biro" />
 </svelte:head>
 
-<div class="container">
+<div>
     <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Dashboard</Heading>
     <br/>
 
       Dashboard ...	
 	 
-
   <br/> <br/>
 </div>

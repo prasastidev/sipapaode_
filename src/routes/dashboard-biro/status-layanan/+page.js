@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { getTableLPPDLPKJ } from '$lib/dataLPPDLPKJ';
+import { getTableLayananOnline } from '$lib/aktivasiLayananOnline';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
@@ -9,7 +9,7 @@ export async function load({ parent }) {
 	}
 
 	return {
-		TableDatasLPPDLPKJ : await getTableLPPDLPKJ ()
+		TableDatasLayananOnline : await getTableLayananOnline ()
 	};	
 }
 

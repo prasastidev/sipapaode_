@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data;
     import { user } from '$lib/user';
-    import {  Sidebar, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
+    import {  Sidebar, Toggle, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
     import { ChartPieSolid, BadgeCheckSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
 
@@ -14,6 +14,8 @@
     img: '/src/lib/images/SipapaOde-logo.webp'
   };
 
+ let sidebarShow = true;
+
 </script>
 
 <svelte:head>
@@ -23,11 +25,12 @@
 
 
 <br/><br/>
-<div class="container max-w-full">
-
-
-<div class="grid grid-cols-12 gap-1 w-full">
- 
+<div class="container max-w-full" style="width:100%;">
+  <Toggle checked={sidebarShow} on:click={() => (sidebarShow = !sidebarShow)}>
+    <svelte:fragment slot="offLabel">Hilang Sidebar</svelte:fragment> Tampil Sidebar
+  </Toggle> <br/>
+  <div class="grid grid-cols-12 gap-1 w-full">
+    {#if sidebarShow} 
     <div class="col-span-3 w-full">
         <Sidebar>
             <SidebarWrapper>
@@ -91,13 +94,14 @@
               </SidebarGroup>
             </SidebarWrapper>
           </Sidebar>
-        
-    </div>
-
-    <div class="col-span-9 w-full" style="margin-left:34px;"><slot></slot></div>
-
+      </div>
+      {/if}
+      {#if sidebarShow} 
+    <div class="col-span-9 w-full" style="margin-left:34px;width:100%;"><slot></slot></div>
+    {:else}
+    <div class="col-span-9 w-max-full" style="margin-left:34px;width: 1020px;"><slot></slot></div>
+    {/if}
 </div>
-
 
   <br/> <br/>
 </div>

@@ -1,10 +1,11 @@
 <script>
     /** @type {import('./$types').PageData} */
-    export let data;
+
     import { Heading, Tabs, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
     import { ArrowRightAltOutline, MoonOutline, BuildingSolid } from 'flowbite-svelte-icons';
     import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
+
 </script>
 
 <svelte:head>
@@ -13,6 +14,7 @@
 </svelte:head>
 
 <br/><br/>
+
 
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Profil</Heading>
@@ -188,8 +190,6 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
   </div>
 </div>
  
-  
-
 
 
 <hr/> <br/><br/>

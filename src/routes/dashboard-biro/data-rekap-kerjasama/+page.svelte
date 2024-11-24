@@ -21,7 +21,7 @@
 		e.preventDefault();
 		const formEl = e.target;
 		const formData = new FormData(formEl);
-		await addTableData(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('No_kerjasama'), formData.get('subjekKS'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'));
+		await addTableData(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('tentangKS'), formData.get('No_kerjasama'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'));
 		invalidateAll();
 
 		// Reset form
@@ -176,13 +176,13 @@
         <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
       </TableHead>
       <TableBody tableBodyClass="divide-y">
-        {#each data.TableDatas.documents as cetakTabel}	
+        {#each data.TableDatas.documents as cetakTabel, i}	
         <TableBodyRow>
-          <TableBodyCell>1</TableBodyCell>
+          <TableBodyCell>{i+1}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Jenis}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Subjek}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Tentang}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces">{cetakTabel.No_kerjasama}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Tentang}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces">{cetakTabel.OPD}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Mitra}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces">{cetakTabel.tanggalMulai}</TableBodyCell>
