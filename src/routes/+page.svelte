@@ -28,8 +28,6 @@
 
 	
 	let ModalmapBombana, ModalmapWakatobi, ModalmapKendari, ModalmapKonawe, ModalmapKonaweUtara = false;
-	 
-    export let visibleBanner = true;
 	
 	let visibleBombana = false;
 	let visibleWakatobi = false;
@@ -175,6 +173,14 @@ export let data=[];
 let OnlineKSpihakKetiga  = data.TableDatasLayananOnline.documents[9];
 let OnlineKSpemerintahdaerahkl  = data.TableDatasLayananOnline.documents[8];
 let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
+let DaerahOB  = data.TableDatasLayananOnline.documents[6];
+let infoKDW  = data.TableDatasLayananOnline.documents[5];
+let penataanWP  = data.TableDatasLayananOnline.documents[4];
+let standarPM  = data.TableDatasLayananOnline.documents[3];
+let penerbitanSKgub  = data.TableDatasLayananOnline.documents[2];
+let lppdLKPJ  = data.TableDatasLayananOnline.documents[1];
+let InventarisasiPOB  = data.TableDatasLayananOnline.documents[0];
+let BannerInfo  = data.TableDatasTextInfo.documents[0];
 
 </script>
 
@@ -236,17 +242,18 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 	   </div>
     </div>
     <br/><br/>
-	<!--
+	
 	<div style="text-align:center;margin:10px 0px;padding:14px;width:100%;">
-		{#if visibleBanner}
-        <div id="banner" tabindex="-1" class="flex z-50 gap-8 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800">
+		{#if BannerInfo.Status_banner}
+        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800">
 			<img class="w-14 h-14 rounded-full" src={ImagelogoSultra} alt="Sultra Pictures" />
-			<h4 class="text-2xl text-center">Biro Pemerintah & Otonomi Daerah Sulawesi Tenggara Mengucapkan HUT RI 2024 ke - 79</h4><br/>
-         <CloseButton class="border-2" on:click={() => (visibleBanner = false)} />
-         </div>
+			<h4 class="text-xl text-left"> {BannerInfo.Text_Banner} </h4>
+         <CloseButton class="border-2" on:click={() => (BannerInfo.Status_banner = false)} />
+         </div> 
          {/if}
-	</div>  -->
+	</div>   
 	  <br/><br/> 
+	 
 </section>
 	<!--End  Section TOP Header -->  
 	
@@ -322,7 +329,7 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				  </div>
 				</div>
 				<h3 class="title text-sm font-bold" style="line-height:normal;">
-				  <a href="/kerjasama-luar-negeri">Fasilitas Kerjasama dengan Pihak Asing / Luar Negeri</a>
+				  <a href="/kerjasama-luar-negeri">Laporan Evaluasi Kerjasama</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
@@ -337,7 +344,10 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 			Pilih layanan Koordinator Pemerintahan sesuai dengan yang akan Anda lakukan. Silahkan Baca Prosedur sebelum melakukan proses Pengajuan.
 		  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">  <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/> 
+			<div class="p-0"> <div class="card_fitur" style="width:100%;">  
+				{#if standarPM.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<br/>
 				<div class="imgBox">
 				  <img src={ PenataanWilayahimg } alt="kerjasama pihak swasta"> 
 				  <div class="img-blur">
@@ -352,7 +362,9 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>   
+				{#if penataanWP.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<br/>
 				<div class="imgBox">
 				   <img src={regionimg} alt="kerjasama instansi"> 
 				  <div class="img-blur">
@@ -367,7 +379,9 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>   
+				{#if DaerahOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<br/>
 				<div class="imgBox">
 			      <img src={ Otonomiimg } alt="Kerjasama Luar Negeri"> 
 				  <div class="img-blur">
@@ -382,7 +396,9 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>   
+				{#if infoKDW.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<br/>
 				<div class="imgBox">
 				  <img src={ KodeWilayahimg } alt="Report Kerjasama"> 
 				  <div class="img-blur">
@@ -407,6 +423,7 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;"> 
+				{#if penerbitanSKgub.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
 				<br/>
 				  <div class="imgBox">
@@ -423,7 +440,9 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				  </p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
+				{#if lppdLKPJ.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<br/>
 				  <div class="imgBox">
 				    <img src={ laporanimg } alt="kerjasama instansi"> 
 					<div class="img-blur">
@@ -438,7 +457,9 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				  </p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
+				{#if InventarisasiPOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<br/>
 				  <div class="imgBox">
 				    <img src={ Inventarisasiotonomi } alt="Kerjasama Luar Negeri"> 
 					<div class="img-blur">

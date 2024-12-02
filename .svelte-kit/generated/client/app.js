@@ -30,7 +30,8 @@ export const nodes = [
 	() => import('./nodes/26'),
 	() => import('./nodes/27'),
 	() => import('./nodes/28'),
-	() => import('./nodes/29')
+	() => import('./nodes/29'),
+	() => import('./nodes/30')
 ];
 
 export const server_loads = [];
@@ -44,25 +45,26 @@ export const dictionary = {
 		"/dashboard-biro/banner-info": [8,[2]],
 		"/dashboard-biro/data-formulir-online-kerjasama": [9,[2]],
 		"/dashboard-biro/data-rekap-kerjasama": [10,[2]],
-		"/dashboard-biro/info-users": [11,[2]],
-		"/dashboard-biro/lanskap-sultra": [12,[2]],
-		"/dashboard-biro/laporan-lppd": [13,[2]],
-		"/dashboard-biro/otonomi-daerah": [14,[2]],
-		"/dashboard-biro/pemerintahan": [15,[2]],
-		"/dashboard-biro/status-layanan": [16,[2]],
-		"/formulir-pengajuan-informasi-publik": [17],
-		"/gallery": [18],
-		"/kerjasama-antar-pemerintah-daerah-kl": [19],
-		"/kerjasama-luar-negeri": [20],
-		"/kerjasama-pihak-ketiga": [21],
-		"/login": [22],
-		"/maps-sultra": [23],
-		"/penyampaian-lppd": [24],
-		"/profil-pimpinan": [26],
-		"/profil": [25],
-		"/regulasi-produk": [27],
-		"/sverdle": [~28],
-		"/sverdle/how-to-play": [29]
+		"/dashboard-biro/evaluasi-kerjasama": [11,[2]],
+		"/dashboard-biro/info-users": [12,[2]],
+		"/dashboard-biro/lanskap-sultra": [13,[2]],
+		"/dashboard-biro/laporan-lppd": [14,[2]],
+		"/dashboard-biro/otonomi-daerah": [15,[2]],
+		"/dashboard-biro/pemerintahan": [16,[2]],
+		"/dashboard-biro/status-layanan": [17,[2]],
+		"/formulir-pengajuan-informasi-publik": [18],
+		"/gallery": [19],
+		"/kerjasama-antar-pemerintah-daerah-kl": [20],
+		"/kerjasama-luar-negeri": [21],
+		"/kerjasama-pihak-ketiga": [22],
+		"/login": [23],
+		"/maps-sultra": [24],
+		"/penyampaian-lppd": [25],
+		"/profil-pimpinan": [27],
+		"/profil": [26],
+		"/regulasi-produk": [28],
+		"/sverdle": [~29],
+		"/sverdle/how-to-play": [30]
 	};
 
 export const hooks = {

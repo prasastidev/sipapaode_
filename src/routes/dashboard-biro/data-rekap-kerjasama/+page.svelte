@@ -82,14 +82,12 @@
       <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
         <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama Pihak Ketiga / Swasta">Kerjasama Pihak Ketiga / Swasta</Radio></li>
         <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama Antar Pemerintah Daerah dan K/L">Kerjasama Antar Pemerintah Daerah dan K/L</Radio></li>
-        <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama dengan Pihak Asing / Luar Negeri">Kerjasama dengan Pihak Asing / Luar Negeri</Radio></li>
       </ul> <br/> 
       <label class="text-sm">Jenis Kerjasama:</label>
       <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
-        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Perjanjian Kerjasama">Perjanjian Kerjasama</Radio></li>
-        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Kesepakatan Bersama">Kesepakatan Bersama</Radio></li>
-        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Addendum PKS">Addendum PKS</Radio></li>
         <li class="w-full"><Radio name="jenisKS" class="p-3" value="Nota Kesepakatan">Nota Kesepakatan</Radio></li>
+        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Kesepakatan Bersama">Kesepakatan Bersama</Radio></li>
+        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Perjanjian Kerjasama">Perjanjian Kerjasama</Radio></li>   
       </ul> 
       <FloatingLabelInput style="filled" id="subjekKS" name="subjekKS" type="text">
         Subjek:
@@ -111,7 +109,12 @@
       <div class="mb-6">
         <label for="tanggalSelesai" class="text-sm">Tanggal Selesai:</label>
         <Input style="margin-top:3px;" type="date" id="tanggalSelesai" placeholder="Tanggal" name="tanggalSelesai" required />
+      </div> 
+      <div class="mb-6">
+        <label for="" class="text-sm">Upload Dokumen Kerjasama:</label>
+        <Fileupload class="mb-2" name="UploadDokumen" />
       </div> <br/>
+       
       <label class="text-sm">Keterangan:</label>
       <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
         <li class="w-full"><Radio name="keteranganKS" class="p-3" value="Masih Berlaku">Masih Berlaku</Radio></li>

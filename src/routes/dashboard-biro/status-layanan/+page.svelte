@@ -27,9 +27,6 @@ function UpdateLayananOnline(Status_raw, id) {
 });
 
 }
-
-
-  console.log(data.TableDatasLayananOnline.documents)
 </script>
 
 <svelte:head>

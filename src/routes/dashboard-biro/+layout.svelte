@@ -47,6 +47,7 @@
                   </svelte:fragment>
                   <SidebarDropdownItem label="Data Formulir Penawaran Kerjasama Secara Online" href="/dashboard-biro/data-formulir-online-kerjasama" />
                   <SidebarDropdownItem label="Data Rekapitulasi Kerjasama Tahun Berjalan" href="/dashboard-biro/data-rekap-kerjasama" />
+                  <SidebarDropdownItem label="Laporan Evaluasi Kerjasama" href="/dashboard-biro/evaluasi-kerjasama" />
                 </SidebarDropdownWrapper>
                 <SidebarItem label="Koord. Pemerintahan" {spanClass} href="/dashboard-biro/pemerintahan">
                     <svelte:fragment slot="icon">

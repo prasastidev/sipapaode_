@@ -42,7 +42,7 @@
     <span class="text-lg font-bold">Informasi Pengiriman LPPD & LKPJ</span>
   </div>
   <p class="mt-2 mb-4 text-sm">Informasi Pengiriman LPPD dan LKPJ tahun 2024 akan diupdate pada halaman ini. 
-    Formulir Pengiriman Dokumen LPPD dan LKPJ tahun 2024 akan mulai dibuka mulai tanggal dd-mm-yyyy sampai dengan tanggal dd-mm-yyyy .</p>
+    Formulir Pengiriman Dokumen LPPD dan LKPJ tahun 2024 akan mulai dibuka mulai tanggal 01 January 2025 sampai dengan tanggal 31 Maret 2025 .</p>
   <div class="flex gap-2">
     <Button size="xs" color="blue"><ArchiveArrowDownSolid class="w-4 h-4 me-2" />Submit LPPD</Button>
     <Button size="xs" outline color="blue"><ArchiveArrowDownSolid class="w-4 h-4 me-2" /> Submit LKPJ</Button>

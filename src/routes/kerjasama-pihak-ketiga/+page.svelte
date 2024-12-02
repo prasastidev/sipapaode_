@@ -1,6 +1,6 @@
 <script>
     /** @type {import('./$types').PageData} */
-    import { Heading, Button, Chart, Modal, Textarea, Radio, Alert, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
+    import { Heading, Button, Chart, Modal, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
     import { ArrowDownToBracketOutline, BuildingSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     
@@ -104,7 +104,6 @@ let OnlineKSpihakKetiga  = data.TableDatasLayananOnline.documents[9];
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama Pihak Ketiga / Swasta" checked>Kerjasama Pihak Ketiga / Swasta</Radio></li>
       <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama Antar Pemerintah Daerah dan K/L" disabled>Kerjasama Antar Pemerintah Daerah dan K/L</Radio></li>
-      <li class="w-full"><Radio name="kategoriKS" class="p-3" value="Kerjasama dengan Pihak Asing / Luar Negeri" disabled>Kerjasama dengan Pihak Asing / Luar Negeri</Radio></li>
     </ul>  
     <FloatingLabelInput style="filled" id="namaOPD" name="namaOPD" type="text">
       Nama:
@@ -121,6 +120,10 @@ let OnlineKSpihakKetiga  = data.TableDatasLayananOnline.documents[9];
     <FloatingLabelInput style="filled" id="namaOPD" name="namaOPD" type="text">
       Tentang:
     </FloatingLabelInput>
+    <div class="mb-6">
+      <label for="" class="text-sm">Upload Draft Dokumen Kerjasama:</label>
+      <Fileupload class="mb-2" name="UploadDokumen" />
+    </div>
     <Textarea id="tentangKS" placeholder="Catatan" rows="2" name="tentangKS" />
     <div>
       <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim Permohonan</button>

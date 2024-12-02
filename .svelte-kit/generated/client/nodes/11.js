@@ -1,3 +1,3 @@
-import * as universal from "../../../../src/routes/dashboard-biro/info-users/+page.js";
+import * as universal from "../../../../src/routes/dashboard-biro/evaluasi-kerjasama/+page.js";
 export { universal };
-export { default as component } from "../../../../src/routes/dashboard-biro/info-users/+page.svelte";
+export { default as component } from "../../../../src/routes/dashboard-biro/evaluasi-kerjasama/+page.svelte";
