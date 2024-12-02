@@ -345,7 +345,7 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan (HUT RI, HUT SULTRA)</a>
+				  <a href="/coming-soon">Fasilitas Standar Pelayanan Minimum (SPM)</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
@@ -360,7 +360,7 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
-				  <a href="/coming-soon">Fasilitas Penegasan Batas Daerah</a>
+				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan & Fasilitas Penegasan Batas Daerah</a>
 				</h3>
 				<p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
@@ -431,7 +431,7 @@ let OnlineKSluarnegeri  = data.TableDatasLayananOnline.documents[7];
 					</div>
 				  </div>
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
-					<a href="#">Laporan dan Evaluasi: LPKJ, LPPD & LPJ</a>
+					<a href="#">Laporan dan Evaluasi: LKPJ & LPPD</a>
 				  </h3>
 				  <p class="textKetFitur">
 					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>

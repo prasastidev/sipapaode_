@@ -3,7 +3,7 @@
     export let data;
     import { user } from '$lib/user';
     import {  Sidebar, Toggle, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
-    import { ChartPieSolid, BadgeCheckSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
+    import { ChartPieSolid, BadgeCheckSolid, BookSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
 
 
@@ -26,9 +26,9 @@
 
 <br/><br/>
 <div class="container max-w-full" style="width:100%;">
-  <Toggle checked={sidebarShow} on:click={() => (sidebarShow = !sidebarShow)}>
-    <svelte:fragment slot="offLabel">Hilang Sidebar</svelte:fragment> Tampil Sidebar
-  </Toggle> <br/>
+  <div style="border:2px solid #00b1ff;padding: 4px;border-radius:12px;width: max-content;"><Toggle class="w-64 text-base" bind:value={sidebarShow} checked={sidebarShow} on:click={() => (sidebarShow = !sidebarShow)}>
+    <svelte:fragment slot="offLabel"></svelte:fragment> {sidebarShow ? 'Hilangkan Menu Sidebar' : 'Tampilkan Menu Sidebar'} 
+  </Toggle></div> <br/>
   <div class="grid grid-cols-12 gap-1 w-full">
     {#if sidebarShow} 
     <div class="col-span-3 w-full">
@@ -64,11 +64,13 @@
                       <DrawSquareSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Laporan LPPD" href="/dashboard-biro/laporan-lppd">
+                  <SidebarDropdownWrapper label="LPPD & LKPJ">
                     <svelte:fragment slot="icon">
-                      <FileCopyAltSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                      <BookSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
-                  </SidebarItem>
+                    <SidebarDropdownItem label="Laporan Pengiriman LPPD & LKPJ" href="/dashboard-biro/laporan-lppd" />
+                    <SidebarDropdownItem label="Data Document LPPD & LKPJ" href="#" />
+                  </SidebarDropdownWrapper>
                   <SidebarItem label="Status Layanan" href="/dashboard-biro/status-layanan">
                     <svelte:fragment slot="icon">
                       <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />

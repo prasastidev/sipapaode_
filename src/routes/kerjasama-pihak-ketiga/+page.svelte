@@ -1,7 +1,6 @@
 <script>
     /** @type {import('./$types').PageData} */
-    export let data;
-    import { Heading, Button, Chart, Modal, Textarea, Radio, Input, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
+    import { Heading, Button, Chart, Modal, Textarea, Radio, Alert, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
     import { ArrowDownToBracketOutline, BuildingSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     
@@ -83,6 +82,9 @@
       }
     }
 
+export let data=[];
+
+let OnlineKSpihakKetiga  = data.TableDatasLayananOnline.documents[9];
 
 </script>
 
@@ -132,9 +134,18 @@
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama Daerah dengan Pihak Ketiga / Swasta</Heading>
 <br/>
-Pengajuan permohonan kerjasama dengan pihak ketiga /swasta dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara  ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> dengan mengisi formulir pada link di bawah berikut.
+Pengajuan permohonan kerjasama dengan pihak ketiga /swasta dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara   {#if OnlineKSpihakKetiga.Status_raw }ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>{/if} dengan mengisi formulir pada link di bawah berikut.
 <br/><br/>
+{#if !OnlineKSpihakKetiga.Status_raw }
+<Alert color="yellow">
+  <span class="font-medium"> Mohon maaf!</span>
+  sehubungan dengan padatnya formulir pengajuan Kerjasama melalui online, dan untuk menjaga status server tetap stabil, maka Pengajuan Kerjasama saat ini dapat dilakukan melalui via kantor. Terimakasih atas perhatiannya..
+</Alert>
+<br/><br/>
+{/if}
+
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+  {#if OnlineKSpihakKetiga.Status_raw }
   <div style="padding: 14px;border-radius: 16px;border: 4px solid green;"><Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> <br/>
     <br/> Isi melalui Formulir dibawah berikut: 
     <GradientButton id="ButtonFormulir" on:click={() => (ModalFormulir = true)} outline color="redToYellow" class="inline-flex w-64 h-12 mt-4">Formulir</GradientButton>
@@ -148,6 +159,7 @@ Pengajuan permohonan kerjasama dengan pihak ketiga /swasta dapat dilakukan baik 
    <Tooltip triggeredBy="#ButtonTatacara">Peraturan Menteri Dalam Negeri Nomor 22 Tahun 2020</Tooltip>
 <br/><br/>
   </div>
+  {/if}
   <div style="padding: 14px;border-radius: 16px;border: 4px solid orange;"><Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>
   <br/> Silahkan Membawa berkas permohonan kerjasama Anda pada alamat di bawah berikut: <br/><br/>
     <div class="text-2xl font-extrabold"><BuildingSolid class="w-10 h-10 align-middle inline-flex" /> Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara <br/>

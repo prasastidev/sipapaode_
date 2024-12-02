@@ -16,11 +16,6 @@ export async function getTableLayananOnline() {
 }
 
 
-export async function UpdateLayananOnline(Status_raw, id) {
-	await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
-		Status_raw
-	});
-}
 
 
 

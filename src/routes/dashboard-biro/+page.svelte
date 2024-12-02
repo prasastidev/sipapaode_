@@ -13,8 +13,8 @@
 <div>
     <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Dashboard</Heading>
     <br/>
-
-      Dashboard ...	
+     Hai Anto, Selamat Datang di Dashboard Anda ....
+      
 	 
   <br/> <br/>
 </div>
