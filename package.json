@@ -23,6 +23,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"appwrite": "^16.0.2"
+		"appwrite": "^16.0.2",
+		"uuid": "^11.0.3"
 	}
 }

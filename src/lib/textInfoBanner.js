@@ -15,6 +15,12 @@ export async function getTableTextInfo() {
 	);
 }
 
+export async function UpdateTableTextInfo(Text_Banner, id) {
+	await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
+		Text_Banner: Text_Banner
+	});
+}
+
 
 
 

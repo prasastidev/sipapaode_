@@ -16,8 +16,8 @@ export async function getTableData() {
 }
 
 
-export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, tanggalMulai, tanggalSelesai, keteranganKS, downloadFileID) {
-	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, ID.unique(), {
+export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, tanggalMulai, tanggalSelesai, keteranganKS, generateid) {
+	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {
 		kategoryKS,
 		Jenis,
 		Subjek,
@@ -27,8 +27,22 @@ export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjas
 		Mitra,
 		tanggalMulai,
 		tanggalSelesai,
-		keteranganKS,
-		downloadFileID
+		keteranganKS
+	});
+}
+
+export async function UpdateTableDataKS(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, tanggalMulai, tanggalSelesai, keteranganKS, id) {
+	await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
+		kategoryKS: kategoryKS ,
+		Jenis: Jenis,
+		Subjek: Subjek,
+		Tentang: Tentang,
+		No_kerjasama: No_kerjasama,
+		OPD: OPD,
+		Mitra: Mitra,
+		tanggalMulai: tanggalMulai,
+		tanggalSelesai: tanggalSelesai,
+		keteranganKS: keteranganKS
 	});
 }
 

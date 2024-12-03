@@ -35,7 +35,6 @@ function getDataDocumentLPPD(id) {
   getKirimLKPJ = response.PengirimanLKPJ;
 	getidDoc = response.$id;
 
-
 }, function (error) {
     console.log(error); // Failure
     throw error;
