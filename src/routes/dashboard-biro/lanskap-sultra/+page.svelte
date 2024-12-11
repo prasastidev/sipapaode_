@@ -1,6 +1,6 @@
 <script>
     /** @type {import('./$types').PageData} */
-    export let data=[];;
+    export let data=[];
     import { Heading, Modal, Button, Alert, Radio, ButtonGroup, FloatingLabelInput, Textarea, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
     import { EditOutline, InfoCircleSolid  } from 'flowbite-svelte-icons';
 
