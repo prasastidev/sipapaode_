@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
 
-    import { Heading, Fileupload, StepIndicator, Toast, Button, Chart, Modal, Textarea, Checkbox, Radio, Alert, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
+    import { Heading, Fileupload, StepIndicator, Toast, Avatar, Button, Chart, Modal, Textarea, Checkbox, Radio, Alert, FloatingLabelInput, Card,Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
     import { ArrowDownToBracketOutline, BuildingSolid, CheckCircleSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     import { storage, databases } from '$lib/appwrite';
@@ -234,6 +234,10 @@
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama antar Pemerintah Daerah dan K/L</Heading>
 <br/>
+<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#statistikKerjasama" class="mb-2">Lihat Statistik Kerjasama</Button>
+<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#3PengirimTerakhir" class="mb-2">Lihat Aktivitas Pengiriman Terakhir</Button>
+<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#DataKerjsamaAktif" class="mb-2">Lihat Data Kerjasama Aktif</Button>
+  <br/><br/>
 Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara  {#if OnlineKSpemerintahdaerahkl.Status_raw } ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if} dengan mengisi formulir pada link di bawah berikut.
 <br/><br/>
 {#if !OnlineKSpemerintahdaerahkl.Status_raw }
@@ -272,7 +276,7 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
 <br/><br/>
 Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antar Pemerintah Daerah dan K/L.
 <br/><br/>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Statistik</Heading>
+<Heading id="statistikKerjasama" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Statistik</Heading>
 <br/>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -303,7 +307,7 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antar Pemerintah D
 
 </div>
 
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Data Kerjasama antar Pemerintah Daerah dan K/L (Aktif)</Heading>
+<Heading id="DataKerjsamaAktif" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Data Kerjasama antar Pemerintah Daerah dan K/L (Aktif)</Heading>
 <br/>
 {#if data.TableDataKSAntarPemerintah_Berlaku.total === 0}
 <p>No TableDatas yet.</p>
@@ -392,8 +396,37 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
  
  <span style="margin-left: 6px; margin-top: 5px;display: block;">Halaman Aktif Page: {currentPage} </span>
  <br/>
-<span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/><br/>
+<span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/>
+<br/>
+<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Aktifitas Pengiriman Terakhir</Heading>
+<br/>
+3 Aktivitas Pengiriman Terakhir
+<br/><br/> 
+<table class="ArsipTable table-striped" style="width:100%;display:block;overflow-wrap: anywhere;background-color: white;padding: 7px;border-radius: 8px;">
+  <thead style="background:#ecf4fb;">
+  <tr>
+  <th style="width:5%;white-space: break-spaces;" class="hidekolom">No</th>
+  <th style="width:18%;white-space: break-spaces;" class="hidekolom">Nama</th>
+  <th style="width:12%;white-space: break-spaces;" class="hidekolom">Tanggal Kirim</th>
+  <th style="width:25%;white-space: break-spaces;">Instansi</th>
+  <th style="width:16%;white-space: break-spaces;">Status</th>
+  <th style="width:14%;white-space: break-spaces;" class="hidekolom">Verifikasi Estimasi</th>
+  </tr>
+  </thead>
+  <tbody> 
+    {#each data.TableDataPengajuanTerakhir.documents as cetakTabel, i}	 
+  <tr>
+  <td class="hidekolom"><span>{i+1}</span></td>
+  <td class="hidekolom"><span><Avatar class="inline-flex" border /> {cetakTabel.Nama}</span></td>
+  <td class="hidekolom"><span> {cetakTabel.$updatedAt.slice(0, 10)}</span></td>
+  <td><span>{cetakTabel.Instansi}</span></td>
+  <td><Badge color="indigo">Proses Pengajuan</Badge></td>
+  <td class="hidekolom">3-5 hari Kerja</td>
+  </tr>
+  {/each}
 
+  </tbody>
+  </table> <br/><br/><br/>
 
 <style>
     table {

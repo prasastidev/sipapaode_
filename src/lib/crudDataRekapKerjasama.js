@@ -15,6 +15,18 @@ export async function getTableData() {
 	);
 }
 
+export async function getTableDataKS_Berlaku() {
+	return await databases.listDocuments(
+		IDEAS_DATABASE_ID,
+		IDEAS_COLLECTION_ID,
+		// Use a query to show the latest ideas first
+		[ 
+          Query.equal('keteranganKS', ['Masih Berlaku']),
+          Query.orderDesc('$createdAt')
+        ]
+	);
+}
+
 
 export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, tanggalMulai, tanggalSelesai, keteranganKS, generateid) {
 	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {

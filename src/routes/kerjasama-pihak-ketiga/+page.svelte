@@ -1,6 +1,6 @@
 <script>
     /** @type {import('./$types').PageData} */
-    import { Heading, StepIndicator, Toast, Button, Chart, Modal, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Checkbox, Card, Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
+    import { Heading, StepIndicator, Toast, Avatar, Button, Chart, Modal, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Checkbox, Card, Indicator, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
     import { ArrowDownToBracketOutline, BuildingSolid, CheckCircleSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     import { storage, databases } from '$lib/appwrite';
@@ -17,6 +17,7 @@ let toastStatus = false;
 let counter = 6;
 
 export let data=[];
+
 
 let OnlineKSpihakKetiga  = data.TableDatasLayananOnline.documents[9];
 let KSAktif, KSAktifBaru, KSTelahBerakhir, KSTotal;
@@ -94,7 +95,6 @@ KSTelahBerakhir = KSTotal - KSAktif ;
 		  const promise = storage.createFile('674fa666003b4eb41eea', uuid, document.getElementById('uploadDocDraftKS').files[0]); 
 	    promise.then(function (response) {
        console.log(response); 
-
          }, function (error) {
           console.log(error); // Failure
            throw error;
@@ -233,6 +233,10 @@ function DownloadFile(id) {
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama Daerah dengan Pihak Ketiga / Swasta</Heading>
 <br/>
+<Button color="alternative" href="/kerjasama-pihak-ketiga/#statistikKerjasama" class="mb-2">Lihat Statistik Kerjasama</Button>
+<Button color="alternative" href="/kerjasama-pihak-ketiga/#3PengirimTerakhir" class="mb-2">Lihat Aktivitas Pengiriman Terakhir</Button>
+<Button color="alternative" href="/kerjasama-pihak-ketiga/#DataKerjsamaAktif" class="mb-2">Lihat Data Kerjasama Aktif</Button>
+  <br/><br/>
 Pengajuan permohonan kerjasama dengan pihak ketiga /swasta dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara   {#if OnlineKSpihakKetiga.Status_raw }ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>{/if} dengan mengisi formulir pada link di bawah berikut.
 <br/><br/>
 {#if !OnlineKSpihakKetiga.Status_raw }
@@ -247,14 +251,14 @@ Pengajuan permohonan kerjasama dengan pihak ketiga /swasta dapat dilakukan baik 
   {#if OnlineKSpihakKetiga.Status_raw }
   <div style="padding: 14px;border-radius: 16px;border: 4px solid green;"><Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> <br/>
     <br/> Isi melalui Formulir dibawah berikut: 
-    <GradientButton id="ButtonFormulir" on:click={() => (ModalFormulir = true)} outline color="redToYellow" class="inline-flex w-64 h-12 mt-4">Formulir</GradientButton>
+    <GradientButton id="ButtonFormulir" on:click={() => (ModalFormulir = true)} outline color="redToYellow" class="inline-flex w-full h-12 mt-4">Formulir</GradientButton>
     <Tooltip triggeredBy="#ButtonFormulir">Formulir Pengajuan Kerjasama melalui Online</Tooltip>
     <br/><br/><br/>
     Lihat Prosedur Kerjasama hingga Approval, dapat dilihat pada link berikut:
     <br/>
-    <GradientButton id="ButtonProsedur" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-64 h-12 mr-4 mt-4">Baca Prosedur</GradientButton> 
+    <GradientButton id="ButtonProsedur" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Baca Prosedur</GradientButton> 
     <Tooltip triggeredBy="#ButtonProsedur">Gambar Alur Prosedur</Tooltip>
-    <GradientButton id="ButtonTatacara" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-64 h-12 mr-4 mt-4">Tata Cara Kerjasama</GradientButton>
+    <GradientButton id="ButtonTatacara" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Tata Cara Kerjasama</GradientButton>
    <Tooltip triggeredBy="#ButtonTatacara">Peraturan Menteri Dalam Negeri Nomor 22 Tahun 2020</Tooltip>
 <br/><br/>
   </div>
@@ -268,9 +272,10 @@ Pengajuan permohonan kerjasama dengan pihak ketiga /swasta dapat dilakukan baik 
   </div>
 </div>
 <br/><br/>
+
 Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah dengan pihak Ketiga / Swasta
 <br/><br/>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Statistik </Heading>
+<Heading id="statistikKerjasama" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Statistik </Heading>
 <br/>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
@@ -301,7 +306,7 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah deng
 
 </div>
 
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Data Kerjasama dengan Pihak Ketiga / Swasta (Aktif)</Heading>
+<Heading  id="DataKerjsamaAktif" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Data Kerjasama dengan Pihak Ketiga / Swasta (Aktif)</Heading>
 <br/>
 {#if data.TableDataKSPihakKetiga_Berlaku.total === 0}
 <p>No TableDatas yet.</p>
@@ -391,7 +396,38 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah deng
  
  <span style="margin-left: 6px; margin-top: 5px;display: block;">Halaman Aktif Page: {currentPage} </span>
  <br/>
-<span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama dengan Pihak Ketiga / Swasta .</span> <br/><br/>
+<span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama dengan Pihak Ketiga / Swasta .</span> <br/>
+
+<br/>
+<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Aktifitas Pengiriman Terakhir</Heading>
+<br/>
+3 Aktivitas Pengiriman Terakhir
+<br/><br/> 
+<table class="ArsipTable table-striped" style="width:100%;display:block;overflow-wrap: anywhere;background-color: white;padding: 7px;border-radius: 8px;">
+  <thead style="background:#ecf4fb;">
+  <tr>
+  <th style="width:5%;white-space: break-spaces;" class="hidekolom">No</th>
+  <th style="width:18%;white-space: break-spaces;" class="hidekolom">Nama</th>
+  <th style="width:12%;white-space: break-spaces;" class="hidekolom">Tanggal Kirim</th>
+  <th style="width:25%;white-space: break-spaces;">Instansi</th>
+  <th style="width:16%;white-space: break-spaces;">Status</th>
+  <th style="width:14%;white-space: break-spaces;" class="hidekolom">Verifikasi Estimasi</th>
+  </tr>
+  </thead>
+  <tbody> 
+    {#each data.TableDataPengajuanTerakhir.documents as cetakTabel, i}	 
+  <tr>
+  <td class="hidekolom"><span>{i+1}</span></td>
+  <td class="hidekolom"><span><Avatar class="inline-flex" border /> {cetakTabel.Nama}</span></td>
+  <td class="hidekolom"><span> {cetakTabel.$updatedAt.slice(0, 10)}</span></td>
+  <td><span>{cetakTabel.Instansi}</span></td>
+  <td><Badge color="indigo">Proses Pengajuan</Badge></td>
+  <td class="hidekolom">3-5 hari Kerja</td>
+  </tr>
+  {/each}
+
+  </tbody>
+  </table> <br/><br/><br/>
 
 <style>
     table {

@@ -15,6 +15,15 @@ export async function getTableData() {
 	);
 }
 
+export async function getTablePengajuanTerakhir() {
+	return await databases.listDocuments(
+		IDEAS_DATABASE_ID,
+		IDEAS_COLLECTION_ID,
+		// Use a query to show the latest ideas first
+		[ Query.limit(3), Query.orderDesc('$createdAt') ]
+	);
+}
+
 
 export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Instansi, Tentang, Catatan, generateid) {
 	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {

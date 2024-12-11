@@ -22,6 +22,12 @@ let DataButonTengah  = data.TableDatasWilayah.documents[13];
 let DataButonSelatan  = data.TableDatasWilayah.documents[14];
 let DataButon  = data.TableDatasWilayah.documents[15];
 let DataBombana  = data.TableDatasWilayah.documents[16];
+let TotalKSTerdaftar =  data.TableDatas.total;
+let TotalKSTerdaftarBerlaku =  data.TableDatasKSBerlaku.total;
+let TotalKSTerdaftarBerakhir;
+
+
+TotalKSTerdaftarBerakhir = TotalKSTerdaftar - TotalKSTerdaftarBerlaku;
 
 let Jum_KecamatanSultra, Jum_KelurahanSultra, Jum_DesaSultra;
 
@@ -84,13 +90,13 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
         <Card padding="xl" size="xl" class="p-6 sm:p-6">
           <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
             <li class="mb-3">Total Kerjasama Terdaftar <br/>
-                <span class="font-normal text-blue-700 text-xl">--</span>
+                <span class="font-normal text-blue-700 text-xl">{TotalKSTerdaftar}</span>
             </li>
             <li class="mb-3">Total Kerjasama Aktif (Masih Berlaku) <br/>
-               <span class="font-normal text-blue-700 text-xl">--</span>
+               <span class="font-normal text-blue-700 text-xl"> {TotalKSTerdaftarBerlaku} </span>
             </li>
             <li class="mb-3">Total Kerjasama Telah Berakhir <br/>
-              <span class="font-normal text-blue-700 text-xl">--</span>
+              <span class="font-normal text-blue-700 text-xl"> {TotalKSTerdaftarBerakhir} </span>
             </li>
             <li class="mb-3">Total Pengajuan Kerjasama Online <br/>
               <span class="font-normal text-blue-700 text-xl">--</span>

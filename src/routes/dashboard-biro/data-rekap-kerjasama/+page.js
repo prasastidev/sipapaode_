@@ -1,6 +1,12 @@
+// since there's no dynamic data here, we can prerender
+// it so that it gets served as a static asset in production
+export const prerender = true;
+export const ssr = false;
+export const csr = true;
+
 import { redirect } from '@sveltejs/kit';
 import { getTableData } from '$lib/crudDataRekapKerjasama';
-
+import { getTableDataKS_Berlaku } from '$lib/crudDataRekapKerjasama';
 
 
 /** @type {import('./$types').PageLoad} */
@@ -10,9 +16,8 @@ export async function load({ parent }) {
 		throw redirect(303, '/');
 	} 
 		return {
-			TableDatas : await getTableData ()
+			TableDatas : await getTableData (),
+			TableDatasKSBerlaku : await getTableDataKS_Berlaku ()
 		};	
 		
 }
-
-

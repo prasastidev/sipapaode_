@@ -1,5 +1,5 @@
 <script>
-    /** @type {{ data: import('./$types').PageData }} */
+    /** @type {import('./$types').PageData} */
  
     import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
     import { PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
@@ -19,13 +19,11 @@
     import { storage, databases } from '$lib/appwrite';
   
   
-   export let data; 
+   export let data=[]; 
 
    let getKategoryKS, getJenisKS, getSubjek, getTentang, getNoKS, getnamaOPD, getnamaMitra, getTanggalmulai, getTMTanpaTime;
    let getTanggalselesai, getTSTanpaTime, getKeterangan, getidData;  
-   
-    
-
+  
    const addDatatoTable = async (e) => {
     uuid = uuidv4();   // generate id melalui uuid
 		e.preventDefault();
@@ -288,10 +286,10 @@ const updateDataKS = async (e) => {
     <br/>
     <div class="grid grid-cols-2 gap-4">
       <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #ebf5ff;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Aktif / Masih Berlaku</h5>
-      <p  id="count2" class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">--</p>
+      <p id="count2" class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2"> <span>{data.TableDatasKSBerlaku.total}</span> </p>
       </Card></div> 
       <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #fff8f1;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Telah Berakhir</h5>
-      <p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">--</p>
+      <p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2"><span>{data.TableDatas.total - data.TableDatasKSBerlaku.total}</span></p>
       </Card></div> 
     </div>
     <br/> <br/>
