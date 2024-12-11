@@ -9,7 +9,7 @@ export async function load({ parent }) {
 	}
 
 	return {
-		TableDatasWilayah : await getTableDataWilayah ()
+		TableDatasWilayah : await getTableDataWilayah()
 	};	
 }
 
