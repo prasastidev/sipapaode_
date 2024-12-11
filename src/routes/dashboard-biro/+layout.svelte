@@ -9,8 +9,7 @@
 
   let site = {
     name: 'SIPAPAODE',
-    href: '/dashboard-biro',
-    img: '/src/lib/images/SipapaOde-logo.webp'
+    href: '/dashboard-biro'
   };
 
  let sidebarShow = true;
