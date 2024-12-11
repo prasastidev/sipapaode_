@@ -1,5 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-import { getTableDataWilayah } from '$lib/Datawilayah';
+import { getTableDataWilayah } from '$lib/DataWilayah';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
