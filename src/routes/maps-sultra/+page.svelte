@@ -659,7 +659,7 @@ function onWindowClick(e) {
 	<table id="MapArea" class="table-striped mt-2" style="width:100%;display: block;background-color: white;padding: 7px;border-radius: 8px;">
         <thead style="background:#ecf4fb;text-align: left;">
         <tr>
-		<th style="width:6%;">Kode</th>	
+		<th style="width:6%;" class="hidekolom">Kode</th>	
         <th style="width:22%;">Nama</th>
         <th style="width:14%;white-space: break-spaces;">Luas Wilayah <span use:tooltip={"Luas Wilayah"}></span> </th>
         <th style="width:14%;white-space: break-spaces;" class="hidekolom">J. Penduduk <span use:tooltip={"Jumlah Penduduk saat ini yang di Update"}></span></th>
@@ -671,7 +671,7 @@ function onWindowClick(e) {
         </thead>
         <tbody>  
         <tr>
-		<td>{ DataBombana.KodeW }</td>
+		<td class="hidekolom">{ DataBombana.KodeW }</td>
         <td>{ DataBombana.Nama } <Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button> 
 			<Popover triggeredBy="#popbombana" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 				<div class="p-3">
@@ -706,7 +706,7 @@ function onWindowClick(e) {
 		  </td>
         </tr>
         <tr>
-		<td>{ DataButon.KodeW }</td>	
+		<td class="hidekolom">{ DataButon.KodeW }</td>	
         <td>{ DataButon.Nama } <Button id="popbuton" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 			<Popover triggeredBy="#popbuton" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 				<div class="p-3">
@@ -742,7 +742,7 @@ function onWindowClick(e) {
         </tr>
         
 		<tr>
-			<td>{DataButonSelatan.KodeW }</td>
+			<td class="hidekolom">{DataButonSelatan.KodeW }</td>
 			<td>{ DataButonSelatan.Nama } <Button id="popbutonselatan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbutonselatan" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -777,7 +777,7 @@ function onWindowClick(e) {
 			 </td>
 		</tr>
 		<tr>
-			<td>{DataButonTengah.KodeW }</td>
+			<td class="hidekolom">{DataButonTengah.KodeW }</td>
 			<td>{DataButonTengah.Nama} <Button id="popbutontengah" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbutontengah" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -813,7 +813,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataButonUtara.KodeW }</td>
+			<td class="hidekolom">{DataButonUtara.KodeW }</td>
 			<td>{DataButonUtara.Nama } <Button id="popbutonutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbutonutara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -849,7 +849,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr id="kolakatabel">
-			<td>{DataKolaka.KodeW }</td>
+			<td class="hidekolom">{DataKolaka.KodeW }</td>
 			<td>{DataKolaka.Nama } <Button id="popkolaka" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkolaka" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -885,7 +885,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKolakaTimur.KodeW }</td>
+			<td class="hidekolom">{DataKolakaTimur.KodeW }</td>
 			<td>{DataKolakaTimur.Nama } <Button id="popkolakatimur" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkolakatimur" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -921,7 +921,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKolakaUtara.KodeW }</td>
+			<td class="hidekolom">{DataKolakaUtara.KodeW }</td>
 			<td>{DataKolakaUtara.Nama } <Button id="popkolakautara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkolakautara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -957,7 +957,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKonawe.KodeW }</td>
+			<td class="hidekolom">{DataKonawe.KodeW }</td>
 			<td>{DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonawe" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -993,7 +993,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKonaweKepulauan.KodeW }</td>
+			<td class="hidekolom">{DataKonaweKepulauan.KodeW }</td>
 			<td> {DataKonaweKepulauan.Nama} <Button id="popkonawekepulauan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonawekepulauan" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1029,7 +1029,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKonaweSelatan.KodeW }</td>
+			<td class="hidekolom">{DataKonaweSelatan.KodeW }</td>
 			<td>{DataKonaweSelatan.Nama }  <Button id="popkonaweselatan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonaweselatan" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1065,7 +1065,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKonaweUtara.KodeW }</td>
+			<td class="hidekolom">{DataKonaweUtara.KodeW }</td>
 			<td>{DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonaweutara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1101,7 +1101,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr id="muna">
-			<td>{DataMuna.KodeW}</td>
+			<td class="hidekolom">{DataMuna.KodeW}</td>
 			<td>{DataMuna.Nama} <Button id="popkabupatenmuna" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkabupatenmuna" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1137,7 +1137,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataMunaBarat.KodeW}</td>
+			<td class="hidekolom">{DataMunaBarat.KodeW}</td>
 			<td>{DataMunaBarat.Nama} <Button id="popkabupatenmunabarat" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkabupatenmunabarat" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1173,7 +1173,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataWakatobi.KodeW}</td>
+			<td class="hidekolom">{DataWakatobi.KodeW}</td>
 			<td>{DataWakatobi.Nama} <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popwakatobi" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1209,7 +1209,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKotaBaubau.KodeW}</td>
+			<td class="hidekolom">{DataKotaBaubau.KodeW}</td>
 			<td>{DataKotaBaubau.Nama} <Button id="popbaubau" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbaubau" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
@@ -1245,7 +1245,7 @@ function onWindowClick(e) {
 		</tr>
 
 		<tr>
-			<td>{DataKotaKendari.KodeW}</td>
+			<td class="hidekolom">{DataKotaKendari.KodeW}</td>
 			<td>{DataKotaKendari.Nama} <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkendari" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">

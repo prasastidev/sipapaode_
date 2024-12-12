@@ -403,26 +403,26 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah deng
 <br/>
 3 Aktivitas Pengiriman Terakhir
 <br/><br/> 
-<table class="ArsipTable table-striped" style="width:100%;display:block;overflow-wrap: anywhere;background-color: white;padding: 7px;border-radius: 8px;">
-  <thead style="background:#ecf4fb;">
-  <tr>
-  <th style="width:5%;white-space: break-spaces;" class="hidekolom">No</th>
-  <th style="width:18%;white-space: break-spaces;" class="hidekolom">Nama</th>
-  <th style="width:12%;white-space: break-spaces;" class="hidekolom">Tanggal Kirim</th>
-  <th style="width:25%;white-space: break-spaces;">Instansi</th>
-  <th style="width:16%;white-space: break-spaces;">Status</th>
-  <th style="width:14%;white-space: break-spaces;" class="hidekolom">Verifikasi Estimasi</th>
+<table style="width:100%;display:block;overflow-wrap: anywhere; background: linear-gradient(147deg, rgba(255,255,255,1) 4%, rgba(44,82,111,1) 99%, rgba(226,237,255,1) 100%, rgba(229,231,235,1) 100%);color:white;padding: 2px;border-radius: 8px;">
+  <thead>
+  <tr style="border-bottom: 1px solid white;background: linear-gradient(147deg, rgba(255,255,255,1) 4%, rgba(44,82,111,1) 99%, rgba(226,237,255,1) 100%, rgba(229,231,235,1) 100%);">
+  <th style="width:5%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">No</th>
+  <th style="width:18%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">Nama</th>
+  <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Tanggal Kirim</th>
+  <th style="width:25%;white-space: break-spaces;padding:6px;">Instansi</th>
+  <th style="width:16%;white-space: break-spaces;padding:6px;">Status</th>
+  <th style="width:14%;white-space: break-spaces;padding:6px;" class="hidekolom">Verifikasi Estimasi</th>
   </tr>
   </thead>
   <tbody> 
     {#each data.TableDataPengajuanTerakhir.documents as cetakTabel, i}	 
-  <tr>
-  <td class="hidekolom"><span>{i+1}</span></td>
-  <td class="hidekolom"><span><Avatar class="inline-flex" border /> {cetakTabel.Nama}</span></td>
-  <td class="hidekolom"><span> {cetakTabel.$updatedAt.slice(0, 10)}</span></td>
-  <td><span>{cetakTabel.Instansi}</span></td>
-  <td><Badge color="indigo">Proses Pengajuan</Badge></td>
-  <td class="hidekolom">3-5 hari Kerja</td>
+  <tr style="border-bottom: 1px solid white;">
+  <td class="hidekolom" style="padding:4px;"><span>{i+1}</span></td>
+  <td class="hidekolom" style="padding:4px;"><span><Avatar class="inline-flex" border /> {cetakTabel.Nama}</span></td>
+  <td class="hidekolom" style="padding:4px;"><span> {cetakTabel.$updatedAt.slice(0, 10)}</span></td>
+  <td style="padding:4px;"><span>{cetakTabel.Instansi}</span></td>
+  <td style="padding:4px;"><Badge color="indigo">Proses Pengajuan</Badge></td>
+  <td class="hidekolom" style="padding:4px;">3-5 hari Kerja</td>
   </tr>
   {/each}
 
@@ -436,13 +436,13 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah deng
       border: 1px solid #ddd;
     }
     
-    th, td {
+     th, td {
       text-align: left;
       padding: 16px;
       vertical-align: top;
     }
     
-    tr:nth-child(even) {
+    .table-striped tr:nth-child(even) {
       background-color: #f2f2f2;
     }
 
