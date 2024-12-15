@@ -7,6 +7,8 @@
 	import PicProfileF from '$lib/images/ProfileF.webp';
     import PicKabagKS from '$lib/images/Hidayat.webp';
 	import Karo from '$lib/images/Karo.webp';
+    import PicTU from '$lib/images/Irma-Fitayanti.webp';
+
 
 </script>
 
@@ -110,7 +112,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
                
                 <li>
                     <div style="width:280px !important;padding:6px;height:100px;"> 
-          <img src={ PicProfileF } style="width:60px;height:60px;border-radius:50%;" />
+          <img src={ PicTU } style="width:60px;height:60px;border-radius:50%;" />
         
                         <div>Kasubag. Tata Usaha <br><label style="font-weight: 100;">Irma Fitayanti Baso, S.Kom</label></div>
                     </div>

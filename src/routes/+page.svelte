@@ -23,6 +23,7 @@
 	import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
 	import PicKabagKS from '$lib/images/Hidayat.webp';
+	import PicTU from '$lib/images/Irma-Fitayanti.webp';
 	import Berakhlak from '$lib/images/Berakhlak.webp';
 	import Karo from '$lib/images/Karo.webp';
 	import { databases } from '$lib/appwrite';
@@ -455,14 +456,14 @@ function ReadMore() {
 				  <div class="imgBox">
 				    <img src={ laporanimg } alt="kerjasama instansi"> 
 					<div class="img-blur">
-					  <a href="#">Lanjutkan ></a>
+					  <a href="/penyampaian-lppd">Lanjutkan ></a>
 					</div>
 				  </div>
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
-					<a href="#">Laporan dan Evaluasi: LKPJ & LPPD</a>
+					<a href="/penyampaian-lppd">Laporan dan Evaluasi: LKPJ & LPPD</a>
 				  </h3>
 				  <p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+					
 				  </p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
@@ -847,7 +848,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                    
                     <li>
                         <div style="width:260px !important;padding:6px;"> 
-							<img src={ PicProfileF } style="width:60px;height:60px;border-radius:50%;" />
+							<img src={ PicTU } style="width:60px;height:60px;border-radius:50%;" />
 						
                             <div>Kasubag. Tata Usaha</div>
                         </div>
