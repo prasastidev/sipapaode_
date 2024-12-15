@@ -1,9 +1,9 @@
 <script>
   /** @type {import('./$types').PageData} */
   export let data=[];
-  import { Heading, Modal, Button, Alert, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
-  import { EditOutline, InfoCircleSolid, FileLinesOutline, ClockOutline  } from 'flowbite-svelte-icons';
-
+  import { Heading, Modal, Toast, Button, Alert, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import { EditOutline, InfoCircleSolid, FileLinesOutline, ClockOutline, CheckCircleSolid } from 'flowbite-svelte-icons';
+  import { slide } from 'svelte/transition';
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
 	import { UpdateTableDataLPPD } from '$lib/dataLPPDLPKJ.js';
@@ -11,6 +11,8 @@
 
   let getNamaKabupatenKota, getidDoc, getSLPPD, getSLPKJ, getKirimLPPD, getKirimLKPJ;
   let ModalUpdateDataLPPD = false;
+  let toastStatus = false;
+  let counter = 7;
  
 
 /** Edit Run 2 function: GetDataDocumentLPPD and update*/
@@ -49,7 +51,17 @@ const updateData = async (e) => {
 
 		// Reset form
 		formEl.reset();
+     // Notification Toast and Time
+     toastStatus = true;
+     counter = 7;
+     timeout();
 	};
+
+  function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalUpdateDataLPPD = false;
+  }  
 
   function SearchTable() {
       var input, filter, table, tr, td, i, txtValue;
@@ -111,7 +123,11 @@ const updateData = async (e) => {
 
   <svelte:fragment slot="footer">
     <Button color="alternative" on:click={()=> ModalUpdateDataLPPD = !ModalUpdateDataLPPD} >Batal</Button>
-    </svelte:fragment>
+    <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+      <CheckCircleSolid slot="icon" class="w-5 h-5" />
+      Data telah berhasil di update. Form akan tutup dalam {counter}s.
+    </Toast> 
+  </svelte:fragment>
 </Modal>
  
 

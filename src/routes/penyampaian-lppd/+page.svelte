@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     import { Heading, Table, TableBody, Radio , Alert, Button, Badge, Indicator, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Toast, Modal, Fileupload, Textarea, FloatingLabelInput, Checkbox, Select, Label, Card, Tooltip } from 'flowbite-svelte';
-    import { ClockOutline, FileLinesOutline, BookSolid, ArchiveArrowDownSolid } from 'flowbite-svelte-icons';
+    import { ClockOutline, CheckCircleSolid, FileLinesOutline, BookSolid, ArchiveArrowDownSolid } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
     import { slide } from 'svelte/transition';
@@ -10,6 +10,11 @@
     import { v4 as uuidv4 } from "uuid";
 
 let uuid = "";
+let ModalKirimLPPD = false;
+let ButtonKirimLPPD = false;
+let JenisLaporan, TahunTerbit;
+let toastStatus = false;
+let counter = 7;
 
 const addDataFormtoTable = async (e) => {
     uuid = uuidv4();   // generate id melalui uuid
@@ -32,10 +37,18 @@ const addDataFormtoTable = async (e) => {
 
 		// Reset form
 		formEl.reset();
+     // Notification Toast and Time
+     toastStatus = true;
+     counter = 7;
+     timeout();
 
 	};
 
-   
+  function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalKirimLPPD = false;
+  }  
    
     let selectKabKota = '';
     let KabKotaName = [
@@ -60,10 +73,6 @@ const addDataFormtoTable = async (e) => {
 
     let TahunBerjalan = 'second';
     let OnlineLppdLkpj  = data.TableDatasLayananOnline.documents[1];
-
-    let ModalKirimLPPD = false;
-    let ButtonKirimLPPD = false;
-    let JenisLaporan;
 
     function SearchTable() {
       var input, filter, table, tr, td, i, txtValue;
@@ -96,24 +105,24 @@ const addDataFormtoTable = async (e) => {
   <form class="space-y-6" on:submit={addDataFormtoTable}>
     <Label>
       Pilih Nama Kabupaten / Kota
-      <Select class="mt-2" items={KabKotaName} name="KabKota" bind:value={selectKabKota} />
+      <Select class="mt-2" items={KabKotaName} name="KabKota" bind:value={selectKabKota} required />
     </Label>
     <br/>
-    <label class="text-sm">Jenis Dokumen:</label>
+    <label class="text-sm">Pilih Jenis Dokumen yang akan di Upload:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="JenisDoc" class="p-3" value="Laporan LPPD" bind:group={JenisLaporan} checked>Laporan LPPD</Radio></li>
       <li class="w-full"><Radio name="JenisDoc" class="p-3" value="Laporan LKPJ" bind:group={JenisLaporan}>Laporan LKPJ</Radio></li>
     </ul> <br/>
     <label class="text-sm">Tahun:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
-      <li class="w-full"><Radio name="Tahun" class="p-3" value="2024" checked>2024</Radio></li>
-      <li class="w-full"><Radio name="Tahun" class="p-3" value="2025" disabled>2025</Radio></li>
-      <li class="w-full"><Radio name="Tahun" class="p-3" value="2025" disabled>2026</Radio></li>
+      <li class="w-full"><Radio name="Tahun" class="p-3" value="2024" bind:group={TahunTerbit} checked>2024</Radio></li>
+      <li class="w-full"><Radio name="Tahun" class="p-3" value="2025" bind:group={TahunTerbit} disabled>2025</Radio></li>
+      <li class="w-full"><Radio name="Tahun" class="p-3" value="2025" bind:group={TahunTerbit} disabled>2026</Radio></li>
     </ul> 
     <FloatingLabelInput style="filled" id="nama" name="namaPengirim" type="text" required>
       *Nama Pengirim:
     </FloatingLabelInput> 
-    <FloatingLabelInput style="filled" id="ContactPerson" name="ContactPerson" type="text">
+    <FloatingLabelInput style="filled" id="ContactPerson" name="ContactPerson" type="text" required>
       Contact Person:
     </FloatingLabelInput> 
     <FloatingLabelInput style="filled" id="Instansi" name="NIPPengirim" type="text" required>
@@ -126,7 +135,7 @@ const addDataFormtoTable = async (e) => {
       <label for="" class="text-sm">*Upload {JenisLaporan}:</label>
       <Fileupload class="mb-2" name="UploadDokumen" id="uploadDoc" required />
     </div>
-    <Checkbox bind:checked={ButtonKirimLPPD} class="inline-block">Dengan ini menyatakan telah mengirim {JenisLaporan}, sesuai dengan informasi dan Data-data yang diisi pada Formulir diatas.</Checkbox>
+    <Checkbox bind:checked={ButtonKirimLPPD} class="inline-block">Dengan ini menyatakan telah mengirim <b>{JenisLaporan} {selectKabKota} Tahun {TahunTerbit}</b>, sesuai dengan informasi dan Data-data yang diisi pada Formulir diatas. Dan bersedia untuk dikonfirmasi Kembali jika terdapat data Dokumen {JenisLaporan} yang tidak lengkap.</Checkbox>
     <br/>
     <div>
       <Button disabled={!ButtonKirimLPPD} type="submit" value="submit" class="flex w-full h-10 justify-center mb-4 rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim {JenisLaporan}</Button>
@@ -134,6 +143,10 @@ const addDataFormtoTable = async (e) => {
   </form>  
   <svelte:fragment slot="footer">
     <Button color="alternative" on:click={()=> ModalKirimLPPD = !ModalKirimLPPD} >Batal</Button>
+    <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+      <CheckCircleSolid slot="icon" class="w-5 h-5" />
+      Data Dokumen Anda telah berhasil terkirim. Form akan tutup dalam {counter}s.
+    </Toast> 
   </svelte:fragment>
 </Modal>
 
