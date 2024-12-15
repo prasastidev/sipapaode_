@@ -5,7 +5,8 @@ export const ssr = false;
 export const csr = true;
 
 import { redirect } from '@sveltejs/kit';
-
+import { getTableDataDokLPPD} from '$lib/DokumenLPPDLKPJ';   
+import { getTableDataDokLKPJ} from '$lib/DokumenLPPDLKPJ';
 
 /** @type {import('./$types').PageLoad} */
 export async function load({ parent }) {
@@ -13,5 +14,15 @@ export async function load({ parent }) {
 	if (!account) {
 		throw redirect(303, '/');
 	}
+
+	return {
+		TableDataDokLPPD : await getTableDataDokLPPD (),
+        TableDataDokLKPJ : await getTableDataDokLKPJ ()
+	};	
 }
+
+
+
+
+
 

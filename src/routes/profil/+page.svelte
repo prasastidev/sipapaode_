@@ -5,6 +5,8 @@
     import { ArrowRightAltOutline, MoonOutline, BuildingSolid } from 'flowbite-svelte-icons';
     import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
+    import PicKabagKS from '$lib/images/Hidayat.webp';
+	import Karo from '$lib/images/Karo.webp';
 
 </script>
 
@@ -124,7 +126,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
                         </div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src={ PicProfileM } class="card-img-top" />
+                                <img src={ PicKabagKS } class="card-img-top" />
                             </div>
                             <div class="staff_name_container">
               Hidayat Agung Wibowo.S.STP

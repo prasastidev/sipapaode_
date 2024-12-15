@@ -1,11 +1,69 @@
 <script>
     /** @type {import('./$types').PageData} */
-    export let data;
-    import { Heading, Table, TableBody, Radio , Alert, Button, Badge, Indicator, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+    export let data=[];
+    import { Heading, Table, TableBody, Radio , Alert, Button, Badge, Indicator, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Toast, Modal, Fileupload, Textarea, FloatingLabelInput, Checkbox, Select, Label, Card, Tooltip } from 'flowbite-svelte';
     import { ClockOutline, FileLinesOutline, BookSolid, ArchiveArrowDownSolid } from 'flowbite-svelte-icons';
-    
+    import { storage, databases } from '$lib/appwrite';
+    import { invalidateAll } from '$app/navigation';
+    import { slide } from 'svelte/transition';
+	  import { addTableDokLPPDLKPJ } from '$lib/DokumenLPPDLKPJ.js';
+    import { v4 as uuidv4 } from "uuid";
+
+let uuid = "";
+
+const addDataFormtoTable = async (e) => {
+    uuid = uuidv4();   // generate id melalui uuid
+		e.preventDefault();
+		const formEl = e.target;
+		const formData = new FormData(formEl);
+    // Masukkan Data ke table melalui crudDataRekap
+		await addTableDokLPPDLKPJ(formData.get('KabKota'), formData.get('JenisDoc'), formData.get('Tahun'), formData.get('namaPengirim'), formData.get('ContactPerson'), formData.get('NIPPengirim'), formData.get('InstansiPengirim'), uuid);
+
+    // Masukkan file ke Storage Bucket
+		  const promise = storage.createFile('675e48c4001bd540c846', uuid, document.getElementById('uploadDoc').files[0]); 
+	    promise.then(function (response) {
+       console.log(response); 
+         }, function (error) {
+          console.log(error); // Failure
+           throw error;
+          });
+
+        invalidateAll();
+
+		// Reset form
+		formEl.reset();
+
+	};
+
+   
+   
+    let selectKabKota = '';
+    let KabKotaName = [
+    { value: 'Kota Kendari', name: 'Kota Kendari' },
+    { value: 'Kota Baubau', name: 'Kota Baubau' },
+    { value: 'Kabupaten Wakatobi', name: 'Kabupaten Wakatobi' },
+    { value: 'Kabupaten Muna Barat', name: 'Kabupaten MunaBarat' },
+    { value: 'Kabupaten Muna', name: 'Kabupaten Muna' },
+    { value: 'Kabupaten Konawe Utara', name: 'Kabupaten Konawe Utara' },
+    { value: 'Kabupaten Konawe Selatan', name: 'Kabupaten Konawe Selatan' },
+    { value: 'Kabupaten Konawe Kepulauan', name: 'Kabupaten Konawe Kepulauan' },
+    { value: 'Kabupaten Konawe', name: 'Kabupaten Konawe' },
+    { value: 'Kabupaten Kolaka Utara', name: 'Kabupaten Kolaka Utara' },
+    { value: 'Kabupaten Kolaka Timur', name: 'Kabupaten Kolaka Timur' },
+    { value: 'Kabupaten Kolaka', name: 'Kabupaten Kolaka' },
+    { value: 'Kabupaten Buton Utara', name: 'Kabupaten Buton Utara' },
+    { value: 'Kabupaten Buton Tengah', name: 'Kabupaten Buton Tengah' },
+    { value: 'Kabupaten Buton Selatan', name: 'Kabupaten Buton Selatan' },
+    { value: 'Kabupaten Buton', name: 'Kabupaten Buton' },
+    { value: 'Kabupaten Bombana', name: 'Kabupaten Bombana' }
+  ]; 
+
     let TahunBerjalan = 'second';
     let OnlineLppdLkpj  = data.TableDatasLayananOnline.documents[1];
+
+    let ModalKirimLPPD = false;
+    let ButtonKirimLPPD = false;
+    let JenisLaporan;
 
     function SearchTable() {
       var input, filter, table, tr, td, i, txtValue;
@@ -34,6 +92,50 @@
 </svelte:head>
 
 <br/><br/>
+<Modal title="Formulir Pengiriman Dokumen LPPD dan LKPJ Kabupaten / Kota" bind:open={ModalKirimLPPD}  autoclose={false}>
+  <form class="space-y-6" on:submit={addDataFormtoTable}>
+    <Label>
+      Pilih Nama Kabupaten / Kota
+      <Select class="mt-2" items={KabKotaName} name="KabKota" bind:value={selectKabKota} />
+    </Label>
+    <br/>
+    <label class="text-sm">Jenis Dokumen:</label>
+    <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+      <li class="w-full"><Radio name="JenisDoc" class="p-3" value="Laporan LPPD" bind:group={JenisLaporan} checked>Laporan LPPD</Radio></li>
+      <li class="w-full"><Radio name="JenisDoc" class="p-3" value="Laporan LKPJ" bind:group={JenisLaporan}>Laporan LKPJ</Radio></li>
+    </ul> <br/>
+    <label class="text-sm">Tahun:</label>
+    <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+      <li class="w-full"><Radio name="Tahun" class="p-3" value="2024" checked>2024</Radio></li>
+      <li class="w-full"><Radio name="Tahun" class="p-3" value="2025" disabled>2025</Radio></li>
+      <li class="w-full"><Radio name="Tahun" class="p-3" value="2025" disabled>2026</Radio></li>
+    </ul> 
+    <FloatingLabelInput style="filled" id="nama" name="namaPengirim" type="text" required>
+      *Nama Pengirim:
+    </FloatingLabelInput> 
+    <FloatingLabelInput style="filled" id="ContactPerson" name="ContactPerson" type="text">
+      Contact Person:
+    </FloatingLabelInput> 
+    <FloatingLabelInput style="filled" id="Instansi" name="NIPPengirim" type="text" required>
+      *NIP Pengirim:
+    </FloatingLabelInput> 
+    <FloatingLabelInput style="filled" id="Instansi" name="InstansiPengirim" type="text" required>
+      *Instansi Pengirim:
+    </FloatingLabelInput> 
+    <div class="mb-6">
+      <label for="" class="text-sm">*Upload {JenisLaporan}:</label>
+      <Fileupload class="mb-2" name="UploadDokumen" id="uploadDoc" required />
+    </div>
+    <Checkbox bind:checked={ButtonKirimLPPD} class="inline-block">Dengan ini menyatakan telah mengirim {JenisLaporan}, sesuai dengan informasi dan Data-data yang diisi pada Formulir diatas.</Checkbox>
+    <br/>
+    <div>
+      <Button disabled={!ButtonKirimLPPD} type="submit" value="submit" class="flex w-full h-10 justify-center mb-4 rounded-md bg-green-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Kirim {JenisLaporan}</Button>
+    </div>  
+  </form>  
+  <svelte:fragment slot="footer">
+    <Button color="alternative" on:click={()=> ModalKirimLPPD = !ModalKirimLPPD} >Batal</Button>
+  </svelte:fragment>
+</Modal>
 
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Laporan Penyampaian LPPD & LKPJ</Heading>
@@ -50,8 +152,7 @@
     Dokumen LPPD dan LKPJ yang telah dikirim akan di update pada tabel di bawah halaman ini.
   </p>
   <div class="flex gap-2">
-    <Button size="sm" color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Submit LPPD</Button>
-    <Button size="sm" outline color="blue"><ArchiveArrowDownSolid class="w-5 h-5 me-2" /> Submit LKPJ</Button>
+    <Button size="sm" on:click={() => (ModalKirimLPPD = true)} color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Submit LPPD dan LKPJ</Button>
   </div>
 </Alert>
 <br/><br/>

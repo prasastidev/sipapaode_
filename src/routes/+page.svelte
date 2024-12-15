@@ -22,6 +22,7 @@
 	import sultraprovLogo from '$lib/images/Sultraprov.webp';
 	import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
+	import PicKabagKS from '$lib/images/Hidayat.webp';
 	import Berakhlak from '$lib/images/Berakhlak.webp';
 	import Karo from '$lib/images/Karo.webp';
 	import { databases } from '$lib/appwrite';
@@ -835,7 +836,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                     </div>
                     <div class="staff_info">
                         <div class="staff_image">
-                            <img src={PicProfileM} class="card-img-top" />
+                            <img src={Karo} class="card-img-top" />
                         </div>
                         <div class="staff_name_container">
 							Muliadi, S.ST
@@ -862,7 +863,7 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
                             </div>
                             <div class="staff_info">
                                 <div class="staff_image">
-                                    <img src={ PicProfileM } class="card-img-top" />
+                                    <img src={ PicKabagKS } class="card-img-top" />
                                 </div>
                                 <div class="staff_name_container">
 									Hidayat Agung Wibowo.S.STP
