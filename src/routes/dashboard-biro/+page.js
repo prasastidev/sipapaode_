@@ -2,6 +2,8 @@ import { redirect } from '@sveltejs/kit';
 import { getTableDataWilayah } from '$lib/DataWilayah';
 import { getTableData } from '$lib/crudDataRekapKerjasama';
 import { getTableDataKS_Berlaku } from '$lib/crudDataRekapKerjasama';
+import { getTableDataDokLPPD} from '$lib/DokumenLPPDLKPJ';   
+import { getTableDataDokLKPJ} from '$lib/DokumenLPPDLKPJ';
 
 
 // Turn off SSR globally, turning the project into a static site
@@ -20,7 +22,9 @@ export async function load({ parent }) {
 	return {
 		TableDatasWilayah : await getTableDataWilayah (), 
 		TableDatas : await getTableData (),
-		TableDatasKSBerlaku : await getTableDataKS_Berlaku ()
+		TableDatasKSBerlaku : await getTableDataKS_Berlaku (),
+		TableDataDokLPPD : await getTableDataDokLPPD (),
+        TableDataDokLKPJ : await getTableDataDokLKPJ ()
 	};	
 }
 

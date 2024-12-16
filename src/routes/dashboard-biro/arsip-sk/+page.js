@@ -6,7 +6,9 @@ export const csr = true;
 
 import { redirect } from '@sveltejs/kit';
 import {getTableSK_GubWakil} from '$lib/DokumenArsipSK';  
-import {getTableSK_BupatiWakil} from '$lib/DokumenArsipSK';    
+import {getTableSK_BupatiWakil} from '$lib/DokumenArsipSK'; 
+import {getTableSK_DPRD} from '$lib/DokumenArsipSK';    
+
 
 
 /** @type {import('./$types').PageLoad} */
@@ -18,7 +20,8 @@ export async function load({ parent }) {
 
 	return {
 		TableDataSK_GubWakil : await getTableSK_GubWakil (),
-        TableDataSK_BupatiWakil : await getTableSK_BupatiWakil ()
+        TableDataSK_BupatiWakil : await getTableSK_BupatiWakil (),
+        TableDataSK_DPRD : await getTableSK_DPRD ()
 	};	
 }
 

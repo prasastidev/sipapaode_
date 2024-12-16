@@ -4,6 +4,11 @@ import { InfoCircleOutline } from 'flowbite-svelte-icons';
 import { tooltip } from './toolTipicon.js';
 import mapSultrapng from '$lib/images/Map-sultra.webp';
 import ImagelogoSultra from '$lib/images/Sultra-Logo.webp';
+import { parseNumber } from './NumberParser.js'
+	// In this locale "," is the decimal separator and "." is the group separator
+	const locale = 'en-EN'
+	const numDecimals = 2;
+	const formatter = new Intl.NumberFormat(locale, {maximumFractionDigits: numDecimals});
 
 import ApexCharts from 'apexcharts';
 import { onMount, onDestroy } from 'svelte';
@@ -382,7 +387,7 @@ function onWindowClick(e) {
 				Informasi Luas Wilayah di Sulawesi Tenggara secara keseluruhan 
 			  </div>
 			</Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{Jum_LuasWilSultra}</p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{formatter.format(Jum_LuasWilSultra)} </p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🧑🏽‍🤝‍🧑🏽 Jumlah Penduduk</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
@@ -393,7 +398,7 @@ function onWindowClick(e) {
 				   Informasi Jumlah Penduduk di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{Jum_PendudukSultra} </p></Card>
+			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{formatter.format(Jum_PendudukSultra)} </p></Card>
 		</div>
 		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🌆 Kabupaten</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">

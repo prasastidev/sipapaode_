@@ -31,6 +31,19 @@ export async function getTableSK_BupatiWakil() {
 }
 
 
+export async function getTableSK_DPRD() {
+    return await databases.listDocuments(
+        IDEAS_DATABASE_ID,
+        IDEAS_COLLECTION_ID,
+        // Use a query to show the latest ideas first
+         [ 
+            Query.equal('CategorySK', ['DPRD']),
+            Query.orderDesc('$createdAt')
+          ]
+    );
+}
+
+
 export async function addTableArsipSK(Penerbit, Nomor_SK, TanggalSK, Tentang, Ringkasan_Isi, CategorySK, generateid) {
     await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {
         Penerbit,

@@ -8,6 +8,7 @@
   import { databases } from '$lib/appwrite';
 	import { UpdateTableDataWilayah } from '$lib/DataWilayah.js';
 
+
   let  getJ_Kecamatan, getKodeW, getKabKota, getJ_Kelurahan, getJ_Desa, getLuas_Wilayah, getJ_Penduduk, getJ_Gunung, getJ_Pulau, getKoordinat, getKetMap, getSitus, getidDoc;
   let ModalUpdateDataWilayah = false;
 

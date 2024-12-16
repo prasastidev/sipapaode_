@@ -140,11 +140,11 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
         <li class="mb-3">Total Penerbitan SK Gubernur <br/>
             <span class="font-normal text-blue-700 text-xl">--</span>
         </li>
-        <li class="mb-3">Jumlah Kab/Kota Telah Mengirim LPPD (Tahun Saat ini)<br/>
-           <span class="font-normal text-blue-700 text-xl">--</span>
+        <li class="mb-3">Total Dokumen LPPD Kab/Kota<br/>
+           <span class="font-normal text-blue-700 text-xl">{ data.TableDataDokLPPD.total }</span>
         </li>
-        <li class="mb-3">Jumlah Kab/Kota Telah Mengirim LKPJ (Tahun Saat ini) <br/>
-          <span class="font-normal text-blue-700 text-xl">--</span>
+        <li class="mb-3">Total Dokumen LKPJ Kab/Kota <br/>
+          <span class="font-normal text-blue-700 text-xl">{ data.TableDataDokLKPJ.total }</span>
         </li>
       </ul>
     </Card>
