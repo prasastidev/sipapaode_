@@ -168,7 +168,7 @@ const updateDataKS = async (e) => {
   <br/><br/>
   <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
     <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan Data Dokumen Kerjasama pada Tombol di samping berikut</div>
-    <div class=""><Button color="blue" class="float-right" on:click={() => (ModalAddData = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Kerjasama</Button>  </div>
+    <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddData = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Kerjasama</Button>  </div>
    </div>
   <Modal title="Form Pengisian Data Kerjasama Baru" bind:open={ModalAddData} autoclose={false}>
     <form class="space-y-6" on:submit={addDatatoTable} >

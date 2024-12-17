@@ -63,7 +63,7 @@ const remove = async (id) => {
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Formulir Permohonan / Pengajuan Kerjasama secara Online</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">🔴 Data Formulir Permohonan / Pengajuan Kerjasama secara Online</Heading>
   <br/>
  
 <br/> <br/>
@@ -91,7 +91,6 @@ const remove = async (id) => {
     
 
 <section>
-
 
 Dibawah berikut adalah Data Pengajuan Kerjasama secara online.  <br/>
 {#if data.TableDataPengajuanKSOnline.total === 0}
