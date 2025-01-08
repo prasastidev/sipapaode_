@@ -211,33 +211,33 @@ function ReadMore() {
   <div class="container">
 	 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
 		<div class="col-span-2 rounded-xl pr-3">
-		<Heading tag="h3" class="mb-4" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl">Sistem Informasi Pelayanan Biro Pemerintahan & Otonomi Daerah Berbasis Digital di <Span gradient><b use:cascade={{ interval: 100 }}><b>Provinsi Sulawesi Tenggara</b></b></Span></Heading>
+		<Heading tag="h3" class="mb-4" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl" style="line-height:1.2;">Sistem Informasi Pelayanan <u>Biro Pemerintahan</u> & <u>Otonomi Daerah</u> Berbasis Digital di <Span gradient><b use:cascade={{ interval: 100 }}><b>Provinsi Sulawesi Tenggara</b></b></Span></Heading>
 			<br/><h2 class="text-3xl font-extrabold">SIPAPAODE</h2>
 		        <span class="morenext flex flex-wrap items-center gap-2 w-64">
-				 <label style="border-bottom:1px dotted;margin-left:4px;">Lihat Profile</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
+				 <label style="border-bottom:1px dotted;margin-left:4px;">Apa itu ..</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
 				</span>
 				  <Modal title="Tentang SiPapaODe" bind:open={clickOutsideModal} autoclose outsideclose>
-					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400"><b>Sambutan Kepala Biro Pemerintahan dan Otonomi Daerah. </b></p>
-					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-						Selamat datang kepada seluruh peserta dalam acara ini. Pada kesempatan yang berharga ini, kita akan membahas tentang Sipapaode, sebuah inisiatif penting dalam mendukung pelaksanaan pemerintahan yang lebih efektif
-						dan efisien. Sipapaode diharapkan dapat menjadi alat yang memudahkan koordinasi antar daerah, 
-						memperkuat transparansi, dan meningkatkan partisipasi masyarakat dalam proses pembangunan. 
-						Mari kita bersama-sama menjadikan platform ini sebagai sarana untuk mencapai tujuan bersama 
-						dalam memajukan daerah kita. Terima kasih atas kehadiran dan partisipasi aktif semua pihak. 
-						Semoga acara ini memberikan manfaat yang besar bagi kita semua. <br/>
-					</p>
-					<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">Wassalamu’alaikum warahmatullahi wabarakatuh.</p>
+				  <b>Pada Situs Web Aplikasi Sipapaode, Anda dapat:  </b>
 					
+						<ul class="list-disc" style="font-size:15px;color:blue">
+						<li>Mengajukan Kerjasama Secara Online Baik Pihak Ketiga/Swasta ataupun antar Pemerintah kepada Pemerintah Prov. Sulawesi Tenggara.  Melihat Dokumentasi Kerjasama dan Pemantauan (monitoring) secara Online, Serta Pelaporan evaluasi Kerjasama Pemerintah Daerah Kabupaten / Kota di Prov. Sulawesi Tenggara. </li>
+						<li>Informasi dan Pelaporan Fasilitas Standar Pelayanan Minimum (SPM) Pemerintahan Daerah Kabupaten/Kota di Prov. Sulawesi tengara. </li>   
+						<li>Informasi Data Wilayah Pemerintahan baik Pemprov maupun Kab/Kota, Pemetaan (GIS) dan Rupabumi. </li>
+						<li>Fasilitas Penataan Wilayah Pemerintahan (Pemutakhiran Data) oleh Kab/Kota dan Pembentukan daerah Otonomi Baru. </li>
+						<li>Penerbitan SK Sehubungan dengan Pemerintahan.</li>
+						<li>Penerbitan SK Gubernur sehubungan dengan Pengajuan Keberangkatan Luar Negeri </li>
+						<li>Laporan LPPD dan LKPJ oleh Pemda Kab/Kota dan Inventarisasi Penataan Urusan Daerah Otonomi Baru. </li>
+						<li style="color:green">Mengirim Saran dan Info Kepada Biro Pemerintahan dan Otonomi Daerah Prov. Sulawesi Tenggara.</li>
+					</ul> 	
 					<svelte:fragment slot="footer">
-					  <Button href="/profil">Lanjut, Lihat Profil Biro Pemerintahan & Otonomi Daerah - Sultra</Button>
-					  <Button color="alternative">Tutup</Button>
+					  <Button>Tutup</Button>
 					</svelte:fragment>
 				  </Modal>
 
-				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang pada Biro Pemerintahan & Otonomi Daerah, meliputi:</span> <br/>
-				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah Dalam dan Luar Negeri</Popover>
-                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Bagian Tata Pemerintahan dan Administrasi Wilayah Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode dan Data Wilayah Pemerintahan serta rupa bumi).</Popover>
-				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Pengkoordinasian Administrasi Kepala Daerah dan DPRD, Penerbitan SK Gubernur tentang usul Pengangkatan Pj Bupati/Walikota, Penerbitan SK Gubernur Pemberhentian, Pengganti Antar Waktu, Serta Administrasi Evaluasi Kinerja Daerah.</Popover>
+				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Apa saja Bidang di Biro Pemerintahan & Otonomi Daerah:</span> <br/>
+				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah dan K/L, Pendataan dan Monitoring</Popover>
+                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Fasilitas Tata Wilayah Pemerintahan dan Administrasi Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode Data Wilayah Pemerintahan, Pemetaan (GIS), serta rupa bumi).</Popover>
+				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Fasilitas Penerbitan SK Sehubungan dengan Pemerintahan, SK Gubernur izin keberangkatan ke Luar Negeri dan Administrasi Laporan Evaluasi Kinerja Daerah (LPPD & LKPJ).</Popover>
               </div>
 		  
 	     <div class="rounded-xl"><center>
@@ -269,19 +269,23 @@ function ReadMore() {
 	
 	<!--  Section Fitur Layanan -->  
  <section>
-	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR LAYANAN BIRO</Span></Heading> <br/>
+	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR-FITUR LAYANAN</Span></Heading> <br/>
 	<div class="flex items-center font-light text-gray-500 dark:text-gray-400 p-1 mb-2 -mt-4" style="font-size:15px;">
 		<button id="panduaninfo">
 		  <InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" />
 		</button> Lihat Panduan Tentang Layanan
 	  </div>
-	  <Popover triggeredBy="#panduaninfo" class="w-72 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
+	  <Popover triggeredBy="#panduaninfo" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
-		  Layanan dapat dilakukan dan diproses secara online. Anda dapat mengisi Formulir yang disediakan secara online, Petugas Biro yang ditunjuk akan menghubungi Anda melalui online, baik via Email ataupun No. Contact. <br/>
+		  Layanan dapat dilakukan dan diproses secara online.<br/>
 		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
-		   Layanan dapat dilakukan secara langsung di Kantor Biro Pemerintahan dan Otda Sultra, Petugas yang ditunjuk akan memberikan Informasi kepada Anda secara langsung.
+		   Layanan dapat dilakukan secara langsung di Kantor Biro Pemerintahan dan Otda Sultra. <br/>
+		   <Badge color="indigo" rounded class="mb-4">Umum</Badge> <br/>
+		   Layanan di Peruntukkan Untuk Umum (Publik)<br/>
+		   <Badge color="indigo" rounded class="mb-4">Khusus</Badge> <br/>
+		   Layanan di Peruntukkan Khusus (Pemda Kab/Kota atau K/L)
 		</div>
 	  </Popover>
 	
@@ -289,7 +293,7 @@ function ReadMore() {
 		<TabItem open>
 		  <span slot="title" class="text-base">Bag. Kerjasama</span>
 		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4"> 
-            Pilih layanan Bag. Kerjasama sesuai dengan kerjasama yang akan Anda lakukan. Silahkan Baca Prosedur sebelum melakukan proses Pengajuan.
+          Dibawah berikut adalah Fasilitas layanan bagian Kerjasama.
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
@@ -307,8 +311,8 @@ function ReadMore() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/kerjasama-pihak-ketiga">Fasilitas Kerjasama dengan Pihak Ketiga / Swasta</a>
 				</h3>
-				<p class="textKetFitur">
-				   <a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">Publik (umum)</Badge>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
@@ -324,8 +328,9 @@ function ReadMore() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/kerjasama-antar-pemerintah-daerah-kl">Fasilitas Kerjasama antar Pemerintah Daerah dan K/L</a>
 				</h3>
-				<p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">>> Baca Prosedur</a>
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">K/L (khusus)</Badge>
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
@@ -341,8 +346,8 @@ function ReadMore() {
 				<h3 class="title text-sm font-bold" style="line-height:normal;">
 				  <a href="/pengiriman-evaluasi-kerjasama">Laporan Evaluasi Kerjasama</a>
 				</h3>
-				<p class="textKetFitur">
-					
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
 			
@@ -351,7 +356,7 @@ function ReadMore() {
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Pemerintahan</span>
 		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4">
-			Pilih layanan Koordinator Pemerintahan sesuai dengan yang akan Anda lakukan. Silahkan Baca Prosedur sebelum melakukan proses Pengajuan.
+			Dibawah berikut adalah Fasilitas layanan Bidang Koordinator Pemerintahan
 		  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">  
@@ -367,8 +372,8 @@ function ReadMore() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/coming-soon">Fasilitas Standar Pelayanan Minimum (SPM)</a>
 				</h3>
-				<p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
@@ -384,8 +389,8 @@ function ReadMore() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan & Fasilitas Penegasan Batas Daerah</a>
 				</h3>
-				<p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
@@ -401,8 +406,8 @@ function ReadMore() {
 				<h3 class="title text-sm font-bold" style="line-height:normal;">
 				  <a href="/coming-soon">Pembentukan Daerah Otonomi Baru</a>
 				</h3>
-				<p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">
@@ -418,8 +423,9 @@ function ReadMore() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;">
 				  <a href="/maps-sultra/#TabelOtonomi">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</a>
 				</h3>
-				<p class="textKetFitur">
-					
+				<p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">Publik (umum)</Badge>
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
 			 
@@ -428,7 +434,7 @@ function ReadMore() {
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Otonomi Daerah</span>
 		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4">
-			Pilih layanan Koordinator Otonomi sesuai dengan yang akan Anda lakukan. Silahkan Baca Prosedur sebelum melakukan proses Pengajuan.
+			Dibawah berikut adalah Fasilitas layanan Bidang Koordinator Otonomi Daerah
 		  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
@@ -445,9 +451,9 @@ function ReadMore() {
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
 					<a href="/coming-soon">Penerbitan Surat & SK Gubernur Pejabat Negara & Legistlatif</a>
 				  </h3>
-				  <p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
-				  </p>
+				  <p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				</p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
 				{#if lppdLKPJ.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
@@ -462,9 +468,9 @@ function ReadMore() {
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
 					<a href="/penyampaian-lppd">Laporan dan Evaluasi: LKPJ & LPPD</a>
 				  </h3>
-				  <p class="textKetFitur">
-					
-				  </p>
+				  <p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				</p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
 				{#if InventarisasiPOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
@@ -479,9 +485,9 @@ function ReadMore() {
 				  <h3 class="title text-sm font-bold" style="line-height:normal;">
 					<a href="/coming-soon">Inventarisasi Penataan Urusan Daerah Otonomi Baru</a>
 				  </h3>
-				  <p class="textKetFitur">
-					<a href="#" style="text-decoration:underline;">Baca Prosedur</a>
-				  </p>
+				  <p class="textKetFitur" style="float:left;">
+					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				</p>
 				</div> </div>
 				
 		  </div></center> <br/><span style="color:#a75710;"> //** Kolom Layanan Koord. Otonomi Daerah</span> <br/>
@@ -553,7 +559,7 @@ function ReadMore() {
 	  </span>
 	</svelte:fragment>
 	<p class="alurlayanan text-base font-normal text-gray-500 dark:text-gray-400" style="background: white;padding: 4px;border-radius: 8px;box-shadow: #e9edf4 7px 7px;">
-		Informasi Pertanyaan dapat melalui langsung di Kantor Biro Pemerintahan dan Otda Sultra atau melalui contact: (+0600)</p>
+		Informasi Pertanyaan dapat melalui langsung di Kantor Biro Pemerintahan dan Otda Sultra atau melalui Contact Info yang telah disediakan.</p>
    </TimelineItem>
 </Timeline> 
 		 </div>

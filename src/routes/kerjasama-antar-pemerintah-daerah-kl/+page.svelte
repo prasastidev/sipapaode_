@@ -267,8 +267,8 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
   <div style="padding: 14px;border-radius: 16px;border: 4px solid orange;"><Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>
   <br/> Silahkan Membawa berkas permohonan kerjasama Anda pada alamat di bawah berikut: <br/><br/>
     <div class="text-2xl font-extrabold"><BuildingSolid class="w-10 h-10 align-middle inline-flex" /> Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara <br/>
-    <span class="text-lg font-normal">Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231
-    <br/>Email: </span>
+    <br/><span class="text-lg font-normal">Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231
+    </span>
     </div>
   </div>
 </div>
@@ -363,7 +363,8 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
     <td class="hidekolom">{cetakTabel.tanggalMulai.slice(0, 10)}</td>
     <td class="hidekolom">{cetakTabel.tanggalSelesai.slice(0, 10)}</td>
     <td style="color:#3f83f8;"> 
-      <a href={DownloadFile(cetakTabel.$id)} target="_blank"><ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> </a>
+      <a href={DownloadFile(cetakTabel.$id)} id="docdownload" target="_blank"><ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> </a>
+      <Tooltip triggeredBy="#docdownload">Unduh Dokumen</Tooltip>
     </td>
     </tr>
     {/if}
