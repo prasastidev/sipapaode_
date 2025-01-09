@@ -164,7 +164,7 @@ const updateDataKS = async (e) => {
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Rekap File Kerjasama</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Database Document File Kerjasama - Prov. Sulawesi Tenggara</Heading>
   <br/><br/>
   <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
     <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan Data Dokumen Kerjasama pada Tombol di samping berikut</div>
@@ -244,8 +244,9 @@ const updateDataKS = async (e) => {
       </ul> 
       <FloatingLabelInput style="filled" id="subjekKS" bind:value={getSubjek} name="subjekKS" type="text">
         Subjek:
-      </FloatingLabelInput>
-      <Textarea id="tentangKS" placeholder="Tentang" rows="2" bind:value={getTentang} name="tentangKS" />
+      </FloatingLabelInput><br/>
+      <label class="text-sm">Tentang:</label>
+      <Textarea style="margin-top:3px;" id="tentangKS" placeholder="Tentang" rows="2" bind:value={getTentang} name="tentangKS" />
       <FloatingLabelInput style="filled" id="No_kerjasama" bind:value={getNoKS} name="No_kerjasama" type="text">
         Nomor Kerjasama:
       </FloatingLabelInput>
@@ -348,9 +349,9 @@ const updateDataKS = async (e) => {
           <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.tanggalMulai.slice(0, 10)}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.tanggalSelesai.slice(0, 10)}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"> 
-            <ButtonGroup class="*:!ring-primary-700"> 
-             <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;">
-               <FilePdfOutline class="w-8 h-8 me-2" /> <br/> <DownloadOutline class="w-4 h-4 me-2" /></Button></a> </ButtonGroup> 
+            <center><ButtonGroup class="*:!ring-primary-700"> 
+             <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;">
+               <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label></center>
           </TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.keteranganKS}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">

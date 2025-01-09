@@ -243,7 +243,7 @@ function ReadMore() {
 	     <div class="rounded-xl"><center>
 			<img src={Berakhlak} alt="berakhlak" style="width:80%;height:100%;margin-bottom:10px;" />
 			<div style="margin-top:22px;">
-				<iframe width="100%" height="290" src={videoURL} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen 
+				<iframe width="100%" height="290" src={videoURL} title="YouTube video player" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen 
 				style="border-radius:20px;"></iframe>
 				</div>
 			<span class="text-xs text-gray-900 dark:text-white">Lihat Video Tentang SipapaOde</span>
@@ -982,11 +982,13 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
 		<span slot="header">Dibagian mana menemukan informasi tentang Kode data wilayah pemerintahan, Pulau dan Rupa Bumi di Sulawesi Tenggara.</span>
-		<p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
+		<p class="mb-2 text-gray-500 dark:text-gray-400">Anda dapat menemukan Informasi tersebut pada halaman situs web Applikasi Sipapaode pada halaman di Bawah berikut ini:
+        <br/><a href="/maps-sultra" target="_blank" style="text-decoration:underline;">https://www.sipapaode.id/maps-sultra</a>
+		</p>
 	  </AccordionItem>
 	  <AccordionItem class="font-semibold text-lg">
 		<span slot="header">Apa saja bidang di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara.</span>
-		<p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
+		<p class="mb-2 text-gray-500 dark:text-gray-400">Bidang di Biro Pemerintahan dan Otonomi Daerah Prov. Sulawesi Tenggara adalah Bagian Kerjasama, Koord. Pemerintahan dan Koord. Otonomi Daerah.</p>
 	  </AccordionItem>
   </Accordion>
 	<br/><br/>

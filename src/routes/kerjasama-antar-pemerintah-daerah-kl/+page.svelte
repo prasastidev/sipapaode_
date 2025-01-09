@@ -180,7 +180,7 @@
 
 <br/><br/> 
 
-<Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir}  autoclose={false}>
+<Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir} size="lg"  autoclose={false}>
   <form class="space-y-6" on:submit={addDataFormtoTable} >
     <h2 style="font-weight:600;margin-bottom:8px;color:green;">Silahkan Isi data Formulir di bawah berikut:</h2>
     <StepIndicator {currentStep} {steps} />
