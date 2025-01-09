@@ -7,11 +7,6 @@
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
 
 
-  let site = {
-    name: 'SIPAPAODE',
-    href: '/dashboard-biro'
-  };
-
  let sidebarShow = true;
 
 </script>
