@@ -1,5 +1,6 @@
 <script>
 	import { Tabs, TabItem, Heading, P, Span, Marquee, Button, Modal, Popover, Avatar, Timeline, TimelineItem, Chart, Card, Indicator, Badge, CloseButton, AccordionItem, Accordion, Video} from 'flowbite-svelte';
+	import { onMount } from 'svelte';
 	let clickOutsideModal = false;
 	import { cascade } from 'svelte-typewriter';
 	import {slide } from 'svelte/transition';
@@ -186,10 +187,40 @@ function ReadMore() {
   } else {
     dots.style.display = "none";
     btnText.innerHTML = "[-] Lihat Lebih Sedikit"; 
-    moreText.style.display = "inline";
+    moreText.style.display = "inline"; 
   }
 }
 
+let quotes = [
+    {
+      author: "Muliadi, S.ST",
+      text: "SiPapaOde dibuat agar agar pelayanan Pemerintahan terutama Biro Pemerintahan & Otonomi Daerah Sultra bisa terintegrasi dan lebih cepat.",
+      position: "Kepala Biro Pemerintahan & Otonomi Daerah",
+	  picture: "https://www.sipapaode.id/_app/immutable/assets/Karo.DQN2OwYw.webp"
+    },
+    {
+      author: "John Doe",
+      text: "Inovasi adalah kunci untuk masa depan yang lebih baik.",
+      position: "CEO Inovasi Corp",
+	  picture: "https://static.vecteezy.com/system/resources/thumbnails/013/394/721/small/user-profile-avatar-png.png"
+    },
+    {
+      author: "Jane Smith",
+      text: "Kreativitas adalah kekuatan yang menggerakkan dunia.",
+      position: "Art Director Creative Agency",
+	  picture: "https://static.vecteezy.com/system/resources/previews/051/718/789/non_2x/elegant-businessman-avatar-with-suit-and-tie-free-png.png"
+    }
+  ];
+
+  let currentIndex = 0;
+
+function nextQuote() {
+  currentIndex = (currentIndex + 1) % quotes.length;
+}
+
+function prevQuote() {
+  currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
+}
 
 
 </script>
@@ -505,7 +536,7 @@ function ReadMore() {
     <Heading tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">PROSES ALUR LAYANAN BIRO PEMERINTAHAN & OTDA SULTRA</Span></Heading>
 	<br/>
 	<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
-		<div class="rounded-xl col-span-2 p-2 pb-4">
+		<div class="rounded-xl p-2 pb-4">
 			 <Timeline order="vertical" style={"padding: 8px;border-radius: 10px;border: 6px dotted #c3ddfd;"}>
 <TimelineItem title=" Persyaratan">
  <svelte:fragment slot="icon">
@@ -563,27 +594,26 @@ function ReadMore() {
    </TimelineItem>
 </Timeline> 
 		 </div>
-		 <div class="rounded-xl p-2 pb-4">
-			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;">Informasi Tentang Layanan
-			</h2>
-			<p style="padding: 4px 4px 16px 8px;border-radius:8px;background: rgb(255,255,255);
-background: linear-gradient(147deg, rgba(255,255,255,1) 38%, rgba(254,254,255,1) 73%, rgba(226,237,255,1) 99%, rgba(229,231,235,1) 100%);">
-Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan Informasi dapat dilakukan secara online ataupun melalui offline (via kantor) dengan mendatangi langsung Kantor Biro Pemerintahan dan Otda Sulawesi Tenggara. 
-<br/><br/>Pengajuan Informasi oleh Publik dapat mendownload Formulir Pengajuan Informasi pada <a href="/formulir-pengajuan-informasi-publik" style="text-decoration:underline;">halaman Laporan dan Informasi</a> pada layanan ini. 
-<br/><br/>  <b>Jam Kerja Verifikasi Informasi:</b> <br/>
-			<b>Senin - Kamis</b> (Pukul 08.00 - 15.00) <br/>
-			<b>Jumat</b> (Pukul 08.00 - 12.00)	<br/>		
-			</p> <br/> <br/>
-			
-			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;">Kotak Saran, Info & Pengaduan</h2>
+		 <div class="col-span-2 rounded-xl p-2 pb-4">
+			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;">Kotak Saran & Info</h2>
 			<p style="padding:10px;background:white;">
-			<b>Email:</b> hotline@gmail.com <br/><br/>
-			
 			<b>Alamat:</b> <br/>
 			<b>Biro Pemerintahan dan Otonomi Daerah Sultra</b><br/>
 			Kompleks Bumi Praja Anduonohu, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>
-			</p>
-		 </div>             
+			</p> <br/><br/><br/>
+			
+			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;margin-bottom:18px;">Berita Hot Terkini di Sulawesi Tenggara
+			</h2> 
+			<div id="BeritaSultra" style="position: relative; width: 100%; height: 100%; /* Aspect ratio: 1600/900 * 100 */">
+				<iframe 
+					src="https://rss.app/embed/v1/list/tVd4uipyQtOidTKx" 
+					frameborder="0" 
+					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
+				</iframe>
+				<a href="/berita-sulawesi-tenggara" class="linevisit"><Button color="light" pill style="margin-top:26px;cursor:pointer;position: relative;float:right;">Lihat Berita Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
+				<!-- <a href="/berita-sulawesi-tenggara" style="text-decoration:underline;"><button on:click={nextQuote} class="button-74" style="margin-top:40px;cursor:pointer;position: relative;">Lihat Berita Lainnya</button></a> -->
+			</div>			   
+		 </div>          
 	 </div>
   </section>
     <br/> <br/>
@@ -922,18 +952,23 @@ Informasi pada Layanan ini dilakukan secara Online. Pengajuan atau permohonan In
 
 <br/><br/>
   <!--  Section Quote -->  
- <section> 
-	<h3 class="justify-start font-semibold text-3xl mb-4">Quote Hari ini:</h3>
+ <section style="align-items: normal;"> 
+	<center><h3 class="justify-start font-semibold text-3xl mb-4">Quote Hari ini:</h3></center>
+	<div class="flex justify-end mt-4" style="text-align:right;margin-bottom:14px;">
+		<button on:click={prevQuote} class="button-74 mr-2">&#8678; Prev</button>
+		<button on:click={nextQuote} class="button-74">Next &#8680;</button>
+	  </div>
+
 <div class="textquote grid grid-cols-4" style="width: 100%;height: 330px;background-color: aliceblue;margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px darkslategray;box-sizing: border-box;">
 	<div class="rounded-xl pr-2">
-	  <Avatar src={ Karo } size="xl" /><br/>
-	  <div style="font-family:Libre Franklin, sans-serif;font-weight: 300;vertical-align: middle;margin-top: 10px;display: inline-block;padding-left: 20px;font-size: 18px;color: darkslategray;"><span>Muliadi, S.ST</span></div>
+	  <Avatar src={quotes[currentIndex].picture} size="xl" /><br/>
+	  <div style="font-family:Libre Franklin, sans-serif;font-weight: 300;vertical-align: middle;margin-top: 10px;display: inline-block;padding-left: 20px;font-size: 18px;color: darkslategray;"><span>{quotes[currentIndex].author}</span></div>
 	</div>
 	<div class="col-span-3 rounded-xl">
 	<span style="font-family: Libre Franklin, sans-serif;font-size: 200px;color: darkslategray;font-weight: 900;display: block;height: 80px;line-height: 105px;">“</span>
-	 <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 26px;line-height: 1.4;color: darkslategray;">SiPapaOde dibuat agar agar pelayanan Pemerintahan terutama Biro Pemerintahan & Otonomi Daerah Sultra bisa terintegrasi dan lebih cepat.</p>
+	 <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 26px;line-height: 1.4;color: darkslategray;">{quotes[currentIndex].text}.</p>
 <hr style=" border: 0.5px solid slategray;" /> <br/>
-<span style="font-weight: 100; font-size: 14px;">Kepala Biro Pemerintahan & Otonomi Daerah</span>
+<span style="font-weight: 100; font-size: 14px;">{quotes[currentIndex].position}</span>
 	</div>             
 </div>
 </section>
@@ -1537,5 +1572,49 @@ ol.static-org-chart .staff_card + div {
 			font-size:14px !important;
 		}
 	}
+
+	/* CSS Button Carousel Quote*/
+	.button-74 {
+  background-color: aliceblue;
+  border: 2px solid #422800;
+  border-radius: 30px;
+  box-shadow: #422800 4px 4px 0 0;
+  color: #422800;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 0 12px;
+  line-height: 34px;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button-74:hover {
+  background-color: #fff;
+}
+
+.button-74:active {
+  box-shadow: #422800 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-74 {
+    min-width: 120px;
+    padding: 0 25px;
+  }
+}
+
+#BeritaSultra {
+padding-top: 127.78%;
+}
+
+@media screen and (max-width: 767px) {
+#BeritaSultra {
+padding-top: 197.78%;
+}
+
+}
 
 </style>

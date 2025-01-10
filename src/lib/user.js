@@ -37,10 +37,10 @@ const createUser = () => {
 	}
 
 	async function logout() {
-		await account.deleteSession('current');
-		store.set(null);
+		await appwrite.account.deleteSession('current');
 		await invalidateAll();
-		goto('/');
+		store.set(null);
+		await goto('/');
 	}
 
 	return {

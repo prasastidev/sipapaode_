@@ -164,7 +164,7 @@ const updateDataKS = async (e) => {
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Database Document File Kerjasama - Prov. Sulawesi Tenggara</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Document File Kerjasama - Prov. Sulawesi Tenggara</Heading>
   <br/><br/>
   <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
     <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan Data Dokumen Kerjasama pada Tombol di samping berikut</div>

@@ -5,7 +5,7 @@
     import {  Sidebar, Toggle, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
     import { ChartPieSolid, BadgeCheckSolid, ObjectsColumnSolid, BookSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
-
+    
 
  let sidebarShow = true;
 
@@ -38,7 +38,7 @@
                   <svelte:fragment slot="icon">
                     <UsersSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                  <SidebarDropdownItem label="🔴 Data Formulir Pengajuan Kerjasama Secara Online" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="🟢 Data Pengajuan Formulir Kerjasama Online" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="📁 Data File Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="📑 Laporan Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="🖼️ Gallery Photo Documentasi Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>

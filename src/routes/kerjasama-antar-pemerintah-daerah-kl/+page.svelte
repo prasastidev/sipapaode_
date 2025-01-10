@@ -13,6 +13,7 @@
    let uuid = "";
 
     let ModalFormulir = false;
+    let ModalProsedure = false;
     let ButtonKirimPengajuan = false;
     let toastStatus = false;
     let counter = 6;
@@ -168,6 +169,28 @@
         currentStep = 1;
     }
 
+ // Lihat Prosedure   
+ const procedure = {
+    title: "Prosedur Kerjasama",
+    steps: [
+      {
+        title: "Formulir Kerjasama",
+        description: "Pemerintah Daerah dan K/L diminta untuk melengkapi Formulir Online dan Mengupload draft Kerjasama. Ini adalah langkah awal untuk memulai kerjasama dan kolaborasi."
+      },
+      {
+        title: "Rekap Data Usulan",
+        description: "Setelah Pengisian, data usulan Anda akan direkap di Administrasi Biro Pemerintahan. Pastikan semua informasi terisi dengan benar."
+      },
+      {
+        title: "Follow Up Kerjasama",
+        description: "Biro Pemerintahan yang ditunjuk akan melakukan tindak lanjut terhadap dokumen kerjasama. Proses Penelaahan lebih lanjut akan dilakukan untuk memastikan kelancaran kerjasama." 
+      },
+			  {
+        title: "Info dan Tindak Lanjut",
+        description: "Info lebih lanjut akan dikirim via email atau kontak di Formulir. Selanjutnya akan disusun PKS untuk formalitas kerjasama." 
+       }
+    ]
+  };
 
 </script>
 
@@ -179,6 +202,24 @@
 </svelte:head>
 
 <br/><br/> 
+
+<Modal title="Prosedure Kerjasama" bind:open={ModalProsedure} size="md" autoclose={false}>
+  <div class="procedure">
+    <h1>{procedure.title}</h1>
+    {#each procedure.steps as step, i}
+      <div class="step">
+        <div class="step-number">{i + 1}</div>
+        <div class="step-content">
+          <div class="step-title">{step.title}</div>
+          <div class="step-description">{step.description}</div>
+        </div>
+      </div>
+    {/each}
+  </div>
+  <svelte:fragment slot="footer">
+    <Button color="alternative" on:click={()=> ModalProsedure = !ModalProsedure} >Tutup</Button>
+  </svelte:fragment>
+</Modal>
 
 <Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir} size="lg"  autoclose={false}>
   <form class="space-y-6" on:submit={addDataFormtoTable} >
@@ -257,8 +298,8 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
     <br/><br/><br/>
     Lihat Prosedur Kerjasama hingga Approval, dapat dilihat pada link berikut:
     <br/>
-    <GradientButton id="ButtonProsedur" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Baca Prosedur</GradientButton> 
-    <Tooltip triggeredBy="#ButtonProsedur">Gambar Alur Prosedur</Tooltip>
+    <GradientButton id="ButtonProsedur" on:click={() => (ModalProsedure = true)} outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Lihat Prosedur</GradientButton> 
+    <Tooltip triggeredBy="#ButtonProsedur">Alur Prosedur</Tooltip>
     <GradientButton id="ButtonTatacara" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Tata Cara Kerjasama</GradientButton>
    <Tooltip triggeredBy="#ButtonTatacara">Peraturan Menteri Dalam Negeri Nomor 22 Tahun 2020</Tooltip>
 <br/><br/>
@@ -469,4 +510,44 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
     
   .pageFormulir { display: none; }
   .pageFormulir.show { display: block; }  
+
+  /**   Prosedure CSS   */
+  
+  .step {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+  }
+
+  .step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    background: #4f46e5;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+
+  .step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .step-title {
+    font-weight: bold;
+    font-size: 1.125rem;
+  }
+
+  .step-description {
+    color: #4b5563;
+  }   
+
 </style>
