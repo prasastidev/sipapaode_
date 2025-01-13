@@ -17,7 +17,7 @@
     <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Berita Terkini - Sulawesi Tenggara</Heading>
     <br/>
 
-    <div style="position: relative; width: 100%; padding-top: 177.78%; height:2300px;/* Aspect ratio: 1600/900 * 100 */">
+    <div style="position: relative; width: 100%; padding-top: 177.78%; height:2800px;/* Aspect ratio: 1600/900 * 100 */">
         <iframe 
             src="https://rss.app/embed/v1/magazine/tjSJifrmqBjNu6f7" 
             frameborder="0" 

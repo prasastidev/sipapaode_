@@ -532,7 +532,7 @@ function prevQuote() {
   <!--  End Section Fitur Layanan --> 
 
   <!--  Section Proses Alur Layanan -->  
-  <section> 
+  <section style="align-items: normal;"> 
     <Heading tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">PROSES ALUR LAYANAN BIRO PEMERINTAHAN & OTDA SULTRA</Span></Heading>
 	<br/>
 	<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
@@ -604,17 +604,17 @@ function prevQuote() {
 			
 			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;margin-bottom:18px;">Berita Hot Terkini di Sulawesi Tenggara
 			</h2> 
-			<div id="BeritaSultra" style="position: relative; width: 100%; height: 100%; /* Aspect ratio: 1600/900 * 100 */">
+			<div id="BeritaSultra" style="position: relative;height: 83%;padding-bottom:50px; /* Aspect ratio: 1600/900 * 100 */">
 				<iframe 
 					src="https://rss.app/embed/v1/list/tVd4uipyQtOidTKx" 
 					frameborder="0" 
 					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
 				</iframe>
-				<a href="/berita-sulawesi-tenggara" class="linevisit"><Button color="light" pill style="margin-top:26px;cursor:pointer;position: relative;float:right;">Lihat Berita Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
-				<!-- <a href="/berita-sulawesi-tenggara" style="text-decoration:underline;"><button on:click={nextQuote} class="button-74" style="margin-top:40px;cursor:pointer;position: relative;">Lihat Berita Lainnya</button></a> -->
-			</div>			   
-		 </div>          
+			</div>	 		   
+		 </div>  
 	 </div>
+	 <a href="/berita-sulawesi-tenggara" class="linevisit"><Button color="light" pill class="mt-10 md:mt-0" style="cursor:pointer;position: relative;float:right;">Lihat Berita Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
+	 <!-- <a href="/berita-sulawesi-tenggara" style="text-decoration:underline;"><button on:click={nextQuote} class="button-74" style="margin-top:40px;cursor:pointer;position: relative;">Lihat Berita Lainnya</button></a> -->        
   </section>
     <br/> <br/>
   <!--  End Section Proses Alur Layanan -->  
@@ -1608,11 +1608,14 @@ ol.static-org-chart .staff_card + div {
 
 #BeritaSultra {
 padding-top: 127.78%;
+width: 100%;
 }
 
 @media screen and (max-width: 767px) {
 #BeritaSultra {
 padding-top: 197.78%;
+width: 106%;
+margin-left: -4%;
 }
 
 }
