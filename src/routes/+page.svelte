@@ -604,7 +604,7 @@ function prevQuote() {
 			
 			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;margin-bottom:18px;">Berita Hot Terkini di Sulawesi Tenggara
 			</h2> 
-			<div id="BeritaSultra" style="position: relative;height: 83%;padding-bottom:50px; /* Aspect ratio: 1600/900 * 100 */">
+			<div id="BeritaSultra" style="position: relative;height: 70%;padding-bottom:70px; /* Aspect ratio: 1600/900 * 100 */">
 				<iframe 
 					src="https://rss.app/embed/v1/list/tVd4uipyQtOidTKx" 
 					frameborder="0" 
@@ -613,7 +613,7 @@ function prevQuote() {
 			</div>	 		   
 		 </div>  
 	 </div>
-	 <a href="/berita-sulawesi-tenggara" class="linevisit"><Button color="light" pill class="mt-10 md:mt-0" style="cursor:pointer;position: relative;float:right;">Lihat Berita Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
+	 <a href="/berita-sulawesi-tenggara" class="linevisit mt-10 md:-mt-10"><Button color="light" pill style="cursor:pointer;position: relative;float:right;">Lihat Berita Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
 	 <!-- <a href="/berita-sulawesi-tenggara" style="text-decoration:underline;"><button on:click={nextQuote} class="button-74" style="margin-top:40px;cursor:pointer;position: relative;">Lihat Berita Lainnya</button></a> -->        
   </section>
     <br/> <br/>
@@ -1614,8 +1614,8 @@ width: 100%;
 @media screen and (max-width: 767px) {
 #BeritaSultra {
 padding-top: 197.78%;
-width: 106%;
-margin-left: -4%;
+width: 112%;
+margin-left: -6%;
 }
 
 }
