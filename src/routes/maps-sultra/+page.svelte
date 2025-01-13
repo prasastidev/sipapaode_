@@ -1306,10 +1306,7 @@ function onWindowClick(e) {
 		
 		
 		<div style="text-align:center;margin-bottom:15px;">***</div>
-		Realtime Update <br/>
-
-	
-		
+		Data Berdasarkan {currentDataName} <br/>
 
 		<div class="container mx-auto p-4">
 		
@@ -1318,15 +1315,12 @@ function onWindowClick(e) {
 		   <div class="flex justify-center mt-4 space-x-4">
 			<button on:click={() => updateChartData(DataJP, 'Jumlah Penduduk')} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
 			Jumlah Penduduk </button>
-
 		    <button on:click={() => updateChartData(DataLW, 'Luas Wilayah')} class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
 			Luas Wilayah</button>
-
 			<button on:click={() => updateChartData(DataJKecamatan, 'Jumlah Kecamatan')} class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
 			Jumlah Kecamatan </button>
-
-
 		   </div>
+
 	   </div>
 		
 	    

@@ -444,9 +444,9 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
 <br/>
 3 Aktivitas Pengiriman Terakhir
 <br/><br/> 
-<table style="width:100%;display:block;overflow-wrap: anywhere; background: linear-gradient(147deg, rgba(255,255,255,1) 4%, rgba(44,82,111,1) 99%, rgba(226,237,255,1) 100%, rgba(229,231,235,1) 100%);color:white;padding: 2px;border-radius: 8px;">
+<table style="width:100%;display:block;overflow-wrap: anywhere; background: linear-gradient(147deg, rgb(255, 255, 255) 4%, rgb(229 232 235) 99%, rgb(226, 237, 255) 100%, rgb(229, 231, 235) 100%);color:#2c526f;padding: 2px;border-radius: 8px;">
   <thead>
-  <tr style="border-bottom: 1px solid white;background: linear-gradient(147deg, rgba(255,255,255,1) 4%, rgba(44,82,111,1) 99%, rgba(226,237,255,1) 100%, rgba(229,231,235,1) 100%);">
+  <tr style="border-bottom: 1px solid white;background: linear-gradient(147deg, rgba(255, 255, 255, 1) 4%, rgb(171 196 215) 99%, rgba(226, 237, 255, 1) 100%, rgba(229, 231, 235, 1) 100%);">
   <th style="width:5%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">No</th>
   <th style="width:18%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">Nama</th>
   <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Tanggal Kirim</th>

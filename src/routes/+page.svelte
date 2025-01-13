@@ -1,6 +1,7 @@
 <script>
 	import { Tabs, TabItem, Heading, P, Span, Marquee, Button, Modal, Popover, Avatar, Timeline, TimelineItem, Chart, Card, Indicator, Badge, CloseButton, AccordionItem, Accordion, Video} from 'flowbite-svelte';
-	import { onMount } from 'svelte';
+	import { onMount, onDestroy } from 'svelte';
+	import ApexCharts from 'apexcharts';
 	let clickOutsideModal = false;
 	import { cascade } from 'svelte-typewriter';
 	import {slide } from 'svelte/transition';
@@ -72,32 +73,37 @@ let DataKotaKendari  = data.TableDatasWilayah.documents[0];
 let DataKonawe = data.TableDatasWilayah.documents[8];
 let DataKonaweUtara  = data.TableDatasWilayah.documents[5];
 
+let DataLW = [
+          { x: 'Kab. Bombana', y: DataBombana.Luas_Wilayah },
+		  { x: 'Kab. Wakatobi', y: DataWakatobi.Luas_Wilayah },
+		  { x: 'Kota Kendari', y: DataKotaKendari.Luas_Wilayah },
+		  { x: 'Kab. Konawe', y: DataKonawe.Luas_Wilayah },
+		  { x: 'Kab. Konawe Utara', y: DataKonaweUtara.Luas_Wilayah }
+        ];
+	
+let DataJP = [
+          { x: 'Kab. Bombana', y: DataBombana.J_Penduduk },
+		  { x: 'Kab. Wakatobi', y: DataWakatobi.J_Penduduk },
+		  { x: 'Kota Kendari', y: DataKotaKendari.J_Penduduk },
+		  { x: 'Kab. Konawe', y: DataKonawe.J_Penduduk },
+		  { x: 'Kab. Konawe Utara', y: DataKonaweUtara.J_Penduduk }
+        ];
+
+	let chart;
+	let chartElement;
+	let selectedData = DataJP;
+	let currentDataName = 'Jumlah Penduduk';
+	let colorChart = '#1A56DB';
+
 /** Chart Data **/
 	const options = {
     colors: ['#1A56DB', '#FDBA8C'],
     series: [
       {
-        name: 'Luas Wilayah (km2)',
-        color: '#1A56DB',
-        data: [
-          { x: 'Kab.Bombana', y: DataBombana.Luas_Wilayah},
-          { x: 'Kab. Wakatobi', y: DataWakatobi.Luas_Wilayah },
-          { x: 'Kota Kendari', y: DataKotaKendari.Luas_Wilayah },
-          { x: 'Kab. Konawe', y: DataKonawe.Luas_Wilayah },
-          { x: 'Konawe Utara', y: DataKonaweUtara.Luas_Wilayah }
-        ]
-      },
-      {
-        name: 'Jumlah Penduduk',
-        color: '#FDBA8C',
-        data: [
-          { x: 'Kab.Bombana', y: DataBombana.J_Penduduk },
-          { x: 'Kab. Wakatobi', y: DataWakatobi.J_Penduduk },
-          { x: 'Kota Kendari', y: DataKotaKendari.J_Penduduk },
-          { x: 'Kab. Konawe', y: DataKonawe.J_Penduduk },
-          { x: 'Konawe Utara', y: DataKonaweUtara.J_Penduduk }
-        ]
-      }
+        name:  currentDataName,
+        color: colorChart,
+        data: selectedData 
+      }  
     ],
     chart: {
       type: 'bar',
@@ -173,6 +179,42 @@ let DataKonaweUtara  = data.TableDatasWilayah.documents[5];
       opacity: 1
     }
   };
+ /** End Chart **/
+
+    // Function to update chart data
+	function updateChartData(newData, dataName, colorChartdata) {
+		selectedData = newData;
+		currentDataName = dataName;
+		colorChart = colorChartdata;
+		
+		// Update the series data
+		chart.updateSeries([{
+			name: dataName,
+			data: newData,
+			color: colorChartdata
+		}]);
+	}
+
+	onMount(() => {
+    // Create the chart when the component mounts
+    if (typeof window !== 'undefined') {
+      chart = new ApexCharts(chartElement, {
+        ...options,
+        series: [{
+          name: currentDataName,
+          data: selectedData
+        }]
+      });
+      chart.render();
+    }
+  });
+
+	onDestroy(() => {
+		// Destroy the chart when the component is destroyed
+		if (chart) {
+			chart.destroy();
+		}
+	});
 
   
 function ReadMore() {
@@ -305,7 +347,7 @@ function prevQuote() {
 		Pilih Layanan Sesuai dengan Bidang. Lihat Panduan Tentang Layanan <button id="panduaninfo">
 			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button>
 	  </div>
-	  <Popover triggeredBy="#panduaninfo" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
+	  <Popover triggeredBy="#panduaninfo" class="w-80 md:w-96 lg:w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
@@ -838,7 +880,7 @@ function prevQuote() {
 		</div>
 		<div class="p-1">
 			<Card class="w-full max-w-lg">
-				<div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700 ">
+				<div class="flex justify-between pb-2 mb-4 border-b border-gray-200 dark:border-gray-700 ">
 				  <div class="flex items-center">
 					<div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center me-3">
 						<img class="w-8 h-8 rounded-full" src={ImagelogoSultra} alt="Flowbite logo" />
@@ -851,7 +893,24 @@ function prevQuote() {
 				  </div>
 				</div>
 	
-				<Chart {options} /> 
+				<!-- <Chart {options} />  -->
+
+		
+		Berdasarkan {currentDataName} <br/>
+
+		<div class="container mx-auto p-1 pb-1">
+		
+			<div bind:this={chartElement}></div>
+			
+		   <div class="flex justify-left -mt-10 space-x-4 relative">
+			<button on:click={() => updateChartData(DataJP, 'Jumlah Penduduk', '#1A56DB')} class="bg-blue-500 hover:bg-blue-900 text-white font-bold py-2 px-6 rounded" style="font-size:12px;border-radius:10px;">
+			Jumlah Penduduk </button>
+		    <button on:click={() => updateChartData(DataLW, 'Luas Wilayah', '#FDBA8C')} class="bg-orange-500 hover:bg-orange-900 text-white font-bold py-2 px-6 rounded" style="font-size:12px;border-radius:10px;">
+			Luas Wilayah</button>
+			
+		   </div>
+		   
+	   </div>
 			  </Card>
 		</div>
 	  </div>
