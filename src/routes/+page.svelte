@@ -302,11 +302,10 @@ function prevQuote() {
  <section>
 	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR-FITUR LAYANAN</Span></Heading> <br/>
 	<div class="flex items-center font-light text-gray-500 dark:text-gray-400 p-1 mb-2 -mt-4" style="font-size:15px;">
-		<button id="panduaninfo">
-		  <InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" />
-		</button> Lihat Panduan Tentang Layanan
+		Pilih Layanan Sesuai dengan Bidang. Lihat Panduan Tentang Layanan <button id="panduaninfo">
+			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button>
 	  </div>
-	  <Popover triggeredBy="#panduaninfo" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
+	  <Popover triggeredBy="#panduaninfo" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
@@ -665,6 +664,9 @@ function prevQuote() {
  <section>
 	<Heading id="InfoTabelGrafik" tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">INFORMASI PEMERINTAHAN OTONOMI SULAWESI TENGGARA</Span></Heading>
 	<br/>
+	<p style="padding:12px;background:white;border-radius:14px;">
+		Dibawah berikut Anda dapat mengetahui Informasi Pemerintahan Kab/Kota di Sulawesi Tenggara, Mencakup : Lambang, Luas Wilayah, Jumlah Penduduk, Kecamatan, Kabupaten, Letak geografis dan Lainnya.
+	</p> <br/>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
 		<div class="p-1">
 			
@@ -1009,11 +1011,11 @@ function prevQuote() {
 <Accordion class="w-full" activeClass="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800" inactiveClass="text-gray-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
 	<AccordionItem class="font-semibold text-lg" open>
 	  <span slot="header">Apa itu Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi tenggara</span>
-	  <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
+	  <p class="mb-2 text-gray-500 dark:text-gray-400">Sipapaode merupakan langkah maju dalam upaya meningkatkan pelayanan pemerintahan di Sulawesi Tenggara. Dengan memanfaatkan teknologi informasi, diharapkan sistem ini dapat menciptakan layanan yang lebih efisien, transparan, dan mudah diakses oleh masyarakat. </p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
 	  <span slot="header">Bagaimana Pengajuan Proses Fasilitas Kerjasama Antar Pemerintah Dalam dan Luar Negeri atau Badan Usaha / Swasta.</span>
-	  <p class="mb-2 text-gray-500 dark:text-gray-400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo ab necessitatibus sint explicabo ...</p>
+	  <p class="mb-2 text-gray-500 dark:text-gray-400">Proses Pengajuan Fasilitas Kerjasama dapat mengunjungi Fitur-Fitur Layanan pada Tab Kerjasama. Anda akan diarahkan ke halaman untuk mengisi Formulir dan juga Informasi lainnya tentang Kerjasama.</p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
 		<span slot="header">Dibagian mana menemukan informasi tentang Kode data wilayah pemerintahan, Pulau dan Rupa Bumi di Sulawesi Tenggara.</span>
