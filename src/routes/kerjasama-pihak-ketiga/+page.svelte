@@ -10,6 +10,8 @@
     import { v4 as uuidv4 } from "uuid";
 
 let uuid = "";
+let defaultStatus = "Proses Pengajuan";
+let defaultEstimasi = "3-5 Hari";
 
 let ModalFormulir = false;
 let ModalProsedure = false;
@@ -89,7 +91,7 @@ KSTelahBerakhir = KSTotal - KSAktif ;
 		const formEl = e.target;
 		const formData = new FormData(formEl);
     // Masukkan Data ke table melalui crudDataRekap
-		await addTableData(formData.get('Kategory_KS'), formData.get('nama'), formData.get('email'), formData.get('ContactPerson'), formData.get('Instansi'), formData.get('Tentang'), formData.get('Catatan'), uuid);
+		await addTableData(formData.get('Kategory_KS'), formData.get('nama'), formData.get('email'), formData.get('ContactPerson'), formData.get('Instansi'), formData.get('Tentang'), formData.get('Catatan'), defaultStatus, defaultEstimasi, uuid);
 
     // Masukkan file ke Storage Bucket
 		  const promise = storage.createFile('674fa666003b4eb41eea', uuid, document.getElementById('uploadDocDraftKS').files[0]); 
@@ -247,7 +249,8 @@ function DownloadFile(id) {
       *Tentang (Perihal Kerjasama):
     </FloatingLabelInput> <br/>
     <div class="mb-6">
-      <label for="" class="text-sm">*Upload Draft Dokumen Kerjasama:</label>
+      <label class="text-sm">*Upload Draft Dokumen Kerjasama:</label><br/>
+      <label class="text-sm">Ket: Surat Permohonan dan Berkas Kerjasama di Scan dalam 1 File (PDF):</label>
       <Fileupload class="mb-2" name="UploadDokumen" id="uploadDocDraftKS" required />
     </div>
     <Textarea id="Catatan" placeholder="Catatan (Optional)" rows="2" name="Catatan" /> <br/><br/>
@@ -451,7 +454,7 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah deng
   <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Tanggal Kirim</th>
   <th style="width:25%;white-space: break-spaces;padding:6px;">Instansi</th>
   <th style="width:16%;white-space: break-spaces;padding:6px;">Status</th>
-  <th style="width:14%;white-space: break-spaces;padding:6px;" class="hidekolom">Verifikasi Estimasi</th>
+  <th style="width:14%;white-space: break-spaces;padding:6px;" class="hidekolom">Estimasi Proses</th>
   </tr>
   </thead>
   <tbody> 
@@ -461,8 +464,8 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antara Daerah deng
   <td class="hidekolom" style="padding:4px;"><span><Avatar class="inline-flex" border /> {cetakTabel.Nama}</span></td>
   <td class="hidekolom" style="padding:4px;"><span> {cetakTabel.$updatedAt.slice(0, 10)}</span></td>
   <td style="padding:4px;"><span>{cetakTabel.Instansi}</span></td>
-  <td style="padding:4px;"><Badge color="indigo">Proses Pengajuan</Badge></td>
-  <td class="hidekolom" style="padding:4px;">3-5 hari Kerja</td>
+  <td style="padding:4px;"><Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge></td>
+  <td class="hidekolom" style="padding:4px;">{cetakTabel.Estimasi} Kerja</td>
   </tr>
   {/each}
 

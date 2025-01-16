@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
  
-    import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+    import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge } from 'flowbite-svelte';
     import { PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
     import { slide } from 'svelte/transition';
     import { v4 as uuidv4 } from "uuid";
@@ -127,7 +127,7 @@ const updateDataKS = async (e) => {
       table = document.getElementById("TABLE_KSPK");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[6];
+        td = tr[i].getElementsByTagName("td")[7];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -304,7 +304,7 @@ const updateDataKS = async (e) => {
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
               </svg>
           </div>
-          <input on:keyup={SearchTable} type="text" id="simple-search" class="bg-white-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Data berdasarkan Nama Mitra Kerjasama ..." required />
+          <input on:keyup={SearchTable} type="text" id="simple-search" class="bg-white-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Data berdasarkan Nama Mitra Kerjasama atau OPD ..." required />
       </div>
       <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -318,16 +318,14 @@ const updateDataKS = async (e) => {
     <Table id="TABLE_KSPK" shadow hoverable={false} class="whitespace-break-spaces table-auto overflow-x-auto">
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">No</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Document</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Jenis</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Kategori</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Subjek</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tentang</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Nomor Kerjasama</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">OPD</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Mitra</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tgl Mulai</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tgl Selesai</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Document</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4">OPD & Mitra</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tanggal</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Keterangan</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tombol Aksi</TableHeadCell>
       </TableHead>
@@ -339,21 +337,19 @@ const updateDataKS = async (e) => {
         {#if i >= postRangeLow && i < postRangeHigh}
         <TableBodyRow class={`bg-${getKeteranganKSColor(cetakTabel.keteranganKS)}`}>
           <TableBodyCell>{i+1}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Jenis}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.kategoryKS}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Subjek}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2" style="height: 150px;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 7;-webkit-box-orient: vertical;">{cetakTabel.Tentang}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.No_kerjasama}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.OPD}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Mitra}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.tanggalMulai.slice(0, 10)}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.tanggalSelesai.slice(0, 10)}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"> 
             <center><ButtonGroup class="*:!ring-primary-700"> 
              <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;">
                <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label></center>
           </TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.keteranganKS}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Jenis}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.kategoryKS}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Subjek}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2" style="height: 150px;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 7;-webkit-box-orient: vertical;">{cetakTabel.Tentang}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.No_kerjasama}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:200px;overflow-wrap: anywhere;"><b>OPD:</b> {cetakTabel.OPD}<br/><b>Mitra:</b> {cetakTabel.Mitra}</div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:180px;overflow-wrap: anywhere;"><b>Mulai:</b> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><b>Selesai: </b>{cetakTabel.tanggalSelesai.slice(0, 10)}</div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataRekapKerjasama(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
             <Button style="color:red;" on:click={() => (ConfirmDeleteModal = true)}><TrashBinOutline class="w-4 h-4 me-2" />Delete</Button>

@@ -1,13 +1,53 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
- 
-    import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
-    import {  TrashBinOutline, DownloadOutline, EyeOutline, BuildingOutline } from 'flowbite-svelte-icons';
+    export let data=[];
+    import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge, Modal, Radio, FloatingLabelInput } from 'flowbite-svelte';
+    import {  TrashBinOutline, FileLinesOutline, EditOutline, BuildingSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
-	  import { deleteTableData } from '$lib/crudPengajuanKSOnline.js';
-   
-    
+	  import { deleteTableData, UpdateStatusPengajuanKS } from '$lib/crudPengajuanKSOnline.js';
+
+    let ConfirmDeleteModal = false;
+    let ModalEditData = false;
+    let getStatusPengajuan, getEstimasi, getNama, getInstansi, getidData, getTentang;
+
+/** Edit Run 2 function: GetDataPengajuanKS and update*/
+
+function getDataPengajuanKS(id) {
+const promise = databases.getDocument(
+  '673dd7b2001a83873b47', 
+  '674fa11f000d0adfbe25',
+  id,
+  []
+);
+
+promise.then(function (response) {
+  ModalEditData = true;
+  console.log(response); // Success
+ getStatusPengajuan = response.Status;
+ getEstimasi = response.Estimasi;
+ getNama = response.Nama;
+ getInstansi = response.Instansi;
+ getTentang = response.Tentang;
+ getidData = response.$id;
+
+}, function (error) {
+  console.log(error); // Failure
+  throw error;
+});
+}
+
+const updateStatusPengajuan = async (e) => {
+		e.preventDefault();
+		const formEl = e.target;
+		const formData = new FormData(formEl);
+		await UpdateStatusPengajuanKS(formData.get('StatusPengajuan'), formData.get('EstimasiProses'), getidData);
+		invalidateAll();
+
+		// Reset form
+		formEl.reset();
+	};
+
 
   function SearchTable() {
       var input, filter, table, tr, td, i, txtValue;
@@ -28,8 +68,6 @@
       }
     }
 
-export let data=[];
-
 function DownloadFile(id) {
   const result = storage.getFileView('674fa666003b4eb41eea', id);
 	return result;
@@ -40,6 +78,7 @@ const remove = async (id) => {
     // Delete File Storage
 		const result = await storage.deleteFile('674fa666003b4eb41eea', id );
     console.log(result);
+    ConfirmDeleteModal = false;
 		invalidateAll();
 	};
 
@@ -68,6 +107,37 @@ const remove = async (id) => {
  
 <br/> <br/>
 
+<Modal title="Pengeditan Data Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
+  <form class="space-y-6" on:submit={updateStatusPengajuan}>
+    <b>Instansi:</b>  {getInstansi}  <br/>
+  <b>Tentang:</b> {getTentang}  <br/> <br/>
+   <label class="text-sm">Status Pengajuan:</label> <br/>
+   <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Proses Pengajuan">Proses Pengajuan</Radio></li>
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Proses Verifikasi">Proses Verifikasi</Radio></li>
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Penandatanganan Naskah">Penandatanganan Naskah</Radio></li>
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Ditolak">Ditolak</Radio></li>
+    </ul> <br/> 
+    <label class="text-sm" style="display:block;margin-bottom:-10px;">Estimasi Proses <i>(Ex: 2 Hari, 3-5 Hari)</i> </label>
+    <FloatingLabelInput style="filled" bind:value={getEstimasi} name="EstimasiProses" type="text">
+      Estimasi Proses:
+    </FloatingLabelInput><br/>
+    <div>
+      <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update Data</button>
+    </div>     
+  </form>  
+  <svelte:fragment slot="footer">
+    <Button color="alternative" on:click={()=> ModalEditData = !ModalEditData} >Batal</Button>
+  </svelte:fragment>
+</Modal>
+
+Dibawah berikut adalah Data Pengajuan Kerjasama secara online.  <br/>
+{#if data.TableDataPengajuanKSOnline.total === 0}
+<p>Saat ini Tidak ada Data Formulir Pengajuan Kerjasama secara Online</p>
+{:else}
+<p>Terdapat {data.TableDataPengajuanKSOnline.total} Data Pengajuan Kerjasama secara Online</p>
+ {/if}
+ <br/>
 
     <form class="flex items-center w-full mx-auto" style="width:100%;">   
       <label for="simple-search" class="sr-only">Search</label>
@@ -92,26 +162,17 @@ const remove = async (id) => {
 
 <section>
 
-Dibawah berikut adalah Data Pengajuan Kerjasama secara online.  <br/>
-{#if data.TableDataPengajuanKSOnline.total === 0}
-<p>Saat ini Tidak ada Data Formulir Pengajuan Kerjasama secara Online</p>
-{:else}
-<p>Terdapat {data.TableDataPengajuanKSOnline.total} Data Pengajuan Kerjasama secara Online</p>
- {/if}
- <br/>
-
   <Table id="TABLE_KSPK" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
     <TableHead>
       <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Nama</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Tanggal Submit</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Kategori Kerjasama</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Email</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Contact Person</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Instansi</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Tentang</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Catatan</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Draft Dokumen KS</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-4">Email & Contact</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-4">Instansi & Tentang</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-4">Catatan</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-4">Status & Estimasi</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
     </TableHead>
     {#await data.TableDataPengajuanKSOnline.documents}
@@ -121,19 +182,36 @@ Dibawah berikut adalah Data Pengajuan Kerjasama secara online.  <br/>
       {#each allPosts as cetakTabel, i}	
       {#if i >= postRangeLow && i < postRangeHigh}
       <TableBodyRow>
-        <TableBodyCell>{i+1}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2"><Avatar class="inline-flex" border /> {cetakTabel.Nama}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.$updatedAt.slice(0, 10)}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Kategory_KS}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Email}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.ContactPerson}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2"><BuildingOutline class="w-4 h-4 infline-flex me-2" /> {cetakTabel.Instansi}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Tentang}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Catatan}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:green;"><EyeOutline class="w-4 h-4 me-2" />Berkas Pengajuan Kerjasama</Button></a> </ButtonGroup></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
-            <Button style="color:red;" on:click={() => remove(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
-          </ButtonGroup></TableBodyCell>
+        <TableBodyCell class="content-start">{i+1}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div><Avatar class="inline-flex mb-2" border /> <br/> <b>{cetakTabel.Nama}</b></div></TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.$updatedAt.slice(0, 10)}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Kategory_KS}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+          <center>
+          <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><FileLinesOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh berkas</label>  
+         </center>
+        </TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;overflow-wrap: anywhere;"><b>Email:</b> {cetakTabel.Email} <br/><b>Contact:</b> {cetakTabel.ContactPerson}
+        </div></TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;display:flex;overflow-wrap: anywhere;"><BuildingSolid class="w-4 h-4 infline-flex me-2" /> {cetakTabel.Instansi}</div> <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Catatan}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;">
+          <Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>
+        </TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+          <ButtonGroup class="*:!ring-primary-700">
+            <Button style="color:blue;" on:click={() => getDataPengajuanKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
+            <Button style="color:red;" on:click={() => (ConfirmDeleteModal = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+          </ButtonGroup>
+        </TableBodyCell>
+        <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
+          <div class="text-center">
+            <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
+            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pengajuan Kerjasama serta Serta Dokumen Berkas Pengajuan Kerjasama</h3>
+            <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+            <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
+          </div>
+        </Modal>
       </TableBodyRow>
       {/if}
    {/each}

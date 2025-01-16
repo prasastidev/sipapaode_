@@ -25,7 +25,7 @@ export async function getTablePengajuanTerakhir() {
 }
 
 
-export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Instansi, Tentang, Catatan, generateid) {
+export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Instansi, Tentang, Catatan, Status, Estimasi, generateid) {
 	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {
 		Kategory_KS,
 		Nama,
@@ -33,7 +33,16 @@ export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Inst
 		ContactPerson,
 		Instansi,
 		Tentang,
-		Catatan
+		Catatan,
+		Status, 
+		Estimasi
+	});
+}
+
+export async function UpdateStatusPengajuanKS(Status, Estimasi, id) {
+	await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
+		Status: Status ,
+		Estimasi: Estimasi
 	});
 }
 
