@@ -1,3 +1,29 @@
 # https://www.robotstxt.org/robotstxt.html
+
+# Allow all crawlers
 User-agent: *
-Disallow:
+Allow: /
+
+# Prevent crawling of specific paths
+Disallow: /dashboard-biro/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*?
+Disallow: /*=
+Disallow: /*/search
+
+# Allow images to be crawled
+Allow: /*.jpg$
+Allow: /*.jpeg$
+Allow: /*.gif$
+Allow: /*.png$
+Allow: /*.webp$
+
+# Crawl-delay directive
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://www.sipapaode.id/sitemap.xml
+
+# Host directive
+Host: https://www.sipapaode.id

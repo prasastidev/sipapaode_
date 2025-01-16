@@ -270,8 +270,8 @@ function prevQuote() {
 <svelte:window on:click={onWindowClick} />
 
 <svelte:head>
-	<title>Home</title>
-	<meta name="description" content="sipapaode" />
+	<title>Sipapaode | Biro Pemerintahan dan Otonomi Daerah Sultra</title>
+	<meta name="description" content="Sipapaode | Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 
@@ -347,7 +347,7 @@ function prevQuote() {
 		Pilih Layanan Sesuai dengan Bidang. Lihat Panduan Tentang Layanan <button id="panduaninfo">
 			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button>
 	  </div>
-	  <Popover triggeredBy="#panduaninfo" class="w-80 md:w-96 lg:w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
+	  <Popover triggeredBy="#panduaninfo" class="w-72 md:w-96 lg:w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>

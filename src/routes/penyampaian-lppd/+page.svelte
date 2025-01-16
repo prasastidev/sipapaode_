@@ -97,7 +97,7 @@ const addDataFormtoTable = async (e) => {
 
 <svelte:head>
 	<title>Laporan Penyampaian LPPD</title>
-	<meta name="description" content="Laporan Penyampaian LPPD" />
+	<meta name="description" content="Sipapaode | Laporan Penyampaian LPPD" />
 </svelte:head>
 
 <br/><br/>
@@ -165,7 +165,7 @@ const addDataFormtoTable = async (e) => {
     Dokumen LPPD dan LKPJ yang telah dikirim akan di update pada tabel di bawah halaman ini.
   </p>
   <div class="flex gap-2">
-    <Button size="sm" on:click={() => (ModalKirimLPPD = true)} color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Submit LPPD dan LKPJ</Button>
+    <Button size="sm" on:click={() => (ModalKirimLPPD = true)} color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Kirim LPPD dan LKPJ</Button>
   </div>
 </Alert>
 <br/><br/>

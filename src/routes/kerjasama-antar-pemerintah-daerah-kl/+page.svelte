@@ -197,8 +197,8 @@
 
 
 <svelte:head>
-	<title>Kerjasama antar Pemerintah Daerah dan K/L</title>
-	<meta name="description" content="Kerjasama antar Pemerintah Daerah dan K/L" />
+	<title>Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L</title>
+	<meta name="description" content="Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L" />
 </svelte:head>
 
 <br/><br/> 

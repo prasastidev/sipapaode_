@@ -44,7 +44,7 @@
 		   </Dropdown>
 
 		   {#if $user}
-	  <div>Hi, <a href="/dashboard-biro">{$user.name}</a>		
+	  <div style="width: 120px;">Hi, <a href="/dashboard-biro">{$user.name}</a>		
 	  </div> 
 	  {:else}
 	  <NavLi href="/login" style="border: 2px solid #808a93;padding: 2px 14px;border-radius: 5px;vertical-align: middle;">Dashboard</NavLi>

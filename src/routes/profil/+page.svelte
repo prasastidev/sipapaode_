@@ -13,8 +13,8 @@
 </script>
 
 <svelte:head>
-	<title>Profil</title>
-	<meta name="description" content="Profil" />
+	<title>Profil Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara</title>
+	<meta name="description" content="Profil Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/>

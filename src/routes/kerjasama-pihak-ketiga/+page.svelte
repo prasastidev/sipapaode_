@@ -195,8 +195,8 @@ function DownloadFile(id) {
 
 
 <svelte:head>
-	<title>Kerjasama dengan Pihak Ketiga</title>
-	<meta name="description" content="Kerjasama dengan Pihak Ketiga" />
+	<title>Sipapaode | Kerjasama dengan Pihak Ketiga</title>
+	<meta name="description" content="Sipapaode | Kerjasama dengan Pihak Ketiga" />
 </svelte:head>
 
 <br/><br/> 
