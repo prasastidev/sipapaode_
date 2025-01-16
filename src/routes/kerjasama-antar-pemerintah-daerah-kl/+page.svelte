@@ -198,7 +198,7 @@
 
 <svelte:head>
 	<title>Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L</title>
-	<meta name="description" content="Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L" />
+	<meta name="description" content="Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/> 

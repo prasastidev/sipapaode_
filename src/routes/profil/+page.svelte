@@ -101,7 +101,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
                 </div>
                 <div class="staff_info">
                     <div class="staff_image">
-                        <img src={ PicProfileM } class="card-img-top" />
+                        <img src={ Karo } class="card-img-top" />
                     </div>
                     <div class="staff_name_container">
           Muliadi, S.ST

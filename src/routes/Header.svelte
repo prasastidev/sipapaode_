@@ -1,7 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import { user } from '$lib/user';
-	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem, DropdownDivider } from 'flowbite-svelte';
+	import { Navbar, NavBrand, NavLi, NavUl, NavHamburger, Dropdown, DropdownItem, DropdownDivider, Tooltip } from 'flowbite-svelte';
 	import logo from '$lib/images/LogoSultradan-Sipapode.webp';
 	import sultraicon from '$lib/images/Sultra-Icon.webp';
 	import { ChevronDownOutline } from 'flowbite-svelte-icons';
@@ -32,7 +32,9 @@
 			<DropdownDivider />
 			<DropdownItem href="/gallery" class="text-[#4a494d]">Gallery Foto & Kegiatan</DropdownItem>
 		   </Dropdown>
-		  <NavLi href="/maps-sultra" style="font-size:15px;color:#2e6c09;"> <img src={sultraicon} class="me-2" alt="Logo" style="width:25px;height:21px;display:inline-flex;margin-right:5px;" />Lanskap Sultra</NavLi>
+		  <NavLi id="mapsSultra" href="/maps-sultra" style="font-size:15px;color:#2e6c09;"> <img src={sultraicon} class="me-2" alt="Logo" style="width:25px;height:21px;display:inline-flex;margin-right:5px;" />Lanskap Sultra</NavLi>
+		  <Tooltip type='auto' triggeredBy="#mapsSultra" placement='bottom' class="w-72 md:w-80 lg:w-80">
+			Informasi Geografis, Kode Wilayah, Pemerintahan, Rupa Bumi dan Grafik Kab/Kota di Provinsi Sulawesi Tenggara</Tooltip>
 		  <NavLi class="cursor-pointer" style="font-size:15px;">Laporan dan Informasi <ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />
 		  </NavLi>
 		  <Dropdown class="w-64 z-20" style="width:320px;">
@@ -44,8 +46,9 @@
 		   </Dropdown>
 
 		   {#if $user}
-	  <div style="width: 120px;">Hi, <a href="/dashboard-biro">{$user.name}</a>		
+	  <div style="width: 120px;">Hi, <a id="gotoDashboard" href="/dashboard-biro">{$user.name}</a>		
 	  </div> 
+	  <Tooltip type='auto' triggeredBy="#gotoDashboard" placement='bottom' class="w-32">Masuk ke Dashboard Anda</Tooltip>
 	  {:else}
 	  <NavLi href="/login" style="border: 2px solid #808a93;padding: 2px 14px;border-radius: 5px;vertical-align: middle;">Dashboard</NavLi>
 	  {/if}

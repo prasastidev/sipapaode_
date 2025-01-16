@@ -364,8 +364,8 @@ function onWindowClick(e) {
 <svelte:window on:click={onWindowClick} />
 
 <svelte:head>
-	<title>About</title>
-	<meta name="description" content="About this app" />
+	<title>Sipapaode - Lanskap Sulawesi Tenggara</title>
+	<meta name="description" content="Lanskap Sulawesi Tenggara - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 

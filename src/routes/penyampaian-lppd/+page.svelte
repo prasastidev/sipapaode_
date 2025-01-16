@@ -96,8 +96,8 @@ const addDataFormtoTable = async (e) => {
 </script>
 
 <svelte:head>
-	<title>Laporan Penyampaian LPPD</title>
-	<meta name="description" content="Sipapaode | Laporan Penyampaian LPPD" />
+	<title>Laporan Penyampaian LPPD LKPJ</title>
+	<meta name="description" content="Sipapaode | Laporan Penyampaian LPPD LKPJ - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/>

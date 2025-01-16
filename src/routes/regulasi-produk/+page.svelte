@@ -26,8 +26,8 @@
 </script>
 
 <svelte:head>
-	<title>Laporan Penyampaian LPPD</title>
-	<meta name="description" content="Laporan Penyampaian LPPD" />
+	<title>Regulasi - Produk Hukum</title>
+	<meta name="description" content="Regulasi - Produk Hukum - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/>

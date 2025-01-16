@@ -7,8 +7,8 @@
 </script>
 
 <svelte:head>
-	<title>Laporan Penyampaian LPPD</title>
-	<meta name="description" content="Laporan Penyampaian LPPD" />
+	<title>Daftar Informasi Publik</title>
+	<meta name="description" content="Daftar Informasi Publik - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/>
@@ -83,7 +83,7 @@ Sulawesi Tenggara <br/>Tahun 2024</Heading>
         <TableBodyCell class="whitespace-break-spaces">Setiap Tahun</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">Hardcopy dan Softcopy</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">Selama Berlaku</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces"><EyeOutline class="w-4 h-4 align-middle inline" /> Lihat</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces"><a href="/profil-pimpinan" style="border-bottom:2px dotted #1251d1;color:#1251d1;"><EyeOutline class="w-4 h-4 align-middle inline" /> Lihat</a></TableBodyCell>
       </TableBodyRow>
       <TableBodyRow>
         <TableBodyCell colspan="8" class="font-semibold" style="background: antiquewhite;">B. Ringkasan Informasi Tentang Program, Kegiatan dan Kinerja Badan Publik</TableBodyCell>

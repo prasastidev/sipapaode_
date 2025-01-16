@@ -21,7 +21,7 @@
 
 <svelte:head>
 	<title>Gallery Foto & Video</title>
-	<meta name="description" content="Gallery Foto & Video" />
+	<meta name="description" content="Gallery Foto & Video - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/>

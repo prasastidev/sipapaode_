@@ -15,8 +15,8 @@
 </script>
 
 <svelte:head>
-	<title>Login</title>
-	<meta name="description" content="Login" />
+	<title>Login Sipapaode</title>
+	<meta name="description" content="Login Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/><br/><br/>

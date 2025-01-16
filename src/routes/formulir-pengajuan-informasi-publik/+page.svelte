@@ -8,7 +8,7 @@
 
 <svelte:head>
 	<title>Formulir Pengajuan Informasi oleh Publik</title>
-	<meta name="description" content="Formulir Pengajuan Informasi oleh Publik" />
+	<meta name="description" content="Formulir Pengajuan Informasi oleh Publik - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
 <br/><br/>
