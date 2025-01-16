@@ -186,7 +186,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
 
  <Heading id="Alamat" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Alamat dan Kontak</Heading>
  
- <div class="grid grid-cols-12 gap-4">
+ <div class="block grid-cols-12 gap-4 md:flex lg:flex">
   <div><BuildingSolid class="w-16 h-16 align-middle inline" /></div>
   <div class="col-span-10 text-2xl font-extrabold">Biro Pemerintahan dan Otonomi Daerah<br/>Sulawesi Tenggara <br/>
   <span class="text-lg font-normal">Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>
