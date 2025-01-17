@@ -330,7 +330,7 @@ function prevQuote() {
 		{#if BannerInfo.Status_banner}
         <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="border:1px solid #adcdd6;border-radius:10px;">
 			<img class="w-14 h-14 rounded-full" src={ImagelogoSultra} alt="Sultra Pictures" />
-			<h4 class="text-xl text-left"> {BannerInfo.Text_Banner} </h4>
+			<h4 class="text-xl text-left"> {@html BannerInfo.Text_Banner} </h4>
          <CloseButton class="border-2" on:click={() => (BannerInfo.Status_banner = false)} />
          </div> 
          {/if}

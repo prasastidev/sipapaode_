@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     import { Heading, Modal, Tabs, TabItem, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
-    import {  TrashBinOutline, DownloadOutline, EyeOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import {  TrashBinOutline, FilePdfOutline, EyeOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
 	 import { deleteTableData } from '$lib/DokumenLPPDLKPJ.js';
@@ -31,7 +31,7 @@
       table = document.getElementById("TABLE_LPPD");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[3];
+        td = tr[i].getElementsByTagName("td")[2];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -79,7 +79,7 @@
           <section>
             Dibawah berikut adalah Data Dokumen Pengiriman LPPD.  <br/>
               {#if data.TableDataDokLPPD.total === 0}
-              <p>Saat ini Tidak ada Data Dokumen Pengiriman LPPD dan LKPJ</p>
+              <p>Saat ini Tidak ada Data Dokumen Pengiriman LPPD</p>
               {:else}
               <p>Terdapat {data.TableDataDokLPPD.total} Dokumen Pengiriman LPPD</p>
                {/if}
@@ -105,28 +105,29 @@
                 <Table id="TABLE_LPPD" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
                   <TableHead>
                     <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Nama Kabupaten / Kota</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Tahun</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Judul</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Tanggal Submit</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">File Dokumen</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Pengirim</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4">Judul</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4">Nama Kab/Kota (Tahun)</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4">Pengirim / Tanggal Submit</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
                   </TableHead>
                   <TableBody tableBodyClass="divide-y">
                     {#each data.TableDataDokLPPD.documents as cetakTabel, i}	
                     <TableBodyRow>
-                      <TableBodyCell>{i+1}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Kabupaten_Kota}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Tahun}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Jenis_laporan} {cetakTabel.Kabupaten_Kota} Tahun {cetakTabel.Tahun} </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.$updatedAt.slice(0, 10)}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)}><Button style="color:green;"><EyeOutline class="w-4 h-4 me-2" />Download File</Button></a> </ButtonGroup></TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} </div>
+                      <TableBodyCell class="content-start">{i+1}</TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+                      <center><ButtonGroup class="*:!ring-primary-700"><a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;">
+                      <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label>
+                      </center>
                       </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;font-weight:600;">{cetakTabel.Jenis_laporan} {cetakTabel.Kabupaten_Kota} Tahun {cetakTabel.Tahun} </div></TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Kabupaten_Kota}<br/><br/>Tahun: {cetakTabel.Tahun}</TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} <br/><br/><b>Tanggal Submit:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)} </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+                        <center><ButtonGroup class="*:!ring-primary-700">
                           <Button style="color:red;" on:click={() => (ConfirmDeleteModalLPPD = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
-                        </ButtonGroup></TableBodyCell>
+                        </ButtonGroup></center></TableBodyCell>
                         <Modal bind:open={ConfirmDeleteModalLPPD} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
@@ -173,26 +174,26 @@
                 <Table id="TABLE_LKPJ" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
                   <TableHead>
                     <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Nama Kabupaten / Kota</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Tahun</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Judul</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Tanggal Submit</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">File Dokumen</TableHeadCell>
-                    <TableHeadCell style="font-size: larger;" class="py-4">Pengirim</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4">Judul</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4">Nama Kab/Kota (Tahun)</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4">Pengirim / Tanggal Submit</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
                   </TableHead>
                   <TableBody tableBodyClass="divide-y">
                     {#each data.TableDataDokLKPJ.documents as cetakTabel, i}	
                     <TableBodyRow>
-                      <TableBodyCell>{i+1}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Kabupaten_Kota}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Tahun}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Jenis_laporan} {cetakTabel.Kabupaten_Kota} Tahun {cetakTabel.Tahun} </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.$updatedAt.slice(0, 10)}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)}><Button style="color:green;"><EyeOutline class="w-4 h-4 me-2" />Download File</Button></a> </ButtonGroup></TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} </div>
+                      <TableBodyCell class="content-start">{i+1}</TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+                        <center><ButtonGroup class="*:!ring-primary-700"><a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;">
+                          <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label>
+                        </center>
                       </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;font-weight:600;">{cetakTabel.Jenis_laporan} {cetakTabel.Kabupaten_Kota} Tahun {cetakTabel.Tahun} </div></TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Kabupaten_Kota}<br/><br/>Tahun: {cetakTabel.Tahun}</TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} <br/><br/><b>Tanggal Submit:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)} </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
                           <Button style="color:red;" on:click={() => (ConfirmDeleteModalLKPJ = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></TableBodyCell>
                         <Modal bind:open={ConfirmDeleteModalLKPJ} size="xs" autoclose={false}>
