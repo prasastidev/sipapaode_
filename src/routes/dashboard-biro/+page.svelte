@@ -98,9 +98,6 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
             <li class="mb-3">Total Kerjasama Telah Berakhir <br/>
               <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;"> {TotalKSTerdaftarBerakhir} </span>
             </li>
-            <li class="mb-3">Total Pengajuan Kerjasama Online <br/>
-              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span>
-            </li>
           </ul>
         </Card>
         </div>

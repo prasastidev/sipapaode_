@@ -9,7 +9,7 @@
 	import { UpdateTableDataWilayah } from '$lib/DataWilayah.js';
 
 
-  let  getJ_Kecamatan, getKodeW, getKabKota, getJ_Kelurahan, getJ_Desa, getLuas_Wilayah, getJ_Penduduk, getJ_Gunung, getJ_Pulau, getKoordinat, getKetMap, getSitus, getidDoc;
+  let  getJ_Kecamatan, getKodeW, getKabKota, getJ_Kelurahan, getJ_Desa, getLuas_Wilayah, getJ_Penduduk, getJ_Gunung, getJ_Pulau, getJ_Selat, getJ_Danau, getJ_Sungai, getJ_Rawa, getKoordinat, getKetMap, getSitus, getidDoc;
   let ModalUpdateDataWilayah = false;
 
   /** Edit Run 2 function: GetDataDocumentLPPD and update*/
@@ -35,6 +35,10 @@ getLuas_Wilayah = response.Luas_Wilayah;
 getJ_Penduduk= response.J_Penduduk;
 getJ_Gunung= response.J_Gunung;
 getJ_Pulau= response.J_Pulau;
+getJ_Selat= response.J_Selat;
+getJ_Danau= response.J_Danau;
+getJ_Sungai= response.J_Sungai;
+getJ_Rawa= response.J_Rawa;
 getKoordinat= response.Koordinat;
 getKetMap= response.KetMap;
 getSitus= response.Situs;
@@ -50,7 +54,7 @@ const updateDataWilayah = async (e) => {
   e.preventDefault();
   const formEl = e.target;
   const formData = new FormData(formEl);
-  await UpdateTableDataWilayah(formData.get('J_Kecamatan'), formData.get('J_Kelurahan'), formData.get('J_Desa'), formData.get('Luas_Wilayah'), formData.get('J_Penduduk'), formData.get('J_Gunung'), formData.get('J_Pulau'), formData.get('Koordinat'), formData.get('KetMap'), formData.get('Situs'), getidDoc);
+  await UpdateTableDataWilayah(formData.get('J_Kecamatan'), formData.get('J_Kelurahan'), formData.get('J_Desa'), formData.get('Luas_Wilayah'), formData.get('J_Penduduk'), formData.get('J_Gunung'), formData.get('J_Pulau'), formData.get('J_Selat'), formData.get('J_Danau'), formData.get('J_Sungai'), formData.get('J_Rawa'), formData.get('Koordinat'), formData.get('KetMap'), formData.get('Situs'), getidDoc);
   invalidateAll();
 
   // Reset form
@@ -112,6 +116,18 @@ const updateDataWilayah = async (e) => {
   <FloatingLabelInput style="filled" id="J_Pulau" bind:value={getJ_Pulau} name="J_Pulau" type="text">
     Masukan Jumlah Pulau {getKabKota}:
   </FloatingLabelInput>
+  <FloatingLabelInput style="filled" id="J_Selat" bind:value={getJ_Selat} name="J_Selat" type="text">
+    Masukan Jumlah Selat {getKabKota}:
+  </FloatingLabelInput>
+  <FloatingLabelInput style="filled" id="J_Danau" bind:value={getJ_Danau} name="J_Danau" type="text">
+    Masukan Jumlah Danau {getKabKota}:
+  </FloatingLabelInput>
+  <FloatingLabelInput style="filled" id="J_Sungai" bind:value={getJ_Sungai} name="J_Sungai" type="text">
+    Masukan Jumlah Sungai {getKabKota}:
+  </FloatingLabelInput>
+  <FloatingLabelInput style="filled" id="J_Rawa" bind:value={getJ_Rawa} name="J_Rawa" type="text">
+    Masukan Jumlah Rawa {getKabKota}:
+  </FloatingLabelInput>
   <FloatingLabelInput style="filled" id="Koordinat" bind:value={getKoordinat} name="Koordinat" type="text">
     Masukan Titik Koordinat {getKabKota}:
   </FloatingLabelInput><br/>
@@ -154,20 +170,15 @@ const updateDataWilayah = async (e) => {
         </button>
     </form> <br/>
     
-      <Table id="TableDataWilayah" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
+      <Table id="TableDataWilayah" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto align-top">
         <TableHead>
           <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Kode</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Nama</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Ibukota</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Kecamatan</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Kelurahan</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Desa</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Luas Wilayah</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Jumlah Penduduk</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Jumlah Gunung</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Jumlah Pulau</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Koordinat</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4">Kec / Kel / Desa</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4">Luas Wilayah / Jum. Penduduk</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4">Rupa Bumi</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Map</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Keterangan Map</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Situs</TableHeadCell>
@@ -175,23 +186,18 @@ const updateDataWilayah = async (e) => {
         <TableBody tableBodyClass="divide-y">
           {#each data.TableDatasWilayah.documents as cetakTabel}	
           <TableBodyRow>
-            <TableBodyCell class="whitespace-break-spaces"><ButtonGroup class="*:!ring-primary-700">
+            <TableBodyCell class="whitespace-break-spaces content-start"><ButtonGroup class="*:!ring-primary-700">
               <Button style="color:blue;" on:click={() => getDataWilayah(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
             </ButtonGroup></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.KodeW}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces font-bold text-xl">{cetakTabel.Nama}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Ibukota}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.J_Kecamatan}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.J_Kelurahan}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.J_Desa}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Luas_Wilayah}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.J_Penduduk}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.J_Gunung	}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.J_Pulau}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Koordinat}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces"><div style="width:300px;">{@html cetakTabel.Map}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces"><div style="width:200px;">{@html cetakTabel.KetMap}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Situs}</TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.KodeW}</TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces font-bold text-xl content-start">{cetakTabel.Nama}</TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Ibukota}</TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:170px;overflow-wrap: anywhere;"><b>Jumlah Kecamatan:</b> {cetakTabel.J_Kecamatan} <br/><b>Jumlah Kelurahan:</b> {cetakTabel.J_Kelurahan}<br/><b>Jumlah Desa: {cetakTabel.J_Desa}</b></div></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:190px;overflow-wrap: anywhere;"><b>Luas Wilayah:</b> {cetakTabel.Luas_Wilayah} km2<br/><b>Jum. Penduduk:</b> {cetakTabel.J_Penduduk}</div></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:170px;overflow-wrap: anywhere;"><b>Jum. Gunung:</b> {cetakTabel.J_Gunung}<br/><b>Jum. Pulau:</b> {cetakTabel.J_Pulau}<br/><b>Jum. Selat:</b> {cetakTabel.J_Selat}<br/><b>Jum. Danau:</b> {cetakTabel.J_Danau}<br/><b>Jum. Sungai:</b> {cetakTabel.J_Sungai}<br/><b>Jum. Rawa:</b> {cetakTabel.J_Rawa}</div></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:300px;">{@html cetakTabel.Map}<br/><b>Koordinat:</b> {cetakTabel.Koordinat}</div></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:200px;">{@html cetakTabel.KetMap}</div></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Situs}</TableBodyCell>
           </TableBodyRow>
        {/each}
     

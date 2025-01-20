@@ -16,9 +16,9 @@ export async function getTableDataWilayah() {
 }
 
 
-export async function UpdateTableDataWilayah(J_Kecamatan, J_Kelurahan, J_Desa, Luas_Wilayah, J_Penduduk, J_Gunung, J_Pulau, Koordinat, KetMap, Situs, id) {
+export async function UpdateTableDataWilayah(J_Kecamatan, J_Kelurahan, J_Desa, Luas_Wilayah, J_Penduduk, J_Gunung, J_Pulau, J_Selat, J_Danau, J_Sungai, J_Rawa, Koordinat, KetMap, Situs, id) {
 	await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
-		J_Kecamatan: J_Kecamatan, J_Kelurahan: J_Kelurahan, J_Desa: J_Desa, Luas_Wilayah: Luas_Wilayah, J_Penduduk: J_Penduduk, J_Gunung: J_Gunung, J_Pulau: J_Pulau, Koordinat: Koordinat, KetMap: KetMap, Situs: Situs
+		J_Kecamatan: J_Kecamatan, J_Kelurahan: J_Kelurahan, J_Desa: J_Desa, Luas_Wilayah: Luas_Wilayah, J_Penduduk: J_Penduduk, J_Gunung: J_Gunung, J_Pulau: J_Pulau, J_Selat: J_Selat, J_Danau: J_Danau, J_Sungai: J_Sungai, J_Rawa: J_Rawa, Koordinat: Koordinat, KetMap: KetMap, Situs: Situs
 	});
 }
 
