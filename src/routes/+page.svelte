@@ -907,7 +907,6 @@ function prevQuote() {
 			Jumlah Penduduk </button>
 		    <button on:click={() => updateChartData(DataLW, 'Luas Wilayah', '#FDBA8C')} class="bg-orange-500 hover:bg-orange-900 text-white font-bold py-2 px-6 rounded" style="font-size:12px;border-radius:10px;">
 			Luas Wilayah</button>
-			
 		   </div>
 		   
 	   </div>

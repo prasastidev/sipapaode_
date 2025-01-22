@@ -18,7 +18,7 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 	<div class="sm:flex sm:items-center sm:justify-between">
 	  <FooterBrand href="/" src={logo} alt="Logo" name="SiPaPaODe" />
 	  <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-		<FooterLink href="/">About</FooterLink>
+		<FooterLink href="/about">About</FooterLink>
 
 		<FooterLink href="/profil#Alamat">Contact</FooterLink>
 	  </FooterLinkGroup>

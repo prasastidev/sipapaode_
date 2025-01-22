@@ -1,7 +1,6 @@
 import { writable } from 'svelte/store';
-import { ID } from 'appwrite';
 import { goto } from '$app/navigation';
-import { account } from '$lib/appwrite';
+import { account, ID } from '$lib/appwrite.js';
 import { invalidateAll } from '$app/navigation';
 
 // Avoid auth calls in server-side, so that a user is not shared between requests
@@ -37,8 +36,7 @@ const createUser = () => {
 	}
 
 	async function logout() {
-		await appwrite.account.deleteSession('current');
-		await invalidateAll();
+		await account.deleteSession('current');
 		store.set(null);
 		await goto('/');
 	}
