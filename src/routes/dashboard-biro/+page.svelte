@@ -82,6 +82,19 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
       <br/><br/>
       <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
       <br/><br/>
+      <Card padding="xl" size="xl" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
+        <div class="col-span-2 rounded-xl pr-3">
+          <h1 class="text-lg" style="text-align:left;color #242a38;font-weight: 600;">
+             Lihat Daftar Informasi PIC Sipapaode pada Link Tombol Berikut
+          </h1></div>
+          <div class="rounded-xl" style="text-align:center;"><a href="/dashboard-biro/info-pic"><button class="bg-blue-500 text-white px-6 py-2 rounded">
+              Informasi PIC</button></a> 
+            </div>   
+      </Card>
+      <br/><br/>
+      <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
+      <br/><br/>
+
       <div class="grid grid-cols-2 gap-6">
         <div> 
           <div class="flex justify-between items-center mb-4">
