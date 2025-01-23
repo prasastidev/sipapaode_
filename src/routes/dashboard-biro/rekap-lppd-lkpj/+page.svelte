@@ -70,12 +70,17 @@
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Rekap Document LPPD & LKPJ Kabupaten/Kota - Sulawesi Tenggara</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Document LPPD & LKPJ Kabupaten/Kota - Sulawesi Tenggara</Heading>
     <br/><br/>
-
+    <div class="modern-box">
+      <div class="contentbox">
+        <label>Dibawah Berikut adalah Data Dokumen LPPD dan LKPJ oleh Pemerintah Daerah Kab/Kota Prov. Sulawesi Tenggara.</label>
+      </div>
+    </div>
+    <br/><br/>
     <Tabs tabStyle="pill">
         <TabItem open>
-          <span slot="title">Dokumen LPPD</span>
+          <span slot="title">DOKUMEN LPPD</span>
           <section>
             Dibawah berikut adalah Data Dokumen Pengiriman LPPD.  <br/>
               {#if data.TableDataDokLPPD.total === 0}
@@ -144,7 +149,7 @@
             </section>
         </TabItem>
         <TabItem>
-          <span slot="title">Dokumen LKPJ</span>
+          <span slot="title">DOKUMEN LKPJ</span>
           <section>
             Dibawah berikut adalah Data Dokumen Pengiriman LKPJ.  <br/>
               {#if data.TableDataDokLKPJ.total === 0}
@@ -215,3 +220,66 @@
 
   <br/> <br/>
 </div>
+
+<style>
+  .modern-box {
+    position: relative;
+    display: inline-block;
+    padding: 12px;
+  }
+  
+  .modern-box::before,
+  .modern-box::after,
+  .contentbox::before,
+  .contentbox::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #c7c7e7;
+  }
+  
+  /* Top left corner */
+  .modern-box::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  /* Top right corner */
+  .modern-box::after {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .contentbox {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  
+  /* Bottom left corner */
+  .contentbox::before {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+  }
+  
+  /* Bottom right corner */
+  .contentbox::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .contentbox label {
+    font-size: 0.94rem;
+    margin: 0;
+    padding: 0;
+  }
+</style>

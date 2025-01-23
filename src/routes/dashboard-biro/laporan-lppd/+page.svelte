@@ -1,7 +1,7 @@
 <script>
   /** @type {import('./$types').PageData} */
   export let data=[];
-  import { Heading, Modal, Toast, Button, Alert, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import { Heading, Modal, Toast, Button, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
   import { EditOutline, InfoCircleSolid, FileLinesOutline, ClockOutline, CheckCircleSolid } from 'flowbite-svelte-icons';
   import { slide } from 'svelte/transition';
   import { invalidateAll } from '$app/navigation';
@@ -132,16 +132,14 @@ const updateData = async (e) => {
  
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Laporan Pengiriman LPPD dan LKPJ Tahun 2024</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Update Laporan Pengiriman LPPD dan LKPJ Tahun 2024</Heading>
   <br/><br/>
-
-
-<Alert color="yellow" dismissable>
-  <InfoCircleSolid slot="icon" class="w-5 h-5" />
-  Semua perubahan yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/penyampaian-lppd" class="font-semibold underline text-yellow-800 hover:text-orange-800 dark:hover:text-yellow-900">Penyampaian LPPD dan LKPJ</a>
-</Alert>
-
-<br/>
+  <div class="modern-box">
+    <div class="contentbox">
+      <label>Berikan Centang Checklist ke Pemerintah Kab/Kota yang telah melakukan pengiriman LPPD dan LKPJ. Semua perubahan yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/penyampaian-lppd" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Penyampaian LPPD dan LKPJ</a>.</label>
+    </div>
+  </div>
+  <br/><br/><br/>
 
 <section>
 
@@ -153,7 +151,7 @@ const updateData = async (e) => {
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
             </svg>
         </div>
-        <input on:keyup={SearchTable} type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Nama Kabupaten / Kota ..." required />
+        <input on:keyup={SearchTable} type="text" id="simple-search" class="bg-white-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Nama Kabupaten / Kota ..." required />
     </div>
     <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -198,3 +196,66 @@ const updateData = async (e) => {
 
 
 </div>
+
+<style>
+  .modern-box {
+    position: relative;
+    display: inline-block;
+    padding: 12px;
+  }
+  
+  .modern-box::before,
+  .modern-box::after,
+  .contentbox::before,
+  .contentbox::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #c7c7e7;
+  }
+  
+  /* Top left corner */
+  .modern-box::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  /* Top right corner */
+  .modern-box::after {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .contentbox {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  
+  /* Bottom left corner */
+  .contentbox::before {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+  }
+  
+  /* Bottom right corner */
+  .contentbox::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .contentbox label {
+    font-size: 0.94rem;
+    margin: 0;
+    padding: 0;
+  }
+</style>

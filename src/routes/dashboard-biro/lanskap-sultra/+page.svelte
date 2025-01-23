@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     import { Heading, Modal, Button, Alert, Radio, ButtonGroup, FloatingLabelInput, Textarea, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
-    import { EditOutline, InfoCircleSolid  } from 'flowbite-svelte-icons';
+    import { EditOutline, GlobeOutline  } from 'flowbite-svelte-icons';
 
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
@@ -93,7 +93,7 @@ const updateDataWilayah = async (e) => {
   <form class="space-y-6" on:submit={updateDataWilayah} >
     Nama Kab/Kota : {getKabKota} <br/>
     Kode Wilayah: { getKodeW } <br/>
-    <h4 style="font-weight:600;">&#10149; Administrasi</h4> 
+    <h4 style="font-weight:600;">&#10149; Administrasi Wilayah Pemerintahan</h4> 
    <FloatingLabelInput style="filled" id="J_Kecamatan" bind:value={getJ_Kecamatan} name="J_Kecamatan" type="text">
     Masukan Data Jumlah Kecamatan Terbaru {getKabKota}:
   </FloatingLabelInput> 
@@ -127,7 +127,8 @@ const updateDataWilayah = async (e) => {
   </FloatingLabelInput>
   <FloatingLabelInput style="filled" id="J_Rawa" bind:value={getJ_Rawa} name="J_Rawa" type="text">
     Masukan Jumlah Rawa {getKabKota}:
-  </FloatingLabelInput>
+  </FloatingLabelInput> <br/>
+  <h4 style="font-weight:600;">&#10149; Map (Peta) dan Koordinat</h4>
   <FloatingLabelInput style="filled" id="Koordinat" bind:value={getKoordinat} name="Koordinat" type="text">
     Masukan Titik Koordinat {getKabKota}:
   </FloatingLabelInput><br/>
@@ -148,8 +149,13 @@ const updateDataWilayah = async (e) => {
 <div class="container">
     <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</Heading>
     <br/>  <br/>
-    Dibawah berikut adalah informasi Kode Data Wilayah Pemerintahan di Sulawesi Tenggara.<br/>
-    Setiap Perubahan Data yang dilakukan pada Tabel di Bawah, akan mengupdate otomatis Data yang ditampilkan pada <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;">halaman berikut.</a> <br/><br/>
+    <div class="modern-box">
+      <div class="contentbox">
+        <label>Dibawah berikut adalah informasi Kode Data Wilayah Pemerintahan di Sulawesi Tenggara.<br/>
+          Setiap Perubahan Data yang dilakukan pada Tabel di Bawah, akan mengupdate otomatis Data yang ditampilkan pada <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;color:blue;">halaman berikut.</a></label>
+      </div>
+    </div>
+    <br/><br/><br/>
     <section>
 
       <form class="flex items-center w-full mx-auto" style="width:100%;">   
@@ -172,16 +178,15 @@ const updateDataWilayah = async (e) => {
     
       <Table id="TableDataWilayah" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto align-top">
         <TableHead>
-          <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Kode</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Nama</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Ibukota</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Kec / Kel / Desa</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Luas Wilayah / Jum. Penduduk</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Rupa Bumi</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Map</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Keterangan Map</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Situs</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Kode</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Nama</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ibukota</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Administratif Wilayah Pemerintahan</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Rupa Bumi</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Map</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Keterangan Map</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Situs Pemerintahan</TableHeadCell>
         </TableHead>
         <TableBody tableBodyClass="divide-y">
           {#each data.TableDatasWilayah.documents as cetakTabel}	
@@ -192,12 +197,12 @@ const updateDataWilayah = async (e) => {
             <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.KodeW}</TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces font-bold text-xl content-start">{cetakTabel.Nama}</TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Ibukota}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:170px;overflow-wrap: anywhere;"><b>Jumlah Kecamatan:</b> {cetakTabel.J_Kecamatan} <br/><b>Jumlah Kelurahan:</b> {cetakTabel.J_Kelurahan}<br/><b>Jumlah Desa: {cetakTabel.J_Desa}</b></div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:190px;overflow-wrap: anywhere;"><b>Luas Wilayah:</b> {cetakTabel.Luas_Wilayah} km2<br/><b>Jum. Penduduk:</b> {cetakTabel.J_Penduduk}</div></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:190px;overflow-wrap: anywhere;"><b>Luas Wilayah:</b> {cetakTabel.Luas_Wilayah} km2<br/><b>Jum. Penduduk:</b> {cetakTabel.J_Penduduk} <br/>
+            <br/><b>Jumlah Kecamatan:</b> {cetakTabel.J_Kecamatan} <br/><b>Jumlah Kelurahan:</b> {cetakTabel.J_Kelurahan}<br/><b>Jumlah Desa: {cetakTabel.J_Desa}</b></div></TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:170px;overflow-wrap: anywhere;"><b>Jum. Gunung:</b> {cetakTabel.J_Gunung}<br/><b>Jum. Pulau:</b> {cetakTabel.J_Pulau}<br/><b>Jum. Selat:</b> {cetakTabel.J_Selat}<br/><b>Jum. Danau:</b> {cetakTabel.J_Danau}<br/><b>Jum. Sungai:</b> {cetakTabel.J_Sungai}<br/><b>Jum. Rawa:</b> {cetakTabel.J_Rawa}</div></TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:300px;">{@html cetakTabel.Map}<br/><b>Koordinat:</b> {cetakTabel.Koordinat}</div></TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:200px;">{@html cetakTabel.KetMap}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Situs}</TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start flex"><GlobeOutline class="w-5 h-5 mr-1 align-middle" /> {cetakTabel.Situs}</TableBodyCell>
           </TableBodyRow>
        {/each}
     
@@ -214,3 +219,66 @@ const updateDataWilayah = async (e) => {
 
   <br/> <br/>
 </div>
+
+<style>
+  .modern-box {
+    position: relative;
+    display: inline-block;
+    padding: 12px;
+  }
+  
+  .modern-box::before,
+  .modern-box::after,
+  .contentbox::before,
+  .contentbox::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #c7c7e7;
+  }
+  
+  /* Top left corner */
+  .modern-box::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  /* Top right corner */
+  .modern-box::after {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .contentbox {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  
+  /* Bottom left corner */
+  .contentbox::before {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+  }
+  
+  /* Bottom right corner */
+  .contentbox::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .contentbox label {
+    font-size: 0.94rem;
+    margin: 0;
+    padding: 0;
+  }
+</style>

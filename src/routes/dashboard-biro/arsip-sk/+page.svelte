@@ -3,7 +3,7 @@
     export let data=[];
   
     import { Heading, Select, Label, Tabs, TabItem, Modal, Toast, Input, Button, Textarea, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, FloatingLabelInput, Fileupload, Radio } from 'flowbite-svelte';
-    import {  DownloadOutline, CheckPlusCircleOutline, TrashBinOutline, CheckCircleSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import {  PaperClipOutline, DownloadOutline, CheckPlusCircleOutline, TrashBinOutline, CheckCircleSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
 	 import { addTableArsipSK, deleteTableData } from '$lib/DokumenArsipSK.js';
@@ -78,7 +78,7 @@
       table = document.getElementById("TABLE_SKGubWakil");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[5];
+        td = tr[i].getElementsByTagName("td")[3];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -97,7 +97,7 @@
       table = document.getElementById("TABLE_SKBupatiWakil");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[5];
+        td = tr[i].getElementsByTagName("td")[3];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -116,7 +116,7 @@
       table = document.getElementById("TABLE_SKDPRD");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[5];
+        td = tr[i].getElementsByTagName("td")[3];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -139,10 +139,10 @@
   </svelte:head>
   
   <div class="container">
-      <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Arsip File Dokumen SK</Heading>
+      <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data File Dokumen SK Pemerintahan</Heading>
       <br/><br/>
       <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
-        <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan File Arsip Dokumen SK pada Tombol di samping berikut</div>
+        <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan File Dokumen SK pada Tombol di samping berikut</div>
         <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px;" color="blue" class="float-right" on:click={() => (ModalArsipSK = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Arsip SK</Button> </div>
        </div>
       <br/>
@@ -213,26 +213,27 @@
             </form><br/>
                 <Table id="TABLE_SKGubWakil" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
                     <TableHead>
-                        <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">Penerbit</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">No SK</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">Tanggal SK</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">Tentang</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">Ringkasan Isi SK</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">Download SK</TableHeadCell>
-                        <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+                        <TableHeadCell style="font-size: larger;" class="py-4 content-start">No</TableHeadCell>
+                        <TableHeadCell style="font-size: larger;" class="py-4 content-start">Dokumen SK</TableHeadCell>
+                        <TableHeadCell style="font-size: larger;" class="py-4 content-start">Penerbit</TableHeadCell>
+                        <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ringkasan Isi SK</TableHeadCell>
+                        <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
                       </TableHead>
                   <TableBody tableBodyClass="divide-y">
                     {#each data.TableDataSK_GubWakil.documents as cetakTabel, i}	
                     <TableBodyRow>
-                      <TableBodyCell>{i+1}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Penerbit}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Nomor_SK}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.TanggalSK.slice(0, 10)}</TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Tentang} </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Ringkasan_Isi} </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)}><Button style="color:green;"><DownloadOutline class="w-4 h-4 me-2" />Download File</Button></a> </ButtonGroup></TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
+                      <TableBodyCell class="content-start">{i+1}</TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+                          <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><PaperClipOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh SK</label>  
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Penerbit:</b> {cetakTabel.Penerbit} <br/><b>No. SK:</b> {cetakTabel.Nomor_SK} <br/><b>Tanggal SK:</b> {cetakTabel.TanggalSK.slice(0, 10)}<br/>
+                        <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}
+                      </div>             
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/> {cetakTabel.Ringkasan_Isi}
+                      </div>             
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
                           <Button style="color:red;" on:click={() => (ConfirmDeleteModalSKGubWakil = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></TableBodyCell>
                         <Modal bind:open={ConfirmDeleteModalSKGubWakil} size="xs" autoclose={false}>
@@ -278,26 +279,27 @@
               </button>
           </form><br/>
               <Table id="TABLE_SKBupatiWakil" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
-                  <TableHead>
-                      <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Penerbit</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">No SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Tanggal SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Tentang</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Ringkasan Isi SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Download SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
-                    </TableHead>
+                <TableHead>
+                  <TableHeadCell style="font-size: larger;" class="py-4 content-start">No</TableHeadCell>
+                  <TableHeadCell style="font-size: larger;" class="py-4 content-start">Dokumen SK</TableHeadCell>
+                  <TableHeadCell style="font-size: larger;" class="py-4 content-start">Penerbit</TableHeadCell>
+                  <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ringkasan Isi SK</TableHeadCell>
+                  <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+                </TableHead>
                 <TableBody tableBodyClass="divide-y">
                   {#each data.TableDataSK_BupatiWakil.documents as cetakTabel, i}	
                   <TableBodyRow>
-                    <TableBodyCell>{i+1}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Penerbit}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Nomor_SK}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.TanggalSK.slice(0, 10)}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Tentang} </TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Ringkasan_Isi} </TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)}><Button style="color:green;"><DownloadOutline class="w-4 h-4 me-2" />Download File</Button></a> </ButtonGroup></TableBodyCell>
+                    <TableBodyCell class="content-start">{i+1}</TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+                          <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><PaperClipOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh SK</label>  
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Penerbit:</b> {cetakTabel.Penerbit} <br/><b>No. SK:</b> {cetakTabel.Nomor_SK} <br/><b>Tanggal SK:</b> {cetakTabel.TanggalSK.slice(0, 10)}<br/>
+                        <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}
+                      </div>             
+                      </TableBodyCell>
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/> {cetakTabel.Ringkasan_Isi}
+                      </div>             
+                      </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
                         <Button style="color:red;" on:click={() => (ConfirmDeleteModalSKBupatiWakil = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                       </ButtonGroup></TableBodyCell>
@@ -344,25 +346,26 @@
           </form><br/>
               <Table id="TABLE_SKDPRD" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
                   <TableHead>
-                      <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Penerbit</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">No SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Tanggal SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Tentang</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Ringkasan Isi SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Download SK</TableHeadCell>
-                      <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4 content-start">No</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4 content-start">Dokumen SK</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4 content-start">Penerbit</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ringkasan Isi SK</TableHeadCell>
+                    <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
                     </TableHead>
                 <TableBody tableBodyClass="divide-y">
                   {#each data.TableDataSK_DPRD.documents as cetakTabel, i}	
                   <TableBodyRow>
-                    <TableBodyCell>{i+1}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Penerbit}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Nomor_SK}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.TanggalSK.slice(0, 10)}</TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Tentang} </TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.Ringkasan_Isi} </TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)}><Button style="color:green;"><DownloadOutline class="w-4 h-4 me-2" />Download File</Button></a> </ButtonGroup></TableBodyCell>
+                    <TableBodyCell class="content-start">{i+1}</TableBodyCell>
+                    <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+                        <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><PaperClipOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh SK</label>  
+                    </TableBodyCell>
+                    <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Penerbit:</b> {cetakTabel.Penerbit} <br/><b>No. SK:</b> {cetakTabel.Nomor_SK} <br/><b>Tanggal SK:</b> {cetakTabel.TanggalSK.slice(0, 10)}<br/>
+                      <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}
+                    </div>             
+                    </TableBodyCell>
+                    <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/> {cetakTabel.Ringkasan_Isi}
+                    </div>             
+                    </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
                         <Button style="color:red;" on:click={() => (ConfirmDeleteModalSKDPRD = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                       </ButtonGroup></TableBodyCell>

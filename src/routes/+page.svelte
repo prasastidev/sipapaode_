@@ -29,6 +29,11 @@
 	import Berakhlak from '$lib/images/Berakhlak.webp';
 	import Karo from '$lib/images/Karo.webp';
 	import { databases } from '$lib/appwrite';
+	
+	// In this locale "," is the decimal separator and "." is the group separator
+	const locale = 'en-EN'
+	const numDecimals = 2;
+	const formatter = new Intl.NumberFormat(locale, {maximumFractionDigits: numDecimals});
 
 	
 	let ModalmapBombana, ModalmapWakatobi, ModalmapKendari, ModalmapKonawe, ModalmapKonaweUtara = false;
@@ -707,7 +712,7 @@ function prevQuote() {
 	<Heading id="InfoTabelGrafik" tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">INFORMASI PEMERINTAHAN OTONOMI SULAWESI TENGGARA</Span></Heading>
 	<br/>
 	<p style="padding:12px;background:white;border-radius:14px;">
-		Dibawah berikut Anda dapat mengetahui Informasi Pemerintahan Kab/Kota di Sulawesi Tenggara, Mencakup : Lambang, Luas Wilayah, Jumlah Penduduk, Kecamatan, Kabupaten, Letak geografis dan Lainnya.
+		Dibawah berikut Anda dapat mengetahui Informasi Pemerintahan Kab/Kota di Sulawesi Tenggara, Mencakup : Lambang, Luas Wilayah, Jumlah Penduduk, Kecamatan, Kabupaten, Letak geografis, Situs Pemerintahan dan Lainnya.
 	</p> <br/>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
 		<div class="p-1">
@@ -737,7 +742,7 @@ function prevQuote() {
 						</div>
 					  </Popover>	
 				</td>
-				<td style="white-space: break-spaces;">{ DataBombana.Luas_Wilayah } km2 / { DataBombana.J_Penduduk } </td>
+				<td style="white-space: break-spaces;">{formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)} </td>
 				 <td> 
 					<span on:click={()=>visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 						&#8285; 
@@ -768,7 +773,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{ DataWakatobi.Luas_Wilayah } km2 / { DataWakatobi.J_Penduduk } </td>
+					<td style="white-space: break-spaces;"> {formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk) } </td>
 					 <td> 
 						<span on:click={()=>visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
@@ -798,7 +803,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{ DataKotaKendari.Luas_Wilayah } km2 / { DataKotaKendari.J_Penduduk } </td>
+					<td style="white-space: break-spaces;">{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} </td>
 					 <td> 
 						<span on:click={()=>visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
@@ -829,7 +834,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{DataKonawe.Luas_Wilayah } km2 / {DataKonawe.J_Penduduk } </td>
+					<td style="white-space: break-spaces;">{formatter.format(DataKonawe.Luas_Wilayah)} km2 / {formatter.format(DataKonawe.J_Penduduk)} </td>
 					 <td> 
 						<span on:click={()=>visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
@@ -860,7 +865,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td> {DataKonaweUtara.Luas_Wilayah } km2 /  {DataKonaweUtara.J_Penduduk } </td>
+					<td> {formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 /  {formatter.format(DataKonaweUtara.J_Penduduk)} </td>
 					 <td> 
 						<span on:click={()=>visibleKonaweUtara  = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 

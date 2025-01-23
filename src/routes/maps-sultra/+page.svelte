@@ -650,7 +650,7 @@ function onWindowClick(e) {
 					<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
 				</svg>
 			</div>
-			<input on:keyup={SearchTable} type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Nama Kabupaten / Kota ..." required />
+			<input on:keyup={SearchTable} type="text" id="simple-search" class="bg-white-800 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-white-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Nama Kabupaten / Kota ..." required />
 		</div>
 		<button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
 			<svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -660,16 +660,14 @@ function onWindowClick(e) {
 		</button>
 	</form>
      <br/>
-	 <Button class="px-2 py-0.1" style="width:fit-content;border-radius:50%;background:cadetblue;vertical-align: middle;font-size: 11px;width: 10px;height: 15px;">i</Button> Sentuh Tanda pada Nama Kab/Kota Untuk melihat Detail  <br/>
+	 <Button class="px-2 py-0.1" style="width:fit-content;border-radius:50%;background:cadetblue;vertical-align: middle;font-size: 11px;width: 10px;height: 15px;">i</Button> Sentuh Pada Tabel untuk melihat Ibukota, Lambang dan Kecamatan  <br/>
 	<table id="MapArea" class="table-striped mt-2" style="width:100%;display: block;background-color: white;padding: 7px;border-radius: 8px;">
         <thead style="background:#ecf4fb;text-align: left;">
         <tr>
 		<th style="width:6%;" class="hidekolom">Kode</th>	
         <th style="width:22%;">Nama</th>
-        <th style="width:14%;white-space: break-spaces;">Luas Wilayah <span use:tooltip={"Luas Wilayah"}></span> </th>
-        <th style="width:14%;white-space: break-spaces;" class="hidekolom">J. Penduduk <span use:tooltip={"Jumlah Penduduk saat ini yang di Update"}></span></th>
-		<th style="width:10%;white-space: break-spaces;" class="hidekolom">J. Gunung <span use:tooltip={"Jumlah Gunung saat ini yang di Update"}></span></th>
-		<th style="width:10%;white-space: break-spaces;" class="hidekolom">J. Pulau <span use:tooltip={"Jumlah Pulau saat ini yang di Update"}></span></th>
+        <th style="width:28%;white-space: break-spaces;">Luas Wilayah / J. Penduduk <span use:tooltip={"Luas Wilayah dan Jumlah Penduduk tiap Kab/Kota"}></span> </th>
+		<th style="width:20%;white-space: break-spaces;" class="hidekolom">J. Rupa Bumi <span use:tooltip={"Jumlah Gunung saat ini yang di Update"}></span></th>
 		<th style="width:14%;white-space:break-spaces;" class="hidekolom">Koordinat <span use:tooltip={"Koordinat Map"}></span></th>
         <th style="width:10%;">Detail</th>
         </tr>
@@ -692,11 +690,9 @@ function onWindowClick(e) {
 				</div>
 			  </Popover>	
 		</td>
-        <td>{ DataBombana.Luas_Wilayah } km2 </td>
-        <td class="hidekolom">{ DataBombana.J_Penduduk }  </td>
-		<td class="hidekolom">{ DataBombana.J_Gunung }  </td>
-		<td class="hidekolom">{ DataBombana.J_Pulau }   </td>
-         <td class="hidekolom">{ DataBombana.Koordinat } </td>
+        <td> {formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)}  </td>
+		<td class="hidekolom">Gunung: { DataBombana.J_Gunung } <br/>Pulau: { DataBombana.J_Pulau } <br/>Selat: { DataBombana.J_Selat } <br/>Danau: { DataBombana.J_Danau } <br/>Sungai: { DataBombana.J_Sungai } <br/>Rawa: { DataBombana.J_Rawa} </td>
+        <td class="hidekolom">{ DataBombana.Koordinat } </td>
 		 <td> 
 			<span on:click={()=> visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 				&#8285; 
@@ -727,10 +723,8 @@ function onWindowClick(e) {
 				</div>
 			  </Popover>
 		</td>
-        <td>{ DataButon.Luas_Wilayah } km2 </td>
-        <td class="hidekolom">{ DataButon.J_Penduduk }  </td>
-		<td class="hidekolom">{ DataButon.J_Gunung } </td>
-		<td class="hidekolom">{ DataButon.J_Pulau } </td>
+        <td> {formatter.format(DataButon.Luas_Wilayah)} km2 / {formatter.format(DataButon.J_Penduduk)} </td>
+		<td class="hidekolom">Gunung: { DataButon.J_Gunung }<br/>Pulau: { DataButon.J_Pulau } <br/>Selat: { DataButon.J_Selat } <br/>Danau: { DataButon.J_Danau } <br/>Sungai: { DataButon.J_Sungai } <br/>Rawa: { DataButon.J_Rawa} </td>
          <td class="hidekolom">{ DataButon.Koordinat } </td>
          <td> 
 			<span on:click={()=> visibleButon  = !visibleButon} bind:this={closeButon} class="KBW2024" style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -763,10 +757,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>	
 			</td>
-			<td>{ DataButonSelatan.Luas_Wilayah }  km2 </td>
-			<td class="hidekolom">{ DataButonSelatan.J_Penduduk } </td>
-			<td class="hidekolom">{ DataButonSelatan.J_Gunung }  </td>
-		<td class="hidekolom">{ DataButonSelatan.J_Pulau }  </td>
+			<td> {formatter.format(DataButonSelatan.Luas_Wilayah)} km2 / {formatter.format(DataButonSelatan.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: { DataButonSelatan.J_Gunung }<br/>Pulau: { DataButonSelatan.J_Pulau } <br/>Selat: { DataButonSelatan.J_Selat } <br/>Danau: { DataButonSelatan.J_Danau } <br/>Sungai: { DataButonSelatan.J_Sungai } <br/>Rawa: { DataButonSelatan.J_Rawa}    </td>
 			 <td class="hidekolom">{ DataButonSelatan.Koordinat }  </td>
 			 <td> 
 				<span on:click={()=> visibleButonSelatan  = !visibleButonSelatan} bind:this={closeButonSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -798,10 +790,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>	
 			</td>
-			<td>{DataButonTengah.Luas_Wilayah} km2  </td>
-			<td class="hidekolom">{DataButonTengah.J_Penduduk}  </td>
-			<td class="hidekolom">{DataButonTengah.J_Gunung} </td>
-		<td class="hidekolom">{DataButonTengah.J_Pulau} </td>
+			<td> {formatter.format(DataButonTengah.Luas_Wilayah)} km2 / {formatter.format(DataButonTengah.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataButonTengah.J_Gunung} <br/>Pulau: {DataButonTengah.J_Pulau} <br/>Selat: { DataButonTengah.J_Selat } <br/>Danau: { DataButonTengah.J_Danau } <br/>Sungai: { DataButonTengah.J_Sungai } <br/>Rawa: { DataButonTengah.J_Rawa} </td>
 			 <td class="hidekolom">{DataButonTengah.Koordinat} </td>
 			 <td> 
 				<span on:click={()=> visibleButonTengah  = !visibleButonTengah} bind:this={closeButonTengah} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -834,10 +824,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>	
 			</td>
-			<td>{DataButonUtara.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataButonUtara.J_Penduduk }  </td>
-			<td class="hidekolom">{DataButonUtara.J_Gunung }  </td>
-		<td class="hidekolom">{DataButonUtara.J_Pulau }  </td>
+			<td> {formatter.format(DataButonUtara.Luas_Wilayah)} km2 / {formatter.format(DataButonUtara.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataButonUtara.J_Gunung } <br/>Pulau: {DataButonUtara.J_Pulau } <br/>Selat: { DataButonUtara.J_Selat } <br/>Danau: { DataButonUtara.J_Danau } <br/>Sungai: { DataButonUtara.J_Sungai } <br/>Rawa: { DataButonUtara.J_Rawa}   </td>
 			 <td class="hidekolom">{DataButonUtara.Koordinat } </td>
 			 <td> 
 				<span on:click={()=> visibleButonUtara  = !visibleButonUtara} bind:this={closeButonUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -870,10 +858,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKolaka.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataKolaka.J_Penduduk }  </td>
-			<td class="hidekolom">{DataKolaka.J_Gunung }  </td>
-		<td class="hidekolom">{DataKolaka.J_Pulau } </td>
+			<td>{formatter.format(DataKolaka.Luas_Wilayah)} km2 / {formatter.format(DataKolaka.J_Penduduk)}  </td>
+			<td class="hidekolom">Gunung: {DataKolaka.J_Gunung } <br/>Pulau: {DataKolaka.J_Pulau } <br/>Selat: { DataKolaka.J_Selat } <br/>Danau: { DataKolaka.J_Danau } <br/>Sungai: { DataKolaka.J_Sungai } <br/>Rawa: { DataKolaka.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolaka.Koordinat }</td>
 			 <td> 
 				<span on:click={toogleKolaka} bind:this={closeKolaka} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -906,10 +892,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKolakaTimur.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataKolakaTimur.J_Penduduk }  </td>
-			<td class="hidekolom">{DataKolakaTimur.J_Gunung}  </td>
-		   <td class="hidekolom">{DataKolakaTimur.J_Pulau }  </td>
+			<td>{formatter.format(DataKolakaTimur.Luas_Wilayah)} km2 / {formatter.format(DataKolakaTimur.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataKolakaTimur.J_Gunung} <br/>Pulau: {DataKolakaTimur.J_Pulau } <br/>Selat: { DataKolakaTimur.J_Selat } <br/>Danau: { DataKolakaTimur.J_Danau } <br/>Sungai: { DataKolakaTimur.J_Sungai } <br/>Rawa: { DataKolakaTimur.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolakaTimur.Koordinat } </td>
 			 <td> 
 				<span on:click={()=> visibleKolakaTimur  = !visibleKolakaTimur} bind:this={closeKolakaTimur} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -942,10 +926,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKolakaUtara.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataKolakaUtara.J_Penduduk }  </td>
-			<td class="hidekolom">{DataKolakaUtara.J_Gunung }  </td>
-		   <td class="hidekolom">{DataKolakaUtara.J_Pulau }  </td>
+			<td>{formatter.format(DataKolakaUtara.Luas_Wilayah)} km2 / {formatter.format(DataKolakaUtara.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataKolakaUtara.J_Gunung }<br/>Pulau: {DataKolakaUtara.J_Pulau }  <br/>Selat: { DataKolakaUtara.J_Selat } <br/>Danau: { DataKolakaUtara.J_Danau } <br/>Sungai: { DataKolakaUtara.J_Sungai } <br/>Rawa: { DataKolakaUtara.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolakaUtara.Koordinat }</td>
 			 <td> 
 				<span on:click={()=> visibleKolakaUtara = !visibleKolakaUtara} bind:this={closeKolakaUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -978,10 +960,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKonawe.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataKonawe.J_Penduduk }  </td>
-			<td class="hidekolom">{DataKonawe.J_Gunung }  </td>
-		 <td class="hidekolom">{DataKonawe.J_Pulau }  </td>
+			<td>{formatter.format(DataKonawe.Luas_Wilayah)} km2 / {formatter.format(DataKonawe.J_Penduduk)}</td>
+			<td class="hidekolom">Gunung: {DataKonawe.J_Gunung }<br/>Pulau: {DataKonawe.J_Pulau } <br/>Selat: { DataKonawe.J_Selat } <br/>Danau: { DataKonawe.J_Danau } <br/>Sungai: { DataKonawe.J_Sungai } <br/>Rawa: { DataKonawe.J_Rawa}   </td>
 			 <td class="hidekolom">{DataKonawe.Koordinat } </td>
 			 <td> 
 				<span on:click={()=> visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1014,10 +994,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKonaweKepulauan.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataKonaweKepulauan.J_Penduduk  } </td>
-			<td class="hidekolom">{DataKonaweKepulauan.J_Gunung }  </td>
-		    <td class="hidekolom">{DataKonaweKepulauan.J_Pulau } </td>
+			<td>{formatter.format(DataKonaweKepulauan.Luas_Wilayah)} km2 / {formatter.format(DataKonaweKepulauan.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataKonaweKepulauan.J_Gunung } <br/>Pulau: {DataKonaweKepulauan.J_Pulau } <br/>Selat: { DataKonaweKepulauan.J_Selat } <br/>Danau: { DataKonaweKepulauan.J_Danau } <br/>Sungai: { DataKonaweKepulauan.J_Sungai } <br/>Rawa: { DataKonaweKepulauan.J_Rawa} </td>
 			 <td class="hidekolom">{DataKonaweKepulauan.Koordinat } </td>
 			 <td> 
 				<span on:click={()=> visibleKonaweKepulauan = !visibleKonaweKepulauan} bind:this={closeKonaweKepulauan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1050,10 +1028,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKonaweSelatan.Luas_Wilayah} km2 </td>
-			<td class="hidekolom">{DataKonaweSelatan.J_Penduduk}  </td>
-			<td class="hidekolom">{DataKonaweSelatan.J_Gunung } </td>
-		    <td class="hidekolom">{DataKonaweSelatan.J_Pulau}  </td>
+			<td>{formatter.format(DataKonaweSelatan.Luas_Wilayah)} km2 / {formatter.format(DataKonaweSelatan.J_Penduduk)}  </td>
+			<td class="hidekolom">Gunung: {DataKonaweSelatan.J_Gunung } <br/>Pulau: {DataKonaweSelatan.J_Pulau} <br/>Selat: { DataKonaweSelatan.J_Selat } <br/>Danau: { DataKonaweSelatan.J_Danau } <br/>Sungai: { DataKonaweSelatan.J_Sungai } <br/>Rawa: { DataKonaweSelatan.J_Rawa}</td>
 			 <td class="hidekolom">{DataKonaweSelatan.Koordinat} </td>
 			 <td> 
 				<span on:click={()=> visibleKonaweSelatan = !visibleKonaweSelatan} bind:this={closeKonaweSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1086,10 +1062,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKonaweUtara.Luas_Wilayah } km2 </td>
-			<td class="hidekolom">{DataKonaweUtara.J_Penduduk}  </td>
-			<td class="hidekolom">{DataKonaweUtara.J_Gunung } </td>
-		    <td class="hidekolom">{DataKonaweUtara.J_Pulau }  </td>
+			<td>{formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 / {formatter.format(DataKonaweUtara.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataKonaweUtara.J_Gunung }<br/>Pulau: {DataKonaweUtara.J_Pulau } <br/>Selat: { DataKonaweUtara.J_Selat } <br/>Danau: { DataKonaweUtara.J_Danau } <br/>Sungai: { DataKonaweUtara.J_Sungai } <br/>Rawa: { DataKonaweUtara.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKonaweUtara.Koordinat }</td>
 			 <td> 
 				<span on:click={()=> visibleKonaweUtara = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1122,10 +1096,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataMuna.Luas_Wilayah} km2 </td>
-			<td class="hidekolom">{DataMuna.J_Penduduk} </td>
-			<td class="hidekolom">{DataMuna.J_Gunung}</td>
-		    <td class="hidekolom">{DataMuna.J_Pulau} </td>
+			<td>{formatter.format(DataMuna.Luas_Wilayah)} km2 / {formatter.format(DataMuna.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataMuna.J_Gunung} <br/>Pulau: {DataMuna.J_Pulau} <br/>Selat: { DataMuna.J_Selat } <br/>Danau: { DataMuna.J_Danau } <br/>Sungai: { DataMuna.J_Sungai } <br/>Rawa: { DataMuna.J_Rawa}  </td>
 			 <td class="hidekolom"> {DataMuna.Koordinat} </td>
 			 <td> 
 				<span on:click={()=> visibleMuna = !visibleMuna} bind:this={closeMuna} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1158,10 +1130,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataMunaBarat.Luas_Wilayah} km2 </td>
-			<td class="hidekolom">{DataMunaBarat.J_Penduduk}  </td>
-			<td class="hidekolom">{DataMunaBarat.J_Gunung}  </td>
-		    <td class="hidekolom">{DataMunaBarat.J_Pulau} </td>
+			<td>{formatter.format(DataMunaBarat.Luas_Wilayah)} km2 / {formatter.format(DataMunaBarat.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataMunaBarat.J_Gunung} <br/>Pulau: {DataMunaBarat.J_Pulau} <br/>Selat: { DataMunaBarat.J_Selat } <br/>Danau: { DataMunaBarat.J_Danau } <br/>Sungai: { DataMunaBarat.J_Sungai } <br/>Rawa: { DataMunaBarat.J_Rawa}   </td>
 			 <td class="hidekolom">{DataMunaBarat.Koordinat} </td>
 			 <td> 
 				<span on:click={()=> visibleMunaBarat = !visibleMunaBarat} bind:this={closeMunaBarat} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1194,10 +1164,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataWakatobi.Luas_Wilayah} km2 </td>
-			<td class="hidekolom">{DataWakatobi.J_Penduduk}  </td>
-			<td class="hidekolom">{DataWakatobi.J_Gunung}  </td>
-		    <td class="hidekolom">{DataWakatobi.J_Pulau}  </td>
+			<td>{formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataWakatobi.J_Gunung}<br/> Pulau: {DataWakatobi.J_Pulau} <br/>Selat: { DataWakatobi.J_Selat } <br/>Danau: { DataWakatobi.J_Danau } <br/>Sungai: { DataWakatobi.J_Sungai } <br/>Rawa: { DataWakatobi.J_Rawa}    </td>
 			 <td class="hidekolom">{DataWakatobi.Koordinat} </td>
 			 <td> 
 				<span on:click={()=> visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1230,10 +1198,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKotaBaubau.Luas_Wilayah} km2 </td>
-			<td class="hidekolom">{DataKotaBaubau.J_Penduduk}  </td>
-			<td class="hidekolom">{DataKotaBaubau.J_Gunung}  </td>
-		    <td class="hidekolom">{DataKotaBaubau.J_Pulau}  </td>
+			<td>{formatter.format(DataKotaBaubau.Luas_Wilayah)} km2 / {formatter.format(DataKotaBaubau.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataKotaBaubau.J_Gunung} <br/>Pulau: {DataKotaBaubau.J_Pulau} <br/>Selat: { DataKotaBaubau.J_Selat } <br/>Danau: {DataKotaBaubau.J_Danau } <br/>Sungai: { DataKotaBaubau.J_Sungai } <br/>Rawa: { DataKotaBaubau.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKotaBaubau.Koordinat} </td>
 			 <td> 
 				<span on:click={()=> visibleBaubau  = !visibleBaubau} bind:this={closeBaubau} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1266,10 +1232,8 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{DataKotaKendari.Luas_Wilayah} </td>
-			<td class="hidekolom">{DataKotaKendari.J_Penduduk}   </td>
-			<td class="hidekolom">{DataKotaKendari.J_Gunung}  </td>
-		    <td class="hidekolom">{DataKotaKendari.J_Pulau} </td>
+			<td>{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} </td>
+			<td class="hidekolom">Gunung: {DataKotaKendari.J_Gunung} <br/>Pulau: {DataKotaKendari.J_Pulau} <br/>Selat: { DataKotaKendari.J_Selat } <br/>Danau: {DataKotaKendari.J_Danau } <br/>Sungai: { DataKotaKendari.J_Sungai } <br/>Rawa: { DataKotaKendari.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKotaKendari.Koordinat}  </td>
 			 <td> 
 				<span on:click={()=> visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
@@ -1325,9 +1289,8 @@ function onWindowClick(e) {
 		
 	    
 	  </Card>
-
-	
-
+	  <br/><br/>
+	  ** Data di atas diupdate oleh Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara - Bidang Koordinator Pemerintahan
 	  <br/><br/>
 </div>
 

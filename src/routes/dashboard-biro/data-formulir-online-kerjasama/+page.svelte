@@ -104,8 +104,13 @@ const remove = async (id) => {
 <div class="container">
   <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">🟢 Data Permohonan / Pengajuan Formulir Kerjasama secara Online</Heading>
   <br/>
- 
-<br/> <br/>
+  <div class="modern-box">
+    <div class="contentbox">
+      <label>Dibawah berikut adalah Data Informasi Pihak yang melakukan Pengajuan Kerjasama Secara Online Baik dilakukan oleh Pihak Ketiga/Swasta ataupun Pemerintah Daerah dan K/L.</label>
+    </div>
+  </div>
+  <br/><br/>
+
 
 <Modal title="Pengeditan Data Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
   <form class="space-y-6" on:submit={updateStatusPengajuan}>
@@ -131,7 +136,6 @@ const remove = async (id) => {
   </svelte:fragment>
 </Modal>
 
-Dibawah berikut adalah Data Pengajuan Kerjasama secara online.  <br/>
 {#if data.TableDataPengajuanKSOnline.total === 0}
 <p>Saat ini Tidak ada Data Formulir Pengajuan Kerjasama secara Online</p>
 {:else}
@@ -266,6 +270,68 @@ Dibawah berikut adalah Data Pengajuan Kerjasama secara online.  <br/>
     background: #8eb5ea !important;
     color: white;
 		}
+
+  .modern-box {
+    position: relative;
+    display: inline-block;
+    padding: 12px;
+  }
+  
+  .modern-box::before,
+  .modern-box::after,
+  .contentbox::before,
+  .contentbox::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #c7c7e7;
+  }
+  
+  /* Top left corner */
+  .modern-box::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  /* Top right corner */
+  .modern-box::after {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .contentbox {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  
+  /* Bottom left corner */
+  .contentbox::before {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+  }
+  
+  /* Bottom right corner */
+  .contentbox::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .contentbox label {
+    font-size: 0.94rem;
+    margin: 0;
+    padding: 0;
+  }
+
 	
 </style>
 

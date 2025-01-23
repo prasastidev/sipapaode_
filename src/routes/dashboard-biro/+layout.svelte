@@ -40,7 +40,7 @@
                   </svelte:fragment>
                   <SidebarDropdownItem label="🟢 Data Pengajuan Formulir Kerjasama Online" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="📁 Data File Dokumen Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
-                  <SidebarDropdownItem label="✅ Laporan Pengiriman Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="✅ Update Laporan Pengiriman Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="🖼️ Gallery Photo Documentasi Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>
                 </SidebarDropdownWrapper>
                 <SidebarDropdownWrapper label="Koord. Pemerintahan" {spanClass} style="text-align: left;">
@@ -53,9 +53,9 @@
                     <svelte:fragment slot="icon">
                       <BuildingSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
-                    <SidebarDropdownItem label="✅ Laporan Pengiriman LPPD & LKPJ" href="/dashboard-biro/laporan-lppd" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="✅ Update Laporan Pengiriman LPPD & LKPJ" href="/dashboard-biro/laporan-lppd" class="pl-4 ps-8" />
                     <SidebarDropdownItem label="📁 Data Dokumen LPPD & LKPJ" href="/dashboard-biro/rekap-lppd-lkpj" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="🗂️ Arsip Dokumen SK" href="/dashboard-biro/arsip-sk" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="🗂️ Data Dokumen SK" href="/dashboard-biro/arsip-sk" class="pl-4 ps-8" />
                   </SidebarDropdownWrapper>
                   <SidebarItem label="Tata Usaha (Data Pegawai)" href="#">
                     <svelte:fragment slot="icon">

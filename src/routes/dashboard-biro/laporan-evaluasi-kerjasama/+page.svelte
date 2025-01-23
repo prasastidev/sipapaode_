@@ -100,15 +100,15 @@ function SearchTable() {
 </Modal>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Publikasi Pengiriman Laporan Evaluasi Kerjasama Kab/Kota</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Update Laporan Pengiriman Evaluasi Kerjasama Tahun 2024</Heading>
     <br/><br/>
 
-    <Alert color="yellow" dismissable>
-      <InfoCircleSolid slot="icon" class="w-5 h-5" />
-      Perubahan Data yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/pengiriman-evaluasi-kerjasama" class="font-semibold underline text-yellow-800 hover:text-orange-800 dark:hover:text-yellow-900">Pengiriman Evaluasi Kerjasama</a>
-    </Alert>
-    
-    <br/>
+    <div class="modern-box">
+      <div class="contentbox">
+        <label>Berikan Centang Checklist ke Pemerintah Kab/Kota yang telah melakukan pengiriman Laporan Evaluasi Kerjasama. Semua Perubahan Data yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/pengiriman-evaluasi-kerjasama" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman Evaluasi Kerjasama</a>.</label>
+      </div>
+    </div>
+    <br/><br/><br/>
 
 <section>
 
@@ -166,3 +166,66 @@ function SearchTable() {
 
   <br/> <br/>
 </div>
+
+<style>
+  .modern-box {
+    position: relative;
+    display: inline-block;
+    padding: 12px;
+  }
+  
+  .modern-box::before,
+  .modern-box::after,
+  .contentbox::before,
+  .contentbox::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 4px solid #c7c7e7;
+  }
+  
+  /* Top left corner */
+  .modern-box::before {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  /* Top right corner */
+  .modern-box::after {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+  }
+
+  .contentbox {
+    background: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+  }
+  
+  /* Bottom left corner */
+  .contentbox::before {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+  }
+  
+  /* Bottom right corner */
+  .contentbox::after {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+  }
+  
+  .contentbox label {
+    font-size: 0.94rem;
+    margin: 0;
+    padding: 0;
+  }
+</style>
