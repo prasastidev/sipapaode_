@@ -292,7 +292,7 @@ function prevQuote() {
 		<Heading tag="h3" class="mb-4" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl" style="line-height:1.2;">Sistem Informasi Pelayanan <u>Biro Pemerintahan</u> & <u>Otonomi Daerah</u> Berbasis Digital di <Span gradient><b use:cascade={{ interval: 100 }}><b>Provinsi Sulawesi Tenggara</b></b></Span></Heading>
 			<br/><h2 class="text-3xl font-extrabold">SIPAPAODE</h2>
 		        <span class="morenext flex flex-wrap items-center gap-2 w-64">
-				 <label style="border-bottom:1px dotted;margin-left:4px;">Apa itu ..</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
+				 <label style="border-bottom:1px dotted;margin-left:4px;">Info.</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
 				</span>
 				  <Modal title="Tentang SiPapaODe" bind:open={clickOutsideModal} autoclose outsideclose>
 				  <b>Pada Situs Web Aplikasi Sipapaode, Anda dapat:  </b>
@@ -312,7 +312,7 @@ function prevQuote() {
 					</svelte:fragment>
 				  </Modal>
 
-				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Apa saja Bidang di Biro Pemerintahan & Otonomi Daerah:</span> <br/>
+				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Daftar Bidang di Biro Pemerintahan & Otonomi Daerah:</span> <br/>
 				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah dan K/L, Pendataan dan Monitoring</Popover>
                   <Button color="light" pill id="b2" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Fasilitas Tata Wilayah Pemerintahan dan Administrasi Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode Data Wilayah Pemerintahan, Pemetaan (GIS), serta rupa bumi).</Popover>
 				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Fasilitas Penerbitan SK Sehubungan dengan Pemerintahan, SK Gubernur izin keberangkatan ke Luar Negeri dan Administrasi Laporan Evaluasi Kinerja Daerah (LPPD & LKPJ).</Popover>
@@ -349,7 +349,7 @@ function prevQuote() {
  <section>
 	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR-FITUR LAYANAN</Span></Heading> <br/>
 	<div class="flex items-center font-light text-gray-500 dark:text-gray-400 p-1 mb-2 -mt-4" style="font-size:15px;">
-		Pilih Layanan Sesuai dengan Bidang. Lihat Panduan Tentang Layanan <button id="panduaninfo">
+		Pilih Layanan Sesuai Bidang. Lihat Panduan Tentang Layanan <button id="panduaninfo">
 			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button>
 	  </div>
 	  <Popover triggeredBy="#panduaninfo" class="w-72 md:w-96 lg:w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
@@ -370,7 +370,7 @@ function prevQuote() {
 		<TabItem open>
 		  <span slot="title" class="text-base">Bag. Kerjasama</span>
 		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4"> 
-          Dibawah berikut adalah Fasilitas layanan bagian Kerjasama.
+		Berikut adalah fasilitas layanan dari bagian Kerjasama yang tersedia.
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
@@ -433,7 +433,7 @@ function prevQuote() {
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Pemerintahan</span>
 		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4">
-			Dibawah berikut adalah Fasilitas layanan Bidang Koordinator Pemerintahan
+			Fasilitas layanan bidang koordinator pemerintahan mencakup berbagai layanan administratif.
 		  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;">  
@@ -511,7 +511,7 @@ function prevQuote() {
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Otonomi Daerah</span>
 		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4">
-			Dibawah berikut adalah Fasilitas layanan Bidang Koordinator Otonomi Daerah
+			Fasilitas layanan Bidang Koordinator Otonomi Daerah mencakup berbagai layanan administrasi.
 		  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
@@ -567,7 +567,7 @@ function prevQuote() {
 				</p>
 				</div> </div>
 				
-		  </div></center> <br/><span style="color:#a75710;"> //** Kolom Layanan Koord. Otonomi Daerah</span> <br/>
+		  </div></center> <br/><span style="color:#a75710;"> //** Kolom Koord. Otonomi Daerah</span> <br/>
 		</TabItem>
 		
 	  </Tabs>
@@ -712,7 +712,7 @@ function prevQuote() {
 	<Heading id="InfoTabelGrafik" tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">INFORMASI PEMERINTAHAN OTONOMI SULAWESI TENGGARA</Span></Heading>
 	<br/>
 	<p style="padding:12px;background:white;border-radius:14px;">
-		Dibawah berikut Anda dapat mengetahui Informasi Pemerintahan Kab/Kota di Sulawesi Tenggara, Mencakup : Lambang, Luas Wilayah, Jumlah Penduduk, Kecamatan, Kabupaten, Letak geografis, Situs Pemerintahan dan Lainnya.
+		Dapatkan informasi lengkap tentang Pemerintahan Kab/Kota di Sulawesi Tenggara, termasuk lambang, luas wilayah, jumlah penduduk, kecamatan, kabupaten, letak geografis, serta situs pemerintahan dan data relevan lainnya.
 	</p> <br/>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
 		<div class="p-1">
@@ -1044,7 +1044,7 @@ function prevQuote() {
  <section> 
 	<br/> <br/>
 	<Heading tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">SINERGI PORTAL INFORMASI LAINNYA</Span></Heading> <br/>
-  <p>Dibawah adalah Daftar Situs yang bisa Anda kunjungi sehubungan dengan Informasi Pemerintahan</p> <br/>
+  <p>Berikut adalah Daftar Situs yang bisa Anda kunjungi sehubungan dengan Informasi Pemerintahan.</p> <br/>
    <Marquee shadow speed={0.4} hoverSpeed={0.1} class="py-16 px-8"> 
 	<div class="portallain grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4">
 		<a href="https://ula.kemendagri.go.id/" target="_blank" style="color:cadetblue;"><div style="padding:12px 20px;border:1px solid;border-radius:12px;margin:10px;">
@@ -1078,7 +1078,7 @@ function prevQuote() {
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
 	  <span slot="header">Bagaimana Pengajuan Proses Fasilitas Kerjasama Antar Pemerintah Dalam dan Luar Negeri atau Badan Usaha / Swasta.</span>
-	  <p class="mb-2 text-gray-500 dark:text-gray-400">Proses Pengajuan Fasilitas Kerjasama dapat mengunjungi Fitur-Fitur Layanan pada Tab Kerjasama. Anda akan diarahkan ke halaman untuk mengisi Formulir dan juga Informasi lainnya tentang Kerjasama.</p>
+	  <p class="mb-2 text-gray-500 dark:text-gray-400">Proses pengajuan fasilitas kerjasama dapat dilakukan melalui Fitur-Fitur Layanan di Tab Kerjasama. Anda akan diarahkan untuk mengisi Formulir serta mendapatkan informasi tambahan mengenai kerjasama tersebut.</p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
 		<span slot="header">Dibagian mana menemukan informasi tentang Kode data wilayah pemerintahan, Pulau dan Rupa Bumi di Sulawesi Tenggara.</span>
