@@ -89,7 +89,7 @@
 
   <div class="modern-box">
     <div class="contentbox">
-      <label>Berikut dibawah ini adalah informasi PIC (Pengelola Informasi, Layanan dan Data Sipapaode - Biro Pemeritahan dan Otonomi Daerah Sulawesi Tenggara. PIC Sipapaode tertuang dalam SK yang dapat di Unduh pada Link Berikut.</label>
+      <label>Berikut dibawah ini adalah informasi daftar PIC (Pengelola Informasi, Layanan dan Data Sipapaode di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara. Pengelola PIC Sipapaode telah ditunjuk berdasarkan SK pada Link Berikut.</label>
     </div>
   </div>
   <br/><br/><br/>

@@ -92,7 +92,7 @@ function upadateAktivasiBanner(Status_banner, id) {
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Edit Informasi Text banner pada Tombol Edit. Dan untuk mengaktifkan Banner Klik Tombol Activasi pada bagian Status. Banner akan Tampil pada halaman depan situs.</label>
+        <label>Informasi banner pengumuman pada halaman depan dapat diaktivasi dan diedit melalui saluran informasi di bawah berikut.</label>
       </div>
     </div>
     <br/><br/>

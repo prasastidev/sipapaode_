@@ -102,25 +102,25 @@ const remove = async (id) => {
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">🟢 Data Permohonan / Pengajuan Formulir Kerjasama secara Online</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Permohonan / Pengajuan Formulir Kerjasama secara Online</Heading>
   <br/>
   <div class="modern-box">
     <div class="contentbox">
-      <label>Dibawah berikut adalah Data Informasi Pihak yang melakukan Pengajuan Kerjasama Secara Online Baik dilakukan oleh Pihak Ketiga/Swasta ataupun Pemerintah Daerah dan K/L.</label>
+      <label>Berikut dibawah ini adalah Data Informasi Pihak yang sedang melakukan Pengajuan Kerjasama Secara Online Baik Pihak Ketiga/Swasta ataupun Pemerintah Daerah dan K/L. Status Pengajuan Kerjasama akan melalui proses tahapan Verifikasi hingga penerbitan Dokumen Naskah Kerjasama.</label>
     </div>
   </div>
   <br/><br/>
 
 
-<Modal title="Pengeditan Data Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
+<Modal title="Edit Data Proses Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
   <form class="space-y-6" on:submit={updateStatusPengajuan}>
     <b>Instansi:</b>  {getInstansi}  <br/>
   <b>Tentang:</b> {getTentang}  <br/> <br/>
-   <label class="text-sm">Status Pengajuan:</label> <br/>
+   <label class="text-sm">Saat ini Proses Pengajuan Sedang dalam Status:</label> <br/>
    <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
-      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Proses Pengajuan">Proses Pengajuan</Radio></li>
-      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Proses Verifikasi">Proses Verifikasi</Radio></li>
-      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Penandatanganan Naskah">Penandatanganan Naskah</Radio></li>
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Proses Pengajuan">1. Proses Pengajuan</Radio></li>
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Proses Verifikasi">2. Proses Verifikasi</Radio></li>
+      <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Penandatanganan Naskah">3. Penandatanganan Naskah</Radio></li>
       <li class="w-full"><Radio name="StatusPengajuan" bind:group={getStatusPengajuan} class="p-3" value="Ditolak">Ditolak</Radio></li>
     </ul> <br/> 
     <label class="text-sm" style="display:block;margin-bottom:-10px;">Estimasi Proses <i>(Ex: 2 Hari, 3-5 Hari)</i> </label>
@@ -197,7 +197,7 @@ const remove = async (id) => {
         </TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;overflow-wrap: anywhere;"><b>Email:</b> {cetakTabel.Email} <br/><b>Contact:</b> {cetakTabel.ContactPerson}
         </div></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;display:flex;overflow-wrap: anywhere;"><BuildingSolid class="w-4 h-4 infline-flex me-2" /> {cetakTabel.Instansi}</div> <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;display:flex;overflow-wrap: anywhere;"><BuildingSolid class="w-4 h-4 infline-flex me-2" /> {cetakTabel.Instansi}</div> <br/><b>Tentang:</b> <br/>{cetakTabel.Tentang}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Catatan}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;">
           <Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>

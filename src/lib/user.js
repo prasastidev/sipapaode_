@@ -38,7 +38,9 @@ const createUser = () => {
 	async function logout() {
 		await account.deleteSession('current');
 		store.set(null);
-		await goto('/');
+		await invalidateAll();	
+		goto('/');
+		window.location.reload();
 	}
 
 	return {

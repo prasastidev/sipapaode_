@@ -100,12 +100,12 @@ function SearchTable() {
 </Modal>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Update Laporan Pengiriman Evaluasi Kerjasama Tahun 2024</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Update Checklist Laporan Evaluasi Kerjasama Tahun 2024</Heading>
     <br/><br/>
 
     <div class="modern-box">
       <div class="contentbox">
-        <label>Berikan Centang Checklist ke Pemerintah Kab/Kota yang telah melakukan pengiriman Laporan Evaluasi Kerjasama. Semua Perubahan Data yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/pengiriman-evaluasi-kerjasama" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman Evaluasi Kerjasama</a>.</label>
+        <label>Dibawah berikut adalah update Checklist pengiriman Laporan Evaluasi Kerjasama oleh Pemerintah Kab/Kota. Semua Perubahan Data yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/pengiriman-evaluasi-kerjasama" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman Evaluasi Kerjasama</a>.</label>
       </div>
     </div>
     <br/><br/><br/>

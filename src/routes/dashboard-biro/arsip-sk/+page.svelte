@@ -3,7 +3,7 @@
     export let data=[];
   
     import { Heading, Select, Label, Tabs, TabItem, Modal, Toast, Input, Button, Textarea, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, FloatingLabelInput, Fileupload, Radio } from 'flowbite-svelte';
-    import {  PaperClipOutline, DownloadOutline, CheckPlusCircleOutline, TrashBinOutline, CheckCircleSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import {  PaperClipOutline, FolderPlusOutline, CheckPlusCircleOutline, TrashBinOutline, CheckCircleSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
 	 import { addTableArsipSK, deleteTableData } from '$lib/DokumenArsipSK.js';
@@ -142,7 +142,7 @@
       <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data File Dokumen SK Pemerintahan</Heading>
       <br/><br/>
       <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
-        <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan File Dokumen SK pada Tombol di samping berikut</div>
+        <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambahkan File Dokumen SK pada Tombol di samping berikut</div>
         <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px;" color="blue" class="float-right" on:click={() => (ModalArsipSK = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Arsip SK</Button> </div>
        </div>
       <br/>
@@ -186,7 +186,7 @@
       <br/>
       <Tabs tabStyle="pill">
         <TabItem open>
-          <span slot="title">Gubernur dan Wakil</span>
+          <span slot="title" class="flex items-center"><FolderPlusOutline class="w-6 h-6 mr-1 text-white-800" /> Gubernur dan Wakil</span>
           <section>
               {#if data.TableDataSK_GubWakil.total === 0}
               <p>Saat ini Tidak ada Data Dokumen SK pada Tab Gubernur & Wakil Gubernur</p>
@@ -227,10 +227,10 @@
                           <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><PaperClipOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh SK</label>  
                       </TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Penerbit:</b> {cetakTabel.Penerbit} <br/><b>No. SK:</b> {cetakTabel.Nomor_SK} <br/><b>Tanggal SK:</b> {cetakTabel.TanggalSK.slice(0, 10)}<br/>
-                        <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}
+                        <br/><b>Tentang:</b><br/>{cetakTabel.Tentang}
                       </div>             
                       </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/> {cetakTabel.Ringkasan_Isi}
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/>{cetakTabel.Ringkasan_Isi}
                       </div>             
                       </TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
@@ -253,7 +253,7 @@
 
         </TabItem>
         <TabItem>
-          <span slot="title">Bupati / WaliKota dan Wakil</span>
+          <span slot="title" class="flex items-center"><FolderPlusOutline class="w-6 h-6 mr-1 text-white-800" /> Bupati / WaliKota dan Wakil</span>
           <section>
             {#if data.TableDataSK_BupatiWakil.total === 0}
             <p>Saat ini Tidak ada Data Dokumen SK pada Tab Bupati & Wakil Bupati</p>
@@ -319,7 +319,7 @@
           </section>
         </TabItem>
         <TabItem>
-          <span slot="title">DPRD </span>
+          <span slot="title" class="flex items-center"><FolderPlusOutline class="w-6 h-6 mr-1 text-white-800" /> DPRD </span>
           <section>
             {#if data.TableDataSK_DPRD.total === 0}
             <p>Saat ini Tidak ada Data Dokumen SK pada Tab DPRD</p>

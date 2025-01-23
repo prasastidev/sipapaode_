@@ -68,7 +68,9 @@ function showimage(id) {
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Klik Tombol Buka Upload Photo untuk Mengupload Gambar Dalam Gallery Photo Koordinator Otonomi Daerah. Optimasi Gambar sebelum mengupload dapat dilakukan pada Link berikut.</label>
+        <label>Silahkan mengklik tombol buka Upload Photo untuk melakukan Upload Photo atau Gambar Dokumentasi ke Dalam Gallery Koordinator Otonomi Daerah. 
+            Dokumen Photo dapat diakses oleh Publik pada <a href="/gallery" style="text-decoration:underline;color:blue;">halaman berikut.</a>
+        </label>
       </div>
     </div>
     <br/><br/>

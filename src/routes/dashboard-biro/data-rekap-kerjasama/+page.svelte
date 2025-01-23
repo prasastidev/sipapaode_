@@ -167,7 +167,7 @@ const updateDataKS = async (e) => {
   <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Document Kerjasama - Pemerintahan Prov. Sulawesi Tenggara</Heading>
   <br/><br/>
   <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
-    <div class="col-span-2" style="font-size:22px;margin-left:10px;">Tambahkan Data Dokumen Kerjasama pada Tombol di samping berikut</div>
+    <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambah Data Dokumen Kerjasama pada Tombol di samping berikut</div>
     <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddData = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Kerjasama</Button>  </div>
    </div>
   <Modal title="Form Pengisian Data Kerjasama Baru" bind:open={ModalAddData} autoclose={false}>
@@ -282,10 +282,10 @@ const updateDataKS = async (e) => {
   <section>
   
     <div class="grid grid-cols-2 gap-4">
-      <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #ebf5ff;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Aktif / Masih Berlaku</h5>
+      <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #ebf5ff;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Aktif (Masih Berlaku)</h5>
       <p id="count2" class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2"> <span>{data.TableDatasKSBerlaku.total}</span> </p>
       </Card></div> 
-      <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #fff8f1;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Telah Berakhir</h5>
+      <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #fff8f1;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Telah Berakhir (Expire)</h5>
       <p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2"><span>{data.TableDatas.total - data.TableDatasKSBerlaku.total}</span></p>
       </Card></div> 
     </div>

@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     import { Heading, Modal, Tabs, TabItem, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
-    import {  TrashBinOutline, FilePdfOutline, EyeOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import {  TrashBinOutline, FilePdfOutline, FolderOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
 	 import { deleteTableData } from '$lib/DokumenLPPDLKPJ.js';
@@ -74,13 +74,13 @@
     <br/><br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Dibawah Berikut adalah Data Dokumen LPPD dan LKPJ oleh Pemerintah Daerah Kab/Kota Prov. Sulawesi Tenggara.</label>
+        <label>Berikut dibawah ini adalah Data Dokumen LPPD dan LKPJ oleh Pemerintah Kab/Kota Prov. Sulawesi Tenggara, yang terangkum dalam satu Folder.</label>
       </div>
     </div>
     <br/><br/>
     <Tabs tabStyle="pill">
         <TabItem open>
-          <span slot="title">DOKUMEN LPPD</span>
+          <span slot="title" class="flex items-center"><FolderOutline class="w-6 h-6 mr-1 text-white-800" /> DOKUMEN LPPD</span>
           <section>
             Dibawah berikut adalah Data Dokumen Pengiriman LPPD.  <br/>
               {#if data.TableDataDokLPPD.total === 0}
@@ -149,7 +149,7 @@
             </section>
         </TabItem>
         <TabItem>
-          <span slot="title">DOKUMEN LKPJ</span>
+          <span slot="title" class="flex items-center"><FolderOutline class="w-6 h-6 mr-1 text-white-800" /> DOKUMEN LKPJ</span>
           <section>
             Dibawah berikut adalah Data Dokumen Pengiriman LKPJ.  <br/>
               {#if data.TableDataDokLKPJ.total === 0}

@@ -904,7 +904,7 @@ function prevQuote() {
 		Berdasarkan {currentDataName} <br/>
 
 		<div class="container mx-auto p-1 pb-1">
-		
+			
 			<div bind:this={chartElement}></div>
 			
 		   <div class="flex justify-left -mt-10 space-x-4 relative">

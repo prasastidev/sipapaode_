@@ -1,8 +1,8 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data=[];
-    import { Heading, Card, Listgroup, Avatar } from 'flowbite-svelte';
-    import { CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid } from 'flowbite-svelte-icons';
+    import { Heading, Card, Listgroup, Avatar, Button } from 'flowbite-svelte';
+    import { ArrowRightToBracketOutline, BadgeCheckOutline, CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid } from 'flowbite-svelte-icons';
     import { user } from '$lib/user';
 
 let DataKotaKendari  = data.TableDatasWilayah.documents[0];
@@ -76,7 +76,15 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
                     <CheckCircleSolid class="w-5 h-5" style="color:green;" />
                 </span>
             </div>
-          </div>
+          </div><br/>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="flex col-span-2 mt-4 gap-4">
+              <Button color="light" disabled>Edit Profile</Button><Button color="light" disabled>Ganti Password</Button>
+            </div>
+            <div class="mt-4" style="text-align:right;"> 
+              <Button color="light" on:click={user.logout}><ArrowRightToBracketOutline class="w-6 h-6 mr-1 text-gray-800" /> Log Out</Button>           
+            </div>   
+         </div>
         </Listgroup>
       </Card>
       <br/><br/>
@@ -85,10 +93,10 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
       <Card padding="xl" size="xl" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
         <div class="col-span-2 rounded-xl pr-3">
           <h1 class="text-lg" style="text-align:left;color #242a38;font-weight: 600;">
-             Lihat Daftar Informasi PIC Sipapaode pada Link Tombol Berikut
+             Anda dapat melihat Informasi daftar PIC Sipapaode pada Link Tombol di samping berikut
           </h1></div>
-          <div class="rounded-xl" style="text-align:center;"><a href="/dashboard-biro/info-pic"><button class="buttonPIC bg-blue-500 text-white px-6 py-2 rounded">
-              Informasi PIC</button></a> 
+          <div class="rounded-xl"><a href="/dashboard-biro/info-pic" style="text-decoration:none;"><button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded float-right">
+            <BadgeCheckOutline class="w-6 h-6 mr-1 text-white-800" /> Informasi PIC</button></a> 
             </div>   
       </Card>
       <br/><br/>

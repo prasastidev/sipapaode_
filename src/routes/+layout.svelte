@@ -30,13 +30,13 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 	</span>
 <br/>
 {#if $user}
-	<div>Anda telah login sebagai 
-		<span>{$user.name}</span>
-		<button type="button" on:click={user.logout}>Logout</button>		
+	<div style="font-size:14px;">Anda telah login sebagai 
+		<span>{$user.name}</span> | 
+		<button type="button" on:click={user.logout}><u>Logout</u></button>		
 	</div> 
 	{:else}
-	  <p>Hello Anda belum login</p>
-	{/if}
+	  <p  style="font-size:14px;">Anda tidak login</p>
+{/if}
   </Footer>
 
 </div>

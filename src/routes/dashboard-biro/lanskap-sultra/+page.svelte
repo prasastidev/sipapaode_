@@ -151,8 +151,8 @@ const updateDataWilayah = async (e) => {
     <br/>  <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Dibawah berikut adalah informasi Kode Data Wilayah Pemerintahan di Sulawesi Tenggara.<br/>
-          Setiap Perubahan Data yang dilakukan pada Tabel di Bawah, akan mengupdate otomatis Data yang ditampilkan pada <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;color:blue;">halaman berikut.</a></label>
+        <label>Berikut dibawah ini adalah informasi Kode Data Wilayah, Administratif Pemerintahan dan Rupa Bumi di Sulawesi Tenggara.
+          Setiap Perubahan Data pada Tabel di Bawah, Dapat diakses oleh publik pada <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;color:blue;">halaman berikut.</a></label>
       </div>
     </div>
     <br/><br/><br/>
