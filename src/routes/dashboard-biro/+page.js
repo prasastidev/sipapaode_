@@ -8,7 +8,7 @@ import { getTableSK_GubWakil} from '$lib/DokumenArsipSK';
 
 
 // Turn off SSR globally, turning the project into a static site
-export const ssr = false;
+export const ssr = true;
 export const prerender = true;
 export const csr = true;
 

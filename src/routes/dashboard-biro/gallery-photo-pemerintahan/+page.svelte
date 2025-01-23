@@ -16,7 +16,7 @@
 
 
 function showimage(id) {
-    const result = storage.getFileView('67545c85000bd5d33ef2', id);
+    const result = storage.getFileView('6791fea50005705fec23', id);
     return result;  
 }
 
@@ -24,11 +24,11 @@ function showimage(id) {
  const UploadImage = async (e) => {
    visibleProgresBar = true;
     e.preventDefault();
-		const formEl = e.target;
-    await storage.createFile('67545c85000bd5d33ef2', ID.unique(), document.getElementById('UploadImageKS').files[0]); 
+	const formEl = e.target;
+    await storage.createFile('6791fea50005705fec23', ID.unique(), document.getElementById('UploadImagePemerintahan').files[0]); 
     progress = 100;
     // Reset form
-		formEl.reset();   
+	formEl.reset();   
     await invalidateAll();
     progress = 0;
     visibleProgresBar = false;
@@ -37,7 +37,7 @@ function showimage(id) {
 
  const remove = async (id) => {
     // Delete File Storage
-    await storage.deleteFile('67545c85000bd5d33ef2', id );
+    await storage.deleteFile('6791fea50005705fec23', id );
     ConfirmDeleteModal = false;
     await invalidateAll();
 	};
@@ -46,7 +46,7 @@ function showimage(id) {
   // Pagination 
   let currentPage =1; // Update this to simulate page change.
   let postsPerPage = 9;
-  let allPosts = data.DatasGambar.files;
+  let allPosts = data.DatasGambarPemerintahan.files;
   let totalPosts = allPosts.length;
   let totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
@@ -58,17 +58,17 @@ function showimage(id) {
   </script>
   
   <svelte:head>
-  <title>Info User</title>
-  <meta name="description" content="Info User" />
+  <title>Gallery Photo Koordinator Pemerintahan</title>
+  <meta name="description" content="Gallery Photo - Koordinator Pemerintahan Sipapaode" />
   </svelte:head>
 
   
   <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Photo Dokumentasi - Bagian Kerjasama</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Photo Dokumentasi - Koordinator Pemerintahan</Heading>
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Klik Tombol Buka Upload Photo untuk Mengupload Gambar Dalam Gallery Photo Bagian Kerjasama. Optimasi Gambar sebelum mengupload dapat dilakukan pada Link berikut.</label>
+        <label>Klik Tombol Buka Upload Photo untuk Mengupload Gambar Dalam Gallery Photo Koordinator Pemerintahan. Optimasi Gambar sebelum mengupload dapat dilakukan pada Link berikut.</label>
       </div>
     </div>
     <br/><br/>
@@ -79,7 +79,7 @@ function showimage(id) {
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
     <form class="space-y-6" on:submit|preventDefault ={UploadImage} >
    <Label class="pb-2 text-base">Upload file Photo / Gambar (Type File: JPG, JPEG or PNG)</Label>
-   <Fileupload class="mb-2" id="UploadImageKS" accept=".png, .jpg, .jpeg, .webp" required />
+   <Fileupload class="mb-2" id="UploadImagePemerintahan" accept=".png, .jpg, .jpeg, .webp" required />
     <Label class="pb-2 mb-3">(Max File Size: 10 MB)</Label>
     <ButtonGroup class="*:!ring-primary-700"><Button outline color="dark" type="submit" value="submit" >
     <UploadOutline  class="w-4 h-4 me-2" />Simpan Gambar</Button> </ButtonGroup>
@@ -109,14 +109,14 @@ function showimage(id) {
 
   <Heading tag="h4" customSize="text-xl text-left font-extrabold  md:text-xl lg:text-2xl">🖼️ List Photo</Heading>
   <br/>
-  {#if data.DatasGambar.total === 0}
-  <p>Saat ini Tidak terdapat Gambar pada Gallery Photo.</p>
+  {#if data.DatasGambarPemerintahan.total === 0}
+  <p>Saat ini tidak terdapat Gambar pada Gallery Photo.</p>
   {:else}
-  <p>Terdapat {data.DatasGambar.total} Gambar dalam Folder Gallery Bagian Kerjasama</p>
+  <p>Terdapat {data.DatasGambarPemerintahan.total} Gambar dalam Folder Gallery Koordinator Pemerintahan</p>
 {/if}
  <br/>
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
-    {#await data.DatasGambar.files}
+    {#await data.DatasGambarPemerintahan.files}
      loading...
     {:then allPosts}
     <div class="grid grid-cols-3 gap-4">
