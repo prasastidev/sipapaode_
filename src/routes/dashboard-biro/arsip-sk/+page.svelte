@@ -294,10 +294,10 @@
                           <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><PaperClipOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh SK</label>  
                       </TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Penerbit:</b> {cetakTabel.Penerbit} <br/><b>No. SK:</b> {cetakTabel.Nomor_SK} <br/><b>Tanggal SK:</b> {cetakTabel.TanggalSK.slice(0, 10)}<br/>
-                        <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}
+                        <br/><b>Tentang:</b><br/>{cetakTabel.Tentang}
                       </div>             
                       </TableBodyCell>
-                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/> {cetakTabel.Ringkasan_Isi}
+                      <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/>{cetakTabel.Ringkasan_Isi}
                       </div>             
                       </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
@@ -360,10 +360,10 @@
                         <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><PaperClipOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh SK</label>  
                     </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Penerbit:</b> {cetakTabel.Penerbit} <br/><b>No. SK:</b> {cetakTabel.Nomor_SK} <br/><b>Tanggal SK:</b> {cetakTabel.TanggalSK.slice(0, 10)}<br/>
-                      <br/><b>Tentang:</b><br/> {cetakTabel.Tentang}
+                      <br/><b>Tentang:</b><br/>{cetakTabel.Tentang}
                     </div>             
                     </TableBodyCell>
-                    <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/> {cetakTabel.Ringkasan_Isi}
+                    <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/>{cetakTabel.Ringkasan_Isi}
                     </div>             
                     </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">

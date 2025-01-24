@@ -312,7 +312,7 @@ function prevQuote() {
 					</svelte:fragment>
 				  </Modal>
 
-				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Daftar Bidang di Biro Pemerintahan & Otonomi Daerah:</span> <br/>
+				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang di Biro Pemerintahan & Otonomi Daerah:</span> <br/>
 				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah dan K/L, Pendataan dan Monitoring</Popover>
                   <Button color="light" pill id="b2" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Fasilitas Tata Wilayah Pemerintahan dan Administrasi Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode Data Wilayah Pemerintahan, Pemetaan (GIS), serta rupa bumi).</Popover>
 				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Fasilitas Penerbitan SK Sehubungan dengan Pemerintahan, SK Gubernur izin keberangkatan ke Luar Negeri dan Administrasi Laporan Evaluasi Kinerja Daerah (LPPD & LKPJ).</Popover>

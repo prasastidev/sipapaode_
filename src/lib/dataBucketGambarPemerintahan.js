@@ -13,6 +13,14 @@ export async function getDataPhotoPemerintahan() {
     );
 }
 
+export async function getDataPhotoPemerintahanGallery() {
+    return await storage.listFiles(
+        BUCKET_ID,
+        // Use a query to show the latest ideas first
+        [ Query.limit(18), Query.orderDesc('$createdAt') ]
+    );
+}
+
 export async function deleteDataPhotoPemerintahan(id) {
     await storage.deleteFile(BUCKET_ID, id);
 }

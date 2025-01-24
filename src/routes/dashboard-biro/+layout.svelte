@@ -80,7 +80,7 @@
                   </svelte:fragment>
                 </SidebarItem>
             </SidebarGroup>
-              <SidebarGroup border>
+              <SidebarGroup border> <br/>
                 <div style="font-size: 16px;text-align: left;color:#515b6d">SipapaOde Versi 1.1</div>
                 <div style="display: flex;gap:10px;">
                   <a href="https://www.youtube.com/" target="_blank"><div class="icon youtube">
@@ -99,6 +99,7 @@
                       </svg>
                   </div>
               </div>
+             
               </SidebarGroup>
             </SidebarWrapper>
           </Sidebar>

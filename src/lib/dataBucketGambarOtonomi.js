@@ -13,6 +13,14 @@ export async function getDataPhotoOtonomi() {
     );
 }
 
+export async function getDataPhotoOtonomiGallery() {
+    return await storage.listFiles(
+        BUCKET_ID,
+        // Use a query to show the latest ideas first
+        [ Query.limit(18), Query.orderDesc('$createdAt') ]
+    );
+}
+
 export async function deleteDataPhotoOtonomi(id) {
     await storage.deleteFile(BUCKET_ID, id);
 }
