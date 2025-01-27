@@ -46,7 +46,7 @@
         {/if}
          <br/>
           <div style="padding:18px;border-radius:12px;border:2px solid #e4e4ff;">
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {#each data.DatasGambarKS.files as cetakTabel,i}
              <div style="float:left;text-align:center;">
              <img src={showimageKS(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
@@ -69,7 +69,7 @@
       {/if}
        <br/>
         <div style="padding:18px;border-radius:12px;border:2px solid #e4e4ff;">
-          <div class="grid grid-cols-3 gap-4">
+          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {#each data.DatasGambarPemerintahan.files as cetakTabel,i}
            <div style="float:left;text-align:center;">
            <img src={showimagePemerintahan(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
@@ -92,7 +92,7 @@
         {/if}
          <br/>
           <div style="padding:18px;border-radius:12px;border:2px solid #e4e4ff;">
-            <div class="grid grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
               {#each data.DatasGambarOtonomi.files as cetakTabel,i}
              <div style="float:left;text-align:center;">
              <img src={showimageOtonomi(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>

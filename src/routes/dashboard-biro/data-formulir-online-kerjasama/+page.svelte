@@ -56,7 +56,7 @@ const updateStatusPengajuan = async (e) => {
       table = document.getElementById("TABLE_KSPK");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[1];
+        td = tr[i].getElementsByTagName("td")[2];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -168,16 +168,14 @@ const remove = async (id) => {
 
   <Table id="TABLE_KSPK" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
     <TableHead>
-      <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Nama</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Tanggal Submit</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Kategori Kerjasama</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Draft Dokumen KS</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Email & Contact</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Instansi & Tentang</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Catatan</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Status & Estimasi</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">No</TableHeadCell>
+      <TableHeadCell style="font-size: larger;width:140px;" class="py-3 px-2 content-start">Berkas Pengajuan Dokumen KS</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Nama</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Contact</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Kategori Kerjasama</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Catatan</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Status & Estimasi</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Aksi</TableHeadCell>
     </TableHead>
     {#await data.TableDataPengajuanKSOnline.documents}
       loading...
@@ -187,18 +185,16 @@ const remove = async (id) => {
       {#if i >= postRangeLow && i < postRangeHigh}
       <TableBodyRow>
         <TableBodyCell class="content-start">{i+1}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div><Avatar class="inline-flex mb-2" border /> <br/> <b>{cetakTabel.Nama}</b></div></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.$updatedAt.slice(0, 10)}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Kategory_KS}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
-          <center>
+         <div style="width:120px;">
           <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;"><FileLinesOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh berkas</label>  
-         </center>
+         </div>
         </TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;overflow-wrap: anywhere;"><b>Email:</b> {cetakTabel.Email} <br/><b>Contact:</b> {cetakTabel.ContactPerson}
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;"><Avatar class="inline-flex mb-4 mr-2 align-middle" border /> {cetakTabel.Nama} <br/><b>Tanggal Submit:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)}</div></TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;overflow-wrap: anywhere;"><b>Instansi:</b> {cetakTabel.Instansi} <br/><b>Email:</b> {cetakTabel.Email} <br/><b>Contact:</b> {cetakTabel.ContactPerson}
         </div></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;display:flex;overflow-wrap: anywhere;"><BuildingSolid class="w-4 h-4 infline-flex me-2" /> {cetakTabel.Instansi}</div> <br/><b>Tentang:</b> <br/>{cetakTabel.Tentang}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Catatan}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;overflow-wrap:anywhere;"><b>Kategory:</b> <br/>{cetakTabel.Kategory_KS}<br/><br/><b>Tentang:</b> <br/>{cetakTabel.Tentang}</div></TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:160px;overflow-wrap:anywhere;">{cetakTabel.Catatan}</div></TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;">
           <Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>
         </TableBodyCell>

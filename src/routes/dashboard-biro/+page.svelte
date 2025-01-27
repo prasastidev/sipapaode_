@@ -110,14 +110,14 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
         </div>
         <Card padding="xl" size="xl" class="p-6 sm:p-6">
           <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
-            <li class="mb-3">Total Kerjasama Terdaftar <br/>
-                <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{TotalKSTerdaftar}</span>
+            <li class="mb-3" style="line-height:1.8">Total Kerjasama Terdaftar <br/>
+                <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{TotalKSTerdaftar}</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen Kerjasama Terdaftar</span> 
             </li>
-            <li class="mb-3">Total Kerjasama Aktif (Masih Berlaku) <br/>
-               <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;"> {TotalKSTerdaftarBerlaku} </span>
+            <li class="mb-3" style="line-height:1.8">Total Kerjasama Aktif (Masih Berlaku) <br/>
+               <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;"> {TotalKSTerdaftarBerlaku} </span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen Kerjasama Masih Aktif</span>
             </li>
-            <li class="mb-3">Total Kerjasama Telah Berakhir <br/>
-              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;"> {TotalKSTerdaftarBerakhir} </span>
+            <li class="mb-3" style="line-height:1.8">Total Kerjasama Telah Berakhir <br/>
+              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;"> {TotalKSTerdaftarBerakhir} </span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen Kerjasama Telah Berakhir</span>
             </li>
           </ul>
         </Card>
@@ -129,17 +129,17 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
         </div>
         <Card padding="xl" size="xl" class="p-6 sm:p-6">
           <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
-            <li class="mb-3">Jumlah Kab/Kota - Sultra <br/>
-                <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">17</span>
+            <li class="mb-3" style="line-height:1.8">Jumlah Kab/Kota - Sultra <br/>
+                <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">17</span> <span style="font-weight:100;margin-left:6px;">Kab/Kota di Sulawesi Tenggara</span>
             </li>
-            <li class="mb-3">Total Jumlah Kecamatan - Sultra <br/>
-               <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{Jum_KecamatanSultra}</span>
+            <li class="mb-3" style="line-height:1.8">Total Jumlah Kecamatan - Sultra <br/>
+               <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{Jum_KecamatanSultra}</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Kecamatan di Sulawesi Tenggara</span>
             </li>
-            <li class="mb-3">Total Jumlah Kelurahan - Sultra <br/>
-              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{Jum_KelurahanSultra}</span>
+            <li class="mb-3" style="line-height:1.8">Total Jumlah Kelurahan - Sultra <br/>
+              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{Jum_KelurahanSultra}</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Kelurahan di Sulawesi Tenggara</span>
             </li>
-            <li class="mb-3">Total Jumlah Desa - Sultra <br/>
-              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{Jum_DesaSultra}</span>
+            <li class="mb-3" style="line-height:1.8">Total Jumlah Desa - Sultra <br/>
+              <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{Jum_DesaSultra}</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Desa di Sulawesi Tenggara</span>
             </li>
           </ul>
         </Card>
@@ -155,14 +155,14 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
     </div>
     <Card padding="xl" size="xl" class="p-6 sm:p-6">
       <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
-        <li class="mb-3">Total Penerbitan SK Gubernur & Wakil <br/>
-            <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataSK_GubWakil.total }</span>
+        <li class="mb-3" style="line-height:1.8">Total Penerbitan SK Gubernur & Wakil <br/>
+            <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataSK_GubWakil.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen SK di Folder SK Gub/Wakil</span>
         </li>
-        <li class="mb-3">Total Dokumen LPPD Kab/Kota<br/>
-           <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataDokLPPD.total }</span>
+        <li class="mb-3" style="line-height:1.8">Total Dokumen LPPD Kab/Kota<br/>
+           <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataDokLPPD.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen LPPD di Folder LPPD</span>
         </li>
-        <li class="mb-3">Total Dokumen LKPJ Kab/Kota <br/>
-          <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataDokLKPJ.total }</span>
+        <li class="mb-3" style="line-height:1.8">Total Dokumen LKPJ Kab/Kota <br/>
+          <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataDokLKPJ.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen LKPJ di Folder LKPJ</span>
         </li>
       </ul>
     </Card>
@@ -174,11 +174,11 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
     </div>
     <Card padding="xl" size="xl" class="p-6 sm:p-6">
       <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
-        <li class="mb-3">Total Pegawai <br/>
-            <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span>
+        <li class="mb-3" style="line-height:1.8">Total Pegawai <br/>
+            <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Pegawai Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>
         </li>
-        <li class="mb-3">Total Pegawai honorer <br/>
-           <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span>
+        <li class="mb-3" style="line-height:1.8">Total Honorer <br/>
+           <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Honorer Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>
         </li>
       </ul>
     </Card>
