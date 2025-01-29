@@ -105,7 +105,7 @@ function SearchTable() {
 
     <div class="modern-box">
       <div class="contentbox">
-        <label>Dibawah berikut adalah update Checklist pengiriman Laporan Evaluasi Kerjasama oleh Pemerintah Kab/Kota. Semua Perubahan Data yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/pengiriman-evaluasi-kerjasama" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman Evaluasi Kerjasama</a>.</label>
+        <label>Berikut adalah pembaruan Checklist pengiriman Laporan Evaluasi Kerjasama oleh Pemerintah Kab/Kota. Semua perubahan data yang dilakukan di halaman ini akan terupdate secara otomatis pada halaman publik <a href="/pengiriman-evaluasi-kerjasama" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman Evaluasi Kerjasama</a> untuk memastikan transparansi dan akurasi informasi.</label>
       </div>
     </div>
     <br/><br/><br/>

@@ -160,9 +160,7 @@ const addDataFormtoTable = async (e) => {
     <span class="text-xl font-bold">Formulir (Online) Pengiriman Pengiriman LPPD & LKPJ <Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Via Online</Badge></span>
   </div>
   <p class="mt-2 mb-4 text-base">
-    Dibawah berikut adalah Formulir Penyampain LPPD dan LKPJ Tahun berjalan.
-    Pengiriman Dokumen LPPD dan LKPJ tahun 2024 dimulai tanggal 01 Januari 2025 sampai dengan tanggal 31 Maret 2025. 
-    Dokumen LPPD dan LKPJ yang telah dikirim akan di update pada tabel di bawah halaman ini.
+    Dibawah ini adalah Formulir Penyampaian LPPD dan LKPJ Tahun berjalan. Pengiriman dokumen LPPD dan LKPJ tahun 2024 berlangsung dari 01 Januari hingga 31 Maret 2025. Dokumen yang dikirimkan akan diperbarui dalam tabel di bawah halaman ini.
   </p>
   <div class="flex gap-2">
     <Button size="sm" on:click={() => (ModalKirimLPPD = true)} color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Kirim LPPD dan LKPJ</Button>

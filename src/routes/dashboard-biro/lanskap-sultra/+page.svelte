@@ -151,7 +151,7 @@ const updateDataWilayah = async (e) => {
     <br/>  <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Berikut dibawah ini adalah informasi Kode Data Wilayah, Administratif Pemerintahan dan Rupa Bumi di Sulawesi Tenggara.
+        <label>Berikut adalah informasi mengenai Kode Data Wilayah, Administratif Pemerintahan dan Rupa Bumi di Sulawesi Tenggara.
           Setiap Perubahan Data pada Tabel di Bawah, Dapat diakses oleh publik pada <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;color:blue;">halaman berikut.</a></label>
       </div>
     </div>
@@ -198,7 +198,7 @@ const updateDataWilayah = async (e) => {
             <TableBodyCell class="whitespace-break-spaces font-bold text-xl content-start">{cetakTabel.Nama}</TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Ibukota}</TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:190px;overflow-wrap: anywhere;"><b>Luas Wilayah:</b> {cetakTabel.Luas_Wilayah} km2<br/><b>Jum. Penduduk:</b> {cetakTabel.J_Penduduk} <br/>
-            <br/><b>Jumlah Kecamatan:</b> {cetakTabel.J_Kecamatan} <br/><b>Jumlah Kelurahan:</b> {cetakTabel.J_Kelurahan}<br/><b>Jumlah Desa: {cetakTabel.J_Desa}</b></div></TableBodyCell>
+            <br/><b>Jumlah Kecamatan:</b> {cetakTabel.J_Kecamatan} <br/><b>Jumlah Kelurahan:</b> {cetakTabel.J_Kelurahan}<br/><b>Jumlah Desa:</b> {cetakTabel.J_Desa}</div></TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:170px;overflow-wrap: anywhere;"><b>Jum. Gunung:</b> {cetakTabel.J_Gunung}<br/><b>Jum. Pulau:</b> {cetakTabel.J_Pulau}<br/><b>Jum. Selat:</b> {cetakTabel.J_Selat}<br/><b>Jum. Danau:</b> {cetakTabel.J_Danau}<br/><b>Jum. Sungai:</b> {cetakTabel.J_Sungai}<br/><b>Jum. Rawa:</b> {cetakTabel.J_Rawa}</div></TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:300px;">{@html cetakTabel.Map}<br/><b>Koordinat:</b> {cetakTabel.Koordinat}</div></TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:200px;">{@html cetakTabel.KetMap}</div></TableBodyCell>

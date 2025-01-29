@@ -3,7 +3,7 @@
     export let data;
     import { user } from '$lib/user';
     import {  Sidebar, Toggle, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
-    import { ChartPieSolid, BadgeCheckSolid, ObjectsColumnSolid, BookSolid, BuildingSolid, LandmarkSolid, DrawSquareSolid, UserCircleSolid, UsersSolid, BullhornSolid, ArrowLeftToBracketOutline, FileCopyAltSolid } from 'flowbite-svelte-icons';
+    import { ChartPieSolid, BadgeCheckSolid, ObjectsColumnSolid, UserHeadsetSolid, BuildingSolid, LandmarkSolid, UserCircleSolid, UsersSolid, BullhornSolid, UsersGroupSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
     
 
@@ -59,11 +59,13 @@
                     <SidebarDropdownItem label="🗂️ Data Dokumen SK" href="/dashboard-biro/arsip-sk" class="pl-4 ps-8" />
                     <SidebarDropdownItem label="🖼️ Gallery Photo Dokumentasi Otonomi Daerah" href="/dashboard-biro/gallery-photo-otonomi" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
-                  <SidebarItem label="Tata Usaha (Data Pegawai)" href="/dashboard-biro/data-pegawai-biro">
+                  <SidebarDropdownWrapper label="Tata Usaha" {spanClass} style="text-align: left;">
                     <svelte:fragment slot="icon">
                       <ObjectsColumnSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
-                  </SidebarItem>
+                    <SidebarDropdownItem label="👤 Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="🖼️ Photo Profil Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
+                  </SidebarDropdownWrapper>
                   <SidebarItem label="Status Layanan" href="/dashboard-biro/status-layanan">
                     <svelte:fragment slot="icon">
                       <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
@@ -74,9 +76,14 @@
                       <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                <SidebarItem label="Informasi PIC" href="/dashboard-biro/info-pic">
+                  <SidebarItem label="Informasi PIC" href="/dashboard-biro/info-pic">
+                    <svelte:fragment slot="icon">
+                      <UserHeadsetSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    </svelte:fragment>
+                  </SidebarItem>
+                <SidebarItem label="Daftar User" href="/dashboard-biro/daftar-user">
                   <svelte:fragment slot="icon">
-                    <UserCircleSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    <UsersGroupSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
                 </SidebarItem>
             </SidebarGroup>

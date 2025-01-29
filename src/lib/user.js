@@ -33,6 +33,7 @@ const createUser = () => {
 		await init();
 		await invalidateAll();
 		goto('/dashboard-biro'); // Redirect to home page after login
+		
 	}
 
 	async function logout() {

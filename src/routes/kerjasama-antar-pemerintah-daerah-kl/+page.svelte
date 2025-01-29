@@ -279,8 +279,9 @@
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama antar Pemerintah Daerah dan K/L</Heading>
 <br/>
 <Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#statistikKerjasama" class="mb-2">Lihat Statistik Kerjasama</Button>
-<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#3PengirimTerakhir" class="mb-2">Lihat Aktivitas Pengiriman Terakhir</Button>
 <Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#DataKerjsamaAktif" class="mb-2">Lihat Data Kerjasama Aktif</Button>
+<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#3PengirimTerakhir" class="mb-2">Progress Pengajuan Kerjasama</Button>
+
   <br/><br/>
 Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara  {#if OnlineKSpemerintahdaerahkl.Status_raw } ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if} dengan mengisi formulir pada link di bawah berikut.
 <br/><br/>
@@ -443,7 +444,7 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
  <br/>
 <span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/>
 <br/>
-<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Aktifitas Pengiriman Terakhir</Heading>
+<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Progress Pengajuan Kerjasama</Heading>
 <br/>
 3 Aktivitas Pengiriman Terakhir
 <br/><br/> 

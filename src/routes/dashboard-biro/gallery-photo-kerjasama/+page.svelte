@@ -68,8 +68,7 @@ function showimage(id) {
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Silahkan mengklik tombol buka Upload Photo untuk melakukan Upload Photo atau Gambar Dokumentasi ke Dalam Gallery Bagian Kerjasama.
-          Dokumen Photo dapat diakses oleh Publik pada <a href="/gallery" style="text-decoration:underline;color:blue;">halaman berikut.</a>
+        <label>Silakan klik tombol "Buka Upload Photo" untuk mengunggah foto atau gambar dokumentasi ke dalam galeri bagian kerjasama. Dokumen foto yang diunggah dapat diakses oleh publik melalui <a href="/gallery" style="text-decoration:underline;color:blue;">halaman berikut.</a>
         </label>
       </div>
     </div>

@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     import { Heading, Card, Listgroup, Avatar, Button } from 'flowbite-svelte';
-    import { ArrowRightToBracketOutline, BadgeCheckOutline, CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid } from 'flowbite-svelte-icons';
+    import { ArrowRightToBracketOutline, UserHeadsetOutline, CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid } from 'flowbite-svelte-icons';
     import { user } from '$lib/user';
 
 let DataKotaKendari  = data.TableDatasWilayah.documents[0];
@@ -96,7 +96,7 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
              Anda dapat melihat Informasi daftar PIC Sipapaode pada Link Tombol di samping berikut
           </h1></div>
           <div class="rounded-xl"><a href="/dashboard-biro/info-pic" style="text-decoration:none;"><button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded float-right">
-            <BadgeCheckOutline class="w-6 h-6 mr-1 text-white-800" /> Informasi PIC</button></a> 
+            <UserHeadsetOutline class="w-6 h-6 mr-1 text-white-800" /> Informasi PIC</button></a> 
             </div>   
       </Card>
       <br/><br/>
@@ -175,10 +175,10 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
     <Card padding="xl" size="xl" class="p-6 sm:p-6">
       <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
         <li class="mb-3" style="line-height:1.8">Total Pegawai <br/>
-            <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Pegawai Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>
+            <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataSPegawai.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Pegawai Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>
         </li>
         <li class="mb-3" style="line-height:1.8">Total Honorer <br/>
-           <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">--</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Honorer Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>
+           <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataSHonorer.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Honorer Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>
         </li>
       </ul>
     </Card>

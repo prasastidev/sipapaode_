@@ -136,7 +136,7 @@ const updateData = async (e) => {
   <br/><br/>
   <div class="modern-box">
     <div class="contentbox">
-      <label>Dibawah berikut adalah update Checklist pengiriman Laporan LPPD dan LKPJ oleh Pemerintah Kab/Kota Prov. Sulawesi Tenggara. Semua perubahan Data yang dilakukan pada halaman ini, akan terupdate otomatis pada halaman publik <a href="/penyampaian-lppd" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman LPPD dan LKPJ</a>.</label>
+      <label>Berikut adalah pembaruan Checklist pengiriman Laporan LPPD dan LKPJ oleh Pemerintah Kabupaten/Kota Provinsi Sulawesi Tenggara. Setiap perubahan data pada halaman ini akan terupdate secara otomatis di halaman publik untuk <a href="/penyampaian-lppd" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman LPPD dan LKPJ</a>.</label>
     </div>
   </div>
   <br/><br/><br/>

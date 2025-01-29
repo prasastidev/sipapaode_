@@ -74,7 +74,7 @@
     <br/><br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Berikut dibawah ini adalah Data Dokumen LPPD dan LKPJ oleh Pemerintah Kab/Kota Prov. Sulawesi Tenggara, yang terangkum dalam satu Folder.</label>
+        <label>Berikut adalah data dokumen LPPD dan LKPJ oleh Pemerintah Kabupaten/Kota Provinsi Sulawesi Tenggara, yang telah dirangkum dan disusun dengan rapi dalam satu folder untuk memudahkan akses dan referensi.</label>
       </div>
     </div>
     <br/><br/>

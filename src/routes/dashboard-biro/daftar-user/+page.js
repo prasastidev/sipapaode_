@@ -5,8 +5,6 @@ export const ssr = false;
 export const csr = true;
 
 import { redirect } from '@sveltejs/kit';
-import { getTableDataPegawai} from '$lib/dataPegawai';
-
 
 
 /** @type {import('./$types').PageLoad} */
@@ -15,14 +13,5 @@ export async function load({ parent }) {
 	if (!account) {
 		throw redirect(303, '/');
 	}
-
-	return {
-		TableDataPegawai : await getTableDataPegawai ()
-	};	
 }
-
-
-
-
-
 

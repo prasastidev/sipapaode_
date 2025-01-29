@@ -16,7 +16,7 @@
 
 
 function showimage(id) {
-    const result = storage.getFileView('6791fea50005705fec23', id);
+    const result = storage.getFileView('67999587003989233678', id);
     return result;  
 }
 
@@ -24,11 +24,11 @@ function showimage(id) {
  const UploadImage = async (e) => {
    visibleProgresBar = true;
     e.preventDefault();
-	const formEl = e.target;
-    await storage.createFile('6791fea50005705fec23', ID.unique(), document.getElementById('UploadImagePemerintahan').files[0]); 
+		const formEl = e.target;
+    await storage.createFile('67999587003989233678', ID.unique(), document.getElementById('UploadPhotoPegawai').files[0]); 
     progress = 100;
     // Reset form
-	formEl.reset();   
+		formEl.reset();   
     await invalidateAll();
     progress = 0;
     visibleProgresBar = false;
@@ -37,7 +37,7 @@ function showimage(id) {
 
  const remove = async (id) => {
     // Delete File Storage
-    await storage.deleteFile('6791fea50005705fec23', id );
+    await storage.deleteFile('67999587003989233678', id );
     ConfirmDeleteModal = false;
     await invalidateAll();
 	};
@@ -46,7 +46,7 @@ function showimage(id) {
   // Pagination 
   let currentPage =1; // Update this to simulate page change.
   let postsPerPage = 9;
-  let allPosts = data.DatasGambarPemerintahan.files;
+  let allPosts = data.DatasGambarPegawai.files;
   let totalPosts = allPosts.length;
   let totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
@@ -58,19 +58,19 @@ function showimage(id) {
   </script>
   
   <svelte:head>
-  <title>Gallery Photo Koordinator Pemerintahan</title>
-  <meta name="description" content="Gallery Photo - Koordinator Pemerintahan Sipapaode" />
+  <title>Info User</title>
+  <meta name="description" content="Info User" />
   </svelte:head>
 
   
   <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Photo Dokumentasi - Koordinator Pemerintahan</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Photo Profil Pegawai - Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Silakan klik tombol "Buka Upload Photo" untuk mengunggah foto atau gambar dokumentasi ke dalam galeri Koordinator Pemerintahan. Dokumen foto yang diunggah dapat diakses oleh publik melalui <a href="/gallery" style="text-decoration:underline;color:blue;">halaman berikut.</a>
-        </label>  
-     </div>
+        <label>Silahkan mengklik tombol buka Upload Photo untuk melakukan Upload Photo Pegawai. Ukuran 200x200 px.
+        </label>
+      </div>
     </div>
     <br/><br/>
 
@@ -80,7 +80,7 @@ function showimage(id) {
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
     <form class="space-y-6" on:submit|preventDefault ={UploadImage} >
    <Label class="pb-2 text-base">Upload file Photo / Gambar (Type File: JPG, JPEG or PNG)</Label>
-   <Fileupload class="mb-2" id="UploadImagePemerintahan" accept=".png, .jpg, .jpeg, .webp" required />
+   <Fileupload class="mb-2" id="UploadPhotoPegawai" accept=".png, .jpg, .jpeg, .webp" required />
     <Label class="pb-2 mb-3">(Max File Size: 10 MB)</Label>
     <ButtonGroup class="*:!ring-primary-700"><Button outline color="dark" type="submit" value="submit" >
     <UploadOutline  class="w-4 h-4 me-2" />Simpan Gambar</Button> </ButtonGroup>
@@ -110,14 +110,14 @@ function showimage(id) {
 
   <Heading tag="h4" customSize="text-xl text-left font-extrabold  md:text-xl lg:text-2xl">🖼️ List Photo</Heading>
   <br/>
-  {#if data.DatasGambarPemerintahan.total === 0}
-  <p>Saat ini tidak terdapat Gambar pada Gallery Photo.</p>
+  {#if data.DatasGambarPegawai.total === 0}
+  <p>Saat ini Tidak terdapat Gambar pada Gallery Photo.</p>
   {:else}
-  <p>Terdapat {data.DatasGambarPemerintahan.total} Gambar dalam Folder Gallery Koordinator Pemerintahan</p>
+  <p>Terdapat {data.DatasGambarPegawai.total} Gambar dalam Folder Gallery Photo Pegawai</p>
 {/if}
  <br/>
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
-    {#await data.DatasGambarPemerintahan.files}
+    {#await data.DatasGambarPegawai.files}
      loading...
     {:then allPosts}
     <div class="grid grid-cols-3 gap-4">

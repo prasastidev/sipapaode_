@@ -27,6 +27,14 @@ function UpdateLayananOnline(Status_raw, id) {
 });
 
 }
+
+const uniqueBidang = [...new Set(data.TableDatasLayananOnline.documents.map(item => item.Bidang))];
+let selectedBidang = '';
+
+$: filteredData = selectedBidang 
+    ? data.TableDatasLayananOnline.documents.filter(item => item.Bidang === selectedBidang)
+    : data.TableDatasLayananOnline.documents;
+
 </script>
 
 <svelte:head>
@@ -38,28 +46,22 @@ function UpdateLayananOnline(Status_raw, id) {
     <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Status Jenis Layanan Online</Heading>
     <br/>
 
-   <label style="font-size:large;padding:6px 10px;font-size:22px;font-weight:600;"><ArrowRightAltSolid class="inline-flex w-6 h-6 mr-4 text-gray-500 dark:text-gray-400" />Bagian Kerjasama </label>
-    <button id="cekonlineKS" class="inline-flex -ml-3 items-center text-sm font-light text-gray-500 dark:text-gray-400"><ExclamationCircleSolid class="w-5 h-5" />
+   <!-- Filter Buttons -->
+   <div class="mb-4 flex gap-2">
+    <button 
+      class="px-4 py-2 rounded {!selectedBidang ? 'bg-blue-600 text-white' : 'bg-gray-200'}"
+      on:click={() => selectedBidang = ''}>
+      All
     </button>
-  <Popover triggeredBy="#cekonlineKS" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400" placement="right">
-   <div class="p-3 space-y-2">Aktivasi Layanan Online Bagian Kerjasama terdapat pada Nomor: 8, 9, dan 10</div>
-  </Popover>
-   <br/>
-   <label style="font-size:large;padding:6px 10px;font-size:22px;font-weight:600;"><ArrowRightAltSolid class="inline-flex w-6 h-6 mr-4 text-gray-500 dark:text-gray-400" />Koord. Pemerintahan </label>
-   <button id="cekonlineKP" class="inline-flex -ml-3 items-center text-sm font-light text-gray-500 dark:text-gray-400"><ExclamationCircleSolid class="w-5 h-5" />
-   </button>
- <Popover triggeredBy="#cekonlineKP" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400" placement="right">
-  <div class="p-3 space-y-2">Aktivasi Layanan Online Koordinator Pemerintahan terdapat pada Nomor: 4, 5, 6, dan 7</div>
- </Popover>
-   <br/>
-   <label style="font-size:large;padding:6px 10px;font-size:22px;font-weight:600;"><ArrowRightAltSolid class="inline-flex w-6 h-6 mr-4 text-gray-500 dark:text-gray-400" />Koord. Otonomi Daerah </label>
-   <button id="cekonlineKOD" class="inline-flex -ml-3 items-center text-sm font-light text-gray-500 dark:text-gray-400"><ExclamationCircleSolid class="w-5 h-5" />
-   </button>
- <Popover triggeredBy="#cekonlineKOD" class="w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400" placement="right">
-  <div class="p-3 space-y-2">Aktivasi Layanan Online Koordinator Otonomi Daerah terdapat pada Nomor: 1, 2, dan 3</div>
- </Popover>
-   <br/>
-   <br/>
+    {#each uniqueBidang as bidang}
+      <button 
+        class="px-4 py-2 rounded {selectedBidang === bidang ? 'bg-blue-600 text-white' : 'bg-gray-200'}"
+        on:click={() => selectedBidang = bidang}>
+        {bidang}
+      </button>
+    {/each}
+  </div>
+
   
 <section>
 
@@ -69,13 +71,15 @@ function UpdateLayananOnline(Status_raw, id) {
   <TableHead>
     <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
     <TableHeadCell style="font-size: larger;" class="py-4">Layanan Online</TableHeadCell>
+    <TableHeadCell style="font-size: larger;" class="py-4">Bidang</TableHeadCell>
     <TableHeadCell style="font-size: larger;" class="py-4">Status</TableHeadCell>
   </TableHead>
   <TableBody tableBodyClass="divide-y">
-    {#each data.TableDatasLayananOnline.documents as cetakTabel, i}	
+    {#each filteredData as cetakTabel, i}	
     <TableBodyRow>
       <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><span class="Bulat">{i+1}</span></TableBodyCell>
       <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{cetakTabel.Jenis_layanan}</TableBodyCell>
+      <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{cetakTabel.Bidang}</TableBodyCell>
       <TableBodyCell class="py-3 whitespace-break-spaces"><Toggle color="green" bind:checked={cetakTabel.Status_raw} on:click={UpdateLayananOnline(cetakTabel.Status_raw, cetakTabel.$id )}>Via Online {cetakTabel.Status_raw ? 'Aktiv' : 'Tidak Aktiv'}</Toggle> </TableBodyCell>
 
     </TableBodyRow>

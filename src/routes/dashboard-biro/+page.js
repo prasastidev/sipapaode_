@@ -5,6 +5,8 @@ import { getTableDataKS_Berlaku } from '$lib/crudDataRekapKerjasama';
 import { getTableDataDokLPPD} from '$lib/DokumenLPPDLKPJ';   
 import { getTableDataDokLKPJ} from '$lib/DokumenLPPDLKPJ';
 import { getTableSK_GubWakil} from '$lib/DokumenArsipSK';
+import { getTableDataStatusPegawai } from '$lib/dataPegawai';
+import { getTableDataStatusHonorer } from '$lib/dataPegawai';
 
 
 // Turn off SSR globally, turning the project into a static site
@@ -27,7 +29,9 @@ export async function load({ parent }) {
 		TableDatasKSBerlaku : await getTableDataKS_Berlaku (),
 		TableDataDokLPPD : await getTableDataDokLPPD (),
         TableDataDokLKPJ : await getTableDataDokLKPJ (),
-		TableDataSK_GubWakil : await getTableSK_GubWakil ()
+		TableDataSK_GubWakil : await getTableSK_GubWakil (),
+		TableDataSPegawai : await getTableDataStatusPegawai (),
+		TableDataSHonorer : await getTableDataStatusHonorer (),
 	};	
 }
 

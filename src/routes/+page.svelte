@@ -294,19 +294,21 @@ function prevQuote() {
 		        <span class="morenext flex flex-wrap items-center gap-2 w-64">
 				 <label style="border-bottom:1px dotted;margin-left:4px;">Info.</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
 				</span>
-				  <Modal title="Tentang SiPapaODe" bind:open={clickOutsideModal} autoclose outsideclose>
-				  <b>Pada Situs Web Aplikasi Sipapaode, Anda dapat:  </b>
-					
-						<ul class="list-disc" style="font-size:15px;color:blue">
-						<li>Mengajukan Kerjasama Secara Online Baik Pihak Ketiga/Swasta ataupun antar Pemerintah kepada Pemerintah Prov. Sulawesi Tenggara.  Melihat Dokumentasi Kerjasama dan Pemantauan (monitoring) secara Online, Serta Pelaporan evaluasi Kerjasama Pemerintah Daerah Kabupaten / Kota di Prov. Sulawesi Tenggara. </li>
-						<li>Informasi dan Pelaporan Fasilitas Standar Pelayanan Minimum (SPM) Pemerintahan Daerah Kabupaten/Kota di Prov. Sulawesi tengara. </li>   
-						<li>Informasi Data Wilayah Pemerintahan baik Pemprov maupun Kab/Kota, Pemetaan (GIS) dan Rupabumi. </li>
-						<li>Fasilitas Penataan Wilayah Pemerintahan (Pemutakhiran Data) oleh Kab/Kota dan Pembentukan daerah Otonomi Baru. </li>
-						<li>Penerbitan SK Sehubungan dengan Pemerintahan.</li>
-						<li>Penerbitan SK Gubernur sehubungan dengan Pengajuan Keberangkatan Luar Negeri </li>
-						<li>Laporan LPPD dan LKPJ oleh Pemda Kab/Kota dan Inventarisasi Penataan Urusan Daerah Otonomi Baru. </li>
-						<li style="color:green">Mengirim Saran dan Info Kepada Biro Pemerintahan dan Otonomi Daerah Prov. Sulawesi Tenggara.</li>
-					</ul> 	
+				  <Modal title="Selamat Datang di Situs Web Aplikasi Sipapaode" bind:open={clickOutsideModal} autoclose outsideclose>
+					Di Situs Web Aplikasi Sipapaode, Anda dapat mengakses berbagai layanan dan informasi yang berkaitan dengan kerjasama dan pengelolaan pemerintahan di Provinsi Sulawesi Tenggara. Berikut adalah beberapa fasilitas yang tersedia:
+					<br/>
+						<ul class="list-disc">
+						<li><b>Pengajuan Kerjasama Secara Online</b><br/>Anda dapat mengajukan kerjasama baik dengan pihak ketiga/swasta maupun antar pemerintah secara online kepada Pemerintah Provinsi Sulawesi Tenggara.</li>
+						<li><b>Dokumentasi dan Pemantauan Kerjasama</b><br/>Melihat dokumentasi kerjasama yang telah dilakukan serta melakukan pemantauan (monitoring) secara online. Selain itu, tersedia juga fasilitas pelaporan evaluasi kerjasama antara Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>   
+						<li><b>Informasi dan Pelaporan Standar Pelayanan Minimum (SPM)</b><br/>Mendapatkan informasi terkait fasilitas standar pelayanan minimum (SPM) yang diterapkan oleh Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>
+						<li><b>Data Wilayah Pemerintahan</b><br/>Akses informasi data wilayah pemerintahan baik dari Pemerintah Provinsi maupun Kabupaten/Kota, lengkap dengan pemetaan (GIS) dan rupabumi. </li>
+						<li><b>Penataan Wilayah Pemerintahan.</b><br/>Fasilitas untuk penataan wilayah pemerintahan, termasuk pemutakhiran data oleh Kabupaten/Kota dan pembentukan daerah otonomi baru.</li>
+						<li><b>Penerbitan SK Pemerintahan</b><br/>Proses penerbitan Surat Keputusan (SK) terkait dengan berbagai aspek pemerintahan. </li>
+						<li><b>Penerbitan SK Gubernur</b><br/>Penerbitan SK Gubernur sehubungan dengan pengajuan keberangkatan luar negeri. </li>
+						<li><b>Laporan LPPD dan LKPJ</b><br/>Laporan Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) dan Laporan Keterangan Pertanggungjawaban (LKPJ) oleh Pemerintah Daerah Kabupaten/Kota, serta inventarisasi penataan urusan daerah otonomi baru. </li>
+						<li><b>Saran dan Informasi</b><br/>Mengirimkan saran dan informasi kepada Biro Pemerintahan dan Otonomi Daerah Provinsi Sulawesi Tenggara. </li>
+					</ul> 	<br/>
+					Dengan fitur-fitur tersebut, Web Aplikasi Sipapaode berkomitmen untuk mendukung transparansi, efisiensi, dan kolaborasi dalam pengelolaan pemerintahan di Provinsi Sulawesi Tenggara.
 					<svelte:fragment slot="footer">
 					  <Button>Tutup</Button>
 					</svelte:fragment>
@@ -742,7 +744,7 @@ function prevQuote() {
 						</div>
 					  </Popover>	
 				</td>
-				<td style="white-space: break-spaces;">{formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)} </td>
+				<td style="white-space: break-spaces;">{formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)} 👥 </td>
 				 <td> 
 					<span on:click={()=>visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 						&#8285; 
@@ -773,7 +775,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;"> {formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk) } </td>
+					<td style="white-space: break-spaces;">{formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk)} 👥 </td>
 					 <td> 
 						<span on:click={()=>visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
@@ -803,7 +805,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} </td>
+					<td style="white-space: break-spaces;">{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} 👥 </td>
 					 <td> 
 						<span on:click={()=>visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
@@ -834,7 +836,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{formatter.format(DataKonawe.Luas_Wilayah)} km2 / {formatter.format(DataKonawe.J_Penduduk)} </td>
+					<td style="white-space: break-spaces;"> {formatter.format(DataKonawe.Luas_Wilayah)} km2 / 👥 {formatter.format(DataKonawe.J_Penduduk)} 👥 </td>
 					 <td> 
 						<span on:click={()=>visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
@@ -865,7 +867,7 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td> {formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 /  {formatter.format(DataKonaweUtara.J_Penduduk)} </td>
+					<td>{formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 / {formatter.format(DataKonaweUtara.J_Penduduk)} 👥 </td>
 					 <td> 
 						<span on:click={()=>visibleKonaweUtara  = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 

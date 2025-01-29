@@ -106,7 +106,7 @@ const remove = async (id) => {
   <br/>
   <div class="modern-box">
     <div class="contentbox">
-      <label>Berikut dibawah ini adalah Data Informasi Pihak yang sedang melakukan Pengajuan Kerjasama Secara Online Baik Pihak Ketiga/Swasta ataupun Pemerintah Daerah dan K/L. Status Pengajuan Kerjasama akan melalui proses tahapan Verifikasi hingga penerbitan Dokumen Naskah Kerjasama.</label>
+      <label>Berikut adalah data informasi mengenai pihak yang sedang mengajukan kerjasama secara online, baik dari pihak ketiga/swasta maupun pemerintah daerah dan Kementerian/Lembaga. Status pengajuan kerjasama akan melalui proses verifikasi hingga penerbitan dokumen naskah kerjasama.</label>
     </div>
   </div>
   <br/><br/>

@@ -1,10 +1,17 @@
 <script>
     /** @type {import('./$types').PageData} */
 
-    import { Heading, Tabs, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
-    import { ArrowRightAltOutline, MoonOutline, BuildingSolid } from 'flowbite-svelte-icons';
+    import { Heading } from 'flowbite-svelte';
+    import { ArrowUpFromBracketOutline } from 'flowbite-svelte-icons';
     import sipapaodeScreen from '$lib/images/Sipapaode-screen.png';
     import ImageKSwasta from '$lib/images/Kerjasama-Pihak-Swasta.webp';
+    import ImageKLuarNegeri from '$lib/images/Kerjasama-Luar-Negeri.webp';
+    import PenataanWilayahimg from '$lib/images/Penataan-wilayah.webp';
+    import KodeWilayahimg from '$lib/images/Kode-Wilayah.webp';
+    import Otonomiimg from '$lib/images/otonomi.webp';
+    import penerbitanSKimg from '$lib/images/SK.webp';
+    import laporanimg from '$lib/images/laporan.webp';
+    import Inventarisasiotonomi from '$lib/images/inventarisasi-otonomi-baru.webp';
 
 
 </script>
@@ -32,30 +39,61 @@
 </div>
 <br/><br/><hr/><br/>
 
-<!-- 
+
 <div class="modern-box">
   <div class="contentbox">
-    <label>Dibawah berikut adalah Data Informasi Pihak yang melakukan Pengajuan Kerjasama Secara Online Baik dilakukan oleh Pihak Ketiga/Swasta ataupun Pemerintah Daerah dan K/L.</label>
+    <label class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2"><div class="col-span-2 rounded-xl pr-3">
+      <h1 class="text-lg" style="text-align:left;color #242a38;font-weight: 600;">
+        Silakan baca buku panduan ringkas tentang sipapaode dengan mengklik tombol download di samping.
+      </h1></div>
+      <div class="rounded-xl content-center"><a href="#" style="text-decoration:none;"><button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded float-right">
+        <ArrowUpFromBracketOutline class="w-6 h-6 mr-1 text-white-800" /> Download</button></a> 
+        </div> </label>
   </div>
 </div>
-<br/><br/>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Bagaimana Sipapaode Bekerja</Heading>
-<br/>
-<div style="display:flex;margin-bottom:12px;align-items: center;gap: 16px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
- <div style="width: 50px;height: 50px;border-radius: 50%;background-color: #e0e0e0;"> <img src={ImageKSwasta} alt="kerjasama pihak swasta" style="border-radius:50%;"></div>
- <div style="flex-grow: 1;background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Memfasilitasi Kerjasama dengan Pemerintah Prov. Sulawesi Tenggara secara Online. </div>
-</div>
-<div style=" display:flex;margin-bottom:12px;align-items: center;gap: 16px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-  <div style="width: 50px;height: 50px;border-radius: 50%;background-color: #e0e0e0;"></div>
-   <div style="flex-grow: 1;background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Pendataan laporan Evaluasi Kerjasama dari Pemerintahan Kab/Kota Prov. Sulawesi Tenggara dengan Pusat.  </div>
-</div> 
+<br/><br/><hr/><br/>
 
-<div style=" display:flex;margin-bottom:12px;align-items: center;gap: 16px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
-    <div style="width: 50px;height: 50px;border-radius: 50%;background-color: #e0e0e0;"></div>
-    <div style="flex-grow: 1;background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Informasi Pendataan Wilayah Pemerintahan, administrasi dan Rupabumi.  </div>
- </div> 
+
+Di situs web aplikasi Sipapaode, Anda dapat mengakses berbagai layanan dan informasi terkait kerjasama serta pengelolaan pemerintahan di Provinsi Sulawesi Tenggara. Fasilitas yang tersedia mencakup informasi kebijakan, data statistik, dan platform komunikasi untuk meningkatkan kolaborasi antar instansi dan masyarakat demi pembangunan yang lebih baik.
 <br/><br/>
-  -->
+<div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+ <div> <img src={ImageKSwasta} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+ <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Memfasilitasi kerjasama online dengan Pemerintah Provinsi Sulawesi Tenggara untuk kemajuan bersama. </div>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <div> <img src={ImageKLuarNegeri} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+  <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Pendataan laporan evaluasi kerjasama antara Pemerintah Kab/Kota Prov. Sulawesi Tenggara dan Pusat dilakukan untuk meningkatkan sinergi dan efektivitas program. </div>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <div> <img src={PenataanWilayahimg} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+  <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;"> Informasi dan pelaporan SPM di Sulawesi Tenggara mencakup fasilitas yang diterapkan oleh Pemerintah Daerah Kabupaten/Kota untuk meningkatkan pelayanan. </div>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <div> <img src={KodeWilayahimg} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+  <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Akses informasi wilayah pemerintahan dari Pemerintah Provinsi dan Kabupaten/Kota, lengkap dengan pemetaan GIS dan rupabumi yang akurat. </div>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <div> <img src={penerbitanSKimg} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+  <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Penerbitan Surat Keputusan (SK) Pemerintahan melibatkan proses resmi, termasuk SK Gubernur terkait pengajuan keberangkatan luar negeri, memastikan kepatuhan terhadap regulasi dan prosedur yang berlaku. </div>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <div> <img src={laporanimg} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+  <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Laporan LPPD dan LKPJ menyajikan evaluasi kinerja penyelenggaraan pemerintahan daerah serta akuntabilitas pengelolaan sumber daya dan program. </div>
+ </div>
+
+ <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
+  <div> <img src={Inventarisasiotonomi} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
+  <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Inventarisasi penataan urusan daerah otonomi baru di Sulawesi Tenggara mencakup evaluasi, pengelolaan sumber daya, dan pemberdayaan masyarakat. </div>
+ </div>
+
+
+<br/><br/>
+
 </div>
 <style>
     
@@ -94,7 +132,7 @@
 
   .contentbox {
     background: white;
-    padding: 6px 12px;
+    padding: 16px 20px;
     border-radius: 8px;
   }
   
