@@ -1,8 +1,9 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data=[];
-    import { Heading, Modal, Button, Alert, Radio, ButtonGroup, FloatingLabelInput, Textarea, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
-    import { EditOutline, GlobeOutline  } from 'flowbite-svelte-icons';
+    import { Heading, Modal, Button, Alert, Radio, ButtonGroup, FloatingLabelInput, Textarea, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, Toast } from 'flowbite-svelte';
+    import { EditOutline, GlobeOutline, CheckCircleSolid  } from 'flowbite-svelte-icons';
+    import { slide } from 'svelte/transition';
 
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
@@ -11,6 +12,9 @@
 
   let  getJ_Kecamatan, getKodeW, getKabKota, getJ_Kelurahan, getJ_Desa, getLuas_Wilayah, getJ_Penduduk, getJ_Gunung, getJ_Pulau, getJ_Selat, getJ_Danau, getJ_Sungai, getJ_Rawa, getKoordinat, getKetMap, getSitus, getidDoc;
   let ModalUpdateDataWilayah = false;
+
+  let toastStatus = false;
+  let counter = 6;
 
   /** Edit Run 2 function: GetDataDocumentLPPD and update*/
 
@@ -59,9 +63,17 @@ const updateDataWilayah = async (e) => {
 
   // Reset form
   formEl.reset();
+   // Notification Toast and Time
+     toastStatus = true;
+     counter = 6;
+     timeout();
 };
 
-
+function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalUpdateDataWilayah = false;
+  } 
 
   function SearchTable() {
       var input, filter, table, tr, td, i, txtValue;
@@ -143,7 +155,11 @@ const updateDataWilayah = async (e) => {
   </form> 
   <svelte:fragment slot="footer">
     <Button color="alternative" on:click={()=> ModalUpdateDataWilayah = !ModalUpdateDataWilayah} >Batal</Button>
-    </svelte:fragment>
+    <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+      <CheckCircleSolid slot="icon" class="w-5 h-5" />
+      Update Data Informasi Pemerintahan dan Wilayah berhasil diperbaharui. Form akan tutup dalam {counter}s.
+    </Toast>
+  </svelte:fragment>
 </Modal>
 
 <div class="container">

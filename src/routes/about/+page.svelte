@@ -58,7 +58,7 @@ Di situs web aplikasi Sipapaode, Anda dapat mengakses berbagai layanan dan infor
 <br/><br/>
 <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">
  <div> <img src={ImageKSwasta} alt="kerjasama pihak swasta" style="border-radius:50%;width:50px;height:50px;"></div>
- <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Memfasilitasi kerjasama online dengan Pemerintah Provinsi Sulawesi Tenggara untuk kemajuan bersama. </div>
+ <div  class="col-span-11 mr-3" style="background-color: #f5f5f5;padding: 15px;border-radius: 10px;">Pengajuan kerjasama dengan pihak ketiga atau antar pemerintah dapat dilakukan secara online kepada Pemerintah Provinsi Sulawesi Tenggara. </div>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-12 lg:grid-cols-12 gap-1" style="margin-bottom:12px;background-color: #fff;padding:16px;border-radius: 10px;box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);">

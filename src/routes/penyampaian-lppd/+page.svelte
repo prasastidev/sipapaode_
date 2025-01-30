@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data=[];
-    import { Heading, Table, TableBody, Radio , Alert, Button, Badge, Indicator, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Toast, Modal, Fileupload, Textarea, FloatingLabelInput, Checkbox, Select, Label, Card, Tooltip } from 'flowbite-svelte';
+    import { Heading, Table, TableBody, Radio , Alert, Button, Badge, Indicator, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Toast, Modal, Fileupload, Textarea, FloatingLabelInput, Checkbox, Select, Label, Card } from 'flowbite-svelte';
     import { ClockOutline, CheckCircleSolid, FileLinesOutline, BookSolid, ArchiveArrowDownSolid } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
@@ -162,9 +162,16 @@ const addDataFormtoTable = async (e) => {
   <p class="mt-2 mb-4 text-base">
     Dibawah ini adalah Formulir Penyampaian LPPD dan LKPJ Tahun berjalan. Pengiriman dokumen LPPD dan LKPJ tahun 2024 berlangsung dari 01 Januari hingga 31 Maret 2025. Dokumen yang dikirimkan akan diperbarui dalam tabel di bawah halaman ini.
   </p>
-  <div class="flex gap-2">
-    <Button size="sm" on:click={() => (ModalKirimLPPD = true)} color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Kirim LPPD dan LKPJ</Button>
+  
+  <div padding="xl" size="xl" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
+  <div class="col-span-2 rounded-xl pr-3">
+    <h1 class="text-lg" style="text-align:left;color: #242a38;font-weight: 600;font-size:22px;">
+      Silahkan Mengirim Laporan LPPD dan LKPJ pada Tombol di Samping.
+    </h1></div>
+    <div class="rounded-xl" style="align-content:center;text-align: right;"><Button size="sm" on:click={() => (ModalKirimLPPD = true)} color="blue" class="mr-4"><ArchiveArrowDownSolid class="w-5 h-5 me-2" />Kirim LPPD dan LKPJ</Button>
+    </div>   
   </div>
+
 </Alert>
 <br/><br/>
 {/if}
@@ -178,7 +185,7 @@ const addDataFormtoTable = async (e) => {
   {#if data.TableDatasLPPDLPKJ.total === 0}
     <p>No TableDatas yet.</p>
   {:else}
-    <p>{data.TableDatasLPPDLPKJ.total} Data ditemukan</p>
+    <p>{data.TableDatasLPPDLPKJ.total} Kab/Kota Prov. Sulawesi Tenggara</p>
   {/if}
   <br/>
 

@@ -13,6 +13,7 @@
     export let data = [];
      let progress = '0';
     let ConfirmDeleteModal = false;
+    let selectedId = null;
 
 
 function showimage(id) {
@@ -34,6 +35,10 @@ function showimage(id) {
     visibleProgresBar = false;
  }
  
+ function openDeleteModal(id) {
+    selectedId = id;
+    ConfirmDeleteModal = true;
+  }
 
  const remove = async (id) => {
     // Delete File Storage
@@ -128,14 +133,14 @@ function showimage(id) {
      <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
       <ButtonGroup class="*:!ring-primary-700">
         <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-4 h-4 me-2" />Lihat</a></Button>
-        <Button style="color:red;" on:click={() => (ConfirmDeleteModal = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+        <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
      </ButtonGroup> 
       </div>
       <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
         <div class="text-center">
           <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus Gambar yang telah Anda pilih</h3>
-          <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus</Button>
+          <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus</Button>
           <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
         </div>
       </Modal>

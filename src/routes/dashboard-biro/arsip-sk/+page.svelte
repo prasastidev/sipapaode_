@@ -15,9 +15,16 @@
     let counter = 7;
 
     let ModalArsipSK = false;
+
     let ConfirmDeleteModalSKGubWakil = false;
+    let selectedIdSKGubWakil = null;
+
     let ConfirmDeleteModalSKBupatiWakil = false;
+    let selectedIdSKBupatiWakil = null;
+
     let ConfirmDeleteModalSKDPRD = false;
+    let selectedIdSKDPRD = null;
+
     let selectPenerbitSK = '';
     let PenerbitSK = [
     { value: 'Presiden RI', name: 'Presiden RI' },
@@ -62,6 +69,21 @@
   const result = storage.getFileDownload('675ee4440003f229a11d', id);
 	return result;
 }
+
+ function openDeleteModalSKGubWakil(id) {
+    selectedIdSKGubWakil = id;
+    ConfirmDeleteModalSKGubWakil = true;
+  }
+
+  function openDeleteModalSKBupatiWakil(id) {
+    selectedIdSKBupatiWakil = id;
+    ConfirmDeleteModalSKBupatiWakil = true;
+  }
+
+  function openDeleteModalSKDPRD(id) {
+    selectedIdSKDPRD = id;
+    ConfirmDeleteModalSKDPRD = true;
+  }
 
   const remove = async (id) => {
 		await deleteTableData(id);
@@ -234,13 +256,13 @@
                       </div>             
                       </TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
-                          <Button style="color:red;" on:click={() => (ConfirmDeleteModalSKGubWakil = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                          <Button style="color:red;" on:click={() => openDeleteModalSKGubWakil(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></TableBodyCell>
                         <Modal bind:open={ConfirmDeleteModalSKGubWakil} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data SK dan File Document yang Anda Pilih</h3>
-                            <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+                            <Button color="red" class="me-2" on:click={() => remove(selectedIdSKGubWakil)}>Ya, Hapus Sekarang</Button>
                             <Button color="alternative" on:click={()=> ConfirmDeleteModalSKGubWakil = !ConfirmDeleteModalSKGubWakil}>Tidak, Batal</Button>
                           </div>
                         </Modal>
@@ -301,13 +323,13 @@
                       </div>             
                       </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
-                        <Button style="color:red;" on:click={() => (ConfirmDeleteModalSKBupatiWakil = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                        <Button style="color:red;" on:click={() => openDeleteModalSKBupatiWakil(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                       </ButtonGroup></TableBodyCell>
                       <Modal bind:open={ConfirmDeleteModalSKBupatiWakil} size="xs" autoclose={false}>
                         <div class="text-center">
                           <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
                           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data SK dan File Document yang Anda Pilih</h3>
-                          <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+                          <Button color="red" class="me-2" on:click={() => remove(selectedIdSKBupatiWakil)}>Ya, Hapus Sekarang</Button>
                           <Button color="alternative" on:click={()=> ConfirmDeleteModalSKBupatiWakil = !ConfirmDeleteModalSKBupatiWakil}>Tidak, Batal</Button>
                         </div>
                       </Modal>
@@ -367,13 +389,13 @@
                     </div>             
                     </TableBodyCell>
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
-                        <Button style="color:red;" on:click={() => (ConfirmDeleteModalSKDPRD = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                        <Button style="color:red;" on:click={() => openDeleteModalSKDPRD(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                       </ButtonGroup></TableBodyCell>
                       <Modal bind:open={ConfirmDeleteModalSKDPRD} size="xs" autoclose={false}>
                         <div class="text-center">
                           <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
                           <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data SK dan File Document yang Anda Pilih</h3>
-                          <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+                          <Button color="red" class="me-2" on:click={() => remove(selectedIdSKDPRD)}>Ya, Hapus Sekarang</Button>
                           <Button color="alternative" on:click={()=> ConfirmDeleteModalSKDPRD = !ConfirmDeleteModalSKDPRD}>Tidak, Batal</Button>
                         </div>
                       </Modal>

@@ -70,12 +70,7 @@
     timeout();
 
 	};
-
-  function timeout() {
-    if (--counter > 0) return setTimeout(timeout, 1000);
-    toastStatus = false;
-    ModalAddData = false;
-  }  
+ 
   
 function DownloadFile(id) {
   const result = storage.getFileView('674e4b10003a83fb0a30', id);
@@ -140,7 +135,18 @@ const updateDataKS = async (e) => {
 
 		// Reset form
 		formEl.reset();
+     // Notification Toast and Time
+     toastStatus = true;
+     counter = 6;
+     timeout();
 	};
+
+  function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalAddData = false;
+    ModalEditData = false;
+  } 
 
 
 
@@ -313,6 +319,10 @@ const updateDataKS = async (e) => {
     </form>  
     <svelte:fragment slot="footer">
       <Button color="alternative" on:click={()=> ModalEditData = !ModalEditData} >Batal</Button>
+      <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+        <CheckCircleSolid slot="icon" class="w-5 h-5" />
+        Data kerjasama berhasil di Perbaharui. Form akan tutup dalam {counter}s.
+      </Toast>
     </svelte:fragment>
   </Modal>
   <br/>

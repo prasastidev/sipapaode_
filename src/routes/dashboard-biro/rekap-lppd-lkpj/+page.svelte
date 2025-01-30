@@ -8,13 +8,26 @@
 	 import { deleteTableData } from '$lib/DokumenLPPDLKPJ.js';
 
    let ConfirmDeleteModalLPPD = false;
-   let ConfirmDeleteModalLKPJ = false;
+   let selectedIdLPPD = null;
 
+   let ConfirmDeleteModalLKPJ = false;
+   let selectedIdLKPJ = null;
+ 
 
   function DownloadFile(id) {
   const result = storage.getFileDownload('675e48c4001bd540c846', id);
 	return result;
 }
+
+function openDeleteModalLPPD(id) {
+    selectedIdLPPD = id;
+    ConfirmDeleteModalLPPD = true;
+  }
+
+function openDeleteModalLKPJ(id) {
+  selectedIdLKPJ = id;
+  ConfirmDeleteModalLKPJ = true;
+  }
 
   const remove = async (id) => {
 		await deleteTableData(id);
@@ -131,13 +144,13 @@
                       </TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
                         <center><ButtonGroup class="*:!ring-primary-700">
-                          <Button style="color:red;" on:click={() => (ConfirmDeleteModalLPPD = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                          <Button style="color:red;" on:click={() => openDeleteModalLPPD(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></center></TableBodyCell>
                         <Modal bind:open={ConfirmDeleteModalLPPD} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data LPPD dan File Document yang Anda Pilih</h3>
-                            <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+                            <Button color="red" class="me-2" on:click={() => remove(selectedIdLPPD)}>Ya, Hapus Sekarang</Button>
                             <Button color="alternative" on:click={()=> ConfirmDeleteModalLPPD = !ConfirmDeleteModalLPPD}>Tidak, Batal</Button>
                           </div>
                         </Modal>
@@ -199,13 +212,13 @@
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} <br/><br/><b>Tanggal Submit:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)} </div>
                       </TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
-                          <Button style="color:red;" on:click={() => (ConfirmDeleteModalLKPJ = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                          <Button style="color:red;" on:click={() => openDeleteModalLKPJ(cetakTabel.$id)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></TableBodyCell>
                         <Modal bind:open={ConfirmDeleteModalLKPJ} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
                             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data LPPD dan File Document yang Anda Pilih</h3>
-                            <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+                            <Button color="red" class="me-2" on:click={() => remove(selectedIdLKPJ)}>Ya, Hapus Sekarang</Button>
                             <Button color="alternative" on:click={()=> ConfirmDeleteModalLKPJ = !ConfirmDeleteModalLKPJ}>Tidak, Batal</Button>
                           </div>
                         </Modal>

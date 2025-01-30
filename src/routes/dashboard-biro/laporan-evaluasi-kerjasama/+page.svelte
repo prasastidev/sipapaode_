@@ -1,8 +1,9 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data=[];
-    import { Heading, Modal, Button, Alert, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
-    import { EditOutline, InfoCircleSolid  } from 'flowbite-svelte-icons';
+    import { Heading, Modal, Button, Toast, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+    import { EditOutline, CheckCircleSolid  } from 'flowbite-svelte-icons';
+    import { slide } from 'svelte/transition';
 
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
@@ -10,6 +11,9 @@
 
   let getNamaKabupatenKota, getidDoc, getSemesterI, getSemesterII;
   let ModalUpdateEvaluasiKS = false;
+
+  let toastStatus = false;
+  let counter = 6;
 
 
   /** Edit Run 2 function: GetDataDocumentLPPD and update*/
@@ -46,7 +50,17 @@ const updateData = async (e) => {
 
   // Reset form
   formEl.reset();
+    // Notification Toast and Time
+     toastStatus = true;
+     counter = 6;
+     timeout();
 };
+
+function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalUpdateEvaluasiKS = false;
+  } 
 
 
 function SearchTable() {
@@ -96,7 +110,11 @@ function SearchTable() {
 
   <svelte:fragment slot="footer">
     <Button color="alternative" on:click={()=> ModalUpdateEvaluasiKS = !ModalUpdateEvaluasiKS} >Batal</Button>
-    </svelte:fragment>
+    <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+      <CheckCircleSolid slot="icon" class="w-5 h-5" />
+      Update Laporan Evaluasi Kerjasama berhasil di Perbaharui. Form akan tutup dalam {counter}s.
+    </Toast>
+   </svelte:fragment>
 </Modal>
 
 <div class="container">

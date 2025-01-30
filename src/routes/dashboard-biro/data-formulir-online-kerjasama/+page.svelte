@@ -1,15 +1,21 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
     export let data=[];
-    import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge, Modal, Radio, FloatingLabelInput } from 'flowbite-svelte';
-    import {  TrashBinOutline, FileLinesOutline, EditOutline, BuildingSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge, Modal, Radio, FloatingLabelInput, Toast } from 'flowbite-svelte';
+    import {  TrashBinOutline, FileLinesOutline, EditOutline, CheckCircleSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
+    import { slide } from 'svelte/transition';
 	  import { deleteTableData, UpdateStatusPengajuanKS } from '$lib/crudPengajuanKSOnline.js';
 
     let ConfirmDeleteModal = false;
+    let selectedId = null;
+    let selectedNama;
     let ModalEditData = false;
     let getStatusPengajuan, getEstimasi, getNama, getInstansi, getidData, getTentang;
+
+    let toastStatus = false;
+    let counter = 6;
 
 /** Edit Run 2 function: GetDataPengajuanKS and update*/
 
@@ -46,7 +52,18 @@ const updateStatusPengajuan = async (e) => {
 
 		// Reset form
 		formEl.reset();
+     // Notification Toast and Time
+     toastStatus = true;
+     counter = 6;
+     timeout();
+
 	};
+
+  function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalFormulir = false;
+  } 
 
 
   function SearchTable() {
@@ -72,6 +89,12 @@ function DownloadFile(id) {
   const result = storage.getFileView('674fa666003b4eb41eea', id);
 	return result;
 }
+
+function openDeleteModal(id, nama) {
+    selectedId = id;
+    selectedNama = nama;
+    ConfirmDeleteModal = true;
+  }
 
 const remove = async (id) => {
 		await deleteTableData(id);
@@ -133,6 +156,10 @@ const remove = async (id) => {
   </form>  
   <svelte:fragment slot="footer">
     <Button color="alternative" on:click={()=> ModalEditData = !ModalEditData} >Batal</Button>
+    <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+      <CheckCircleSolid slot="icon" class="w-5 h-5" />
+      Data Pengajuan Kerjasama berhasil di Perbaharui. Form akan tutup dalam {counter}s.
+    </Toast>
   </svelte:fragment>
 </Modal>
 
@@ -201,14 +228,14 @@ const remove = async (id) => {
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
           <ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataPengajuanKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-            <Button style="color:red;" on:click={() => (ConfirmDeleteModal = true)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+            <Button style="color:red;"on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
           </ButtonGroup>
         </TableBodyCell>
-        <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
+        <Modal bind:open={ConfirmDeleteModal} size="md" autoclose={false}>
           <div class="text-center">
             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pengajuan Kerjasama serta Serta Dokumen Berkas Pengajuan Kerjasama</h3>
-            <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pengajuan Kerjasama serta Serta Dokumen Berkas Pengajuan Kerjasama a.n <b>{selectedNama}</b></h3>
+            <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
             <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
           </div>
         </Modal>

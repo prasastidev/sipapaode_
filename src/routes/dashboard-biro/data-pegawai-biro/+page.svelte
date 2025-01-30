@@ -18,6 +18,7 @@
 
     let ConfirmDeleteModal = false;
     let selectedId = null;
+    let selectedNama;
 
     let selectPendidikanTerakhir = '';
     let PendidikanTerakhir = [
@@ -94,6 +95,7 @@ function timeout() {
     if (--counter > 0) return setTimeout(timeout, 1000);
     toastStatus = false;
     ModalAddDataPegawai = false;
+    ModalEditData = false;
   } 
 
 
@@ -135,10 +137,15 @@ const updateDataPegawai = async (e) => {
    invalidateAll();
     // Reset form
     formEl.reset();
+      // Notification Toast and Time
+      toastStatus = true;
+      counter = 6;
+       timeout();
   };
 
-  function openDeleteModal(id) {
+  function openDeleteModal(id, nama) {
     selectedId = id;
+    selectedNama = nama;
     ConfirmDeleteModal = true;
   }
 
@@ -155,7 +162,7 @@ const updateDataPegawai = async (e) => {
       table = document.getElementById("TABLE_Pegawai");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[2];
+        td = tr[i].getElementsByTagName("td")[1];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -288,6 +295,10 @@ const updateDataPegawai = async (e) => {
             </form>  
             <svelte:fragment slot="footer">
               <Button color="alternative" on:click={()=> ModalEditData = !ModalEditData} >Batal</Button>
+              <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+                <CheckCircleSolid slot="icon" class="w-5 h-5" />
+                Data Pegawai berhasil diupdate. Form akan tutup dalam {counter}s.
+              </Toast>
             </svelte:fragment>
           </Modal>
           <br/>
@@ -345,16 +356,16 @@ const updateDataPegawai = async (e) => {
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Tanggal_lahir.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Kelamin}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Pendidikan_Terakhir}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Pegawai} <br/> {cetakTabel.$id} </TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Pegawai}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">
               <ButtonGroup class="*:!ring-primary-700">
                 <Button style="color:blue;" on:click={() => getDataPegawai(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-                 <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                 <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                   </ButtonGroup>
                   <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
                     <div class="text-center">
                       <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
-                      <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pegawai ini dengan id {selectedId}</h3>
+                      <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pegawai ini dengan a.n {selectedNama}</h3>
                       <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
                       <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
                     </div>
