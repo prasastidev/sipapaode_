@@ -51,12 +51,24 @@
 
   let selectJabatan = '';
     let Jabatan = [
-    { value: 'Kepala Biro', name: 'Kepala Biro' },
-    { value: 'Kasubag. Tata Usaha', name: 'Kasubag. Tata Usaha' },
-    { value: 'Kabag. Kerjasama', name: 'Kabag. Kerjasama' },
-    { value: 'Kabag. Koordinator Pemerintahan', name: 'Kabag. Koordinator Pemerintahan' },
-    { value: 'Kabag. Koordinator Otonomi Daerah', name: 'Kabag. Koordinator Otonomi Daerah' },
-    { value: 'Staff', name: 'Staff' }
+    { value: 'KEPALA BIRO', name: 'KEPALA BIRO' },
+    { value: 'KASUBAG TATA USAHA', name: 'KASUBAG TATA USAHA' },
+    { value: 'KABAG KERJASAMA', name: 'KABAG KERJASAMA' },
+    { value: 'ANALISIS KERJASAMA', name: 'ANALISIS KERJASAMA' },
+    { value: 'ANALISIS KEBIJAKAN AHLI MADYA', name: 'ANALISIS KEBIJAKAN AHLI MADYA' },
+    { value: 'ANALISIS KEBIJAKAN AHLI MUDA', name: 'ANALISIS KEBIJAKAN AHLI MUDA' },
+    { value: 'ANALISIS ASET DAERAH', name: 'ANALISIS ASET DAERAH' },
+    { value: 'ANALISIS BATAS WILAYAH', name: 'ANALISIS BATAS WILAYAH' },
+    { value: 'ANALISIS DOKUMEN PERIJINAN', name: 'ANALISIS DOKUMEN PERIJINAN' },
+    { value: 'ANALISIS PEMERINTAHAN DAERAH', name: 'ANALISIS PEMERINTAHAN DAERAH' },
+    { value: 'PENGELOLA PERJALANAN DINAS', name: 'PENGELOLA PERJALANAN DINAS' },
+    { value: 'BENDAHARA', name: 'BENDAHARA' },
+    { value: 'PENGELOLA DATA', name: 'PENGELOLA DATA' },
+    { value: 'PENYUSUNAN LAPORAN KEUANGAN', name: 'PENYUSUNAN LAPORAN KEUANGAN' },
+    { value: 'PERENCANAAN', name: 'PERENCANAAN' },
+    { value: 'PENGADMINISTRASI PERENCANAAN DAN PROGRAM', name: 'PENGADMINISTRASI PERENCANAAN DAN PROGRAM' },
+    { value: 'PENGADMINSITRASI UMUM', name: 'PENGADMINSITRASI UMUM' },
+    { value: 'STAFF', name: 'STAFF' }
   ]; 
 
 

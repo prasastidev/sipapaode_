@@ -20,17 +20,17 @@
     },
     {
       no: 3,
-      nama: '--',
+      nama: 'M. Arief Budiman',
       bidang: 'Koordinator Pemerintahan',
       deskripsi: 'Mengupdate dan memelihara data informasi mengenai <b>kode wilayah pemerintahan</b>, administrasi, dan rupa bumi. Memastikan keakuratan dan konsistensi data, serta mendukung analisis dan pengambilan keputusan yang sehubungan dengan pengelolaan wilayah dan sumber daya, mendorong pelayanan publik yang efektif dan efisien.',
-      email: '--'
+      email: 'bobexlbudiman@gmail.com'
     },
     {
       no: 4,
-      nama: '--',
+      nama: 'M. Arief Budiman',
       bidang: 'Koordinator Pemerintahan',
       deskripsi: 'Memfasilitasi penataan wilayah pemerintahan serta mendukung proses <b>pembentukan daerah otonomi baru</b>, termasuk analisis kebijakan, koordinasi antar instansi, dan penyusunan rekomendasi untuk meningkatkan efisiensi pengelolaan daerah serta pelayanan publik yang lebih baik.',
-      email: '--'
+      email: 'bobexlbudiman@gmail.com'
     },
     {
       no: 5,
