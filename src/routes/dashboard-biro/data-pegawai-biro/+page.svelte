@@ -17,6 +17,7 @@
     let getnamaPegawai, getURLPhotoProfile, getNIPPegawai, getGolPegawai, getJabPegawai, getTanggalLahir, getJKPegawai, getPTPegawai, getjenisPegawai, getidData;
 
     let ConfirmDeleteModal = false;
+    let selectedId = null;
 
     let selectPendidikanTerakhir = '';
     let PendidikanTerakhir = [
@@ -123,6 +124,11 @@ const updateDataPegawai = async (e) => {
     // Reset form
     formEl.reset();
   };
+
+  function openDeleteModal(id) {
+    selectedId = id;
+    ConfirmDeleteModal = true;
+  }
 
   const remove = async (id) => {
 	await deleteTableData(id);
@@ -232,7 +238,7 @@ const updateDataPegawai = async (e) => {
          <FloatingLabelInput style="filled" id="namaPegawai" bind:value={getnamaPegawai} name="namaPegawai" type="text">
          Nama Pegawai:
          </FloatingLabelInput>
-         <div class="grid grid-cols-8 gap-4" style=" background: white;border-radius: 12px;">
+         <div class="grid grid-cols-8 gap-4" style="background: white;border-radius: 12px;">
           <div style="font-size:54px;margin-right:2px; margin-top:-14px;">🖼️</div>
           <div class="col-span-7"> <FloatingLabelInput style="filled" id="URLPhotoProfile" bind:value={getURLPhotoProfile} name="URLPhotoProfile" type="text">
             Enter URL Photo Profile: </FloatingLabelInput>  </div>
@@ -327,21 +333,21 @@ const updateDataPegawai = async (e) => {
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Tanggal_lahir.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Kelamin}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Pendidikan_Terakhir}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Pegawai} </TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Pegawai} <br/> {cetakTabel.$id} </TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">
               <ButtonGroup class="*:!ring-primary-700">
                 <Button style="color:blue;" on:click={() => getDataPegawai(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-                 <Button style="color:red;" on:click={() => (ConfirmDeleteModal = true)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                 <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                   </ButtonGroup>
+                  <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
+                    <div class="text-center">
+                      <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
+                      <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pegawai ini dengan id {selectedId}</h3>
+                      <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
+                      <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
+                    </div>
+                  </Modal>       
                </TableBodyCell>  
-               <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
-                  <div class="text-center">
-                    <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pegawai ini</h3>
-                    <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
-                    <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
-                  </div>
-                </Modal>       
               </TableBodyRow>
               {/if}
               {/each}

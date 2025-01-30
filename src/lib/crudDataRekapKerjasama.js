@@ -28,7 +28,7 @@ export async function getTableDataKS_Berlaku() {
 }
 
 
-export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, tanggalMulai, tanggalSelesai, keteranganKS, generateid) {
+export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, TahunMulai, tanggalMulai, tanggalSelesai, keteranganKS, generateid) {
 	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {
 		kategoryKS,
 		Jenis,
@@ -37,13 +37,14 @@ export async function addTableData(kategoryKS, Jenis, Subjek, Tentang, No_kerjas
 		No_kerjasama,
 		OPD,
 		Mitra,
+		TahunMulai,
 		tanggalMulai,
 		tanggalSelesai,
 		keteranganKS
 	});
 }
 
-export async function UpdateTableDataKS(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, tanggalMulai, tanggalSelesai, keteranganKS, id) {
+export async function UpdateTableDataKS(kategoryKS, Jenis, Subjek, Tentang, No_kerjasama, OPD, Mitra, TahunMulai, tanggalMulai, tanggalSelesai, keteranganKS, id) {
 	await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
 		kategoryKS: kategoryKS ,
 		Jenis: Jenis,
@@ -52,6 +53,7 @@ export async function UpdateTableDataKS(kategoryKS, Jenis, Subjek, Tentang, No_k
 		No_kerjasama: No_kerjasama,
 		OPD: OPD,
 		Mitra: Mitra,
+		TahunMulai: TahunMulai,
 		tanggalMulai: tanggalMulai,
 		tanggalSelesai: tanggalSelesai,
 		keteranganKS: keteranganKS

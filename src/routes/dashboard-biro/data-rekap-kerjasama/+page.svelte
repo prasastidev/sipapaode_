@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
  
-    import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge } from 'flowbite-svelte';
+    import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Select, Label, Badge } from 'flowbite-svelte';
     import { PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
     import { slide } from 'svelte/transition';
     import { v4 as uuidv4 } from "uuid";
@@ -13,6 +13,7 @@
     let counter = 6;
 
     let ConfirmDeleteModal = false;
+    let selectedId = null;
    
     import { invalidateAll } from '$app/navigation';
 	  import { addTableData, deleteTableData, UpdateTableDataKS } from '$lib/crudDataRekapKerjasama.js';
@@ -21,7 +22,24 @@
   
    export let data=[]; 
 
-   let getKategoryKS, getJenisKS, getSubjek, getTentang, getNoKS, getnamaOPD, getnamaMitra, getTanggalmulai, getTMTanpaTime;
+   let selectTahunMulai = '';
+    let tahunmulaiAKtif = [
+    { value: '2018', name: '2018' },
+    { value: '2019', name: '2019' },
+    { value: '2020', name: '2020' },
+    { value: '2021', name: '2021' },
+    { value: '2022', name: '2022' },
+    { value: '2023', name: '2023' },
+    { value: '2024', name: '2024' },
+    { value: '2025', name: '2025' },
+    { value: '2026', name: '2026' },
+    { value: '2027', name: '2027' },
+    { value: '2028', name: '2028' },
+    { value: '2029', name: '2029' },
+    { value: '2030', name: '2030' }
+  ]; 
+
+   let getKategoryKS, getJenisKS, getSubjek, getTentang, getNoKS, getnamaOPD, getnamaMitra, getTahunMulai, getTanggalmulai, getTMTanpaTime;
    let getTanggalselesai, getTSTanpaTime, getKeterangan, getidData;  
   
    const addDatatoTable = async (e) => {
@@ -30,7 +48,7 @@
 		const formEl = e.target;
         // Masukkan Data ke table melalui crudDataRekap
 		const formData = new FormData(formEl);
-		await addTableData(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('tentangKS'), formData.get('No_kerjasama'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'), uuid);
+		await addTableData(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('tentangKS'), formData.get('No_kerjasama'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tahunMulai'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'), uuid);
 
     // Masukkan file ke Storage Bucket
 		  const promise = storage.createFile('674e4b10003a83fb0a30', uuid, document.getElementById('uploadDocKS').files[0]); 
@@ -64,6 +82,11 @@ function DownloadFile(id) {
 	return result;
 }
 
+function openDeleteModal(id) {
+    selectedId = id;
+    ConfirmDeleteModal = true;
+  }
+
   const remove = async (id) => {
 		await deleteTableData(id);
     // Delete File Storage
@@ -94,6 +117,7 @@ promise.then(function (response) {
  getNoKS = response.No_kerjasama;
  getnamaOPD = response.OPD;
  getnamaMitra = response.Mitra;
+ getTahunMulai = response.TahunMulai;
  getTanggalmulai = response.tanggalMulai;
  getTMTanpaTime = getTanggalmulai.slice(0, 10);
  getTanggalselesai = response.tanggalSelesai;
@@ -111,7 +135,7 @@ const updateDataKS = async (e) => {
 		e.preventDefault();
 		const formEl = e.target;
 		const formData = new FormData(formEl);
-		await UpdateTableDataKS(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('tentangKS'), formData.get('No_kerjasama'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'), getidData);
+		await UpdateTableDataKS(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('tentangKS'), formData.get('No_kerjasama'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tahunMulai'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'), getidData);
 		invalidateAll();
 
 		// Reset form
@@ -141,7 +165,7 @@ const updateDataKS = async (e) => {
 
   // Pagination 
   let currentPage =1; // Update this to simulate page change.
-  let postsPerPage = 3;
+  let postsPerPage = 10;
   let allPosts = data.TableDatas.documents;
   let totalPosts = allPosts.length;
   let totalPages = Math.ceil(totalPosts / postsPerPage);
@@ -155,6 +179,14 @@ const updateDataKS = async (e) => {
 		if (Keterangan == 'Masih Berlaku') return 'blue-50'
 		else return 'orange-50'
 	}
+
+  let selectedYear = 'all';
+  $: filteredData = selectedYear === 'all' 
+    ? data.TableDatas.documents 
+    : data.TableDatas.documents.filter(item => item.TahunMulai === selectedYear);
+
+  // Get unique years for filter options
+  const years = [...new Set(data.TableDatas.documents.map(item => item.TahunMulai))].sort((a, b) => b - a);
 
 </script>
 
@@ -197,6 +229,9 @@ const updateDataKS = async (e) => {
       <FloatingLabelInput style="filled" id="namaMitra" name="namaMitra" type="text">
         Nama Mitra:
       </FloatingLabelInput>
+      <Label>Tahun Mulai:
+        <Select class="mt-2" items={tahunmulaiAKtif} name="tahunMulai" bind:value={selectTahunMulai} />
+         </Label>  
       <div class="mb-6">
         <label for="tanggalMulai" class="text-sm">Tanggal Mulai:</label>
         <Input style="margin-top:3px;" type="date" id="tanggalMulai" placeholder="Tanggal" name="tanggalMulai" required />
@@ -256,6 +291,9 @@ const updateDataKS = async (e) => {
       <FloatingLabelInput style="filled" id="namaMitra" bind:value={getnamaMitra} name="namaMitra" type="text">
         Nama Mitra:
       </FloatingLabelInput>
+      <Label>Tahun Mulai:
+        <Select class="mt-2" items={tahunmulaiAKtif} name="tahunMulai" bind:value={getTahunMulai} />
+         </Label> 
       <div class="mb-6">
         <label for="tanggalMulai" class="text-sm">Tanggal Mulai:</label>
         <Input style="margin-top:3px;" type="date" id="tanggalMulai"  bind:value={getTMTanpaTime} placeholder="Tanggal" name="tanggalMulai" required />
@@ -315,6 +353,19 @@ const updateDataKS = async (e) => {
   </form>
     
 <br/>
+<div class="mb-4">
+  <label class="mr-2 font-medium">Tahun:</label>
+  <select 
+    bind:value={selectedYear}
+    class="px-3 py-2 border rounded-md bg-white"
+  >
+    <option value="all">All Years</option>
+    {#each years as year}
+      <option value={year}>{year}</option>
+    {/each}
+  </select>
+</div>
+
     <Table id="TABLE_KSPK" shadow hoverable={false} class="whitespace-break-spaces table-auto overflow-x-auto">
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">No</TableHeadCell>
@@ -325,15 +376,16 @@ const updateDataKS = async (e) => {
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tentang</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Nomor Kerjasama</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">OPD & Mitra</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tahun Mulai</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tanggal</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Keterangan</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tombol Aksi</TableHeadCell>
       </TableHead>
       {#await data.TableDatas.documents}
       loading...
-      {:then allPosts}
+      {:then allPosts }
       <TableBody tableBodyClass="divide-y align-top">
-        {#each allPosts as cetakTabel, i}	
+        {#each filteredData as cetakTabel, i}	
         {#if i >= postRangeLow && i < postRangeHigh}
         <TableBodyRow class={`bg-${getKeteranganKSColor(cetakTabel.keteranganKS)}`}>
           <TableBodyCell>{i+1}</TableBodyCell>
@@ -348,18 +400,19 @@ const updateDataKS = async (e) => {
           <TableBodyCell class="whitespace-break-spaces py-3 px-2" style="height: 150px;overflow: hidden;display: -webkit-box;-webkit-line-clamp: 7;-webkit-box-orient: vertical;">{cetakTabel.Tentang}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.No_kerjasama}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:200px;overflow-wrap: anywhere;"><b>OPD:</b> {cetakTabel.OPD}<br/><b>Mitra:</b> {cetakTabel.Mitra}</div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.TahunMulai}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:180px;overflow-wrap: anywhere;"><b>Mulai:</b> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><b>Selesai: </b>{cetakTabel.tanggalSelesai.slice(0, 10)}</div></TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataRekapKerjasama(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-            <Button style="color:red;" on:click={() => (ConfirmDeleteModal = true)}><TrashBinOutline class="w-4 h-4 me-2" />Delete</Button>
+            <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id) }><TrashBinOutline class="w-4 h-4 me-2" />Delete</Button>
            </ButtonGroup> 
         </TableBodyCell>
          <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
           <div class="text-center">
             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
             <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data rekap Kerjasama serta File Document</h3>
-            <Button color="red" class="me-2" on:click={() => remove(cetakTabel.$id)}>Ya, Hapus Sekarang</Button>
+            <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
             <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
           </div>
         </Modal>
