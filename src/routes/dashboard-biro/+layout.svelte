@@ -22,7 +22,7 @@
   <div style="border:2px solid #00b1ff;padding: 4px;border-radius:12px;width: max-content;"><Toggle class="w-64 text-base" bind:value={sidebarShow} checked={sidebarShow} on:click={() => (sidebarShow = !sidebarShow)}>
     <svelte:fragment slot="offLabel"></svelte:fragment> {sidebarShow ? 'Hilangkan Menu Sidebar' : 'Tampilkan Menu Sidebar'} 
   </Toggle></div> <br/>
-  <div class="grid grid-cols-12 gap-1 w-full">
+  <div class="flex md:flex lg:grid grid-cols-12 gap-1 w-full">
     {#if sidebarShow} 
     <div class="col-span-3 w-full">
         <Sidebar>
@@ -66,7 +66,7 @@
                     <SidebarDropdownItem label="👤 Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
                     <SidebarDropdownItem label="🖼️ Photo Profil Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
-                  <SidebarItem label="Status Layanan" href="/dashboard-biro/status-layanan">
+                  <SidebarItem label="Aktivasi Layanan" href="/dashboard-biro/status-layanan">
                     <svelte:fragment slot="icon">
                       <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
@@ -81,7 +81,7 @@
                       <UserHeadsetSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                <SidebarItem label="Daftar User" href="/dashboard-biro/daftar-user">
+                <SidebarItem label="Informasi Users Sipapaode" href="/dashboard-biro/daftar-user">
                   <svelte:fragment slot="icon">
                     <UsersGroupSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>

@@ -95,24 +95,24 @@ const updateData = async (e) => {
    <label class="text-sm">Apakah LPPD {getNamaKabupatenKota} sudah mengirim:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="SLPPD" class="p-3" bind:group={getSLPPD} value="✔️">Ya</Radio></li>
-      <li class="w-full"><Radio name="SLPPD" class="p-3" bind:group={getSLPPD} value="➖">Tidak</Radio></li>
+      <li class="w-full"><Radio name="SLPPD" class="p-3" bind:group={getSLPPD} value="➖">Belum</Radio></li>
     </ul> <br/> 
     <label class="text-sm">Bagaimana Waktu Pengiriman LPPD {getNamaKabupatenKota}:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="PengirimanLPPD" bind:group={getKirimLPPD} class="p-3" value="🟩 Tepat Waktu">Tepat Waktu</Radio></li>
       <li class="w-full"><Radio name="PengirimanLPPD" bind:group={getKirimLPPD} class="p-3" value="🟥 Terlambat">Terlambat</Radio></li> 
-      <li class="w-full"><Radio name="PengirimanLPPD" bind:group={getKirimLPPD} class="p-3" value="🟨 Tidak Mengirim">Tidak Mengirim</Radio></li> 
+      <li class="w-full"><Radio name="PengirimanLPPD" bind:group={getKirimLPPD} class="p-3" value="🟨 Belum Mengirim">Belum Mengirim</Radio></li> 
     </ul> <br/> 
     <label class="text-sm">Apakah LKPJ {getNamaKabupatenKota} sudah mengirim:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="SLPKJ" bind:group={getSLPKJ} class="p-3" value="✔️" >Ya</Radio></li>
-      <li class="w-full"><Radio name="SLPKJ" bind:group={getSLPKJ} class="p-3" value="➖">Tidak</Radio></li>
+      <li class="w-full"><Radio name="SLPKJ" bind:group={getSLPKJ} class="p-3" value="➖">Belum</Radio></li>
     </ul> <br/> 
     <label class="text-sm">Bagaimana Waktu Pengiriman LKPJ {getNamaKabupatenKota}:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="PengirimanLKPJ" bind:group={getKirimLKPJ} class="p-3" value="🟩 Tepat Waktu">Tepat Waktu</Radio></li>
       <li class="w-full"><Radio name="PengirimanLKPJ" bind:group={getKirimLKPJ} class="p-3" value="🟥 Terlambat">Terlambat</Radio></li>
-      <li class="w-full"><Radio name="PengirimanLKPJ" bind:group={getKirimLKPJ} class="p-3" value="🟨 Tidak Mengirim">Tidak Mengirim</Radio></li>
+      <li class="w-full"><Radio name="PengirimanLKPJ" bind:group={getKirimLKPJ} class="p-3" value="🟨 Belum Mengirim">Belum Mengirim</Radio></li>
      
     </ul> <br/>
     
@@ -189,7 +189,7 @@ const updateData = async (e) => {
   {#if data.TableDatasLPPDLPKJ.total === 0}
   <p>No TableDatas yet.</p>
   {:else}
-  <p>{data.TableDatasLPPDLPKJ.total} Data ditemukan</p>
+  <p>{data.TableDatasLPPDLPKJ.total} Kab/Kota Prov. Sulawesi Tenggara</p>
    {/if}
  
 </section>

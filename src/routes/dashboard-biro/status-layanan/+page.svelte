@@ -43,7 +43,7 @@ $: filteredData = selectedBidang
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Status Jenis Layanan Online</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Aktivasi Layanan Online</Heading>
     <br/>
 
    <!-- Filter Buttons -->
@@ -72,7 +72,7 @@ $: filteredData = selectedBidang
     <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
     <TableHeadCell style="font-size: larger;" class="py-4">Layanan Online</TableHeadCell>
     <TableHeadCell style="font-size: larger;" class="py-4">Bidang</TableHeadCell>
-    <TableHeadCell style="font-size: larger;" class="py-4">Status</TableHeadCell>
+    <TableHeadCell style="font-size: larger;" class="py-4">Aktivasi</TableHeadCell>
   </TableHead>
   <TableBody tableBodyClass="divide-y">
     {#each filteredData as cetakTabel, i}	
