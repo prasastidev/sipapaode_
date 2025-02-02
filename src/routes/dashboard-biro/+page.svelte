@@ -1,9 +1,15 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data=[];
-    import { Heading, Card, Listgroup, Avatar, Button } from 'flowbite-svelte';
+    import { Heading, Card, Listgroup, Avatar, Button, Modal, FloatingLabelInput, Toast, Badge } from 'flowbite-svelte';
     import { ArrowRightToBracketOutline, UserHeadsetOutline, CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid } from 'flowbite-svelte-icons';
     import { user } from '$lib/user';
+
+    let ModalGantiPassword = false;
+    let oldPassword = '';
+    let newPassword = '';
+    let errorMessage = '';
+    let successMessage = '';
 
 let DataKotaKendari  = data.TableDatasWilayah.documents[0];
 let DataKotaBaubau  = data.TableDatasWilayah.documents[1];
@@ -40,6 +46,54 @@ Jum_KelurahanSultra = (DataKotaKendari.J_Kelurahan * 1) + (DataKotaBaubau.J_Kelu
 Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (DataWakatobi.J_Desa * 1) + (DataMunaBarat.J_Desa * 1) + (DataMuna.J_Desa * 1) + (DataKonaweUtara.J_Desa * 1)+ (DataKonaweSelatan.J_Desa * 1)+ (DataKonaweKepulauan.J_Desa * 1) +
 (DataKonawe.J_Desa * 1) + (DataKolakaUtara.J_Desa * 1) + (DataKolakaTimur.J_Desa * 1) + (DataKolaka.J_Desa * 1) + (DataButonUtara.J_Desa * 1) + (DataButonTengah.J_Desa * 1) + (DataButonSelatan.J_Desa * 1) + (DataButon.J_Desa * 1) + (DataBombana.J_Desa * 1);
 
+async function handleSubmit(event) {
+  event.preventDefault();
+  
+  // Reset messages
+  errorMessage = '';
+  successMessage = '';
+
+  // Validate passwords
+  if (!oldPassword || !newPassword) {
+    errorMessage = 'Mohon isi semua field password';
+    return;
+  }
+  
+  if (newPassword.length < 8) {
+    errorMessage = 'Password baru harus minimal 8 karakter';
+    return;
+  }
+
+  try {
+    const result = await user.changePassword(oldPassword, newPassword);
+    
+    if (result.success) {
+      successMessage = result.message;
+      // Reset form
+      oldPassword = '';
+      newPassword = '';
+      // Close modal after successful change
+      setTimeout(() => {
+        ModalGantiPassword = false;
+        successMessage = '';
+      }, 2000);
+    } else {
+      errorMessage = result.message;
+    }
+  } catch (error) {
+    errorMessage = 'Terjadi kesalahan saat mengubah password';
+    console.error('Password change error:', error);
+  }
+}
+
+function resetForm() {
+  oldPassword = '';
+  newPassword = '';
+  errorMessage = '';
+  successMessage = '';
+  ModalGantiPassword = false;
+}
+
 </script>
 
 <svelte:head>
@@ -50,6 +104,37 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
 <div>
     <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Dashboard</Heading>
     <br/>
+
+    <Modal title="Update Password" bind:open={ModalGantiPassword} autoclose={false} on:close={resetForm}>
+      <form class="space-y-6" on:submit={handleSubmit}>
+       <h2 style="font-weight:600;margin-bottom:8px;color:#5850ec;">Silahkan masukkan Password baru Anda:</h2>
+       {#if errorMessage}
+      <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50">
+        {errorMessage}
+      </div>
+    {/if}
+
+    {#if successMessage}
+      <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50">
+        {successMessage}
+      </div>
+    {/if}
+
+    <FloatingLabelInput style="filled" id="oldPassword" name="oldPassword" type="password" bind:value={oldPassword} required>
+      Password Lama:
+    </FloatingLabelInput>
+       
+    <FloatingLabelInput style="filled" id="newPassword" name="newPassword" type="password" bind:value={newPassword} required>
+    Password Baru (minimal 8 karakter):
+    </FloatingLabelInput>
+          <div>
+            <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update Password</button>
+          </div>     
+        </form>  
+        <svelte:fragment slot="footer">
+          <Button color="alternative" on:click={resetForm} >Batal</Button>
+        </svelte:fragment>
+      </Modal>
  
      Hai {$user.name}, Selamat Datang di Dashboard Anda .... <br/><br/>
 
@@ -68,7 +153,7 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
                 {$user.prefs['Bidang']}
               </p>
               <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                {$user.email}
+                {$user.email}  &nbsp;|&nbsp;  <Badge border color="indigo"> {$user.prefs['Role']}</Badge>
               </p>
             </div>
             <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">
@@ -78,9 +163,12 @@ Jum_DesaSultra = (DataKotaKendari.J_Desa * 1) + (DataKotaBaubau.J_Desa * 1) + (D
             </div>
           </div><br/>
           <div class="grid grid-cols-3 gap-4">
+           
             <div class="flex col-span-2 mt-4 gap-4">
-              <Button color="light" disabled>Edit Profile</Button><Button color="light" disabled>Ganti Password</Button>
+              <!-- <Button color="light" disabled>Edit Profile</Button> --> 
+               <Button color="light" on:click={() => (ModalGantiPassword = true)}>Ganti Password</Button>
             </div>
+           
             <div class="mt-4" style="text-align:right;"> 
               <Button color="light" on:click={user.logout}><ArrowRightToBracketOutline class="w-6 h-6 mr-1 text-gray-800" /> Log Out</Button>           
             </div>   

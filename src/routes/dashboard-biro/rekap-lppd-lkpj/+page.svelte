@@ -6,6 +6,8 @@
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
 	 import { deleteTableData } from '$lib/DokumenLPPDLKPJ.js';
+   import { user } from '$lib/user';
+
 
    let ConfirmDeleteModalLPPD = false;
    let selectedIdLPPD = null;
@@ -127,7 +129,9 @@ function openDeleteModalLKPJ(id) {
                     <TableHeadCell style="font-size: larger;" class="py-4">Judul</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">Nama Kab/Kota (Tahun)</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">Pengirim / Tanggal Submit</TableHeadCell>
+                    {#if $user.prefs['Role'] === "PIC Otonomi"}
                     <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+                    {/if}
                   </TableHead>
                   <TableBody tableBodyClass="divide-y">
                     {#each data.TableDataDokLPPD.documents as cetakTabel, i}	
@@ -142,10 +146,12 @@ function openDeleteModalLKPJ(id) {
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Kabupaten_Kota}<br/><br/>Tahun: {cetakTabel.Tahun}</TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} <br/><br/><b>Tanggal Submit:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)} </div>
                       </TableBodyCell>
+                      {#if $user.prefs['Role'] === "PIC Otonomi"}
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
                         <center><ButtonGroup class="*:!ring-primary-700">
                           <Button style="color:red;" on:click={() => openDeleteModalLPPD(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></center></TableBodyCell>
+                      {/if}
                         <Modal bind:open={ConfirmDeleteModalLPPD} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
@@ -196,7 +202,9 @@ function openDeleteModalLKPJ(id) {
                     <TableHeadCell style="font-size: larger;" class="py-4">Judul</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">Nama Kab/Kota (Tahun)</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4">Pengirim / Tanggal Submit</TableHeadCell>
+                    {#if $user.prefs['Role'] === "PIC Otonomi"}
                     <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+                     {/if}
                   </TableHead>
                   <TableBody tableBodyClass="divide-y">
                     {#each data.TableDataDokLKPJ.documents as cetakTabel, i}	
@@ -211,9 +219,11 @@ function openDeleteModalLKPJ(id) {
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.Kabupaten_Kota}<br/><br/>Tahun: {cetakTabel.Tahun}</TableBodyCell>
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:260px;"><b>Nama Pengirim:</b> {cetakTabel.Nama_Pengirim} <br/><b>NIP Pengirim:</b> {cetakTabel.NIP_pengirim} <br/><b>Instansi Pengirim:</b> {cetakTabel.Instansi_Pengirim} <br/><b>Contac Person:</b> {cetakTabel.Contac_Person} <br/><br/><b>Tanggal Submit:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)} </div>
                       </TableBodyCell>
+                      {#if $user.prefs['Role'] === "PIC Otonomi"}
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
                           <Button style="color:red;" on:click={() => openDeleteModalLKPJ(cetakTabel.$id)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></TableBodyCell>
+                         {/if}
                         <Modal bind:open={ConfirmDeleteModalLKPJ} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />

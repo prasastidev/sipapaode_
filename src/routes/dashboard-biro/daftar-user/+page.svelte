@@ -21,7 +21,7 @@
       .then(res => res.json())
       .then(data => {
         users = data.users;
-        console.log('Fetched users:', users);
+       // console.log('Fetched users:', users);
       })
       .catch(err => {
         console.error('Error fetching users:', err);
@@ -41,21 +41,53 @@
       ConfirmDeleteModal = false;
   }
 
+  
   function editUser(user) {
-    fetch(`/api/users/${user.$id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        name: user.name,
-        email: user.email
-      })
-    }).then(() => {
-      editingUser = null;
-      getUsers();
-    });
+  // Only include fields that have actually changed
+  const updateData = {};
+  
+  if (user.name !== user.originalName) {
+    updateData.name = user.name;
   }
+  
+  if (user.email !== user.originalEmail) {
+    updateData.email = user.email;
+  }
+  
+  if (user.password && user.password.trim() !== '') {
+    updateData.password = user.password;
+  }
+
+  // Only proceed if there are actual changes
+  if (Object.keys(updateData).length === 0) {
+    editingUser = null;
+    return;
+  }
+
+  fetch(`/api/users/${user.$id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(updateData)
+  })
+  .then(response => {
+    if (!response.ok) {
+      return response.json().then(data => {
+        throw new Error(data.error || 'Failed to update user');
+      });
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log('User updated:', data);
+    editingUser = null;
+    getUsers(); // Refresh user data
+  })
+  .catch(error => {
+    console.error('Error updating user:', error);
+    alert('Failed to update user: ' + error.message);
+  });
+}
+
 
   async function createUser() {
     try {
@@ -84,11 +116,19 @@
     }
   }
 
-  function startEdit(user) {
-    editingUser = { ...user };
-  }
+  // Modify the startEdit function to store original values
+function startEdit(user) {
+  editingUser = {
+    ...user,
+    originalName: user.name,
+    originalEmail: user.email,
+    password: '' // Clear password field for editing
+  };
+}
 
   getUsers();
+
+
   
   </script>
   
@@ -152,28 +192,50 @@
         </TableHead>
         <TableBody tableBodyClass="divide-y">
           {#each users as user, i}
-          <TableBodyRow>
-           
+          <TableBodyRow>   
+            
+            {#if editingUser && editingUser.$id === user.$id}
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{i+1}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><div style="width:300px;"><Avatar class="grid -mb-3 align-middle" border />
-              <br/>{#if editingUser && editingUser.$id === user.$id}
-              <div style="display:flex;align-items:center;"><b style="margin-right:6px;">Nama:</b> <input type="text" bind:value={editingUser.name} placeholder="Name" /></div>
-              <div style="display:flex;align-items:center;margin-top:-30px;"><b style="margin-right:6px;">Email:</b> <input type="email" bind:value={editingUser.email} placeholder="Email" /></div>
-            <div class="button-group" style="margin-top:-20px;">
-              <button class="save-btn" on:click={() => editUser(editingUser)}>Simpan</button>
-              <button class="cancel-btn" on:click={() => editingUser = null}>Batal</button>
-            </div> 
-            {:else}<div style="margin-bottom:6px;line-height: 1.6;"><b>Nama:</b> {user.name}<br/><b>Email:</b> {user.email}</div>
-            {/if}
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><div style="width:340px;"><Avatar class="grid -mb-3 align-middle" border />
+              <br/>
+              <div style="display:flex;align-items:center;">
+                <b style="margin-right:6px;">Nama:</b>
+                <input type="text" bind:value={editingUser.name} placeholder="Name" />
+              </div>
+              <div style="display:flex;align-items:center;margin-top:-30px;">
+                <b style="margin-right:6px;">Email:</b>
+                <input type="email" bind:value={editingUser.email} placeholder="Email" />
+              </div>
+              <div style="display:flex;align-items:center;margin-top:-30px;">
+                <b style="margin-right:6px;">Password:</b>
+                <input type="password" bind:value={editingUser.password} placeholder="Kosongkan jika tidak di Update" />
+              </div>
+          
             </TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">
               <ButtonGroup class="*:!ring-primary-700">
-                <Button style="color:blue;" on:click={() => startEdit(user)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-                <Button style="color:red;" on:click={() => openDeleteModal(user.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+                <button class="save-btn" on:click={() => editUser(editingUser)}>Simpan</button>
+                <button class="cancel-btn" on:click={() => editingUser = null}>Batal</button>
               </ButtonGroup>
             </TableBodyCell>
+            {:else}  
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{i+1}</TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><div style="width:300px;"><Avatar class="grid -mb-3 align-middle" border />
+              <br/>
+              <div style="display:flex;align-items:center;"><b style="margin-right:6px;">Nama:</b> {user.name}</div>
+              <div style="display:flex;align-items:center;margin-top:-10px;margin-bottom:10px;"><b style="margin-right:6px;">Email:</b> {user.email}</div>
+            </TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">
+              <ButtonGroup class="*:!ring-primary-700">
+                <button class="edit-btn" on:click={() => startEdit(user)}>Edit</button>
+                <button class="delete-btn" on:click={() => openDeleteModal(user.$id)}>Delete</button>
+              </ButtonGroup>
+            </TableBodyCell>
+            {/if}
             <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
               <div class="text-center">
                 <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
@@ -274,25 +336,35 @@
   }
 
   .button-group {
-    margin-top: 10px;
-  }
-
-  button {
-    margin-right: 10px;
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: none;
-    cursor: pointer;
-  }
-
-  .save-btn {
-    background-color: #4CAF50;
-    color: white;
-  }
-
-  .cancel-btn {
-    background-color: #f44336;
-    color: white;
-  }
+     margin-top: 10px;
+   }
+ 
+   button {
+     margin-right: 10px;
+     padding: 8px 16px;
+     border-radius: 4px;
+     border: none;
+     cursor: pointer;
+   }
+ 
+   .save-btn {
+     background-color: #4CAF50;
+     color: white;
+   }
+ 
+   .cancel-btn {
+     background-color: #f44336;
+     color: white;
+   }
+ 
+   .edit-btn {
+     background-color: #2196F3;
+     color: white;
+   }
+ 
+   .delete-btn {
+     background-color: #f44336;
+     color: white;
+   }
 
   </style>

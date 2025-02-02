@@ -5,6 +5,7 @@
     import {  TrashBinOutline, CheckCircleSolid, FileLinesOutline, CheckPlusCircleOutline, EditOutline, BuildingSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
+    import { user } from '$lib/user';
     import { addTableDataPegawai, UpdatePegawai, deleteTableData } from '$lib/dataPegawai.js';
     import { slide } from 'svelte/transition';
 
@@ -197,10 +198,12 @@ const updateDataPegawai = async (e) => {
 <div class="container">
       <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Pegawai Biro Pemerintahan - Sultra</Heading>
       <br/><br/>
+      {#if $user.prefs['Role'] === "Tata Usaha"}
       <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
         <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambah Data Pegawai pada Tombol di samping berikut</div>
         <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddDataPegawai = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Pegawai</Button>  </div>
        </div>
+       {/if}
        <Modal title="Form Data Pegawai Baru" bind:open={ModalAddDataPegawai} autoclose={false}>
           <form class="space-y-6" on:submit={addDatatoTable} >
            <h2 style="font-weight:600;margin-bottom:8px;color:#5850ec;">Silahkan mengisi Data Pegawai Baru pada Form di bawah berikut:</h2>
@@ -341,7 +344,9 @@ const updateDataPegawai = async (e) => {
       <TableHeadCell style="font-size: larger;" class="py-4 content-start">Jenis Kelamin</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4 content-start">Pendidikan Terakhir</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4 content-start">Jenis Pegawai</TableHeadCell>
+      {#if $user.prefs['Role'] === "Tata Usaha"}
       <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+      {/if}
        </TableHead>
        {#await data.TableDataPegawai.documents}
        loading...
@@ -357,20 +362,22 @@ const updateDataPegawai = async (e) => {
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Kelamin}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Pendidikan_Terakhir}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Pegawai}</TableBodyCell>
+            {#if $user.prefs['Role'] === "Tata Usaha"}
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">
               <ButtonGroup class="*:!ring-primary-700">
                 <Button style="color:blue;" on:click={() => getDataPegawai(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
                  <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama)}><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
-                  </ButtonGroup>
-                  <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
-                    <div class="text-center">
-                      <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
-                      <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pegawai ini dengan a.n {selectedNama}</h3>
-                      <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
-                      <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
-                    </div>
-                  </Modal>       
+                  </ButtonGroup>   
                </TableBodyCell>  
+               {/if}
+               <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
+                <div class="text-center">
+                  <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
+                  <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Pegawai ini dengan a.n {selectedNama}</h3>
+                  <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
+                  <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
+                </div>
+              </Modal>    
               </TableBodyRow>
               {/if}
               {/each}

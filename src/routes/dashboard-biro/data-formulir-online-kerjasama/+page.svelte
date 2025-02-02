@@ -7,6 +7,7 @@
     import { invalidateAll } from '$app/navigation';
     import { slide } from 'svelte/transition';
 	  import { deleteTableData, UpdateStatusPengajuanKS } from '$lib/crudPengajuanKSOnline.js';
+    import { user } from '$lib/user';
 
     let ConfirmDeleteModal = false;
     let selectedId = null;
@@ -202,7 +203,9 @@ const remove = async (id) => {
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Kategori Kerjasama</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Catatan</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Status & Estimasi</TableHeadCell>
+      {#if $user.prefs['Role'] === "PIC Kerjasama"}
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Aksi</TableHeadCell>
+      {/if}
     </TableHead>
     {#await data.TableDataPengajuanKSOnline.documents}
       loading...
@@ -225,12 +228,14 @@ const remove = async (id) => {
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;">
           <Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>
         </TableBodyCell>
+        {#if $user.prefs['Role'] === "PIC Kerjasama"}
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
           <ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataPengajuanKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
             <Button style="color:red;"on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
           </ButtonGroup>
         </TableBodyCell>
+        {/if}
         <Modal bind:open={ConfirmDeleteModal} size="md" autoclose={false}>
           <div class="text-center">
             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />

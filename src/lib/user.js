@@ -44,12 +44,27 @@ const createUser = () => {
 		window.location.reload();
 	}
 
+	async function changePassword(oldPassword, newPassword) {
+		if (!isBrowser) return;
+		try {
+		  await account.updatePassword(newPassword, oldPassword);
+		  return { success: true, message: 'Password berhasil diubah' };
+		} catch (error) {
+		  return { 
+			success: false, 
+			message: error.message || 'Gagal mengubah password'
+		  };
+		}
+	  }
+	
+
 	return {
 		// Exposes the store's value with $user
 		subscribe: store.subscribe,
 		register,
 		login,
 		logout,
+		changePassword,
 		init
 	};
 };

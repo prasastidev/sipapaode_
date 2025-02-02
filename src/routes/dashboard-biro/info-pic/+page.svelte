@@ -1,7 +1,7 @@
 <script>
   /** @type {import('./$types').PageData} */
   export let data;
-  import { Heading, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import { Heading, Badge, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
   import { PlusOutline, TrashBinOutline, EditOutline } from 'flowbite-svelte-icons';
   const tableData = [
     {
@@ -9,63 +9,72 @@
       nama: 'Susi Hasniati',
       bidang: 'Bagian Kerjasama',
       deskripsi: 'Verifikasi data pengajuan kerjasama secara online, monitoring, dan pembaruan informasi secara berkala. <br/>Mengelola serta mendata <b>Dokumen kerjasama</b>, baik yang aktif maupun yang telah selesai, untuk memastikan semua informasi terkini dan akurat demi kelancaran proses kerjasama. <br/>Serta Mengunggah foto dokumentasi kerjasama sebagai bukti kolaborasi yang efektif dan produktif antara pihak-pihak terlibat.',
-      email: 'biropem.bagks@gmail.com'
+      email: 'biropem.bagks@gmail.com',
+      pic: 'PIC Kerjasama'
     },
     {
       no: 2,
       nama: '--',
       bidang: 'Bagian Kerjasama',
       deskripsi: 'menyampaikan informasi mengenai pengiriman <b>laporan evaluasi kerjasama</b> dari pemerintah kabupaten/kota, memastikan dokumentasi yang tepat dan akurat, serta meneruskannya ke pusat sesuai dengan prosedur dan waktu yang ditentukan untuk mendukung transparansi dan akuntabilitas.',
-      email: '--'
+      email: '--',
+      pic: 'PIC Kerjasama'
     },
     {
       no: 3,
       nama: 'M. Arief Budiman',
       bidang: 'Koordinator Pemerintahan',
       deskripsi: 'Mengupdate dan memelihara data informasi mengenai <b>kode wilayah pemerintahan</b>, administrasi, dan rupa bumi. Memastikan keakuratan dan konsistensi data, serta mendukung analisis dan pengambilan keputusan yang sehubungan dengan pengelolaan wilayah dan sumber daya, mendorong pelayanan publik yang efektif dan efisien.',
-      email: 'bobexlbudiman@gmail.com'
+      email: 'bobexlbudiman@gmail.com',
+      pic: 'PIC Pemerintahan'
     },
     {
       no: 4,
       nama: 'M. Arief Budiman',
       bidang: 'Koordinator Pemerintahan',
       deskripsi: 'Memfasilitasi penataan wilayah pemerintahan serta mendukung proses <b>pembentukan daerah otonomi baru</b>, termasuk analisis kebijakan, koordinasi antar instansi, dan penyusunan rekomendasi untuk meningkatkan efisiensi pengelolaan daerah serta pelayanan publik yang lebih baik.',
-      email: 'bobexlbudiman@gmail.com'
+      email: 'bobexlbudiman@gmail.com',
+      pic: 'PIC Pemerintahan'
     },
     {
       no: 5,
       nama: '--',
       bidang: 'Koordinator Pemerintahan',
       deskripsi: 'memfasilitasi pelaporan <b>Standar Pelayanan Minimal (SPM)</b> secara akurat dan tepat waktu, serta memastikan pengiriman laporan ke Pusat sesuai dengan regulasi yang berlaku, guna mendukung peningkatan kualitas pelayanan dan akuntabilitas institusi.',
-      email: '--'
+      email: '--',
+      pic: 'PIC Pemerintahan'
     },
     {
       no: 6,
       nama: 'Rizky Tahir',
       bidang: 'Koordinator Otonomi Daerah',
       deskripsi: 'mendokumentasikan dan mengarsipkan <b>laporan LPPD dan LKPJ</b> dari Pemerintah Kabupaten/Kota, memastikan semua dokumen terorganisir dengan baik, serta meneruskan laporan tersebut ke instansi pusat sesuai dengan ketentuan yang berlaku untuk mendukung transparansi dan akuntabilitas.',
-      email: 'biropemerintahanlppd@gmail.com'
+      email: 'biropemerintahanlppd@gmail.com',
+      pic: 'PIC Otonomi'
     },
     {
       no: 7,
       nama: '',
       bidang: 'Koordinator Otonomi Daerah',
       deskripsi: 'Melakukan <b>inventarisasi</b> dan penataan urusan <b>daerah untuk Otonomi Baru</b> dengan tujuan memastikan pengelolaan yang efektif. Mencakup pengumpulan data, analisis kebijakan, serta penyusunan rekomendasi untuk pengembangan dan efektifitas pengelolaan daerah, guna mendukung implementasi otonomi yang lebih baik dan berkelanjutan.',
-      email: ''
+      email: '',
+      pic: 'PIC Otonomi'
     },
     {
       no: 8,
       nama: '',
       bidang: 'Koordinator Otonomi Daerah',
       deskripsi: 'Memfasilitasi penerbitan <b>Surat Keputusan (SK)</b> dengan kategory ditujukan kepada Gubernur, Bupati/Walikota dan Legislatif. Serta penyusunan dan pemeliharaan arsip dokumentasi sehubungan dengan SK, memastikan semua dokumen terorganisir dengan baik dan dapat diakses untuk administrasi dan audit.',
-      email: ''
+      email: '',
+      pic: 'PIC Otonomi'
     },
     {
       no: 9,
       nama: 'Irma Fitayanti, S.Kom',
       bidang: 'Tata Usaha',
       deskripsi: 'Pendataan pegawai di Biro Pemerintahan</b> dan Otonomi Daerah, mengelola informasi pegawai dan keakuratan data, serta mendukung pengambilan keputusan melalui laporan yang tepat dan tepat waktu.',
-      email: 'oci25ocioci@gmail.com'
+      email: 'oci25ocioci@gmail.com',
+      pic: 'PIC Tata Usaha'
     }
   ];
 
@@ -125,7 +134,7 @@
         <TableBodyCell class="whitespace-break-spaces">{row.nama}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">{row.bidang}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">{@html row.deskripsi}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces"><div style="width:120px;overflow-wrap: anywhere;">{row.email}</div></TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces"><div style="width:140px;overflow-wrap: anywhere;">{row.email} <br/><Badge border color="indigo">{row.pic}</Badge></div></TableBodyCell>
       </TableBodyRow>
       {/each}
 

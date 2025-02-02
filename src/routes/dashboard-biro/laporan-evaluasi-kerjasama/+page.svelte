@@ -8,6 +8,7 @@
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
 	import { UpdateTableEvaluasiKS } from '$lib/PengirimanEvaluasiKS.js';
+  import { user } from '$lib/user';
 
   let getNamaKabupatenKota, getidDoc, getSemesterI, getSemesterII;
   let ModalUpdateEvaluasiKS = false;
@@ -155,7 +156,9 @@ function SearchTable() {
       <TableHeadCell style="font-size: larger;" class="py-4">Kabupaten / Kota</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Lap. Semester I</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">Lap. Semester II</TableHeadCell>
+      {#if $user.prefs['Role'] === "PIC Kerjasama"}
       <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+      {/if}
     </TableHead>
     <TableBody tableBodyClass="divide-y">
       {#each data.TableDatasEvaluasiKS.documents as cetakTabel, i}	
@@ -164,9 +167,11 @@ function SearchTable() {
         <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Kabupaten_Kota}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">{cetakTabel.SemesterI}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces">{cetakTabel.SemesterII}</TableBodyCell>
+        {#if $user.prefs['Role'] === "PIC Kerjasama"}
         <TableBodyCell class="whitespace-break-spaces"><ButtonGroup class="*:!ring-primary-700">
           <Button style="color:blue;" on:click={() => getDataPengirimanEvaluasiKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
         </ButtonGroup></TableBodyCell>
+        {/if}
       </TableBodyRow>
    {/each}
 

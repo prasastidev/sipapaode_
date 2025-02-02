@@ -7,6 +7,7 @@
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
 	 import { addTableArsipSK, deleteTableData } from '$lib/DokumenArsipSK.js';
+   import { user } from '$lib/user';
     import { slide } from 'svelte/transition';
     import { v4 as uuidv4 } from "uuid";
 
@@ -163,11 +164,14 @@
   <div class="container">
       <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data File Dokumen SK Pemerintahan</Heading>
       <br/><br/>
+      {#if $user.prefs['Role'] === "PIC Otonomi"}
       <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
         <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambahkan File Dokumen SK pada Tombol di samping berikut</div>
         <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px;" color="blue" class="float-right" on:click={() => (ModalArsipSK = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Arsip SK</Button> </div>
        </div>
+       {/if}
       <br/>
+      
       <Modal title="Form Pengisian Data Arsip SK" bind:open={ModalArsipSK}  autoclose={false}>
         <form class="space-y-6" on:submit={addDataFormtoTable}>
           <Label>
@@ -239,7 +243,9 @@
                         <TableHeadCell style="font-size: larger;" class="py-4 content-start">Dokumen SK</TableHeadCell>
                         <TableHeadCell style="font-size: larger;" class="py-4 content-start">Penerbit</TableHeadCell>
                         <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ringkasan Isi SK</TableHeadCell>
+                        {#if $user.prefs['Role'] === "PIC Otonomi"}
                         <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+                        {/if}
                       </TableHead>
                   <TableBody tableBodyClass="divide-y">
                     {#each data.TableDataSK_GubWakil.documents as cetakTabel, i}	
@@ -255,9 +261,11 @@
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/>{cetakTabel.Ringkasan_Isi}
                       </div>             
                       </TableBodyCell>
+                      {#if $user.prefs['Role'] === "PIC Otonomi"}
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
                           <Button style="color:red;" on:click={() => openDeleteModalSKGubWakil(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                         </ButtonGroup></TableBodyCell>
+                        {/if}
                         <Modal bind:open={ConfirmDeleteModalSKGubWakil} size="xs" autoclose={false}>
                           <div class="text-center">
                             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
@@ -306,7 +314,9 @@
                   <TableHeadCell style="font-size: larger;" class="py-4 content-start">Dokumen SK</TableHeadCell>
                   <TableHeadCell style="font-size: larger;" class="py-4 content-start">Penerbit</TableHeadCell>
                   <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ringkasan Isi SK</TableHeadCell>
+                  {#if $user.prefs['Role'] === "PIC Otonomi"}
                   <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+                  {/if} 
                 </TableHead>
                 <TableBody tableBodyClass="divide-y">
                   {#each data.TableDataSK_BupatiWakil.documents as cetakTabel, i}	
@@ -322,9 +332,11 @@
                       <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/>{cetakTabel.Ringkasan_Isi}
                       </div>             
                       </TableBodyCell>
+                      {#if $user.prefs['Role'] === "PIC Otonomi"}
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
                         <Button style="color:red;" on:click={() => openDeleteModalSKBupatiWakil(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                       </ButtonGroup></TableBodyCell>
+                      {/if}
                       <Modal bind:open={ConfirmDeleteModalSKBupatiWakil} size="xs" autoclose={false}>
                         <div class="text-center">
                           <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
@@ -372,8 +384,10 @@
                     <TableHeadCell style="font-size: larger;" class="py-4 content-start">Dokumen SK</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4 content-start">Penerbit</TableHeadCell>
                     <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ringkasan Isi SK</TableHeadCell>
+                    {#if $user.prefs['Role'] === "PIC Otonomi"}
                     <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
-                    </TableHead>
+                    {/if}
+                  </TableHead>
                 <TableBody tableBodyClass="divide-y">
                   {#each data.TableDataSK_DPRD.documents as cetakTabel, i}	
                   <TableBodyRow>
@@ -388,9 +402,11 @@
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:300px;overflow-wrap: anywhere;"><b>Ringkasan Isi SK:</b><br/>{cetakTabel.Ringkasan_Isi}
                     </div>             
                     </TableBodyCell>
+                    {#if $user.prefs['Role'] === "PIC Otonomi"}
                     <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
                         <Button style="color:red;" on:click={() => openDeleteModalSKDPRD(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
                       </ButtonGroup></TableBodyCell>
+                      {/if}
                       <Modal bind:open={ConfirmDeleteModalSKDPRD} size="xs" autoclose={false}>
                         <div class="text-center">
                           <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />

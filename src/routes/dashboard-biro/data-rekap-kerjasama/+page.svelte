@@ -3,6 +3,7 @@
  
     import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Select, Label, Badge } from 'flowbite-svelte';
     import { PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
+    import { user } from '$lib/user';
     import { slide } from 'svelte/transition';
     import { v4 as uuidv4 } from "uuid";
 
@@ -204,10 +205,12 @@ const updateDataKS = async (e) => {
 <div class="container">
   <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Document Kerjasama - Pemerintahan Prov. Sulawesi Tenggara</Heading>
   <br/><br/>
+  {#if $user.prefs['Role'] === "PIC Kerjasama"}
   <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
     <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambah Data Dokumen Kerjasama pada Tombol di samping berikut</div>
     <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddData = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Kerjasama</Button>  </div>
    </div>
+   {/if}
   <Modal title="Form Pengisian Data Kerjasama Baru" bind:open={ModalAddData} autoclose={false}>
     <form class="space-y-6" on:submit={addDatatoTable} >
       <h2 style="font-weight:600;margin-bottom:8px;color:#5850ec;">Silahkan Isi data Kerjasama Baru pada Form di bawah berikut:</h2>
@@ -384,7 +387,9 @@ const updateDataKS = async (e) => {
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">OPD & Mitra</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tahun Mulai</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tanggal</TableHeadCell>
+        {#if $user.prefs['Role'] === "PIC Kerjasama"}
         <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tombol Aksi</TableHeadCell>
+        {/if}
       </TableHead>
       {#await data.TableDatas.documents}
       loading...
@@ -403,11 +408,13 @@ const updateDataKS = async (e) => {
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:200px;overflow-wrap: anywhere;"><b>OPD:</b> {cetakTabel.OPD}<br/><b>Mitra:</b> {cetakTabel.Mitra}<br/><br/><b>Nomor Kerjasama:</b><br/>{cetakTabel.No_kerjasama}</div></TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.TahunMulai}</TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:180px;overflow-wrap: anywhere;"><b>Mulai:</b> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><b>Selesai: </b>{cetakTabel.tanggalSelesai.slice(0, 10)}<br/><br/><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></div></TableBodyCell>
+          {#if $user.prefs['Role'] === "PIC Kerjasama"}
           <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataRekapKerjasama(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
             <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id) }><TrashBinOutline class="w-4 h-4 me-2" />Delete</Button>
            </ButtonGroup> 
         </TableBodyCell>
+          {/if}
          <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
           <div class="text-center">
             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />

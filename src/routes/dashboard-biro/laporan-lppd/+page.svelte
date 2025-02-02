@@ -7,6 +7,7 @@
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
 	import { UpdateTableDataLPPD } from '$lib/dataLPPDLPKJ.js';
+  import { user } from '$lib/user';
 
 
   let getNamaKabupatenKota, getidDoc, getSLPPD, getSLPKJ, getKirimLPPD, getKirimLKPJ;
@@ -168,7 +169,9 @@ const updateData = async (e) => {
       <TableHeadCell style="font-size: larger;" class="py-4">Kabupaten / Kota</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">LPPD</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4">LKPJ</TableHeadCell>
+      {#if $user.prefs['Role'] === "PIC Otonomi"}
       <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+      {/if}
     </TableHead>
     <TableBody tableBodyClass="divide-y">
       {#each data.TableDatasLPPDLPKJ.documents as cetakTabel, i}	
@@ -177,9 +180,11 @@ const updateData = async (e) => {
         <TableBodyCell class="whitespace-break-spaces">{cetakTabel.Kabupaten_Kota}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces"><FileLinesOutline style="display:inline-flex;vertical-align:sub;" class="w-5 h-5" /> Document: {cetakTabel.SLPPD} <br/><ClockOutline style="display:inline-flex;vertical-align:sub;" class="w-5 h-5" /> Pengiriman: {cetakTabel.PengirimanLPPD}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces"><FileLinesOutline style="display:inline-flex;vertical-align:sub;" class="w-5 h-5" /> Document: {cetakTabel.SLPKJ}  <br/><ClockOutline style="display:inline-flex;vertical-align:sub;" class="w-5 h-5" /> Pengiriman: {cetakTabel.PengirimanLKPJ}</TableBodyCell>
+        {#if $user.prefs['Role'] === "PIC Otonomi"}
         <TableBodyCell class="whitespace-break-spaces"><ButtonGroup class="*:!ring-primary-700">
           <Button style="color:blue;" on:click={() => getDataDocumentLPPD(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
         </ButtonGroup></TableBodyCell>
+        {/if}
       </TableBodyRow>
    {/each}
 

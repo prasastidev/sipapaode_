@@ -4,6 +4,7 @@
     import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, Modal  } from 'flowbite-svelte';
     import { UploadOutline, ZoomInOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, ID } from '$lib/appwrite';
+    import { user } from '$lib/user';
     import { invalidateAll } from '$app/navigation';
     import { sineOut } from 'svelte/easing';
   
@@ -79,7 +80,9 @@ function showimage(id) {
     </div>
     <br/><br/>
 
+    {#if $user.prefs['Role'] === "Tata Usaha"}
     <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>{!isUploadOpen ? 'Buka Upload Photo' : 'Tutup Upload Photo'} </Button> <br/><br/>
+    {/if}
 
     {#if isUploadOpen}
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
@@ -131,11 +134,13 @@ function showimage(id) {
      <div style="float:left;text-align:center;">
      <img src={showimage(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
      <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
+     {#if $user.prefs['Role'] === "Tata Usaha"}
       <ButtonGroup class="*:!ring-primary-700">
         <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-4 h-4 me-2" />Lihat</a></Button>
         <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
      </ButtonGroup> 
-      </div>
+     {/if}
+     </div>
       <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
         <div class="text-center">
           <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />

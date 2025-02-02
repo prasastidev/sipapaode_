@@ -4,6 +4,7 @@
     import { Heading, Modal, Button, Alert, Radio, ButtonGroup, FloatingLabelInput, Textarea, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, Toast } from 'flowbite-svelte';
     import { EditOutline, GlobeOutline, CheckCircleSolid  } from 'flowbite-svelte-icons';
     import { slide } from 'svelte/transition';
+    import { user } from '$lib/user';
 
   import { invalidateAll } from '$app/navigation';
   import { databases } from '$lib/appwrite';
@@ -194,7 +195,9 @@ function timeout() {
     
       <Table id="TableDataWilayah" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto align-top">
         <TableHead>
+          {#if $user.prefs['Role'] === "PIC Pemerintahan"}
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+          {/if}
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Kode</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Nama</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ibukota</TableHeadCell>
@@ -207,9 +210,11 @@ function timeout() {
         <TableBody tableBodyClass="divide-y">
           {#each data.TableDatasWilayah.documents as cetakTabel}	
           <TableBodyRow>
+            {#if $user.prefs['Role'] === "PIC Pemerintahan"}
             <TableBodyCell class="whitespace-break-spaces content-start"><ButtonGroup class="*:!ring-primary-700">
               <Button style="color:blue;" on:click={() => getDataWilayah(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
             </ButtonGroup></TableBodyCell>
+            {/if}
             <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.KodeW}</TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces font-bold text-xl content-start">{cetakTabel.Nama}</TableBodyCell>
             <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Ibukota}</TableBodyCell>
