@@ -1,9 +1,11 @@
 <script>
     /** @type {import('./$types').PageData} */
     export let data=[];
-  
-    import { Heading, Modal, Toast, Toggle, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+    
+    import { Heading, Modal, Toast, Toggle, Badge, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
     import {  EditOutline, UserAddOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+   
+
     let users = [];
     let editingUser = null;
     let showAddForm = false;
@@ -89,32 +91,53 @@
 }
 
 
-  async function createUser() {
-    try {
-      const response = await fetch('/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newUser)
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to create user');
-      }
-
-      console.log('User created:', result);
-      showAddForm = false;
-      newUser = { name: '', email: '', password: '' };
-      getUsers();
-
-    } catch (error) {
-      console.error('Error details:', error);
-      alert(error.message || 'Failed to create user');
+async function createUser() {
+  try {
+    // Validate required fields
+    if (!newUser.email?.trim() || !newUser.password?.trim() || !newUser.name?.trim()) {
+      throw new Error('Semua kolom harus terisi dengan lengkap');
     }
+
+    // Password validation
+    if (newUser.password.trim().length < 8) {
+      throw new Error('Password harus minimal 8 karakter');
+    }
+
+     // Email format validation
+     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newUser.email.trim())) {
+      throw new Error('Format email tidak valid');
+    }
+
+    const response = await fetch('/api/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: newUser.email.trim(),
+        password: newUser.password.trim(),
+        name: newUser.name.trim()
+      })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || 'Gagal membuat user baru');
+    }
+
+    console.log('User created:', result);
+    showAddForm = false;
+    newUser = { name: '', email: '', password: '' };
+    getUsers();
+    alert('User berhasil dibuat');
+
+  } catch (error) {
+    console.error('Error details:', error);
+    alert(error.message || 'Gagal membuat user baru');
   }
+}
 
   // Modify the startEdit function to store original values
 function startEdit(user) {
@@ -170,7 +193,7 @@ function startEdit(user) {
           <input 
             type="password" 
             bind:value={newUser.password} 
-            placeholder="Password"
+            placeholder="Password (minimal 8 Character)"
             required
           />
           <div class="button-group">
@@ -186,6 +209,7 @@ function startEdit(user) {
         <TableHead>
           <TableHeadCell style="font-size: larger;" class="py-4">No</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Nama</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4">Role</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Aktivitas Terakhir</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Tanggal Registrasi</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
@@ -212,6 +236,7 @@ function startEdit(user) {
               </div>
           
             </TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><Badge border color="indigo"> {user.prefs['Role']}</Badge></TableBodyCell> 
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">
@@ -227,6 +252,7 @@ function startEdit(user) {
               <div style="display:flex;align-items:center;"><b style="margin-right:6px;">Nama:</b> {user.name}</div>
               <div style="display:flex;align-items:center;margin-top:-10px;margin-bottom:10px;"><b style="margin-right:6px;">Email:</b> {user.email}</div>
             </TableBodyCell>
+             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><Badge border color="indigo"> {user.prefs['Role']}</Badge></TableBodyCell> 
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">

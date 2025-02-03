@@ -45,13 +45,19 @@ export async function POST({ request }) {
       throw new Error('Missing required fields');
     }
 
-    const newUser = await users.createArgon2User(
+    // Create user with null phone parameter
+    const newUser = await users.create(
       ID.unique(),
       data.email,
+      null,  // phone parameter set to null
       data.password,
       data.name
-      
     );
+    
+    // Set initial preferences after user creation
+    await users.updatePrefs(newUser.$id, {
+      Role: 'User'
+    });
     
     console.log('User created successfully:', newUser);
 

@@ -44,7 +44,7 @@
   <div class="contentbox">
     <label class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2"><div class="col-span-2 rounded-xl pr-3">
       <h1 class="text-lg" style="text-align:left;color #242a38;font-weight: 600;">
-        Silakan baca buku panduan ringkas tentang sipapaode dengan mengklik tombol download di samping.
+        Silakan unduh buku panduan ringkas tentang sipapaode dengan mengklik tombol download yang tersedia di samping.
       </h1></div>
       <div class="rounded-xl content-center"><a href="#" style="text-decoration:none;"><button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded float-right">
         <ArrowUpFromBracketOutline class="w-6 h-6 mr-1 text-white-800" /> Download</button></a> 

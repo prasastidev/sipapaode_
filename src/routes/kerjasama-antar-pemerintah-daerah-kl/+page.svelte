@@ -280,10 +280,10 @@
 <br/>
 <Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#statistikKerjasama" class="mb-2">Lihat Statistik Kerjasama</Button>
 <Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#DataKerjsamaAktif" class="mb-2">Lihat Data Kerjasama Aktif</Button>
-<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#3PengirimTerakhir" class="mb-2">Progress Pengajuan Kerjasama</Button>
+<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#3PengirimTerakhir" class="mb-2">Lihat Pengajuan Kerjasama Terkini</Button>
 
   <br/><br/>
-Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara  {#if OnlineKSpemerintahdaerahkl.Status_raw } ataupun melalui online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if} dengan mengisi formulir pada link di bawah berikut.
+Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan baik melalui <Badge color="yellow" rounded><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> kantor biro pemerintahan dan otonomi daerah Sulawesi tenggara  {#if OnlineKSpemerintahdaerahkl.Status_raw } atau secara online <Badge color="green" rounded><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if} dengan mengisi formulir pada link di bawah berikut.
 <br/><br/>
 {#if !OnlineKSpemerintahdaerahkl.Status_raw }
 <Alert color="yellow">
@@ -296,11 +296,11 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
   {#if OnlineKSpemerintahdaerahkl.Status_raw }
   <div style="padding: 14px;border-radius: 16px;border: 4px solid green;"><Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> <br/>
-    <br/> Isi melalui Formulir dibawah berikut: 
+    <br/> Silakan isi formulir dibawah berikut untuk melanjutkan proses: 
     <GradientButton id="ButtonFormulir" on:click={() => (ModalFormulir = true)} outline color="redToYellow" class="inline-flex w-full h-12 mt-4">Formulir</GradientButton>
     <Tooltip triggeredBy="#ButtonFormulir">Formulir Pengajuan Kerjasama melalui Online</Tooltip>
     <br/><br/><br/>
-    Lihat Prosedur Kerjasama hingga Approval, dapat dilihat pada link berikut:
+    Silakan lihat prosedur kerjasama melalui tautan di bawah berikut:
     <br/>
     <GradientButton id="ButtonProsedur" on:click={() => (ModalProsedure = true)} outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Lihat Prosedur</GradientButton> 
     <Tooltip triggeredBy="#ButtonProsedur">Alur Prosedur</Tooltip>
@@ -310,7 +310,7 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
   </div> 
    {/if} 
   <div style="padding: 14px;border-radius: 16px;border: 4px solid orange;"><Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>
-  <br/> Silahkan Membawa berkas permohonan kerjasama Anda pada alamat di bawah berikut: <br/><br/>
+  <br/> Silakan membawa berkas permohonan kerjasama Anda ke alamat di bawah ini. Kami menantikan kesempatan untuk bekerja sama dengan Anda: <br/><br/>
     <div class="text-2xl font-extrabold"><BuildingSolid class="w-10 h-10 align-middle inline-flex" /> Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara <br/>
     <br/><span class="text-lg font-normal">Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231
     </span>
@@ -319,7 +319,7 @@ Pengajuan permohonan kerjasama antar Pemerintah Daerah dan K/L dapat dilakukan b
 </div>
 
 <br/><br/>
-Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antar Pemerintah Daerah dan K/L.
+Berikut adalah statistik dan data terkini mengenai kerjasama antar Pemerintah Daerah dan K/L yang dapat digunakan untuk analisis lebih lanjut.
 <br/><br/>
 <Heading id="statistikKerjasama" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Statistik</Heading>
 <br/>
@@ -357,10 +357,10 @@ Dibawah berikut adalah Statistik dan Data Kerjasama saat ini, antar Pemerintah D
 {#if data.TableDataKSAntarPemerintah_Berlaku.total === 0}
 <p>No TableDatas yet.</p>
 {:else}
-<p>{data.TableDataKSAntarPemerintah_Berlaku.total} Data ditemukan</p>
+<p>Saat ini, terdapat  {data.TableDataKSAntarPemerintah_Berlaku.total} data kerjasama aktif antar Pemerintah Daerah dan K/L dan Pemerintah Provinsi Sulawesi Tenggara.</p>
 {/if}
 
-Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
+Silakan cari nama mitra kerjasama pada kolom pencarian di bawah ini. Setelah menemukan nama yang dicari, unduh dokumen kerjasama yang tersedia di bawah ini untuk informasi lebih lanjut. : <br/><br/>
 <form class="flex items-center w-full mx-auto" style="width:100%;">   
     <label for="simple-search" class="sr-only">Search</label>
     <div class="relative w-full">
@@ -408,7 +408,7 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
     <td class="hidekolom">{cetakTabel.tanggalMulai.slice(0, 10)}</td>
     <td class="hidekolom">{cetakTabel.tanggalSelesai.slice(0, 10)}</td>
     <td style="color:#3f83f8;"> 
-      <a href={DownloadFile(cetakTabel.$id)} id="docdownload" target="_blank"><ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> </a>
+      <a href={DownloadFile(cetakTabel.$id)} id="docdownload" target="_blank" style="padding: 4px;border-radius: 4px;border: 1px solid #3f83f8;background: #e5f2ef;"><ArrowDownToBracketOutline class="flex w-6 h-6 inline-flex items-baseline text-blue-500 dark:text-blue-500" /> </a>
       <Tooltip triggeredBy="#docdownload">Unduh Dokumen</Tooltip>
     </td>
     </tr>
@@ -444,16 +444,16 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
  <br/>
 <span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/>
 <br/>
-<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Progress Pengajuan Kerjasama</Heading>
+<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Daftar Pengajuan Kerjasama Terkini</Heading>
 <br/>
-3 Aktivitas Pengiriman Terakhir
+Daftar Progres Pengajuan Kerjasama Terkini.
 <br/><br/> 
 <table style="width:100%;display:block;overflow-wrap: anywhere; background: linear-gradient(147deg, rgb(255, 255, 255) 4%, rgb(229 232 235) 99%, rgb(226, 237, 255) 100%, rgb(229, 231, 235) 100%);color:#2c526f;padding: 2px;border-radius: 8px;">
   <thead>
   <tr style="border-bottom: 1px solid white;background: linear-gradient(147deg, rgba(255, 255, 255, 1) 4%, rgb(171 196 215) 99%, rgba(226, 237, 255, 1) 100%, rgba(229, 231, 235, 1) 100%);">
   <th style="width:5%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">No</th>
   <th style="width:18%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">Nama</th>
-  <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Tanggal Kirim</th>
+  <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Kategori</th>
   <th style="width:25%;white-space: break-spaces;padding:6px;">Instansi</th>
   <th style="width:16%;white-space: break-spaces;padding:6px;">Status</th>
   <th style="width:14%;white-space: break-spaces;padding:6px;" class="hidekolom">Estimasi Proses</th>
@@ -462,12 +462,12 @@ Silahkan Cari Nama Mitra pada Kolom Pencarian di Bawah berikut : <br/><br/>
   <tbody> 
     {#each data.TableDataPengajuanTerakhir.documents as cetakTabel, i}	 
   <tr style="border-bottom: 1px solid white;">
-  <td class="hidekolom" style="padding:4px;"><span>{i+1}</span></td>
-  <td class="hidekolom" style="padding:4px;"><span><Avatar class="inline-flex" border /> {cetakTabel.Nama}</span></td>
-  <td class="hidekolom" style="padding:4px;"><span> {cetakTabel.$updatedAt.slice(0, 10)}</span></td>
-  <td style="padding:4px;"><span>{cetakTabel.Instansi}</span></td>
-  <td style="padding:4px;"><Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge></td>
-  <td class="hidekolom" style="padding:4px;">{cetakTabel.Estimasi} Kerja</td>
+  <td class="hidekolom" style="padding:14px 6px;"><span>{i+1}</span></td>
+  <td class="hidekolom" style="padding:14px 6px;"><span><Avatar class="grid mb-2" border /> {cetakTabel.Nama} <br/><br/><b>Tanggal Kirim:</b><br/>{cetakTabel.$updatedAt.slice(0, 10)}</span></td>
+  <td class="hidekolom" style="padding:14px 6px;"><span>{cetakTabel.Kategory_KS}</span></td>
+  <td style="padding:14px 6px;"><span>{cetakTabel.Instansi}</span></td>
+  <td style="padding:14px 6px;"><Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge></td>
+  <td class="hidekolom" style="padding:14px 6px;">{cetakTabel.Estimasi} Kerja</td>
   </tr>
   {/each}
 
