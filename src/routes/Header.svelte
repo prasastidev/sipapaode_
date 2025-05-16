@@ -32,7 +32,7 @@
 			<DropdownDivider />
 			<DropdownItem href="/gallery" class="text-[#4a494d]">Gallery Foto & Kegiatan</DropdownItem>
 		   </Dropdown>
-		  <NavLi id="mapsSultra" href="/maps-sultra" style="font-size:15px;color:#2e6c09;"> <img src={sultraicon} class="me-2" alt="Logo" style="width:25px;height:21px;display:inline-flex;margin-right:5px;" />Lanskap Sultra</NavLi>
+		  <NavLi id="mapsSultra" href="/maps-sultra" style="font-size:15px;color:#2e6c09;"> <span style="font-size:20px;vertical-align:middle;">🗺️</span> Lanskap Sultra</NavLi>
 		  <Tooltip type='auto' triggeredBy="#mapsSultra" placement='bottom' class="w-72 md:w-80 lg:w-80">
 			Informasi Geografis, Kode Wilayah, Pemerintahan, Rupa Bumi dan Grafik Kab/Kota di Provinsi Sulawesi Tenggara</Tooltip>
 		  <NavLi class="cursor-pointer" style="font-size:15px;">Laporan dan Informasi <ChevronDownOutline class="w-6 h-6 ms-2 text-primary-800 dark:text-white inline" />

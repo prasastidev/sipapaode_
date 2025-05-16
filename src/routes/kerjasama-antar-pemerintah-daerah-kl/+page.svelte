@@ -230,7 +230,6 @@
     <div class="pageFormulir" class:show={pageForm === 1}>
     <label class="text-sm">Kategori Kerjasama:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
-      <li class="w-full"><Radio name="Kategory_KS" class="p-3" value="Kerjasama Pihak Ketiga / Swasta" disabled>Kerjasama Pihak Ketiga / Swasta</Radio></li>
       <li class="w-full"><Radio name="Kategory_KS" class="p-3" value="Kerjasama Antar Pemerintah Daerah dan K/L" checked>Kerjasama Antar Pemerintah Daerah dan K/L</Radio></li>
     </ul>  <br/>
     <FloatingLabelInput style="filled" id="nama" name="nama" type="text" required>

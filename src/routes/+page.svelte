@@ -29,6 +29,8 @@
 	import Berakhlak from '$lib/images/Berakhlak.webp';
 	import Karo from '$lib/images/Karo.webp';
 	import { databases } from '$lib/appwrite';
+	import { fly } from 'svelte/transition';
+
 	
 	// In this locale "," is the decimal separator and "." is the group separator
 	const locale = 'en-EN'
@@ -294,19 +296,19 @@ function prevQuote() {
 		        <span class="morenext flex flex-wrap items-center gap-2 w-64">
 				 <label style="border-bottom:1px dotted;margin-left:4px;">Info.</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
 				</span>
-				  <Modal title="Selamat Datang di Situs Web Aplikasi Sipapaode" bind:open={clickOutsideModal} autoclose outsideclose>
-					Di Situs Web Aplikasi Sipapaode, Anda dapat mengakses berbagai layanan dan informasi yang berkaitan dengan kerjasama dan pengelolaan pemerintahan di Provinsi Sulawesi Tenggara. Berikut adalah beberapa fasilitas yang tersedia:
+				  <Modal size="lg" title="Selamat Datang di Situs Web Aplikasi Sipapaode" bind:open={clickOutsideModal} autoclose outsideclose>
+					Di situs web Aplikasi Sipapaode, Anda dapat mengakses beragam layanan dan informasi yang berkaitan dengan kerjasama serta pengelolaan pemerintahan di Provinsi Sulawesi Tenggara. Berikut adalah beberapa fasilitas yang tersedia untuk mendukung efisiensi dan transparansi dalam pengelolaan pemerintahan:
 					<br/>
 						<ul class="list-disc">
-						<li><b>Pengajuan Kerjasama Secara Online</b><br/>Anda dapat mengajukan kerjasama baik dengan pihak ketiga/swasta maupun antar pemerintah secara online kepada Pemerintah Provinsi Sulawesi Tenggara.</li>
-						<li><b>Dokumentasi dan Pemantauan Kerjasama</b><br/>Melihat dokumentasi kerjasama yang telah dilakukan serta melakukan pemantauan (monitoring) secara online. Selain itu, tersedia juga fasilitas pelaporan evaluasi kerjasama antara Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>   
-						<li><b>Informasi dan Pelaporan Standar Pelayanan Minimum (SPM)</b><br/>Mendapatkan informasi terkait fasilitas standar pelayanan minimum (SPM) yang diterapkan oleh Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>
-						<li><b>Data Wilayah Pemerintahan</b><br/>Akses informasi data wilayah pemerintahan baik dari Pemerintah Provinsi maupun Kabupaten/Kota, lengkap dengan pemetaan (GIS) dan rupabumi. </li>
-						<li><b>Penataan Wilayah Pemerintahan.</b><br/>Fasilitas untuk penataan wilayah pemerintahan, termasuk pemutakhiran data oleh Kabupaten/Kota dan pembentukan daerah otonomi baru.</li>
-						<li><b>Penerbitan SK Pemerintahan</b><br/>Proses penerbitan Surat Keputusan (SK) terkait dengan berbagai aspek pemerintahan. </li>
-						<li><b>Penerbitan SK Gubernur</b><br/>Penerbitan SK Gubernur sehubungan dengan pengajuan keberangkatan luar negeri. </li>
-						<li><b>Laporan LPPD dan LKPJ</b><br/>Laporan Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) dan Laporan Keterangan Pertanggungjawaban (LKPJ) oleh Pemerintah Daerah Kabupaten/Kota, serta inventarisasi penataan urusan daerah otonomi baru. </li>
-						<li><b>Saran dan Informasi</b><br/>Mengirimkan saran dan informasi kepada Biro Pemerintahan dan Otonomi Daerah Provinsi Sulawesi Tenggara. </li>
+						<li><b style="color:#6767c3;">Pengajuan Kerjasama Secara Online</b><br/>Anda dapat mengajukan kerjasama baik dengan pihak ketiga/swasta maupun antar pemerintah secara online kepada Pemerintah Provinsi Sulawesi Tenggara.</li>
+						<li><b style="color:#6767c3;">Dokumentasi dan Pemantauan Kerjasama</b><br/>Melihat dokumentasi kerjasama yang telah dilakukan serta melakukan pemantauan (monitoring) secara online. Selain itu, tersedia juga fasilitas pelaporan evaluasi kerjasama antara Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>   
+						<li><b style="color:#6767c3;">Informasi dan Pelaporan Standar Pelayanan Minimum (SPM)</b><br/>Mendapatkan informasi terkait fasilitas standar pelayanan minimum (SPM) yang diterapkan oleh Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>
+						<li><b style="color:#6767c3;">Data Wilayah Pemerintahan</b><br/>Akses informasi data wilayah pemerintahan baik dari Pemerintah Provinsi maupun Kabupaten/Kota, lengkap dengan pemetaan (GIS) dan rupabumi. </li>
+						<li><b style="color:#6767c3;">Penataan Wilayah Pemerintahan.</b><br/>Fasilitas untuk penataan wilayah pemerintahan, termasuk pemutakhiran data oleh Kabupaten/Kota dan pembentukan daerah otonomi baru.</li>
+						<li><b style="color:#6767c3;">Penerbitan SK Pemerintahan</b><br/>Proses penerbitan Surat Keputusan (SK) terkait dengan berbagai aspek pemerintahan. </li>
+						<li><b style="color:#6767c3;">Penerbitan SK Gubernur</b><br/>Penerbitan SK Gubernur sehubungan dengan pengajuan keberangkatan luar negeri. </li>
+						<li><b style="color:#6767c3;">Laporan LPPD dan LKPJ</b><br/>Laporan Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) dan Laporan Keterangan Pertanggungjawaban (LKPJ) oleh Pemerintah Daerah Kabupaten/Kota, serta inventarisasi penataan urusan daerah otonomi baru. </li>
+						<li><b style="color:#6767c3;">Saran dan Informasi</b><br/>Mengirimkan saran dan informasi kepada Biro Pemerintahan dan Otonomi Daerah Provinsi Sulawesi Tenggara. </li>
 					</ul> 	<br/>
 					Dengan fitur-fitur tersebut, Web Aplikasi Sipapaode berkomitmen untuk mendukung transparansi, efisiensi, dan kolaborasi dalam pengelolaan pemerintahan di Provinsi Sulawesi Tenggara.
 					<svelte:fragment slot="footer">
@@ -314,10 +316,10 @@ function prevQuote() {
 					</svelte:fragment>
 				  </Modal>
 
-				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang di Biro Pemerintahan & Otonomi Daerah:</span> <br/>
-				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah dan K/L, Pendataan dan Monitoring</Popover>
-                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Fasilitas Tata Wilayah Pemerintahan dan Administrasi Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode Data Wilayah Pemerintahan, Pemetaan (GIS), serta rupa bumi).</Popover>
-				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;"><QuestionCircleOutline class="w-5 h-5 mr-1" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Fasilitas Penerbitan SK Sehubungan dengan Pemerintahan, SK Gubernur izin keberangkatan ke Luar Negeri dan Administrasi Laporan Evaluasi Kinerja Daerah (LPPD & LKPJ).</Popover>
+				  <br/> <span style="font-size: 15px;margin-bottom: 8px;display: inline-block;margin-left: 5px;">Bidang di Biro Pemerintahan & Otonomi Daerah, meliputi:</span> <br/>
+				  <Button color="light" pill id="b1" style="background:transparent;margin:2px;border: 1px solid #2fb7e0;"><QuestionCircleOutline class="w-5 h-5 mr-1" style="color:#8ac5db;" /> Bag. Kerjasama</Button><Popover class="w-64 text-sm font-light" transition={slide} placement='bottom' title="Bag. Kerjasama" triggeredBy="#b1" trigger="click">Memfasilitasi Administrasi Kerjasama Pihak Ketiga / Swasta maupun Antar Pemerintah dan K/L, Pendataan dan Monitoring</Popover>
+                  <Button color="light" pill id="b2" style="background:transparent;margin:2px;border: 1px solid #2fb7e0;"><QuestionCircleOutline class="w-5 h-5 mr-1" style="color:#8ac5db;" /> Koord. Pemerintahan</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Pemerintahan" triggeredBy="#b2" trigger="click">Fasilitas Tata Wilayah Pemerintahan dan Administrasi Pemerintahan (Fasilitas Pembentukan Daerah Otonomi Baru, Kode Data Wilayah Pemerintahan, Pemetaan (GIS), serta rupa bumi).</Popover>
+				  <Button color="light" pill id="b3" style="background:transparent;margin:2px;border: 1px solid #2fb7e0;"><QuestionCircleOutline class="w-5 h-5 mr-1" style="color:#8ac5db;" /> Koord. Otonomi Daerah</Button><Popover class="w-64 text-sm font-light" transition={slide} title="Koordinasi Otonomi Daerah" triggeredBy="#b3" trigger="click">Fasilitas Penerbitan SK Sehubungan dengan Pemerintahan, SK Gubernur izin keberangkatan ke Luar Negeri dan Administrasi Laporan Evaluasi Kinerja Daerah (LPPD & LKPJ).</Popover>
               </div>
 		  
 	     <div class="rounded-xl"><center>
@@ -335,10 +337,10 @@ function prevQuote() {
 	
 	<div style="text-align:center;margin:10px 0px;padding:14px;width:100%;">
 		{#if BannerInfo.Status_banner}
-        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="border:1px solid #adcdd6;border-radius:10px;">
+        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="border:3px solid #bcd6ad;border-radius:10px;">
 			<img class="w-14 h-14 rounded-full" src={ImagelogoSultra} alt="Sultra Pictures" />
 			<h4 class="text-xl text-left"> {@html BannerInfo.Text_Banner} </h4>
-         <CloseButton class="border-2" on:click={() => (BannerInfo.Status_banner = false)} />
+         <CloseButton class="border-2 bg-red-500 hover:bg-red-700" style="color:white;" on:click={() => (BannerInfo.Status_banner = false)} />
          </div> 
          {/if}
 	</div>   
@@ -347,39 +349,37 @@ function prevQuote() {
 </section>
 	<!--End  Section TOP Header -->  
 	
+	<div class="mouse m-5"></div>
+
 	<!--  Section Fitur Layanan -->  
  <section>
-	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR-FITUR LAYANAN</Span></Heading> <br/>
+	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR PELAYANAN ONLINE</Span></Heading> <br/>
 	<div class="flex items-center font-light text-gray-500 dark:text-gray-400 p-1 mb-2 -mt-4" style="font-size:15px;">
-		Pilih Layanan Sesuai Bidang. Lihat Panduan Tentang Layanan <button id="panduaninfo">
+		Silahkan Pilih Layanan Online sesuai Bidang di Bawah. Lihat Panduan Tentang Layanan <button id="panduaninfo">
 			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button>
 	  </div>
 	  <Popover triggeredBy="#panduaninfo" class="w-72 md:w-96 lg:w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
-		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  <br/>
-		  Layanan dapat dilakukan dan diproses secara online.<br/>
-		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  <br/>
-		   Layanan dapat dilakukan secara langsung di Kantor Biro Pemerintahan dan Otda Sultra. <br/>
-		   <Badge color="indigo" rounded class="mb-4">Umum</Badge> <br/>
-		   Layanan di Peruntukkan Untuk Umum (Publik)<br/>
-		   <Badge color="indigo" rounded class="mb-4">Khusus</Badge> <br/>
-		   Layanan di Peruntukkan Khusus (Pemda Kab/Kota atau K/L)
+		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  <br/>
+		  Pelayanan akan dilakukan dengan mengisi formulir secara online yang telah disediakan, dengan melampirkan sejumlah dokumen yang telah dipersiapkan.<br/>
+		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  <br/>
+		   Pelayanan dapat dilakukan kantor Biro Pemerintahan dengan membawa sejumlah dokumen yang telah dipersiapkan. <br/>
 		</div>
 	  </Popover>
 	
-	<Tabs tabStyle="full"  defaultClass="flex border-2 border-slate-400 rounded-lg divide-x rtl:divide-x-reverse divide-blue-200 shadow dark:divide-blue-700">
-		<TabItem open>
+	<Tabs tabStyle="full"  defaultClass="flex border-2 border-slate-400 rounded-lg divide-x rtl:divide-x-reverse divide-blue-200 shadow dark:divide-blue-700" style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
+		<TabItem open style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
 		  <span slot="title" class="text-base">Bag. Kerjasama</span>
-		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4"> 
-		Berikut adalah fasilitas layanan dari bagian Kerjasama yang tersedia.
+		  <p class="text-2sm text-blue-400 dark:text-blue-300 pb-4 text-center"> 
+		Dibawah berikut adalah pilihan Layanan Online pada Bidang Bagian Kerjasama.
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
-			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;"> 
 				
-				{#if OnlineKSpihakKetiga.Status_raw }<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>
+				{#if OnlineKSpihakKetiga.Status_raw }<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>
 				 {/if} 
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 				  <img src={ImageKSwasta} alt="kerjasama pihak swasta">
@@ -387,16 +387,16 @@ function prevQuote() {
 					<a href="/kerjasama-pihak-ketiga">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-1xl font-bold" style="line-height:normal;">
+				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/kerjasama-pihak-ketiga">Fasilitas Kerjasama dengan Pihak Ketiga / Swasta</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">Publik (umum)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk umum pihak ketiga atau instansi swasta.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;"> 
-				{#if OnlineKSpemerintahdaerahkl.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge> {/if}  
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;"> 
+				{#if OnlineKSpemerintahdaerahkl.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge> {/if}  
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 				  <img src={ImageKAinstansi} alt="kerjasama instansi"> 
@@ -404,17 +404,16 @@ function prevQuote() {
 					<a href="/kerjasama-antar-pemerintah-daerah-kl">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-1xl font-bold" style="line-height:normal;">
+				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/kerjasama-antar-pemerintah-daerah-kl">Fasilitas Kerjasama antar Pemerintah Daerah dan K/L</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">K/L (khusus)</Badge>
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk instansi Pemerintah Daerah dan Kementerian atau Lembaga.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				{#if OnlineLaporanEvaluasiKS.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+				{#if OnlineLaporanEvaluasiKS.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 				  <img src={ImageKLuarNegeri} alt="Evaluasi Kerjasama">
@@ -422,25 +421,25 @@ function prevQuote() {
 					<a href="/pengiriman-evaluasi-kerjasama">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-sm font-bold" style="line-height:normal;">
+				<h3 class="title text-sm font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/pengiriman-evaluasi-kerjasama">Laporan Evaluasi Kerjasama</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam mengirim laporan evaluasi kerjasama.
 				</p>
 			  </div> </div>
 			
-		</div></center> <br/><span style="color:#a75710;"> //** Kolom Layanan Bag. Kerjasama.</span> <br/>
+		</div></center> <br/><span style="color:#a75710;"> //** Klik Icon Untuk Melanjutkan</span> <br/>
 		</TabItem>
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Pemerintahan</span>
-		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4">
-			Fasilitas layanan bidang koordinator pemerintahan mencakup berbagai layanan administratif.
-		  </p>  <center>
+		  <p class="text-2sm text-blue-400 dark:text-blue-300 pb-4 text-center"> 
+			Dibawah berikut adalah pilihan Layanan Online pada Bidang Koordinator Pemerintahan.
+			  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">  
-				{#if standarPM.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">  
+				{#if standarPM.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 				  <img src={ PenataanWilayahimg } alt="kerjasama pihak swasta"> 
@@ -448,16 +447,16 @@ function prevQuote() {
 					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-1xl font-bold" style="line-height:normal;">
+				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/coming-soon">Fasilitas Standar Pelayanan Minimum (SPM)</a>
 				</h3>
 				<p class="textKetFitur" style="float:left;">
 					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				{#if penataanWP.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+				{#if penataanWP.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 				   <img src={regionimg} alt="kerjasama instansi"> 
@@ -465,16 +464,16 @@ function prevQuote() {
 					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-1xl font-bold" style="line-height:normal;">
+				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan & Fasilitas Penegasan Batas Daerah</a>
 				</h3>
 				<p class="textKetFitur" style="float:left;">
 					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				{#if DaerahOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+				{#if DaerahOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 			      <img src={ Otonomiimg } alt="Kerjasama Luar Negeri"> 
@@ -482,16 +481,16 @@ function prevQuote() {
 					<a href="/coming-soon">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-sm font-bold" style="line-height:normal;">
+				<h3 class="title text-sm font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/coming-soon">Pembentukan Daerah Otonomi Baru</a>
 				</h3>
 				<p class="textKetFitur" style="float:left;">
 					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;">
-				{#if infoKDW.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+				{#if infoKDW.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				<div class="imgBox">
 				  <img src={ KodeWilayahimg } alt="Report Kerjasama"> 
@@ -499,7 +498,7 @@ function prevQuote() {
 					<a href="/maps-sultra/#TabelOtonomi">Lanjutkan ></a>
 				  </div>
 				</div>
-				<h3 class="title text-1xl font-bold" style="line-height:normal;">
+				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/maps-sultra/#TabelOtonomi">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</a>
 				</h3>
 				<p class="textKetFitur" style="float:left;">
@@ -508,18 +507,18 @@ function prevQuote() {
 				</p>
 			  </div> </div>
 			 
-		</div></center> <br/><span style="color:#a75710;"> //** Kolom Layanan Koord. Pemerintahan</span> <br/>
+		</div></center> <br/><span style="color:#a75710;"> //** Klik Icon Untuk Melanjutkan</span> <br/>
 		</TabItem>
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Otonomi Daerah</span>
-		  <p class="text-2sm text-gray-500 dark:text-gray-400 pb-4">
-			Fasilitas layanan Bidang Koordinator Otonomi Daerah mencakup berbagai layanan administrasi.
-		  </p>
+		  <p class="text-2sm text-blue-400 dark:text-blue-300 pb-4 text-center"> 
+			Dibawah berikut adalah pilihan Layanan Online pada Bidang Koordinator Otonomi Daerah.
+			  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;"> 
-				{#if penerbitanSKgub.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;"> 
+				{#if penerbitanSKgub.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				  <div class="imgBox">
 				  <img src={ penerbitanSKimg } alt="kerjasama pihak swasta"> 
@@ -527,16 +526,16 @@ function prevQuote() {
 					  <a href="/coming-soon">Lanjutkan ></a>
 					</div>
 				  </div>
-				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
+				  <h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 					<a href="/coming-soon">Penerbitan Surat & SK Gubernur Pejabat Negara & Legistlatif</a>
 				  </h3>
 				  <p class="textKetFitur" style="float:left;">
 					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 				</div> </div>
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
-				{#if lppdLKPJ.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+				{#if lppdLKPJ.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				  <div class="imgBox">
 				    <img src={ laporanimg } alt="kerjasama instansi"> 
@@ -544,16 +543,16 @@ function prevQuote() {
 					  <a href="/penyampaian-lppd">Lanjutkan ></a>
 					</div>
 				  </div>
-				  <h3 class="title text-1xl font-bold" style="line-height:normal;">
+				  <h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 					<a href="/penyampaian-lppd">Laporan dan Evaluasi: LKPJ & LPPD</a>
 				  </h3>
 				  <p class="textKetFitur" style="float:left;">
 					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
 				</p>
 				</div> </div>
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;">
-				{#if InventarisasiPOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Via Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge>  
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+				{#if InventarisasiPOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
+				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
 				  <div class="imgBox">
 				    <img src={ Inventarisasiotonomi } alt="Kerjasama Luar Negeri"> 
@@ -561,7 +560,7 @@ function prevQuote() {
 					  <a href="/coming-soon">Lanjutkan ></a>
 					</div>
 				  </div>
-				  <h3 class="title text-sm font-bold" style="line-height:normal;">
+				  <h3 class="title text-sm font-bold" style="line-height:normal;background: #f0f8ff;">
 					<a href="/coming-soon">Inventarisasi Penataan Urusan Daerah Otonomi Baru</a>
 				  </h3>
 				  <p class="textKetFitur" style="float:left;">
@@ -569,7 +568,7 @@ function prevQuote() {
 				</p>
 				</div> </div>
 				
-		  </div></center> <br/><span style="color:#a75710;"> //** Kolom Koord. Otonomi Daerah</span> <br/>
+		  </div></center> <br/><span style="color:#a75710;"> //** Klik Icon Untuk Melanjutkan</span> <br/>
 		</TabItem>
 		
 	  </Tabs>
@@ -668,14 +667,14 @@ function prevQuote() {
   <!--  End Section Proses Alur Layanan -->  
 
 <!--  Map Modal -->  
-  <Modal title="Map Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
+  <Modal size="lg" title="Map Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
 	<div style="width: 100%">{@html DataBombana.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{@html DataBombana.KetMap }</p>
 	<svelte:fragment slot="footer">
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal title="Map Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
+  <Modal size="lg" title="Map Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
 	<div style="width: 100%">{@html DataWakatobi.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataWakatobi.KetMap }</p>
@@ -683,7 +682,7 @@ function prevQuote() {
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal title="Map Kota Kendari" bind:open={ModalmapKendari} autoclose>
+  <Modal size="lg" title="Map Kota Kendari" bind:open={ModalmapKendari} autoclose>
 	<div style="width: 100%">{@html DataKotaKendari.Map } </div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataKotaKendari.KetMap }</p>
@@ -691,7 +690,7 @@ function prevQuote() {
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal title="Map Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
+  <Modal size="lg" title="Map Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
 	<div style="width: 100%">{@html DataKonawe.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataKonawe.KetMap }</p>
@@ -699,7 +698,7 @@ function prevQuote() {
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal title="Map Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
+  <Modal size="lg" title="Map Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
 	<div style="width: 100%">{@html DataKonaweUtara.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataKonaweUtara.KetMap }</p>
@@ -713,9 +712,12 @@ function prevQuote() {
  <section>
 	<Heading id="InfoTabelGrafik" tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">INFORMASI PEMERINTAHAN OTONOMI SULAWESI TENGGARA</Span></Heading>
 	<br/>
-	<p style="padding:12px;background:white;border-radius:14px;">
-		Dapatkan informasi lengkap tentang Pemerintahan Kab/Kota di Sulawesi Tenggara, termasuk lambang, luas wilayah, jumlah penduduk, kecamatan, kabupaten, letak geografis, serta situs pemerintahan dan data relevan lainnya.
-	</p> <br/>
+	<div style="padding:12px;background:white;border-radius:14px;">
+		  <div class="block grid-cols-12 gap-2 md:flex lg:flex">
+			 <div><span style="font-size:40px;">🗺️</span></div> 
+			  <div class="col-span-11">Lihat informasi statistik Pemerintah Kab/Kota Sulawesi tenggara mencakup luas wilayah, jumlah penduduk, Lambang, Jumlah Kecamatan, Kelurahan / Desa, Map Geografis, serta Situs web Pemerintahan. <span style="color:#49a1f2;">(Update: 2025)</span></div>
+			</div>
+		</div> <br/>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
 		<div class="p-1">
 			
@@ -744,16 +746,16 @@ function prevQuote() {
 						</div>
 					  </Popover>	
 				</td>
-				<td style="white-space: break-spaces;">{formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)} 👥 </td>
+				<td style="white-space: break-spaces;">{formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)} 👤 </td>
 				 <td> 
-					<span on:click={()=>visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
+					<span class="buttonDetail" on:click={()=>visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 						&#8285; 
 					</span>
 					<!-- menu -->
 					{#if visibleBombana}
 					<div id="menuDropdown" class="dropdown-content">
 					  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapBombana = true)}>Lihat Map</a> 
-					  <a href={ DataBombana.Situs } rel="nofollow noopener" target="_blank">Ke Situs</a>
+					  <a href={ DataBombana.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
 					</div>
 					{/if}
 				  </td>
@@ -775,16 +777,16 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk)} 👥 </td>
+					<td style="white-space: break-spaces;">{formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk)} 👤 </td>
 					 <td> 
-						<span on:click={()=>visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
+						<span class="buttonDetail" on:click={()=>visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
 						</span>
 						<!-- menu -->
 						{#if visibleWakatobi}
 						<div id="menuDropdown" class="dropdown-content">
 						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapWakatobi = true)}>Lihat Map</a> 
-						  <a href={ DataWakatobi.Situs } rel="nofollow noopener" target="_blank">Ke Situs</a>
+						  <a href={ DataWakatobi.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
 						</div>
 						{/if}
 					 </td>
@@ -805,16 +807,16 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;">{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} 👥 </td>
+					<td style="white-space: break-spaces;">{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} 👤 </td>
 					 <td> 
-						<span on:click={()=>visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
+						<span class="buttonDetail" on:click={()=>visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
 						</span>
 						<!-- menu -->
 						{#if visibleKendari}
 						<div id="menuDropdown" class="dropdown-content">
 						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKendari = true)}>Lihat Map</a> 
-						  <a href={ DataKotaKendari.Situs } rel="nofollow noopener" target="_blank">Ke Situs</a>
+						  <a href={ DataKotaKendari.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
 						</div>
 						{/if}
 					 </td>
@@ -836,16 +838,16 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td style="white-space: break-spaces;"> {formatter.format(DataKonawe.Luas_Wilayah)} km2 / 👥 {formatter.format(DataKonawe.J_Penduduk)} 👥 </td>
+					<td style="white-space: break-spaces;"> {formatter.format(DataKonawe.Luas_Wilayah)} km2 / {formatter.format(DataKonawe.J_Penduduk)} 👤 </td>
 					 <td> 
-						<span on:click={()=>visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
+						<span class="buttonDetail" on:click={()=>visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
 						</span>
 						<!-- menu -->
 						{#if visibleKonawe}
 						<div id="menuDropdown" class="dropdown-content">
 						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKonawe = true)}>Lihat Map</a> 
-						  <a href={DataKonawe.Situs } rel="nofollow noopener" target="_blank">Ke Situs</a>
+						  <a href={DataKonawe.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
 						</div>
 						{/if}
 					 </td>
@@ -867,16 +869,16 @@ function prevQuote() {
 							</div>
 						  </Popover>
 					</td>
-					<td>{formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 / {formatter.format(DataKonaweUtara.J_Penduduk)} 👥 </td>
+					<td>{formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 / {formatter.format(DataKonaweUtara.J_Penduduk)} 👤 </td>
 					 <td> 
-						<span on:click={()=>visibleKonaweUtara  = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
+						<span class="buttonDetail" on:click={()=>visibleKonaweUtara  = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgba(129, 129, 137, 0.44);"> 
 							&#8285; 
 						</span>
 						<!-- menu -->
 						{#if visibleKonaweUtara}
 						<div id="menuDropdown" class="dropdown-content">
 						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKonaweUtara = true)}>Lihat Map</a> 
-						  <a href={DataKonaweUtara.Situs } rel="nofollow noopener" target="_blank">Ke Situs</a>
+						  <a href={DataKonaweUtara.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
 						</div>
 						{/if}
 					 </td>
@@ -1130,6 +1132,7 @@ function prevQuote() {
   transition: all .5s;
   border-bottom: 6px solid rgb(195, 221, 253);
   border: 1px solid #dadae8;
+  background: #e4ecfb;
 }
 .card_fitur .imgBox {
 	display: inline-flex;
@@ -1686,5 +1689,70 @@ margin-left: -6%;
 }
 
 }
+
+.buttonDetail:hover {
+  box-shadow: 0 0 10px #a5b8f2;
+}
+
+/*** Mouse */
+.mouse {
+  width: 32px;
+  height: 52px;
+  border-radius: 20px;
+  border: 3px solid #999;
+  position: fixed;
+  top: calc(58% - 30px);
+  left: calc(92% - 20px);
+}
+.mouse:before, .mouse:after {
+  content: "";
+  display: block;
+  position: absolute;
+}
+
+
+
+/* Sixth */
+.m-5:before {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  top: 10px;
+  left: calc(50% - 5px);
+  border: 2px solid rgba(153, 153, 153, 0.55);
+}
+.m-5:after {
+  top: 30px;
+  left: calc(50% - 5px);
+  border: 5px solid transparent;
+  border-top-color: #999;
+  -webkit-animation: m-5-arrow 1.2s ease-in-out infinite;
+          animation: m-5-arrow 1.2s ease-in-out infinite;
+}
+
+@-webkit-keyframes m-5-arrow {
+  20%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(9px);
+  }
+  80% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes m-5-arrow {
+  20%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(9px);
+  }
+  80% {
+    transform: translateY(-3px);
+  }
+}
+
 
 </style>

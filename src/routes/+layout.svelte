@@ -29,14 +29,7 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
     <br/> <MapPinAltOutline class="w-4 h-4 align-middle inline" /> <span>Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, Kota Kendari, Sulawesi Tenggara 93231</span>
 	</span>
 <br/>
-{#if $user}
-	<div style="font-size:14px;">Anda telah login sebagai 
-		<span>{$user.name}</span> | 
-		<button type="button" on:click={user.logout}><u>Logout</u></button>		
-	</div> 
-	{:else}
-	  <p  style="font-size:14px;">Anda tidak login</p>
-{/if}
+
   </Footer>
 
 </div>
