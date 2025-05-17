@@ -375,6 +375,8 @@ function onWindowClick(e) {
 <div class="container mt-14">
 	<Heading tag="h3" class="mb-4" customSize="text-3xl text-center font-extrabold  md:text-3xl lg:text-4xl">Peta & Informasi Pemerintahan Otonomi Sulawesi Tenggara</Heading>
 	<br/>
+	Dibawah Berikut adalah informasi Data Statistic Provinsi Sulawesi Tenggara se-kab/kota Sulawesi Tenggara. Mencakup <a href="/maps-sultra/#Maps" style="text-decoration:underline;">Maps</a>, <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;">Kode dan Data Administrasi</a>, serta <a href="/maps-sultra/#grafik" style="text-decoration:underline;">Grafik</a>.
+	<br/><br/>
 	<Heading tag="h4" class="mb-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Lanskap Geografis Sulawesi Tenggara</Heading>
 	
 	<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3">
@@ -479,7 +481,7 @@ function onWindowClick(e) {
 		</div>
 	</div>
 	<br/><br/>
-	<Heading tag="h4" class="mb-4 mt-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Maps Sulawesi Tenggara</Heading>
+	<Heading id="Maps" tag="h4" class="mb-4 mt-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Maps Sulawesi Tenggara</Heading>
 	<Tabs>
 		<TabItem open title="Maps Sultra">
 		 <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=provinsi%20sulawesi%20tenggara+(My%20Business%20Name)&amp;t=&amp;z=8&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
@@ -694,7 +696,7 @@ function onWindowClick(e) {
 		<td class="hidekolom">Gunung: { DataBombana.J_Gunung } <br/>Pulau: { DataBombana.J_Pulau } <br/>Selat: { DataBombana.J_Selat } <br/>Danau: { DataBombana.J_Danau } <br/>Sungai: { DataBombana.J_Sungai } <br/>Rawa: { DataBombana.J_Rawa} </td>
         <td class="hidekolom">{ DataBombana.Koordinat } </td>
 		 <td> 
-			<span on:click={()=> visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+			<span class="buttonDetail" on:click={()=> visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 				&#8285; 
 			</span>
 			<!-- menu -->
@@ -727,7 +729,7 @@ function onWindowClick(e) {
 		<td class="hidekolom">Gunung: { DataButon.J_Gunung }<br/>Pulau: { DataButon.J_Pulau } <br/>Selat: { DataButon.J_Selat } <br/>Danau: { DataButon.J_Danau } <br/>Sungai: { DataButon.J_Sungai } <br/>Rawa: { DataButon.J_Rawa} </td>
          <td class="hidekolom">{ DataButon.Koordinat } </td>
          <td> 
-			<span on:click={()=> visibleButon  = !visibleButon} bind:this={closeButon} class="KBW2024" style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+			<span class="buttonDetail" on:click={()=> visibleButon  = !visibleButon} bind:this={closeButon} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 				&#8285; 
 			</span>
 			<!-- menu -->
@@ -761,7 +763,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: { DataButonSelatan.J_Gunung }<br/>Pulau: { DataButonSelatan.J_Pulau } <br/>Selat: { DataButonSelatan.J_Selat } <br/>Danau: { DataButonSelatan.J_Danau } <br/>Sungai: { DataButonSelatan.J_Sungai } <br/>Rawa: { DataButonSelatan.J_Rawa}    </td>
 			 <td class="hidekolom">{ DataButonSelatan.Koordinat }  </td>
 			 <td> 
-				<span on:click={()=> visibleButonSelatan  = !visibleButonSelatan} bind:this={closeButonSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleButonSelatan  = !visibleButonSelatan} bind:this={closeButonSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -794,7 +796,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataButonTengah.J_Gunung} <br/>Pulau: {DataButonTengah.J_Pulau} <br/>Selat: { DataButonTengah.J_Selat } <br/>Danau: { DataButonTengah.J_Danau } <br/>Sungai: { DataButonTengah.J_Sungai } <br/>Rawa: { DataButonTengah.J_Rawa} </td>
 			 <td class="hidekolom">{DataButonTengah.Koordinat} </td>
 			 <td> 
-				<span on:click={()=> visibleButonTengah  = !visibleButonTengah} bind:this={closeButonTengah} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleButonTengah  = !visibleButonTengah} bind:this={closeButonTengah} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -828,7 +830,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataButonUtara.J_Gunung } <br/>Pulau: {DataButonUtara.J_Pulau } <br/>Selat: { DataButonUtara.J_Selat } <br/>Danau: { DataButonUtara.J_Danau } <br/>Sungai: { DataButonUtara.J_Sungai } <br/>Rawa: { DataButonUtara.J_Rawa}   </td>
 			 <td class="hidekolom">{DataButonUtara.Koordinat } </td>
 			 <td> 
-				<span on:click={()=> visibleButonUtara  = !visibleButonUtara} bind:this={closeButonUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleButonUtara  = !visibleButonUtara} bind:this={closeButonUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -862,7 +864,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKolaka.J_Gunung } <br/>Pulau: {DataKolaka.J_Pulau } <br/>Selat: { DataKolaka.J_Selat } <br/>Danau: { DataKolaka.J_Danau } <br/>Sungai: { DataKolaka.J_Sungai } <br/>Rawa: { DataKolaka.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolaka.Koordinat }</td>
 			 <td> 
-				<span on:click={toogleKolaka} bind:this={closeKolaka} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={toogleKolaka} bind:this={closeKolaka} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -896,7 +898,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKolakaTimur.J_Gunung} <br/>Pulau: {DataKolakaTimur.J_Pulau } <br/>Selat: { DataKolakaTimur.J_Selat } <br/>Danau: { DataKolakaTimur.J_Danau } <br/>Sungai: { DataKolakaTimur.J_Sungai } <br/>Rawa: { DataKolakaTimur.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolakaTimur.Koordinat } </td>
 			 <td> 
-				<span on:click={()=> visibleKolakaTimur  = !visibleKolakaTimur} bind:this={closeKolakaTimur} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKolakaTimur  = !visibleKolakaTimur} bind:this={closeKolakaTimur} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -930,7 +932,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKolakaUtara.J_Gunung }<br/>Pulau: {DataKolakaUtara.J_Pulau }  <br/>Selat: { DataKolakaUtara.J_Selat } <br/>Danau: { DataKolakaUtara.J_Danau } <br/>Sungai: { DataKolakaUtara.J_Sungai } <br/>Rawa: { DataKolakaUtara.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolakaUtara.Koordinat }</td>
 			 <td> 
-				<span on:click={()=> visibleKolakaUtara = !visibleKolakaUtara} bind:this={closeKolakaUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKolakaUtara = !visibleKolakaUtara} bind:this={closeKolakaUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -964,7 +966,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKonawe.J_Gunung }<br/>Pulau: {DataKonawe.J_Pulau } <br/>Selat: { DataKonawe.J_Selat } <br/>Danau: { DataKonawe.J_Danau } <br/>Sungai: { DataKonawe.J_Sungai } <br/>Rawa: { DataKonawe.J_Rawa}   </td>
 			 <td class="hidekolom">{DataKonawe.Koordinat } </td>
 			 <td> 
-				<span on:click={()=> visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -998,7 +1000,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKonaweKepulauan.J_Gunung } <br/>Pulau: {DataKonaweKepulauan.J_Pulau } <br/>Selat: { DataKonaweKepulauan.J_Selat } <br/>Danau: { DataKonaweKepulauan.J_Danau } <br/>Sungai: { DataKonaweKepulauan.J_Sungai } <br/>Rawa: { DataKonaweKepulauan.J_Rawa} </td>
 			 <td class="hidekolom">{DataKonaweKepulauan.Koordinat } </td>
 			 <td> 
-				<span on:click={()=> visibleKonaweKepulauan = !visibleKonaweKepulauan} bind:this={closeKonaweKepulauan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonaweKepulauan = !visibleKonaweKepulauan} bind:this={closeKonaweKepulauan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1032,7 +1034,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKonaweSelatan.J_Gunung } <br/>Pulau: {DataKonaweSelatan.J_Pulau} <br/>Selat: { DataKonaweSelatan.J_Selat } <br/>Danau: { DataKonaweSelatan.J_Danau } <br/>Sungai: { DataKonaweSelatan.J_Sungai } <br/>Rawa: { DataKonaweSelatan.J_Rawa}</td>
 			 <td class="hidekolom">{DataKonaweSelatan.Koordinat} </td>
 			 <td> 
-				<span on:click={()=> visibleKonaweSelatan = !visibleKonaweSelatan} bind:this={closeKonaweSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonaweSelatan = !visibleKonaweSelatan} bind:this={closeKonaweSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1066,7 +1068,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKonaweUtara.J_Gunung }<br/>Pulau: {DataKonaweUtara.J_Pulau } <br/>Selat: { DataKonaweUtara.J_Selat } <br/>Danau: { DataKonaweUtara.J_Danau } <br/>Sungai: { DataKonaweUtara.J_Sungai } <br/>Rawa: { DataKonaweUtara.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKonaweUtara.Koordinat }</td>
 			 <td> 
-				<span on:click={()=> visibleKonaweUtara = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonaweUtara = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1100,7 +1102,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataMuna.J_Gunung} <br/>Pulau: {DataMuna.J_Pulau} <br/>Selat: { DataMuna.J_Selat } <br/>Danau: { DataMuna.J_Danau } <br/>Sungai: { DataMuna.J_Sungai } <br/>Rawa: { DataMuna.J_Rawa}  </td>
 			 <td class="hidekolom"> {DataMuna.Koordinat} </td>
 			 <td> 
-				<span on:click={()=> visibleMuna = !visibleMuna} bind:this={closeMuna} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleMuna = !visibleMuna} bind:this={closeMuna} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1134,7 +1136,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataMunaBarat.J_Gunung} <br/>Pulau: {DataMunaBarat.J_Pulau} <br/>Selat: { DataMunaBarat.J_Selat } <br/>Danau: { DataMunaBarat.J_Danau } <br/>Sungai: { DataMunaBarat.J_Sungai } <br/>Rawa: { DataMunaBarat.J_Rawa}   </td>
 			 <td class="hidekolom">{DataMunaBarat.Koordinat} </td>
 			 <td> 
-				<span on:click={()=> visibleMunaBarat = !visibleMunaBarat} bind:this={closeMunaBarat} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleMunaBarat = !visibleMunaBarat} bind:this={closeMunaBarat} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1168,7 +1170,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataWakatobi.J_Gunung}<br/> Pulau: {DataWakatobi.J_Pulau} <br/>Selat: { DataWakatobi.J_Selat } <br/>Danau: { DataWakatobi.J_Danau } <br/>Sungai: { DataWakatobi.J_Sungai } <br/>Rawa: { DataWakatobi.J_Rawa}    </td>
 			 <td class="hidekolom">{DataWakatobi.Koordinat} </td>
 			 <td> 
-				<span on:click={()=> visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1202,7 +1204,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKotaBaubau.J_Gunung} <br/>Pulau: {DataKotaBaubau.J_Pulau} <br/>Selat: { DataKotaBaubau.J_Selat } <br/>Danau: {DataKotaBaubau.J_Danau } <br/>Sungai: { DataKotaBaubau.J_Sungai } <br/>Rawa: { DataKotaBaubau.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKotaBaubau.Koordinat} </td>
 			 <td> 
-				<span on:click={()=> visibleBaubau  = !visibleBaubau} bind:this={closeBaubau} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleBaubau  = !visibleBaubau} bind:this={closeBaubau} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1236,7 +1238,7 @@ function onWindowClick(e) {
 			<td class="hidekolom">Gunung: {DataKotaKendari.J_Gunung} <br/>Pulau: {DataKotaKendari.J_Pulau} <br/>Selat: { DataKotaKendari.J_Selat } <br/>Danau: {DataKotaKendari.J_Danau } <br/>Sungai: { DataKotaKendari.J_Sungai } <br/>Rawa: { DataKotaKendari.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKotaKendari.Koordinat}  </td>
 			 <td> 
-				<span on:click={()=> visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1253,7 +1255,7 @@ function onWindowClick(e) {
         </table>
 
 	<br/><br/>
-	<Heading tag="h4" class="mb-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Grafik Kabupaten/Kota Sulawesi Tenggara</Heading>
+	<Heading id="grafik" tag="h4" class="mb-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Grafik Kabupaten/Kota Sulawesi Tenggara</Heading>
 	<Card class="w-full max-w-full">
 		<div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700 ">
 		  <div class="flex items-center">
@@ -1387,6 +1389,10 @@ margin-left:-60px;
 			display:none;
 		}
 	}
+
+.buttonDetail:hover {
+  box-shadow: 0 0 10px #a5b8f2;
+}
 
 </style>
 

@@ -32,7 +32,8 @@
 
 <div class="container">
     <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Foto & Kegiatan</Heading>
-    <br/>
+    <br/>Berikut adalah dokumentasi kegiatan yang dilaksanakan oleh berbagai bidang di Biro Pemerintahan dan Otonomi Daerah Sekretariat Daerah Sulawesi Tenggara. Dokumentasi ini disajikan dalam bentuk gambar atau foto yang menggambarkan berbagai aktivitas dan program yang telah dilaksanakan. Untuk melihat lebih lanjut, silakan pilih tab masing-masing bidang untuk mengakses galeri foto terkait. Kami berharap dokumentasi ini dapat memberikan gambaran yang jelas mengenai komitmen dan kontribusi Biro dalam meningkatkan pemerintahan dan otonomi daerah di Sulawesi Tenggara.
+    <br/> <br/>
 
     <Tabs tabStyle="underline">
       <TabItem open>

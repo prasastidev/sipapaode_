@@ -242,19 +242,16 @@ function ReadMore() {
 
 let quotes = [
     {
-      author: "Muliadi, S.ST",
       text: "SiPapaOde dibuat agar agar pelayanan Pemerintahan terutama Biro Pemerintahan & Otonomi Daerah Sultra bisa terintegrasi dan lebih cepat.",
-      position: "Kepala Biro Pemerintahan & Otonomi Daerah",
-	  picture: "https://www.sipapaode.id/_app/immutable/assets/Karo.DQN2OwYw.webp"
+      position: "Kementerian Dalam Negeri, Jakarta",
+	  picture: "https://cloud.appwrite.io/v1/storage/buckets/6791fea50005705fec23/files/679aea77003b037ff868/view?project=67384f1d0028200e3af4&project=67384f1d0028200e3af4"
     },
     {
-      author: "John Doe",
       text: "Inovasi adalah kunci untuk masa depan yang lebih baik.",
       position: "CEO Inovasi Corp",
 	  picture: "https://static.vecteezy.com/system/resources/thumbnails/013/394/721/small/user-profile-avatar-png.png"
     },
     {
-      author: "Jane Smith",
       text: "Kreativitas adalah kekuatan yang menggerakkan dunia.",
       position: "Art Director Creative Agency",
 	  picture: "https://static.vecteezy.com/system/resources/previews/051/718/789/non_2x/elegant-businessman-avatar-with-suit-and-tie-free-png.png"
@@ -450,8 +447,8 @@ function prevQuote() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/coming-soon">Fasilitas Standar Pelayanan Minimum (SPM)</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal informasi dan pengiriman laporan Standar Pelayanan Minimum atau SPM.
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
@@ -467,8 +464,8 @@ function prevQuote() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan & Fasilitas Penegasan Batas Daerah</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal informasi Fasilitasi Penataan Wilayah Pemerintahan dan Penegasan Batas Daerah.
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
@@ -484,8 +481,8 @@ function prevQuote() {
 				<h3 class="title text-sm font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/coming-soon">Pembentukan Daerah Otonomi Baru</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Pemerintah Daerah di Sultra dalam hal informasi pembentukan daerah Otonomi Baru.
 				</p>
 			  </div> </div>
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
@@ -501,9 +498,8 @@ function prevQuote() {
 				<h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 				  <a href="/maps-sultra/#TabelOtonomi">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</a>
 				</h3>
-				<p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">Publik (umum)</Badge>
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				<p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk umum dalam mengetahui Informasi Kode, Data Wilayah dan Rupa Bumi Kab/Kota Sultra.
 				</p>
 			  </div> </div>
 			 
@@ -529,8 +525,8 @@ function prevQuote() {
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 					<a href="/coming-soon">Penerbitan Surat & SK Gubernur Pejabat Negara & Legistlatif</a>
 				  </h3>
-				  <p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				  <p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Kepala Daerah, DPRD dan ASN di Sultra dalam hal menerbitkan SK ataupun Surat resmi lainnya baik Pengangkatan/Pemberhentian ataupun Pengurusan Izin ke Luar Negeri.
 				</p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
@@ -546,8 +542,8 @@ function prevQuote() {
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;background: #f0f8ff;">
 					<a href="/penyampaian-lppd">Laporan dan Evaluasi: LKPJ & LPPD</a>
 				  </h3>
-				  <p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				  <p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal pengiriman laporan LKPJ ataupun LPPD.
 				</p>
 				</div> </div>
 			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
@@ -563,8 +559,8 @@ function prevQuote() {
 				  <h3 class="title text-sm font-bold" style="line-height:normal;background: #f0f8ff;">
 					<a href="/coming-soon">Inventarisasi Penataan Urusan Daerah Otonomi Baru</a>
 				  </h3>
-				  <p class="textKetFitur" style="float:left;">
-					<Badge color="indigo" rounded class="mb-4" style="font-weight:600;">PemDa kab/kota (khusus)</Badge>
+				  <p class="textKetFitur" style="color:#2c6ed8;">
+					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal pengurusan inventarisasi penataan  Daerah otonomi baru.
 				</p>
 				</div> </div>
 				
@@ -643,11 +639,19 @@ function prevQuote() {
 		 </div>
 		 <div class="col-span-2 rounded-xl p-2 pb-4">
 			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;">Kotak Saran & Info</h2>
-			<p style="padding:10px;background:white;">
-			<b>Alamat:</b> <br/>
-			<b>Biro Pemerintahan dan Otonomi Daerah Sultra</b><br/>
-			Kompleks Bumi Praja Anduonohu, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>
-			</p> <br/><br/><br/>
+			
+			<div style="padding:10px;background:white;">
+				<div class="block grid-cols-8 gap-2 md:flex lg:flex">
+					<div class="col-span-6">
+						<b>Alamat:</b> <br/>
+						<b>Biro Pemerintahan dan Otonomi Daerah Sultra</b><br/>
+						Kompleks Bumi Praja Anduonohu, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>	
+					</div>
+					<div><img src="https://app.wondersites.org/templates/review-widget.net/assets/img/widgets/square-widget-7.png" style="height:100px;width:250px;margin-left:10px;" /></div> 			 
+				   </div>
+			
+   
+			</div> <br/><br/><br/>
 			
 			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;margin-bottom:18px;">Berita Hot Terkini di Sulawesi Tenggara
 			</h2> 
@@ -932,6 +936,7 @@ function prevQuote() {
    <!-- Section Organization -->
 <section>
 	<Heading tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid rgb(195, 221, 253);">STRUKTUR ORGANISASI BIRO PEM. & OTDA SULTRA</Span></Heading>
+	<span>Dibawah berikut adalah Struktur Organisasi Biro Pemerintahan dan Otonomi Daerah Setda Sulawesi Tenggara</span>
 	<br/> 
 	<div id="container_org">
         <ol class="static-org-chart">
@@ -1022,22 +1027,22 @@ function prevQuote() {
 <br/><br/>
   <!--  Section Quote -->  
  <section style="align-items: normal;"> 
-	<center><h3 class="justify-start font-semibold text-3xl mb-4">Quote Hari ini:</h3></center>
+	<center><h3 class="justify-start font-semibold text-3xl mb-4">Dokumentasi Album Gallery:</h3></center>
 	<div class="flex justify-end mt-4" style="text-align:right;margin-bottom:14px;">
 		<button on:click={prevQuote} class="button-74 mr-2">&#8678; Prev</button>
 		<button on:click={nextQuote} class="button-74">Next &#8680;</button>
 	  </div>
 
-<div class="textquote grid grid-cols-4" style="width: 100%;height: 330px;background-color: aliceblue;margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px darkslategray;box-sizing: border-box;">
-	<div class="rounded-xl pr-2">
-	  <Avatar src={quotes[currentIndex].picture} size="xl" /><br/>
-	  <div style="font-family:Libre Franklin, sans-serif;font-weight: 300;vertical-align: middle;margin-top: 10px;display: inline-block;padding-left: 20px;font-size: 18px;color: darkslategray;"><span>{quotes[currentIndex].author}</span></div>
+<div class="textquote grid grid-cols-12" style="width: 100%;height: 330px;background-color: aliceblue;margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px darkslategray;box-sizing: border-box;">
+	<div class="col-span-8 rounded-xl pr-2">
+	  <img src={quotes[currentIndex].picture} style="width:560px;height:260px;border-radius:40px;" /><br/>
+	  
 	</div>
-	<div class="col-span-3 rounded-xl">
-	<span style="font-family: Libre Franklin, sans-serif;font-size: 200px;color: darkslategray;font-weight: 900;display: block;height: 80px;line-height: 105px;">“</span>
-	 <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 26px;line-height: 1.4;color: darkslategray;">{quotes[currentIndex].text}.</p>
+	<div class="col-span-4 rounded-xl">
+	<span style="font-family: Libre Franklin, sans-serif;font-size:60px;color: darkslategray;font-weight: 900;display: block;height:50px;line-height: 60px;">“</span>
+	 <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 18px;line-height: 1.4;color: darkslategray;">{quotes[currentIndex].text}.</p>
 <hr style=" border: 0.5px solid slategray;" /> <br/>
-<span style="font-weight: 100; font-size: 14px;">{quotes[currentIndex].position}</span>
+<span style="font-weight: 100; font-size: 14px;">📍 {quotes[currentIndex].position}</span>
 	</div>             
 </div>
 </section>
