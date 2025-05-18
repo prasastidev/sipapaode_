@@ -657,7 +657,7 @@ function prevQuote() {
 			</h2> 
 			<div id="BeritaSultra" style="position: relative;height: 70%;padding-bottom:70px; /* Aspect ratio: 1600/900 * 100 */">
 				<iframe 
-					src="https://rss.app/embed/v1/list/tVd4uipyQtOidTKx" 
+					src="https://rss.app/embed/v1/list/tAep0D0iP9KiHpnj" 
 					frameborder="0" 
 					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
 				</iframe>
@@ -1039,7 +1039,7 @@ function prevQuote() {
 	  
 	</div>
 	<div class="col-span-4 rounded-xl">
-	<span style="font-family: Libre Franklin, sans-serif;font-size:60px;color: darkslategray;font-weight: 900;display: block;height:50px;line-height: 60px;">“</span>
+	<span style="font-family: Libre Franklin, sans-serif;font-size:60px;color: darkslategray;font-weight: 900;display: block;height:40px;line-height: 30px;">“</span>
 	 <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 18px;line-height: 1.4;color: darkslategray;">{quotes[currentIndex].text}.</p>
 <hr style=" border: 0.5px solid slategray;" /> <br/>
 <span style="font-weight: 100; font-size: 14px;">📍 {quotes[currentIndex].position}</span>

@@ -43,7 +43,7 @@ $: filteredData = selectedBidang
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Aktivasi Layanan Online</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Aktivasi Layanan Formulir Online</Heading>
     <br/>
 
    <!-- Filter Buttons -->
@@ -80,7 +80,7 @@ $: filteredData = selectedBidang
       <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><span class="Bulat">{i+1}</span></TableBodyCell>
       <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{cetakTabel.Jenis_layanan}</TableBodyCell>
       <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{cetakTabel.Bidang}</TableBodyCell>
-      <TableBodyCell class="py-3 whitespace-break-spaces"><Toggle color="green" bind:checked={cetakTabel.Status_raw} on:click={UpdateLayananOnline(cetakTabel.Status_raw, cetakTabel.$id )}>Via Online {cetakTabel.Status_raw ? 'Aktiv' : 'Tidak Aktiv'}</Toggle> </TableBodyCell>
+      <TableBodyCell class="py-3 whitespace-break-spaces"><Toggle color="green" bind:checked={cetakTabel.Status_raw} on:click={UpdateLayananOnline(cetakTabel.Status_raw, cetakTabel.$id )}>Formulir Online {cetakTabel.Status_raw ? 'Aktiv' : 'Tidak Aktiv'}</Toggle> </TableBodyCell>
 
     </TableBodyRow>
  {/each}

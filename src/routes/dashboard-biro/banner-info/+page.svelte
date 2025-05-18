@@ -8,6 +8,7 @@
   import { UpdateTableTextInfo } from '$lib/textInfoBanner.js';
   import { invalidateAll } from '$app/navigation';
   import { slide } from 'svelte/transition';
+  import ScreenInfo from '$lib/images/ScreenshotInfo.png';
 
   let ModalEditTextBanner = false;
   let toastStatus = false;
@@ -88,13 +89,16 @@ function upadateAktivasiBanner(Status_banner, id) {
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Banner Info</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Info Pengumuman Halaman Depan</Heading>
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Informasi banner pengumuman pada halaman depan dapat diaktivasi dan diedit melalui saluran informasi di bawah berikut.</label>
+        <label>Dibawah berikut adalah pengeditan informasi pengumuman yang terdapat pada halaman depan situs. Pengeditan Text dan Penyetingan Aktivasi Tampil terdapat pada table halaman ini.</label>
       </div>
     </div>
+    <br/> <br/>
+    Sample Gambar:<br/> <br/>
+    <img src={ScreenInfo} alt="screen info" style="width:100%;height:100%;" />
     <br/><br/>
 
     <Modal title="Edit Text Info Banner" bind:open={ModalEditTextBanner} autoclose={false}>
@@ -118,15 +122,15 @@ function upadateAktivasiBanner(Status_banner, id) {
     </Modal>
 
   <section>
-
-    <br/>
+    Silahkan melakukan pengeditan informasi pengumuman pada tabel di bawah:
+    <br/> <br/> 
     {#if data.TableDatasTextInfo.documents.length > 0}
     <Table shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4">Lokasi</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4">Text Info</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4">Edit Text</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4">Status</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4">Tampil</TableHeadCell>
       </TableHead>
       <TableBody tableBodyClass="divide-y">
         {#each data.TableDatasTextInfo.documents as cetakTabel, i}	
