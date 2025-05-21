@@ -1708,6 +1708,7 @@ margin-left: -6%;
   position: fixed;
   top: calc(58% - 30px);
   left: calc(92% - 20px);
+  z-index: 1000;
 }
 .mouse:before, .mouse:after {
   content: "";

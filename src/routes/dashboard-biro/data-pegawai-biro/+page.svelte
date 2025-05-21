@@ -198,7 +198,7 @@ const updateDataPegawai = async (e) => {
 <div class="container">
       <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Pegawai Biro Pemerintahan - Sultra</Heading>
       <br/><br/>
-      {#if $user.prefs['Role'] === "Tata Usaha"}
+      {#if $user.prefs['Role'] === "PIC Tata Usaha"}
       <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
         <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambah Data Pegawai pada Tombol di samping berikut</div>
         <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddDataPegawai = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Pegawai</Button>  </div>
