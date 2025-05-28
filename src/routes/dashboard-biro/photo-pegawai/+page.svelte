@@ -134,7 +134,7 @@ function showimage(id) {
      <div style="float:left;text-align:center;">
      <img src={showimage(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
      <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
-     {#if $user.prefs['Role'] === "Tata Usaha"}
+     {#if $user.prefs['Role'] === "PIC Tata Usaha"}
       <ButtonGroup class="*:!ring-primary-700">
         <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-4 h-4 me-2" />Lihat</a></Button>
         <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>

@@ -339,13 +339,9 @@ const updateDataPegawai = async (e) => {
       <TableHead>
       <TableHeadCell style="font-size: larger;" class="py-4 content-start">No</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-4 content-start">Nama</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Golongan</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Tanggal Lahir</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Jenis Kelamin</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Pendidikan Terakhir</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Jenis Pegawai</TableHeadCell>
-      {#if $user.prefs['Role'] === "Tata Usaha"}
-      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
+      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Detail</TableHeadCell>
+      {#if $user.prefs['Role'] === "PIC Tata Usaha"}
+      <TableHeadCell style="font-size: larger;" class="py-4 content-start">Tombol Tindakan</TableHeadCell>
       {/if}
        </TableHead>
        {#await data.TableDataPegawai.documents}
@@ -356,13 +352,13 @@ const updateDataPegawai = async (e) => {
            {#if i >= postRangeLow && i < postRangeHigh}
            <TableBodyRow>
            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{i+1}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start"><div style="width:160px;"><Avatar src={cetakTabel.URL_PhotoProfile || undefined } class="align-middle" border rounded size="lg" /> <br/>{cetakTabel.Nama} <br/><b>NIP:</b> {cetakTabel.NIP}</div> </TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start"><div style="width:180px;"><b>Golongan:</b><br/>{cetakTabel.Golongan}<br/><br/><b>Jabatan:</b><br/>{cetakTabel.Jabatan}</div></TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Tanggal_lahir.slice(0, 10)}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Kelamin}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Pendidikan_Terakhir}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">{cetakTabel.Jenis_Pegawai}</TableBodyCell>
-            {#if $user.prefs['Role'] === "Tata Usaha"}
+            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start"><div style="width:160px;"><Avatar src={cetakTabel.URL_PhotoProfile || undefined } class="align-middle" border rounded size="lg" /> <br/>{cetakTabel.Nama} <br/><br/><b>Tanggal Lahir:</b> {cetakTabel.Tanggal_lahir.slice(0, 10)}
+            <br/><br/><b>Gender:</b><br/>{cetakTabel.Jenis_Kelamin}
+            </div> </TableBodyCell>
+            <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start"><div style="width:180px;"><b>NIP:</b><br/>{cetakTabel.NIP}<br/><br/><b>Golongan:</b><br/>{cetakTabel.Golongan}<br/><br/><b>Jabatan:</b><br/>{cetakTabel.Jabatan}
+            <br/><br/><b>Pendidikan Terakhir:</b><br/>{cetakTabel.Pendidikan_Terakhir}  <br/><br/><b>Jenis Pegawai:</b><br/>{cetakTabel.Jenis_Pegawai}
+            </div></TableBodyCell>
+            {#if $user.prefs['Role'] === "PIC Tata Usaha"}
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">
               <ButtonGroup class="*:!ring-primary-700">
                 <Button style="color:blue;" on:click={() => getDataPegawai(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>

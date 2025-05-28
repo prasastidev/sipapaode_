@@ -1064,7 +1064,7 @@ function prevQuote() {
     <!-- Optional: Counter untuk menunjukkan posisi -->
     {#if quotes.length > 0}
         <div class="text-center mt-2 text-sm text-gray-600">
-            {currentIndex + 1} / {quotes.length}
+           Menampilkan gambar {currentIndex + 1} / dari {quotes.length}
         </div>
     {/if}
 </section>
