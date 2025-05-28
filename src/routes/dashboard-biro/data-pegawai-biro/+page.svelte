@@ -53,24 +53,15 @@
 
   let selectJabatan = '';
     let Jabatan = [
-    { value: 'KEPALA BIRO', name: 'KEPALA BIRO' },
-    { value: 'KASUBAG TATA USAHA', name: 'KASUBAG TATA USAHA' },
-    { value: 'KABAG KERJASAMA', name: 'KABAG KERJASAMA' },
-    { value: 'ANALISIS KERJASAMA', name: 'ANALISIS KERJASAMA' },
+    { value: 'KARO PEMERINTAHAN & OTDA', name: 'KARO PEMERINTAHAN & OTDA' },
     { value: 'ANALISIS KEBIJAKAN AHLI MADYA', name: 'ANALISIS KEBIJAKAN AHLI MADYA' },
+    { value: 'KABAG KERJASAMA', name: 'KABAG KERJASAMA' },
     { value: 'ANALISIS KEBIJAKAN AHLI MUDA', name: 'ANALISIS KEBIJAKAN AHLI MUDA' },
-    { value: 'ANALISIS ASET DAERAH', name: 'ANALISIS ASET DAERAH' },
-    { value: 'ANALISIS BATAS WILAYAH', name: 'ANALISIS BATAS WILAYAH' },
-    { value: 'ANALISIS DOKUMEN PERIJINAN', name: 'ANALISIS DOKUMEN PERIJINAN' },
-    { value: 'ANALISIS PEMERINTAHAN DAERAH', name: 'ANALISIS PEMERINTAHAN DAERAH' },
-    { value: 'PENGELOLA PERJALANAN DINAS', name: 'PENGELOLA PERJALANAN DINAS' },
-    { value: 'BENDAHARA', name: 'BENDAHARA' },
-    { value: 'PENGELOLA DATA', name: 'PENGELOLA DATA' },
-    { value: 'PENYUSUNAN LAPORAN KEUANGAN', name: 'PENYUSUNAN LAPORAN KEUANGAN' },
-    { value: 'PERENCANAAN', name: 'PERENCANAAN' },
-    { value: 'PENGADMINISTRASI PERENCANAAN DAN PROGRAM', name: 'PENGADMINISTRASI PERENCANAAN DAN PROGRAM' },
-    { value: 'PENGADMINSITRASI UMUM', name: 'PENGADMINSITRASI UMUM' },
-    { value: 'STAFF', name: 'STAFF' }
+    { value: 'KASUBAG TATA USAHA BIRO', name: 'KASUBAG TATA USAHA BIRO' },
+    { value: 'PENELAAH TEKNIS KEBIJAKAN', name: 'PENELAAH TEKNIS KEBIJAKAN' },
+    { value: 'PENATA KELOLA PEMERINTAHAN', name: 'PENATA KELOLA PEMERINTAHAN' },
+    { value: 'PENGOLAH DATA DAN INFORMASI', name: 'PENGOLAH DATA DAN INFORMASI' },
+    { value: 'PENGADMINISTRASI PERKANTORAN', name: 'PENGADMINISTRASI PERKANTORAN' }
   ]; 
 
 
@@ -356,7 +347,7 @@ const updateDataPegawai = async (e) => {
             <br/><br/><b>Gender:</b><br/>{cetakTabel.Jenis_Kelamin}
             </div> </TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start"><div style="width:180px;"><b>NIP:</b><br/>{cetakTabel.NIP}<br/><br/><b>Golongan:</b><br/>{cetakTabel.Golongan}<br/><br/><b>Jabatan:</b><br/>{cetakTabel.Jabatan}
-            <br/><br/><b>Pendidikan Terakhir:</b><br/>{cetakTabel.Pendidikan_Terakhir}  <br/><br/><b>Jenis Pegawai:</b><br/>{cetakTabel.Jenis_Pegawai}
+            <br/><br/><b>Pendidikan Terakhir:</b><br/>{cetakTabel.Pendidikan_Terakhir}  <br/><br/><b>Status Pegawai:</b><br/>{cetakTabel.Jenis_Pegawai}
             </div></TableBodyCell>
             {#if $user.prefs['Role'] === "PIC Tata Usaha"}
             <TableBodyCell style="font-size: larger;" class="py-4 whitespace-break-spaces content-start">
