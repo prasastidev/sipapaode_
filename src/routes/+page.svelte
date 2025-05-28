@@ -258,6 +258,9 @@ let quotes = [
     }
   ];
 
+// Ambil data gallery
+$: quotes = data.TableDatasGallery?.documents || [];
+
   let currentIndex = 0;
 
 function nextQuote() {
@@ -268,6 +271,8 @@ function prevQuote() {
   currentIndex = (currentIndex - 1 + quotes.length) % quotes.length;
 }
 
+ // Item yang sedang ditampilkan
+ $: currentItem = quotes[currentIndex] || {};
 
 </script>
 
@@ -1025,26 +1030,43 @@ function prevQuote() {
 </section>
 
 <br/><br/>
-  <!--  Section Quote -->  
- <section style="align-items: normal;"> 
-	<center><h3 class="justify-start font-semibold text-3xl mb-4">Dokumentasi Album Gallery:</h3></center>
-	<div class="flex justify-end mt-4" style="text-align:right;margin-bottom:14px;">
-		<button on:click={prevQuote} class="button-74 mr-2">&#8678; Prev</button>
-		<button on:click={nextQuote} class="button-74">Next &#8680;</button>
-	  </div>
-
-<div class="textquote grid grid-cols-12" style="width: 100%;height: 330px;background-color: aliceblue;margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px darkslategray;box-sizing: border-box;">
-	<div class="col-span-8 rounded-xl pr-2">
-	  <img src={quotes[currentIndex].picture} style="width:560px;height:260px;border-radius:40px;" /><br/>
-	  
-	</div>
-	<div class="col-span-4 rounded-xl">
-	<span style="font-family: Libre Franklin, sans-serif;font-size:60px;color: darkslategray;font-weight: 900;display: block;height:40px;line-height: 30px;">“</span>
-	 <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 18px;line-height: 1.4;color: darkslategray;">{quotes[currentIndex].text}.</p>
-<hr style=" border: 0.5px solid slategray;" /> <br/>
-<span style="font-weight: 100; font-size: 14px;">📍 {quotes[currentIndex].position}</span>
-	</div>             
-</div>
+  <!-- Section Quote -->
+<section style="align-items: normal;">
+    <center>
+        <h3 class="justify-start font-semibold text-3xl mb-4">Dokumentasi Album Gallery:</h3>
+    </center>
+    
+    <div class="flex justify-end mt-4" style="text-align:right;margin-bottom:14px;">
+        <button on:click={prevQuote} class="button-74 mr-2">&#8678; Prev</button>
+        <button on:click={nextQuote} class="button-74">Next &#8680;</button>
+    </div>
+    
+    <div class="textquote grid grid-cols-12" style="width: 100%;height: 330px;background-color: aliceblue;margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px darkslategray;box-sizing: border-box;">
+        <div class="col-span-8 rounded-xl pr-2">
+            <img 
+                src={currentItem.URL || '/placeholder-image.jpg'} 
+                alt={currentItem.Description || 'Gallery image'}
+                style="width:560px;height:260px;border-radius:40px;object-fit:cover;" 
+            />
+        </div>
+        
+        <div class="col-span-4 rounded-xl">
+            <span style="font-family: Libre Franklin, sans-serif;font-size:60px;color: darkslategray;font-weight: 900;display: block;height:40px;line-height: 30px;">"</span>
+            <p style="font-family:Libre Franklin, sans-serif;font-weight: 100;font-size: 18px;line-height: 1.4;color: darkslategray;">
+                {currentItem.Description || 'undefined'}.
+            </p>
+            <hr style="border: 0.5px solid slategray;" />
+            <br/>
+            <span style="font-weight: 100; font-size: 14px;">📍 {currentItem.Location || 'undefined'}</span>
+        </div>
+    </div>
+    <br/>  
+    <!-- Optional: Counter untuk menunjukkan posisi -->
+    {#if quotes.length > 0}
+        <div class="text-center mt-2 text-sm text-gray-600">
+            {currentIndex + 1} / {quotes.length}
+        </div>
+    {/if}
 </section>
   <br/> <br/>
   <!--  End Section Quote -->  

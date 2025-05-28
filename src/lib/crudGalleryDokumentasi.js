@@ -13,14 +13,25 @@ export async function getTableGalleryDokumentasi() {
         IDEAS_COLLECTION_ID,
         // Use a query to show the latest ideas first
          [ 
-            Query.limit(18), Query.orderDesc('$createdAt')
+             Query.orderDesc('$createdAt')
+         ]
+    );
+}
+
+export async function getTableGalleryFront() {
+    return await databases.listDocuments(
+        IDEAS_DATABASE_ID,
+        IDEAS_COLLECTION_ID,
+        // Use a query to show the latest ideas first
+         [ 
+            Query.limit(12), Query.orderDesc('$createdAt')
           ]
     );
 }
 
-export async function addGalleryAlbumDepan(Title, Description, URL, ImageId) {
+export async function addGalleryAlbumDepan(Location, Description, URL, ImageId) {
     await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, ID.unique(), {
-        Title,
+        Location,
         Description,
         URL,
         ImageId

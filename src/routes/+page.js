@@ -9,6 +9,7 @@ export const csr = true;
 import { getTableLayananOnline } from '$lib/aktivasiLayananOnline';
 import { getTableTextInfo } from '$lib/textInfoBanner';
 import { getTableDataWilayah } from '$lib/DataWilayah';
+import { getTableGalleryFront } from '$lib/crudGalleryDokumentasi';
 
 
 
@@ -17,7 +18,8 @@ export async function load() {
 	return {
         TableDatasLayananOnline : await getTableLayananOnline(),
 		TableDatasTextInfo : await getTableTextInfo (),
-		TableDatasWilayah : await getTableDataWilayah()
+		TableDatasWilayah : await getTableDataWilayah(),
+		TableDatasGallery : await getTableGalleryFront()
 	};
 }
 

@@ -1,7 +1,7 @@
 <script>
-    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, FloatingLabelInput, Textarea } from 'flowbite-svelte';
-    import { UploadOutline, ZoomInOutline } from 'flowbite-svelte-icons';
-    import { addGalleryAlbumDepan } from '$lib/crudGalleryDokumentasi.js';
+    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, FloatingLabelInput, Textarea, Modal } from 'flowbite-svelte';
+    import { UploadOutline, ZoomInOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';  
+    import { addGalleryAlbumDepan, deleteGalleryAlbumDepan } from '$lib/crudGalleryDokumentasi.js';
     import { storage, ID } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
     import { sineOut } from 'svelte/easing';
@@ -11,39 +11,68 @@
     let visibleProgresBar = false;
     let progress = '0';
     let errorMessage = null;
-    let debugInfo = ""; // For debugging
-    
+    let ConfirmDeleteModal = false;
+    let selectedId = null;
+    let selectedFileId = null;
+    let isLoading = true;
+    let isDeleting = false;
+   
     // Accept data from parent component
-    export let data;
+    export let data = [];
     
-    // Initialize local variables to handle data safely
-    let filesArray = [];
-    let totalFiles = 0;
+    // Pagination variables
+    let currentPage = 1;
+    let postsPerPage = 9;
     
-    onMount(() => {
-        // Debug the data structure
-        debugInfo = `Data type: ${typeof data}, Has DatasGallery: ${!!data?.DatasGallery}, Files type: ${typeof data?.DatasGallery?.files}`;
-        
+    // Konstanta bucket ID
+    const STORAGE_BUCKET_ID = '682972a20025d83de321';
+    
+    // Safe data handling
+    $: {
         try {
-            // Try to safely extract the files
-            if (data && data.DatasGallery && data.DatasGallery.files) {
-                if (Array.isArray(data.DatasGallery.files)) {
-                    filesArray = [...data.DatasGallery.files];
-                    totalFiles = filesArray.length;
-                    debugInfo += `, Extracted ${totalFiles} files`;
-                } else if (typeof data.DatasGallery.files === 'object') {
-                    // Handle case if files is a promise or other object
-                    debugInfo += ", Files is an object but not an array";
-                }
-            } else if (data && data.DatasGallery && data.DatasGallery.total !== undefined) {
-                totalFiles = data.DatasGallery.total;
-                debugInfo += `, Only got total: ${totalFiles}`;
+            console.log('Data received:', data);
+            if (data?.DatasGallery) {
+                console.log('DatasGallery:', data.DatasGallery);
+                console.log('DatasGallery keys:', Object.keys(data.DatasGallery));
             }
-        } catch (err) {
-            debugInfo += `, Error: ${err.message}`;
-            console.error("Error processing data:", err);
+        } catch (e) {
+            console.error('Error in data logging:', e);
         }
-    });
+    }
+    
+    // Safe reactive statements
+    $: allPosts = (() => {
+        try {
+            if (!data?.DatasGallery) return [];
+            
+            const gallery = data.DatasGallery;
+            
+            // Try different possible structures
+            if (Array.isArray(gallery)) return gallery;
+            if (gallery.files && Array.isArray(gallery.files)) return gallery.files;
+            if (gallery.documents && Array.isArray(gallery.documents)) return gallery.documents;
+            
+            return [];
+        } catch (e) {
+            console.error('Error processing posts:', e);
+            return [];
+        }
+    })();
+    
+    $: totalPosts = allPosts.length;
+    $: totalPages = Math.ceil(totalPosts / postsPerPage);
+    $: postRangeHigh = currentPage * postsPerPage;
+    $: postRangeLow = postRangeHigh - postsPerPage;
+    
+    $: {
+        if (data !== undefined) {
+            isLoading = false;
+        }
+    }
+    
+    const setCurrentPage = newPage => {
+        currentPage = newPage;
+    }
 
     const addDataFormtoTable = async (e) => {
         visibleProgresBar = true; 
@@ -54,41 +83,156 @@
             const formData = new FormData(formEl);
             const customImageId = ID.unique();
             
+            console.log('Uploading with file ID:', customImageId);
+            
             // Upload file to storage
             await storage.createFile(
-                '682972a20025d83de321',
+                STORAGE_BUCKET_ID,
                 customImageId,
                 document.getElementById('uploadGalleryDoc').files[0]
             );
             
-            const URL = `https://fra.cloud.appwrite.io/v1/storage/buckets/682972a20025d83de321/files/${customImageId}/view?project=67384f1d0028200e3af4`;
+            const URL = `https://fra.cloud.appwrite.io/v1/storage/buckets/${STORAGE_BUCKET_ID}/files/${customImageId}/view?project=67384f1d0028200e3af4`;
             progress = 100;
             
-            await addGalleryAlbumDepan(formData.get('Title'), formData.get('Description'), URL, customImageId);
+            // Simpan dengan file ID yang sama dengan storage
+            await addGalleryAlbumDepan(
+                formData.get('Location'), 
+                formData.get('Description'), 
+                URL, 
+                customImageId // Gunakan customImageId sebagai file ID
+            );
+            
             invalidateAll();
 
             formEl.reset();
             progress = 0;
             visibleProgresBar = false;
         } catch (error) {
-            console.error("Error:", error);
+            console.error("Upload error:", error);
             errorMessage = error.message;
             visibleProgresBar = false;
         }
     };
 
-    // Pagination
-    let currentPage = 1;
-    let postsPerPage = 9;
-    $: totalPages = Math.ceil(totalFiles / postsPerPage) || 1;
-    $: postRangeHigh = currentPage * postsPerPage;
-    $: postRangeLow = postRangeHigh - postsPerPage;
-    const setCurrentPage = newPage => {
-        currentPage = newPage;
+    // Function to extract file ID from URL
+    function extractFileIdFromUrl(url) {
+        try {
+            // Pattern: /files/{fileId}/view
+            const match = url.match(/\/files\/([^\/]+)\/view/);
+            return match ? match[1] : null;
+        } catch (e) {
+            console.error('Error extracting file ID from URL:', e);
+            return null;
+        }
     }
 
-    // Force display of visible images
-    $: visibleImages = filesArray.slice(postRangeLow, postRangeHigh);
+    function openDeleteModal(item) {
+        console.log('Opening delete modal for item:', item);
+        
+        const docId = item.$id || item.id;
+        
+        // Coba berbagai cara untuk mendapatkan file ID
+        let fileId = item.fileId || item.FileId || item.file_id;
+        
+        // Jika tidak ada fileId, coba extract dari URL
+        if (!fileId && item.URL) {
+            fileId = extractFileIdFromUrl(item.URL);
+        }
+        
+        // Fallback ke document ID jika masih tidak ada
+        if (!fileId) {
+            fileId = docId;
+        }
+        
+        console.log('Document ID:', docId);
+        console.log('File ID:', fileId);
+        
+        if (!docId) {
+            alert('Tidak dapat menghapus: ID tidak valid');
+            return;
+        }
+        
+        selectedId = docId;
+        selectedFileId = fileId;
+        ConfirmDeleteModal = true;
+    }
+
+    const remove = async (docId, fileId) => {
+        if (isDeleting) return;
+        
+        isDeleting = true;
+        let storageDeleted = false;
+        let databaseDeleted = false;
+        
+        try {
+            console.log('🗑️ DELETE PROCESS START');
+            console.log('Document ID:', docId);
+            console.log('File ID:', fileId);
+            console.log('Bucket ID:', STORAGE_BUCKET_ID);
+            
+            // STEP 1: Delete from storage first (safer approach)
+            console.log('Step 1: Deleting from storage...');
+            try {
+                await storage.deleteFile(STORAGE_BUCKET_ID, fileId);
+                storageDeleted = true;
+                console.log('✅ Storage deletion successful');
+            } catch (storageError) {
+                console.error('❌ Storage deletion failed:', storageError);
+                
+                // Jika file tidak ditemukan di storage, lanjutkan ke database
+                if (storageError.code === 404 || storageError.message.includes('not found')) {
+                    console.log('⚠️ File not found in storage, continuing to delete database record');
+                    storageDeleted = true; // Consider it deleted since it doesn't exist
+                } else {
+                    // Jika error lain, stop proses
+                    throw new Error(`Gagal menghapus file dari storage: ${storageError.message}`);
+                }
+            }
+            
+            // STEP 2: Delete from database (only if storage delete succeeded or file not found)
+            if (storageDeleted) {
+                console.log('Step 2: Deleting from database...');
+                await deleteGalleryAlbumDepan(docId);
+                databaseDeleted = true;
+                console.log('✅ Database deletion successful');
+            }
+            
+            // STEP 3: Close modal and refresh
+            ConfirmDeleteModal = false;
+            await invalidateAll();
+            
+            console.log('✅ Delete process completed successfully');
+            
+        } catch (error) {
+            console.error('❌ Delete process failed:', error);
+            
+            let errorMessage = 'Terjadi kesalahan saat menghapus';
+            
+            if (error.message.includes('not found')) {
+                errorMessage = 'File atau data tidak ditemukan';
+            } else if (error.message.includes('permission')) {
+                errorMessage = 'Tidak memiliki izin untuk menghapus';
+            } else if (error.message.includes('network')) {
+                errorMessage = 'Koneksi bermasalah, coba lagi';
+            } else if (error.message) {
+                errorMessage = error.message;
+            }
+            
+            alert(errorMessage);
+            ConfirmDeleteModal = false;
+            
+            // Refresh data untuk sinkronisasi
+            try {
+                await invalidateAll();
+            } catch (refreshError) {
+                console.error('Failed to refresh data:', refreshError);
+            }
+            
+        } finally {
+            isDeleting = false;
+        }
+    };
 </script>
 
 <div class="container">
@@ -112,7 +256,7 @@
                 <Label class="text-base" style="margin-bottom: -20px;">Upload file Photo / Gambar (Type File: JPG, JPEG or PNG)</Label>
                 <Fileupload class="mb-1" id="uploadGalleryDoc" accept=".png, .jpg, .jpeg, .webp" required />
                 <Label class="pb-2 mb-1" style="margin-top: 10px;">(Max File Size: 10 MB)</Label>
-                <FloatingLabelInput style="filled" id="Title" name="Title" type="text" required>Lokasi Photo* :</FloatingLabelInput>  
+                <FloatingLabelInput style="filled" id="Location" name="Location" type="text" required>Lokasi Photo* :</FloatingLabelInput>  
                 <Textarea id="Description" placeholder="Deskripsi Photo*" rows="2" name="Description" required />  
                 <ButtonGroup class="*:!ring-primary-700">
                     <Button outline color="dark" type="submit" value="submit">
@@ -145,82 +289,130 @@
     <Heading tag="h4" customSize="text-xl text-left font-extrabold md:text-xl lg:text-2xl">🖼️ List Photo</Heading>
     <br/>
     
-    <!-- Debug info for development - remove in production -->
-    <div style="background-color: #f0f0f0; padding: 10px; margin-bottom: 10px; font-family: monospace; font-size: 12px;">
-        Debug: {debugInfo}
+    <!-- Debug info 
+    <div style="background: #f0f0f0; padding: 10px; margin: 10px 0; border-radius: 5px; font-size: 12px;">
+        <strong>Debug Info:</strong><br>
+        Total Posts: {totalPosts}<br>
+        Is Loading: {isLoading}<br>
+        {#if allPosts.length > 0}
+            First Item Keys: {Object.keys(allPosts[0]).join(', ')}<br>
+            First Item URL: {allPosts[0].URL || allPosts[0].url}<br>
+            Extracted File ID: {extractFileIdFromUrl(allPosts[0].URL || allPosts[0].url)}
+        {/if}
     </div>
+    -->
     
-    {#if errorMessage}
-        <div style="color: red; padding: 10px; background-color: #ffeeee; border-radius: 5px; margin-bottom: 15px;">
-            <p>Error: {errorMessage}</p>
-        </div>
-    {/if}
-    
-    {#if totalFiles === 0}
+    {#if isLoading}
+        <p>Memuat data gallery...</p>
+    {:else if totalPosts === 0}
         <p>Saat ini Tidak terdapat Gambar pada Gallery Photo.</p>
     {:else}
-        <p>Terdapat {totalFiles} Gambar dalam Folder Gallery Koordinator Otonomi Daerah</p>
-    {/if} 
+        <p>Terdapat {totalPosts} Gambar dalam Folder Gallery Koordinator Otonomi Daerah</p>
+    {/if}
     
     <br/>
-
     <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
-        {#if filesArray.length > 0}
+        {#if isLoading}
+            <p>Loading images...</p>
+        {:else if allPosts.length > 0}
             <div class="grid grid-cols-3 gap-4">
-                {#each visibleImages as item}
-                    <div style="float:left;text-align:center;">
-                        <img 
-                            src={item.URL || item.url || ''} 
-                            alt="image" 
-                            style="width:460px;height:240px;margin:10px;border-radius:10px;"
-                            onerror="this.onerror=null; this.src='https://via.placeholder.com/460x240?text=Image+Not+Found';"
-                        />
-                        <span style="font-size:14px;">
-                            {item.Description || item.description || 'No description'}
-                        </span>
-                        <br/>
-                        <ButtonGroup class="*:!ring-primary-700">
-                            <Button style="color:blue;">
-                                <a href={item.URL || item.url || '#'} target="_blank" style="color:blue;">
-                                    <ZoomInOutline class="w-4 h-4 me-2" />Lihat
-                                </a>
-                            </Button>
-                        </ButtonGroup> 
-                    </div>
+                {#each allPosts as cetakTabel, i}
+                    {#if i >= postRangeLow && i < postRangeHigh}
+                        <div style="float:left;text-align:center;">
+                            <!-- Debug info untuk setiap item -->
+                            <div style="background: #ffffcc; padding: 3px; margin: 3px; font-size: 10px; border-radius: 3px;">
+                                Doc ID: {cetakTabel.$id || cetakTabel.id || 'NO ID'}<br>
+                                File ID from URL: {extractFileIdFromUrl(cetakTabel.URL || cetakTabel.url)}
+                            </div>
+                            
+                            <img 
+                                src={cetakTabel.URL || cetakTabel.url || ''} 
+                                alt="Gallery image" 
+                                style="width:460px;height:240px;margin:10px;border-radius:10px;"
+                                on:error={(e) => {
+                                    console.error('Image failed to load:', cetakTabel.URL || cetakTabel.url);
+                                    e.target.style.border = '2px dashed #ccc';
+                                    e.target.alt = 'Gambar tidak dapat dimuat';
+                                }}
+                            />
+                            <span style="font-size:14px;">{cetakTabel.Description || cetakTabel.description || 'No description'}</span><br/>
+                            
+                            <ButtonGroup class="*:!ring-primary-700">
+                                <Button style="color:blue;">
+                                    <a href={cetakTabel.URL || cetakTabel.url || '#'} target="_blank" style="color:blue;">
+                                        <ZoomInOutline class="w-4 h-4 me-2" />Lihat
+                                    </a>
+                                </Button>
+                                <Button 
+                                    style="color:red;" 
+                                    on:click={() => openDeleteModal(cetakTabel)}
+                                >
+                                    <TrashBinOutline class="w-4 h-4 me-2" />Hapus
+                                </Button>
+                            </ButtonGroup>
+                        </div>
+                    {/if}
                 {/each}
             </div>
         {:else}
-            <!-- Show a more detailed loading message -->
-            <div>
-               
-               
-            </div>
+            <p>Tidak ada gambar untuk ditampilkan.</p>
         {/if}
     </div>
-    <br/>
-    <ul class="paginationTable" style="list-style-type: none;">
-        {#if currentPage > 1}
-            <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
-            <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
-        {/if}
-        {#each [3,2,1] as i}
-            {#if currentPage - i > 0}
-                <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
+
+    <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
+        <div class="text-center">
+            <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
+            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                Apakah Anda sudah memastikan akan menghapus Gambar yang telah Anda pilih?
+            </h3>
+            <Button 
+                color="red" 
+                class="me-2" 
+                disabled={isDeleting}
+                on:click={() => remove(selectedId, selectedFileId)}
+            >
+                {isDeleting ? 'Menghapus...' : 'Ya, Hapus'}
+            </Button>
+            <Button 
+                color="alternative" 
+                disabled={isDeleting}
+                on:click={() => ConfirmDeleteModal = !ConfirmDeleteModal}
+            >
+                Tidak, Batal
+            </Button>
+        </div>
+    </Modal>
+
+    <!-- Pagination -->
+    {#if !isLoading && totalPages > 1}
+        <br/>
+        <ul class="paginationTable" style="list-style-type: none;">
+            {#if currentPage > 1}
+                <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
+                <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}><span>&#8678;</span></li>
             {/if}
-        {/each}
-        <li class:active={currentPage}><span>{currentPage}</span></li>
-        {#each Array(3) as _, i}
-            {#if currentPage + (i+1) <= totalPages}
-                <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
+            
+            {#each [3,2,1] as i}
+                {#if currentPage - i > 0}
+                    <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
+                {/if}
+            {/each}
+            
+            <li class:active={currentPage}><span>{currentPage}</span></li>
+            
+            {#each Array(3) as _, i}
+                {#if currentPage + (i+1) <= totalPages}
+                    <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
+                {/if}
+            {/each}
+            
+            {#if currentPage < totalPages}
+                <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}><span>&#8680;</span></li>
+                <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
             {/if}
-        {/each}
-        {#if currentPage < totalPages}
-            <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
-            <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
-        {/if}
-    </ul> 
-           
-    <span style="margin-left: 6px; margin-top: 5px;display: block;">Halaman Aktif Page: {currentPage} </span>
+        </ul>
+        <span style="margin-left: 6px; margin-top: 5px;display: block;">Halaman Aktif Page: {currentPage}</span>
+    {/if}
 </div>
 
 <style>
@@ -231,7 +423,7 @@
         margin: 3px;
         border-radius: 8px;
         background: #fcfcfc;
-        cursor:pointer;
+        cursor: pointer;
     }  
   
     ul.paginationTable li.active {
