@@ -168,7 +168,7 @@ const updateDataPegawai = async (e) => {
 
  // Pagination 
  let currentPage =1; // Update this to simulate page change.
- let postsPerPage = 5;
+ let postsPerPage = 10;
  let allPosts = data.TableDataPegawai.documents;
  let totalPosts = allPosts.length;
  let totalPages = Math.ceil(totalPosts / postsPerPage);
@@ -231,7 +231,7 @@ const updateDataPegawai = async (e) => {
             <label class="text-sm">Status Pegawai:</label>
               <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
                <li class="w-full"><Radio name="jenisPegawai" class="p-3" value="Pegawai">Pegawai</Radio></li>
-               <li class="w-full"><Radio name="jenisPegawai" class="p-3" value="Honorer">Honorer</Radio></li>
+               <li class="w-full"><Radio name="jenisPegawai" class="p-3" value="PHT">PHT</Radio></li>
               </ul> 
               <div>
                 <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tambah Data Pegawai</button>
