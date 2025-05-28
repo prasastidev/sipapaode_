@@ -11,7 +11,7 @@ export async function getTableDataPegawai() {
         IDEAS_DATABASE_ID,
         IDEAS_COLLECTION_ID,
         // Use a query to show the latest ideas first
-        [Query.orderDesc('$createdAt')]
+        [Query.orderDesc('$createdAt'), Query.limit(200) ]
     );
 }
 
