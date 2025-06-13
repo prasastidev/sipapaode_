@@ -80,7 +80,7 @@ function showimage(id) {
     </div>
     <br/><br/>
 
-    {#if $user.prefs['Role'] === "Tata Usaha"}
+    {#if $user.prefs['Role'] === "PIC Tata Usaha"}
     <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>{!isUploadOpen ? 'Buka Upload Photo' : 'Tutup Upload Photo'} </Button> <br/><br/>
     {/if}
 

@@ -6,32 +6,32 @@
   const tableData = [
     {
       no: 1,
-      nama: 'Susi Hasniati',
-      bidang: 'Bagian Kerjasama',
+      nama: 'SUSI HASMIATI, S.STP. MM.',
+      bidang: 'Bidang Bagian Kerjasama',
       deskripsi: 'Verifikasi data pengajuan kerjasama secara online, monitoring, dan pembaruan informasi secara berkala. <br/>Mengelola serta mendata <b>Dokumen kerjasama</b>, baik yang aktif maupun yang telah selesai, untuk memastikan semua informasi terkini dan akurat demi kelancaran proses kerjasama. <br/>Serta Mengunggah foto dokumentasi kerjasama sebagai bukti kolaborasi yang efektif dan produktif antara pihak-pihak terlibat.',
       email: 'biropem.bagks@gmail.com',
       pic: 'PIC Kerjasama'
     },
     {
       no: 2,
-      nama: '--',
-      bidang: 'Bagian Kerjasama',
+      nama: 'HERLINA UDDIN, S.STP. M.Si',
+      bidang: 'Bidang Bagian Kerjasama',
       deskripsi: 'menyampaikan informasi mengenai pengiriman <b>laporan evaluasi kerjasama</b> dari pemerintah kabupaten/kota, memastikan dokumentasi yang tepat dan akurat, serta meneruskannya ke pusat sesuai dengan prosedur dan waktu yang ditentukan untuk mendukung transparansi dan akuntabilitas.',
       email: '--',
       pic: 'PIC Kerjasama'
     },
     {
       no: 3,
-      nama: 'M. Arief Budiman',
-      bidang: 'Koordinator Pemerintahan',
+      nama: 'MOH. ARIEF BUDIMAN, SE.',
+      bidang: 'Bidang Koordinator Pemerintahan',
       deskripsi: 'Mengupdate dan memelihara data informasi mengenai <b>kode wilayah pemerintahan</b>, administrasi, dan rupa bumi. Memastikan keakuratan dan konsistensi data, serta mendukung analisis dan pengambilan keputusan yang sehubungan dengan pengelolaan wilayah dan sumber daya, mendorong pelayanan publik yang efektif dan efisien.',
       email: 'bobexlbudiman@gmail.com',
       pic: 'PIC Pemerintahan'
     },
     {
       no: 4,
-      nama: 'M. Arief Budiman',
-      bidang: 'Koordinator Pemerintahan',
+      nama: 'MOH. ARIEF BUDIMAN, SE',
+      bidang: 'Bidang Koordinator Pemerintahan',
       deskripsi: 'Memfasilitasi penataan wilayah pemerintahan serta mendukung proses <b>pembentukan daerah otonomi baru</b>, termasuk analisis kebijakan, koordinasi antar instansi, dan penyusunan rekomendasi untuk meningkatkan efisiensi pengelolaan daerah serta pelayanan publik yang lebih baik.',
       email: 'bobexlbudiman@gmail.com',
       pic: 'PIC Pemerintahan'
@@ -39,15 +39,15 @@
     {
       no: 5,
       nama: '--',
-      bidang: 'Koordinator Pemerintahan',
+      bidang: 'Bidang Koordinator Pemerintahan',
       deskripsi: 'memfasilitasi pelaporan <b>Standar Pelayanan Minimal (SPM)</b> secara akurat dan tepat waktu, serta memastikan pengiriman laporan ke Pusat sesuai dengan regulasi yang berlaku, guna mendukung peningkatan kualitas pelayanan dan akuntabilitas institusi.',
       email: '--',
       pic: 'PIC Pemerintahan'
     },
     {
       no: 6,
-      nama: 'Rizky Tahir',
-      bidang: 'Koordinator Otonomi Daerah',
+      nama: 'RISKY TAHIR, S.Ip.',
+      bidang: 'Bidang Koordinator Otonomi Daerah',
       deskripsi: 'mendokumentasikan dan mengarsipkan <b>laporan LPPD dan LKPJ</b> dari Pemerintah Kabupaten/Kota, memastikan semua dokumen terorganisir dengan baik, serta meneruskan laporan tersebut ke instansi pusat sesuai dengan ketentuan yang berlaku untuk mendukung transparansi dan akuntabilitas.',
       email: 'biropemerintahanlppd@gmail.com',
       pic: 'PIC Otonomi'
@@ -55,22 +55,22 @@
     {
       no: 7,
       nama: '',
-      bidang: 'Koordinator Otonomi Daerah',
+      bidang: 'Bidang Koordinator Otonomi Daerah',
       deskripsi: 'Melakukan <b>inventarisasi</b> dan penataan urusan <b>daerah untuk Otonomi Baru</b> dengan tujuan memastikan pengelolaan yang efektif. Mencakup pengumpulan data, analisis kebijakan, serta penyusunan rekomendasi untuk pengembangan dan efektifitas pengelolaan daerah, guna mendukung implementasi otonomi yang lebih baik dan berkelanjutan.',
       email: '',
       pic: 'PIC Otonomi'
     },
     {
       no: 8,
-      nama: '',
-      bidang: 'Koordinator Otonomi Daerah',
+      nama: 'RESYA SAPUTRA, S.STP., M.Si.',
+      bidang: 'Bidang Koordinator Otonomi Daerah',
       deskripsi: 'Memfasilitasi penerbitan <b>Surat Keputusan (SK)</b> dengan kategory ditujukan kepada Gubernur, Bupati/Walikota dan Legislatif. Serta penyusunan dan pemeliharaan arsip dokumentasi sehubungan dengan SK, memastikan semua dokumen terorganisir dengan baik dan dapat diakses untuk administrasi dan audit.',
       email: '',
       pic: 'PIC Otonomi'
     },
     {
       no: 9,
-      nama: 'Irma Fitayanti, S.Kom',
+      nama: 'IRMA FITAYANTI BASO, S.Kom',
       bidang: 'Tata Usaha',
       deskripsi: 'Pendataan pegawai di Biro Pemerintahan</b> dan Otonomi Daerah, mengelola informasi pegawai dan keakuratan data, serta mendukung pengambilan keputusan melalui laporan yang tepat dan tepat waktu.',
       email: 'oci25ocioci@gmail.com',
@@ -98,7 +98,7 @@
 
   <div class="modern-box">
     <div class="contentbox">
-      <label>Berikut adalah informasi daftar PIC (Pengelola Informasi, Layanan, dan Data Sipapaode) di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara, berdasarkan SK yang telah ditunjuk.</label>
+      <label>Berikut di Bawah ini adalah informasi PIC (person in charge), pejabat pengelola informasi, data dan layanan pada sipapaode.id.</label>
     </div>
   </div>
   <br/><br/><br/>

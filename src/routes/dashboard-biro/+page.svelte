@@ -141,8 +141,8 @@ function resetForm() {
      <div class="flex justify-between items-center mb-4">
       <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Informasi Profile Anda</h5>
     </div>
-     <Card padding="xl" size="xl">
-        <Listgroup class="border-0 dark:!bg-transparent">
+     <Card padding="xl" size="xl" class="hover:bg-blue-100">
+        <!-- <Listgroup class="border-0 hover:bg-blue-100"> -->
           <div class="flex items-center space-x-4 rtl:space-x-reverse">
             <Avatar class="border flex-shrink-0 w-14 h-14" size="none" />
             <div class="flex-1 min-w-0">
@@ -173,22 +173,24 @@ function resetForm() {
               <Button color="light" on:click={user.logout}><ArrowRightToBracketOutline class="w-6 h-6 mr-1 text-gray-800" /> Log Out</Button>           
             </div>   
          </div>
-        </Listgroup>
+        <!-- </Listgroup> -->
       </Card>
       <br/><br/>
       <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
       <br/><br/>
-      <Card padding="xl" size="xl" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2">
+      <Card padding="xl" size="xl" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 hover:bg-blue-100">
         <div class="col-span-2 rounded-xl pr-3">
           <h1 class="text-lg" style="text-align:left;color:#242a38;font-weight: 600;">
-             Anda dapat melihat Informasi daftar PIC Sipapaode pada Link Tombol di samping berikut
+             Lihat informasi PIC, Pejabat Pengelola data dan Informasi Sipapaode pada Link Tombol di samping berikut
           </h1></div>
           <div class="rounded-xl"><a href="/dashboard-biro/info-pic" style="text-decoration:none;"><button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded float-right">
             <UserHeadsetOutline class="w-6 h-6 mr-1 text-white-800" /> Informasi PIC</button></a> 
             </div>   
       </Card>
       <br/><br/>
-      <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
+      <center><hr style="width:80%;height:2px;background:#d6d6d6;"/><br/>
+      Di bawah berikut jumlah informasi Data yang terdapat dalam Database Informasi Sipapaode.
+      </center>
       <br/><br/>
 
       <div class="grid grid-cols-2 gap-6">
@@ -196,7 +198,7 @@ function resetForm() {
           <div class="flex justify-between items-center mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white"><UsersSolid class="inline-flex w-6 h-6 text-gray-500 dark:text-gray-400" style="vertical-align:sub;" /> Bagian Kerjasama</h5>
         </div>
-        <Card padding="xl" size="xl" class="p-6 sm:p-6">
+        <Card padding="xl" size="xl" class="p-6 sm:p-6 hover:bg-blue-100">
           <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
             <li class="mb-3" style="line-height:1.8">Total Kerjasama Terdaftar <br/>
                 <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{TotalKSTerdaftar}</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen Kerjasama Terdaftar</span> 
@@ -215,7 +217,7 @@ function resetForm() {
           <div class="flex justify-between items-center mb-4">
             <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white"><LandmarkSolid class="inline-flex w-6 h-6 text-gray-500 dark:text-gray-400 mr-1" style="vertical-align:sub;" /> Koordinator Pemerintahan</h5>
         </div>
-        <Card padding="xl" size="xl" class="p-6 sm:p-6">
+        <Card padding="xl" size="xl" class="p-6 sm:p-6 hover:bg-blue-100">
           <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
             <li class="mb-3" style="line-height:1.8">Jumlah Kab/Kota - Sultra <br/>
                 <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">17</span> <span style="font-weight:100;margin-left:6px;">Kab/Kota di Sulawesi Tenggara</span>
@@ -241,7 +243,7 @@ function resetForm() {
       <div class="flex justify-between items-center mb-4">
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white"><BuildingSolid class="inline-flex w-6 h-6 text-gray-500 dark:text-gray-400 mr-1" style="vertical-align:sub;" /> Koordinator Otonomi Daerah</h5>
     </div>
-    <Card padding="xl" size="xl" class="p-6 sm:p-6">
+    <Card padding="xl" size="xl" class="p-6 sm:p-6 hover:bg-blue-100">
       <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
         <li class="mb-3" style="line-height:1.8">Total Penerbitan SK Gubernur & Wakil <br/>
             <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataSK_GubWakil.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Dokumen SK di Folder SK Gub/Wakil</span>
@@ -260,7 +262,7 @@ function resetForm() {
       <div class="flex justify-between items-center mb-4">
         <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white"><ObjectsColumnSolid class="inline-flex w-6 h-6 text-gray-500 dark:text-gray-400 mr-1" style="vertical-align:sub;" /> Tata Usaha</h5>
     </div>
-    <Card padding="xl" size="xl" class="p-6 sm:p-6">
+    <Card padding="xl" size="xl" class="p-6 sm:p-6 hover:bg-blue-100">
       <ul class="font-bold text-gray-700 dark:text-gray-400 leading-tight">
         <li class="mb-3" style="line-height:1.8">Total Pegawai <br/>
             <span class="font-normal text-blue-700 text-xl" style="padding: 4px 12px;background: aliceblue;border-radius:8px;">{ data.TableDataSPegawai.total }</span> <span style="font-weight:100;margin-left:6px;font-size:15px;">Pegawai Terdaftar di Biro Pemerintahan dan Otonomi Daerah Sultra</span>

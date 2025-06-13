@@ -11,7 +11,7 @@ export async function getTableDataPegawai() {
         IDEAS_DATABASE_ID,
         IDEAS_COLLECTION_ID,
         // Use a query to show the latest ideas first
-        [Query.orderDesc('$createdAt'), Query.limit(200) ]
+        [Query.orderAsc('$createdAt'), Query.limit(200) ]
     );
 }
 
@@ -33,7 +33,7 @@ export async function getTableDataStatusHonorer() {
 		IDEAS_COLLECTION_ID,
 		// Use a query to show the latest ideas first
 		[ 
-          Query.equal('Jenis_Pegawai', ['Honorer']),
+          Query.equal('Jenis_Pegawai', ['PHT']),
           Query.orderDesc('$createdAt')
         ]
 	);

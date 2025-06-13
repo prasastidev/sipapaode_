@@ -130,7 +130,7 @@ const remove = async (id) => {
   <br/>
   <div class="modern-box">
     <div class="contentbox">
-      <label>Berikut adalah data informasi mengenai pihak yang sedang mengajukan kerjasama secara online, baik dari pihak ketiga/swasta maupun pemerintah daerah dan Kementerian/Lembaga. Status pengajuan kerjasama akan melalui proses verifikasi hingga penerbitan dokumen naskah kerjasama.</label>
+      <label>Berikut dibawah adalah Data pengajuan Kerjasama yang dilakukan oleh Pihak ketiga/Swasta ataupun Pemerintah Daerah atau K/L melalui Pengiriman Formulir Online.</label>
     </div>
   </div>
   <br/><br/>
@@ -213,7 +213,7 @@ const remove = async (id) => {
     <TableBody tableBodyClass="divide-y">
       {#each allPosts as cetakTabel, i}	
       {#if i >= postRangeLow && i < postRangeHigh}
-      <TableBodyRow>
+      <TableBodyRow class="hover:bg-blue-100">
         <TableBodyCell class="content-start">{i+1}</TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
          <div style="width:120px;">
@@ -293,6 +293,12 @@ const remove = async (id) => {
     background: #fcfcfc;
     cursor:pointer;
 	}  
+
+  ul.paginationTable li:hover {
+  background: #e2effb;
+  border-color: #2196f3;
+  transform: translateY(-1px);
+}
 
   ul.paginationTable li.active {
     background: #8eb5ea !important;
