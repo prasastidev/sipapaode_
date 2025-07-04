@@ -111,7 +111,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
             <ol id="first">
                
                 <li>
-                    <div style="width:280px !important;padding:6px;height:100px;"> 
+                    <div class="staff_card" style="width:280px !important;padding:6px;height:100px;"> 
           <img src={ PicTU } style="width:60px;height:60px;border-radius:50%;" />
         
                         <div>Kasubag. Tata Usaha <br><label style="font-weight: 100;">Irma Fitayanti Baso, S.Kom</label></div>
@@ -190,7 +190,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
   <div><BuildingSolid class="w-16 h-16 align-middle inline" /></div>
   <div class="col-span-10 text-2xl font-extrabold">Biro Pemerintahan dan Otonomi Daerah<br/>Sulawesi Tenggara <br/>
   <span class="text-lg font-normal">Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>
-  Email: -</span>
+  </span>
   </div>
 </div>
  
@@ -324,7 +324,7 @@ ol.static-org-chart #first > li > div {
         color: #555a62 !important;
         background: linear-gradient(147deg, rgba(255, 255, 255, 1) 21%, rgba(254, 254, 255, 1) 32%, rgba(226, 237, 255, 1) 100%, rgba(229, 231, 235, 1) 100%);
         border-radius: 12px;
-        border: 3px dotted #3b3b44;
+      
         font-weight: 600;
 }
 ol.static-org-chart #first > li > div > div {

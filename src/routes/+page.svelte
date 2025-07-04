@@ -30,6 +30,11 @@
 	import Karo from '$lib/images/Karo.webp';
 	import { databases } from '$lib/appwrite';
 	import { fly } from 'svelte/transition';
+	import LogoBombana from '$lib/images/Kabupaten Bombana.png';
+	import LogoWakatobi from '$lib/images/Kabupaten Wakatobi.png';
+	import LogoKendari from '$lib/images/Kota Kendari.png';
+	import LogoKonawe from '$lib/images/Kabupaten Konawe.png';
+	import LogoKonaweUtara from '$lib/images/Kabupaten Konawe Utara.png';
 
 	
 	// In this locale "," is the decimal separator and "." is the group separator
@@ -298,21 +303,20 @@ function prevQuote() {
 		        <span class="morenext flex flex-wrap items-center gap-2 w-64">
 				 <label style="border-bottom:1px dotted;margin-left:4px;">Info.</label> <Button on:click={() => (clickOutsideModal = true)} pill={true} outline={true} class="arrowvisit !p-2 size-8"><ArrowRightOutline class="w-6 h-6" /></Button>
 				</span>
-				  <Modal size="lg" title="Selamat Datang di Situs Web Aplikasi Sipapaode" bind:open={clickOutsideModal} autoclose outsideclose>
-					Di situs web Aplikasi Sipapaode, Anda dapat mengakses beragam layanan dan informasi yang berkaitan dengan kerjasama serta pengelolaan pemerintahan di Provinsi Sulawesi Tenggara. Berikut adalah beberapa fasilitas yang tersedia untuk mendukung efisiensi dan transparansi dalam pengelolaan pemerintahan:
+				  <Modal size="lg" title="Hai, Selamat Datang di Situs Web Biro Pemerintahan dan Otonomi Daerah Prov. Sulawesi Tenggara (Sipapaode)" bind:open={clickOutsideModal} autoclose outsideclose>
+					Di situs web Aplikasi Sipapaode ini, Anda dapat mengakses beragam layanan dan informasi yang disediakan oleh Biro Pemerintahan dan Otonomi Daerah Setda Prov. Sultra, antara lain Pengajuan Kerjasama dengan Prov. Sultra secara Online, serta Informasi Data Pemerintahan se-Sultra dan lainnya. Berikut adalah Beberapa Fasilitas Informasi, pada web Sipapaode: 
 					<br/>
 						<ul class="list-disc">
-						<li><b style="color:#6767c3;">Pengajuan Kerjasama Secara Online</b><br/>Anda dapat mengajukan kerjasama baik dengan pihak ketiga/swasta maupun antar pemerintah secara online kepada Pemerintah Provinsi Sulawesi Tenggara.</li>
-						<li><b style="color:#6767c3;">Dokumentasi dan Pemantauan Kerjasama</b><br/>Melihat dokumentasi kerjasama yang telah dilakukan serta melakukan pemantauan (monitoring) secara online. Selain itu, tersedia juga fasilitas pelaporan evaluasi kerjasama antara Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>   
-						<li><b style="color:#6767c3;">Informasi dan Pelaporan Standar Pelayanan Minimum (SPM)</b><br/>Mendapatkan informasi terkait fasilitas standar pelayanan minimum (SPM) yang diterapkan oleh Pemerintah Daerah Kabupaten/Kota di Provinsi Sulawesi Tenggara. </li>
-						<li><b style="color:#6767c3;">Data Wilayah Pemerintahan</b><br/>Akses informasi data wilayah pemerintahan baik dari Pemerintah Provinsi maupun Kabupaten/Kota, lengkap dengan pemetaan (GIS) dan rupabumi. </li>
-						<li><b style="color:#6767c3;">Penataan Wilayah Pemerintahan.</b><br/>Fasilitas untuk penataan wilayah pemerintahan, termasuk pemutakhiran data oleh Kabupaten/Kota dan pembentukan daerah otonomi baru.</li>
-						<li><b style="color:#6767c3;">Penerbitan SK Pemerintahan</b><br/>Proses penerbitan Surat Keputusan (SK) terkait dengan berbagai aspek pemerintahan. </li>
-						<li><b style="color:#6767c3;">Penerbitan SK Gubernur</b><br/>Penerbitan SK Gubernur sehubungan dengan pengajuan keberangkatan luar negeri. </li>
-						<li><b style="color:#6767c3;">Laporan LPPD dan LKPJ</b><br/>Laporan Laporan Penyelenggaraan Pemerintahan Daerah (LPPD) dan Laporan Keterangan Pertanggungjawaban (LKPJ) oleh Pemerintah Daerah Kabupaten/Kota, serta inventarisasi penataan urusan daerah otonomi baru. </li>
-						<li><b style="color:#6767c3;">Saran dan Informasi</b><br/>Mengirimkan saran dan informasi kepada Biro Pemerintahan dan Otonomi Daerah Provinsi Sulawesi Tenggara. </li>
+						<li><b style="color:#6767c3;">Pengajuan dan Tracking Informasi Kerjasama dengan Pemerintah Prov. Sultra.</b><br/>Pengajuan Kerjasama dengan Pemerintah Prov. Sultra dapat dilakukan secara Online dan mentracking progress laporan Kerjasama secara real time.</li>
+						<li><b style="color:#6767c3;">Database laporan Evaluasi Kerjasama se-Prov. Sultra.</b><br/>Pendataan laporan Evaluasi Kerjasama Pemerintahan Daerah se-Sultra terdokumentasi dengan baik yang sewaktu-waktu dapat diakses kapan saja dan dimana saja selama terhubung Internet. </li>   
+						<li><b style="color:#6767c3;">Database Informasi dan Pelaporan Standar Pelayanan Minimum (SPM).</b><br/>Database Dokumentasi Laporan Standar Pelayanan Minimum (SPM) pemerintah se-Prov Sultra. </li>
+						<li><b style="color:#6767c3;">Informasi Fasilitas Penataan Wilayah Pemerintahan dan Pembentukan Daerah Otonomi Baru.</b><br/>Informasi Fasilitas Penataan Wilayah Pemerintahan dan Pembentukan Daerah Otonomi Baru termaksut Pemutakhiran Data oleh Kabupaten/Kota Otonomi Baru. </li>
+						<li><b style="color:#6767c3;">Informasi Data Pemerintahan dan Rupa Bumi Se-Sultra.</b><br/>Informasi kode data wilayah, Letak Geografis dan Rupa Bumi Pemerintahan daerah Se-Sultra.</li>
+						<li><b style="color:#6767c3;">Manajemen Penerbitan SK Gubernur serta SK Pengangkatan dan Pemberhentian Kepala Daerah.</b><br/>Database Manajemen Penerbitan SK Gubernur dan serta SK Pengangkatan dan Pemberhentian Kepala Daerah yang terdata dengan baik. </li>
+						<li><b style="color:#6767c3;">Database Laporan LPPD dan LKPJ Pemerintahan se-Sultra.</b><br/>Manajemen Database Laporan LPPD dan LKPJ Pemerintahan secara digital yang dapat diakses kapan saja. </li>
+						<li><b style="color:#6767c3;">Berita Hot Terkini dan Real-Time se-Sulawesi Tenggara.</b><br/>Ikuti berita Hot terkini di Sulawesi Tenggara yang terintegrasi secara real time dengan berbagai portal media. </li>
 					</ul> 	<br/>
-					Dengan fitur-fitur tersebut, Web Aplikasi Sipapaode berkomitmen untuk mendukung transparansi, efisiensi, dan kolaborasi dalam pengelolaan pemerintahan di Provinsi Sulawesi Tenggara.
+					Web Aplikasi Sipapaode berkomitmen memberikan layanan pemerintahan secara efektif dan mendukung transformasi digital pemerintahan yang baik.
 					<svelte:fragment slot="footer">
 					  <Button>Tutup</Button>
 					</svelte:fragment>
@@ -339,7 +343,7 @@ function prevQuote() {
 	
 	<div style="text-align:center;margin:10px 0px;padding:14px;width:100%;">
 		{#if BannerInfo.Status_banner}
-        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="border:3px solid #bcd6ad;border-radius:10px;">
+        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="border:3px solid #36b9e0;border-radius:10px;">
 			<img class="w-14 h-14 rounded-full" src={ImagelogoSultra} alt="Sultra Pictures" />
 			<h4 class="text-xl text-left"> {@html BannerInfo.Text_Banner} </h4>
          <CloseButton class="border-2 bg-red-500 hover:bg-red-700" style="color:white;" on:click={() => (BannerInfo.Status_banner = false)} />
@@ -357,7 +361,7 @@ function prevQuote() {
  <section>
 	<Heading tag="h3" class="mb-3 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="box-shadow: #c3ddfd -15px -20px;border-bottom:8px solid #c3ddfd;">FITUR PELAYANAN ONLINE</Span></Heading> <br/>
 	<div class="flex items-center font-light text-gray-500 dark:text-gray-400 p-1 mb-2 -mt-4" style="font-size:15px;">
-		Silahkan Pilih Layanan Online sesuai Bidang di Bawah. Lihat Panduan Tentang Layanan <button id="panduaninfo">
+		Silahkan Pilih Layanan Online sesuai dengan Bidang di Bawah. Lihat Panduan Tentang Layanan <button id="panduaninfo">
 			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button>
 	  </div>
 	  <Popover triggeredBy="#panduaninfo" class="w-72 md:w-96 lg:w-96 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
@@ -377,7 +381,7 @@ function prevQuote() {
 		Dibawah berikut adalah pilihan Layanan Online pada Bidang Bagian Kerjasama.
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;"> 
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;"> 
 				
 				{#if OnlineKSpihakKetiga.Status_raw }<Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>
 				 {/if} 
@@ -396,7 +400,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk umum pihak ketiga atau instansi swasta.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;"> 
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;"> 
 				{#if OnlineKSpemerintahdaerahkl.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge> {/if}  
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -413,7 +417,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk instansi Pemerintah Daerah dan Kementerian atau Lembaga.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if OnlineLaporanEvaluasiKS.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -439,7 +443,7 @@ function prevQuote() {
 			Dibawah berikut adalah pilihan Layanan Online pada Bidang Koordinator Pemerintahan.
 			  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">  
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">  
 				{#if standarPM.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -456,7 +460,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal informasi dan pengiriman laporan Standar Pelayanan Minimum atau SPM.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if penataanWP.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -473,7 +477,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal informasi Fasilitasi Penataan Wilayah Pemerintahan dan Penegasan Batas Daerah.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if DaerahOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -490,7 +494,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk Pemerintah Daerah di Sultra dalam hal informasi pembentukan daerah Otonomi Baru.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if infoKDW.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -517,7 +521,7 @@ function prevQuote() {
 			  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;"> 
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;"> 
 				{#if penerbitanSKgub.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -534,7 +538,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk Kepala Daerah, DPRD dan ASN di Sultra dalam hal menerbitkan SK ataupun Surat resmi lainnya baik Pengangkatan/Pemberhentian ataupun Pengurusan Izin ke Luar Negeri.
 				</p>
 				</div> </div>
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if lppdLKPJ.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -551,7 +555,7 @@ function prevQuote() {
 					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal pengiriman laporan LKPJ ataupun LPPD.
 				</p>
 				</div> </div>
-			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;">
+			  <div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if InventarisasiPOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
 				<br/>
@@ -658,7 +662,7 @@ function prevQuote() {
    
 			</div> <br/><br/><br/>
 			
-			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;margin-bottom:18px;">Berita Hot Terkini di Sulawesi Tenggara
+			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #c3ddfd 15px -20px;margin-bottom:18px;">Berita Hot Terkini di Sulawesi Tenggara (Real Time)
 			</h2> 
 			<div id="BeritaSultra" style="position: relative;height: 70%;padding-bottom:70px; /* Aspect ratio: 1600/900 * 100 */">
 				<iframe 
@@ -669,21 +673,21 @@ function prevQuote() {
 			</div>	 		   
 		 </div>  
 	 </div>
-	 <a href="/berita-sulawesi-tenggara" class="linevisit mt-10 md:-mt-10"><Button color="light" pill style="cursor:pointer;position: relative;float:right;">Lihat Berita Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
+	 <a href="/berita-sulawesi-tenggara" class="linevisit mt-6 md:-mt-2"><Button color="light" pill style="cursor:pointer;position: relative;float:right;">Lihat Berita Terkini Lainnya di Sultra <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
 	 <!-- <a href="/berita-sulawesi-tenggara" style="text-decoration:underline;"><button on:click={nextQuote} class="button-74" style="margin-top:40px;cursor:pointer;position: relative;">Lihat Berita Lainnya</button></a> -->        
   </section>
     <br/> <br/>
   <!--  End Section Proses Alur Layanan -->  
 
 <!--  Map Modal -->  
-  <Modal size="lg" title="Map Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
+  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
 	<div style="width: 100%">{@html DataBombana.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{@html DataBombana.KetMap }</p>
 	<svelte:fragment slot="footer">
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal size="lg" title="Map Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
+  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
 	<div style="width: 100%">{@html DataWakatobi.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataWakatobi.KetMap }</p>
@@ -691,7 +695,7 @@ function prevQuote() {
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal size="lg" title="Map Kota Kendari" bind:open={ModalmapKendari} autoclose>
+  <Modal size="lg" title="Letak Geografis (Map) Kota Kendari" bind:open={ModalmapKendari} autoclose>
 	<div style="width: 100%">{@html DataKotaKendari.Map } </div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataKotaKendari.KetMap }</p>
@@ -699,7 +703,7 @@ function prevQuote() {
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal size="lg" title="Map Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
+  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
 	<div style="width: 100%">{@html DataKonawe.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataKonawe.KetMap }</p>
@@ -707,7 +711,7 @@ function prevQuote() {
 	  <Button color="alternative">Tutup</Button>
 	</svelte:fragment>
   </Modal>
-  <Modal size="lg" title="Map Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
+  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
 	<div style="width: 100%">{@html DataKonaweUtara.Map }</div>
 	<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 		{@html DataKonaweUtara.KetMap }</p>
@@ -724,7 +728,7 @@ function prevQuote() {
 	<div style="padding:12px;background:white;border-radius:14px;">
 		  <div class="block grid-cols-12 gap-2 md:flex lg:flex">
 			 <div><span style="font-size:40px;">🗺️</span></div> 
-			  <div class="col-span-11">Lihat informasi statistik Pemerintah Kab/Kota Sulawesi tenggara mencakup luas wilayah, jumlah penduduk, Lambang, Jumlah Kecamatan, Kelurahan / Desa, Map Geografis, serta Situs web Pemerintahan. <span style="color:#49a1f2;">(Update: 2025)</span></div>
+			  <div class="col-span-11">Lihat informasi statistik Pemerintah Kab/Kota Sulawesi tenggara mencakup luas wilayah, jumlah penduduk, Lambang, Jumlah Kecamatan, Kelurahan / Desa, Map Geografis, serta Situs web Portal Pemerintahan. <span style="color:#49a1f2;">(Update: 2025)</span></div>
 			</div>
 		</div> <br/>
 	<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-2">
@@ -740,11 +744,11 @@ function prevQuote() {
 				</thead>
 				<tbody>  
 				<tr>
-				<td>{ DataBombana.Nama }<Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button> 
+				<td style="display:flex;"><img class="object-center" src={LogoBombana} alt="Kabupaten Bombana" width="30px" height="30px" style="margin-right: 5px;" /> {DataBombana.Nama } <Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button> 
 					<Popover triggeredBy="#popbombana" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 						<div class="p-3">
 						  <center>
-							<img class="object-center" src="https://upload.wikimedia.org/wikipedia/commons/3/34/Lambang_Kabupaten_Bombana.png" alt="Jese Leos" width="90px" height="90px" />
+							<img class="object-center" src={LogoBombana} alt="Kabupaten Bombana" width="90px" height="90px" />
 						 </center>
 						 <p class="mt-3">
 							<b>{ DataBombana.Nama }</b><br/>
@@ -763,19 +767,19 @@ function prevQuote() {
 					<!-- menu -->
 					{#if visibleBombana}
 					<div id="menuDropdown" class="dropdown-content">
-					  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapBombana = true)}>Lihat Map</a> 
-					  <a href={ DataBombana.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
+					  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapBombana = true)}>Letak Geografis</a> 
+					  <a href={ DataBombana.Situs } rel="nofollow noopener" target="_blank">Portal Pemerintahan</a>
 					</div>
 					{/if}
 				  </td>
 				</tr>
 				
 				<tr>
-					<td>{ DataWakatobi.Nama } <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+					<td style="display:flex;"><img class="object-center" src={LogoWakatobi} alt="Kabupaten Wakatobi" width="30px" height="30px" style="margin-right: 5px;" /> { DataWakatobi.Nama } <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 						<Popover triggeredBy="#popwakatobi" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 							<div class="p-3">
 							  <center>
-								<img class="object-center" src="https://upload.wikimedia.org/wikipedia/id/0/0d/Logo_Kabupaten_Wakatobi_Sulawesi_Tenggara.png" alt="Jese Leos" width="90px" height="90px" />
+								<img class="object-center" src={LogoWakatobi} alt="Kabupaten Wakatobi" width="90px" height="90px" />
 							 </center>
 							 <p class="mt-3">
 								<b>{ DataWakatobi.Nama }</b><br/>
@@ -794,18 +798,18 @@ function prevQuote() {
 						<!-- menu -->
 						{#if visibleWakatobi}
 						<div id="menuDropdown" class="dropdown-content">
-						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapWakatobi = true)}>Lihat Map</a> 
-						  <a href={ DataWakatobi.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
+						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapWakatobi = true)}>Letak Geografis</a> 
+						  <a href={ DataWakatobi.Situs } rel="nofollow noopener" target="_blank">Portal Pemerintahan</a>
 						</div>
 						{/if}
 					 </td>
 				</tr>
 				<tr>
-					<td>{ DataKotaKendari.Nama } <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+					<td style="display:flex;"><img class="object-center" src={LogoKendari} alt="Kota Kendari" width="30px" height="30px" style="margin-right: 5px;"/> { DataKotaKendari.Nama } &nbsp; &emsp; &emsp; <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 						<Popover triggeredBy="#popkendari" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 							<div class="p-3">
 							  <center>
-								<img class="object-center" src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Lambang_Kota_Kendari.png" alt="Jese Leos" width="90px" height="90px" />
+								<img class="object-center" src={LogoKendari} alt="Kota Kendari" width="90px" height="90px" />
 							 </center>
 							 <p class="mt-3">
 								<b>{ DataKotaKendari.Nama }</b><br/>
@@ -824,19 +828,19 @@ function prevQuote() {
 						<!-- menu -->
 						{#if visibleKendari}
 						<div id="menuDropdown" class="dropdown-content">
-						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKendari = true)}>Lihat Map</a> 
-						  <a href={ DataKotaKendari.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
+						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKendari = true)}>Letak Geografis</a> 
+						  <a href={ DataKotaKendari.Situs } rel="nofollow noopener" target="_blank">Portal Pemerintahan</a>
 						</div>
 						{/if}
 					 </td>
 				</tr>
 			   
 				<tr>
-					<td>{DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+					<td style="display:flex;"><img class="object-center" src={LogoKonawe} alt="Kabupaten Konawe" width="30px" height="30px" style="margin-right: 5px;" /> {DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 						<Popover triggeredBy="#popkonawe" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 							<div class="p-3">
 							  <center>
-								<img class="object-center" src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Lambang_Kabupaten_Konawe.png" alt="Jese Leos" width="90px" height="90px" />
+								<img class="object-center" src={LogoKonawe} alt="Kabupaten Konawe" width="90px" height="90px" />
 							 </center>
 							 <p class="mt-3">
 								<b>{DataKonawe.Nama }</b><br/>
@@ -855,19 +859,19 @@ function prevQuote() {
 						<!-- menu -->
 						{#if visibleKonawe}
 						<div id="menuDropdown" class="dropdown-content">
-						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKonawe = true)}>Lihat Map</a> 
-						  <a href={DataKonawe.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
+						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKonawe = true)}>Letak Geografis</a> 
+						  <a href={DataKonawe.Situs } rel="nofollow noopener" target="_blank">Portal Pemerintahan</a>
 						</div>
 						{/if}
 					 </td>
 				</tr>
 
 				<tr>
-					<td>{DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+					<td style="display:flex;"><img class="object-center" src={LogoKonaweUtara} alt="Kabupaten Konawe Utara" width="30px" height="30px" style="margin-right: 5px;" /> {DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
 						<Popover triggeredBy="#popkonaweutara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 							<div class="p-3">
 							  <center>
-								<img class="object-center" src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Logo_konawe_utara.jpg" alt="Jese Leos" width="90px" height="90px" />
+								<img class="object-center" src={LogoKonaweUtara} alt="Kabupaten Konawe Utara" width="90px" height="90px" />
 							 </center>
 							 <p class="mt-3">
 								<b>{DataKonaweUtara.Nama }</b><br/>
@@ -886,8 +890,8 @@ function prevQuote() {
 						<!-- menu -->
 						{#if visibleKonaweUtara}
 						<div id="menuDropdown" class="dropdown-content">
-						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKonaweUtara = true)}>Lihat Map</a> 
-						  <a href={DataKonaweUtara.Situs } rel="nofollow noopener" target="_blank">Ke Situs Web</a>
+						  <a href="/#InfoTabelGrafik" on:click={() => (ModalmapKonaweUtara = true)}>Letak Geografis</a> 
+						  <a href={DataKonaweUtara.Situs } rel="nofollow noopener" target="_blank">Portal Pemerintahan</a>
 						</div>
 						{/if}
 					 </td>
@@ -914,7 +918,7 @@ function prevQuote() {
 				<!-- <Chart {options} />  -->
 
 		
-		Berdasarkan {currentDataName} <br/>
+		Statistik Berdasarkan {currentDataName} <br/>
 
 		<div class="container mx-auto p-1 pb-1">
 			
@@ -932,7 +936,7 @@ function prevQuote() {
 		</div>
 	  </div>
   
-   <br/> <a href="/maps-sultra/#TabelOtonomi" class="linevisit"><Button color="light" pill>Lihat Kota / Kabupaten Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
+   <br/> <a href="/maps-sultra/#TabelOtonomi" class="linevisit"><Button color="light" pill>Lihat Selengkapnya Kota / Kabupaten Lainnya <label class="arrowvisit"><ArrowRightOutline class="w-6 h-6" /></label></Button></a>
    <br/>
   </section>
            <br/>
@@ -962,10 +966,13 @@ function prevQuote() {
                 <ol id="first">
                    
                     <li>
-                        <div style="width:260px !important;padding:6px;"> 
+                        <div class="staff_card" style="width:260px !important;padding:6px;"> 
 							<img src={ PicTU } style="width:60px;height:60px;border-radius:50%;" />
 						
                             <div>Kasubag. Tata Usaha</div>
+							  <div class="kasubag">
+									Irma Fitayanti, S.Kom
+                                </div>
                         </div>
                     </li>
                   
@@ -1280,9 +1287,20 @@ margin-left:-60px;
 
 }
 
+.kasubag {
+    font-weight: 200;
+	text-align: left !important;
+	width: 200px !important;
+	margin-top: -16px !important;
+ }
+
 @media screen and (max-width: 760px) {
   .dropdown-content {
    right: 10px;
+}
+ .kasubag {
+    text-align: right !important;
+    margin-top: 0px !important;
 }
 }
 
@@ -1459,7 +1477,7 @@ ol.static-org-chart #first > li > div {
         color: #555a62 !important;
         background: linear-gradient(147deg, rgba(255, 255, 255, 1) 21%, rgba(254, 254, 255, 1) 32%, rgba(226, 237, 255, 1) 100%, rgba(229, 231, 235, 1) 100%);
         border-radius: 12px;
-        border: 3px dotted #3b3b44;
+       
         font-weight: 600;
 }
 ol.static-org-chart #first > li > div > div {
