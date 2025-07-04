@@ -18,7 +18,7 @@
 
 
 <br/><br/>
-<div class="container max-w-full" style="width:100%;">
+<div class="container max-w-full" style="width:100%; max-width: 100vw; margin: 0 auto; padding: 0 8px;margin-top: 30px;">
   <div style="border:2px solid #00b1ff;padding: 4px;border-radius:12px;width: max-content;"><Toggle class="w-64 text-base" bind:value={sidebarShow} checked={sidebarShow} on:click={() => (sidebarShow = !sidebarShow)}>
     <svelte:fragment slot="offLabel"></svelte:fragment> {sidebarShow ? 'Hilangkan Menu Sidebar' : 'Tampilkan Menu Sidebar'} 
   </Toggle></div> <br/>
@@ -118,9 +118,9 @@
       </div>
       {/if}
       {#if sidebarShow} 
-    <div class="col-span-9 w-full" style="margin-left:34px;width:100%;"><slot></slot></div>
+    <div class="col-span-9 w-full" style="margin-left:14px;width:100%;"><slot></slot></div>
     {:else}
-    <div class="col-span-9 w-max-full" style="margin-left:34px;width: 1020px;"><slot></slot></div>
+    <div class="col-span-12 w-max-full" style="margin-left:14px;width: 100%;"><slot></slot></div>
     {/if}
 </div>
 
@@ -129,10 +129,13 @@
 
 <style>
     .container {
-        display: flex;
+         display: flex;
 		flex-direction: column;
         margin-top: 30px;
-        width: max-content;
+        width: 100%;
+        max-width: 100vw;
+        margin-left: 0;
+        margin-right: 0;
     }
     
     .icon {

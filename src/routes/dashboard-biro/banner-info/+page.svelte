@@ -125,12 +125,12 @@ function upadateAktivasiBanner(Status_banner, id) {
     Silahkan melakukan pengeditan informasi pengumuman pada tabel di bawah:
     <br/> <br/> 
     {#if data.TableDatasTextInfo.documents.length > 0}
-    <Table shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
+    <Table shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto border-4 border-red-500">
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4">Lokasi</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4">Text Info</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4">Edit Text</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4">Tampil</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4">Status Aktif</TableHeadCell>
       </TableHead>
       <TableBody tableBodyClass="divide-y">
         {#each data.TableDatasTextInfo.documents as cetakTabel, i}	

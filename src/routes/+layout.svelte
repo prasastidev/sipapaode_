@@ -48,7 +48,7 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 64rem;
+		max-width: 74rem;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}

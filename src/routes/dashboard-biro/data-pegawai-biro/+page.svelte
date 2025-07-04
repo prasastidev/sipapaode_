@@ -1,5 +1,6 @@
 <script>
   /** @type {{ data: import('./$types').PageData }} */
+   import { onMount } from 'svelte';
   export let data=[];
   import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Popover, Modal, Radio, FloatingLabelInput, Input, Select, Label, Toast } from 'flowbite-svelte';
   import {  TrashBinOutline, CheckCircleSolid, FileLinesOutline, CheckPlusCircleOutline, EditOutline, BuildingSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
@@ -11,6 +12,7 @@
 
   let ModalAddDataPegawai = false;
   let ModalEditData = false;
+  let ModalStatistic = false;
   let toastStatus = false;
   let counter = 6;
 
@@ -192,6 +194,354 @@
 
   // Debug log untuk melihat jumlah data
   $: console.log('Total posts:', totalPosts, 'Current data:', allPosts.length);
+
+
+// Chart Data Statistic 
+let TotalDataPegawai =  data.TableDataPegawai.total;
+let TotalPegawaiTetap =  data.TableDataSPegawai.total;
+let TotalPHT =  data.TableDataSHonorer.total;
+let TotalPegawaiPria =  data.TableDataPria.total;
+let TotalPegawaiWanita =  data.TableDataWanita.total;
+let TotalPegawaiSLTP =  data.TableDataSLTP.total;
+let TotalPegawaiSLTA =  data.TableDataSLTA.total;
+let TotalPegawaiDIII =  data.TableDataDIII.total;
+let TotalPegawaiSarjana =  data.TableDataSarjana.total;
+let TotalPegawaiPascaSarjana =  data.TableDataPascaSarjana.total;
+let TotalPegawaiGolIA =  data.TableDataGolIA.total;
+let TotalPegawaiGolIB =  data.TableDataGolIB.total;
+let TotalPegawaiGolIC =  data.TableDataGolIC.total;
+let TotalPegawaiGolID =  data.TableDataGolID.total;
+let TotalPegawaiGolIIA =  data.TableDataGolIIA.total;
+let TotalPegawaiGolIIB =  data.TableDataGolIIB.total;
+let TotalPegawaiGolIIC =  data.TableDataGolIIC.total;
+let TotalPegawaiGolIID =  data.TableDataGolIID.total;
+let TotalPegawaiGolIIIA =  data.TableDataGolIIIA.total;
+let TotalPegawaiGolIIIB =  data.TableDataGolIIIB.total;
+let TotalPegawaiGolIIIC =  data.TableDataGolIIIC.total;
+let TotalPegawaiGolIIID =  data.TableDataGolIIID.total;
+let TotalPegawaiGolIVA =  data.TableDataGolIVA.total;
+let TotalPegawaiGolIVB =  data.TableDataGolIVB.total;
+let TotalPegawaiGolIVC =  data.TableDataGolIVC.total;
+let TotalPegawaiGolIVD =  data.TableDataGolIVD.total;
+let TotalPegawaiGolIVE =  data.TableDataGolIVE.total;
+
+
+
+let genderChartCanvas;
+let educationChartCanvas;
+let golonganChartCanvas;
+
+// Data statistik jenis kelamin
+const genderData = [
+  { gender: 'Pria', count: TotalPegawaiPria },
+  { gender: 'Wanita', count: TotalPegawaiWanita }
+];
+
+// Data pendidikan terakhir
+const educationData = [
+  { education: 'SLTP', count: TotalPegawaiSLTP },
+  { education: 'SLTA', count: TotalPegawaiSLTA },
+  { education: 'Diploma III (DIII)', count: TotalPegawaiDIII },
+  { education: 'Sarjana (S1)', count: TotalPegawaiSarjana },
+  { education: 'Pasca Sarjana (S2)', count: TotalPegawaiPascaSarjana }
+];
+
+// Data golongan
+const golonganData = [
+  { golongan: 'Gol IA', count: TotalPegawaiGolIA },
+  { golongan: 'Gol IB', count: TotalPegawaiGolIB },
+  { golongan: 'Gol IC', count: TotalPegawaiGolIC },
+  { golongan: 'Gol ID', count: TotalPegawaiGolID },
+  { golongan: 'Gol IIA', count: TotalPegawaiGolIIA},
+  { golongan: 'Gol IIB', count: TotalPegawaiGolIIB },
+  { golongan: 'Gol IIC', count: TotalPegawaiGolIIC},
+  { golongan: 'Gol IID', count: TotalPegawaiGolIID },
+  { golongan: 'Gol IIIA', count: TotalPegawaiGolIIIA },
+  { golongan: 'Gol IIIB', count: TotalPegawaiGolIIIB },
+  { golongan: 'Gol IIIC', count: TotalPegawaiGolIIIC },
+  { golongan: 'Gol IIID', count: TotalPegawaiGolIIID },
+  { golongan: 'Gol IVA', count: TotalPegawaiGolIVA },
+  { golongan: 'Gol IVB', count: TotalPegawaiGolIVB },
+  { golongan: 'Gol IVC', count: TotalPegawaiGolIVC },
+  { golongan: 'Gol IVD', count: TotalPegawaiGolIVD },
+  { golongan: 'Gol IVE', count: TotalPegawaiGolIVE }
+];
+
+// Hitung total dan persentase
+const genderTotal = genderData.reduce((sum, item) => sum + item.count, 0);
+const educationTotal = educationData.reduce((sum, item) => sum + item.count, 0);
+const golonganTotal = golonganData.reduce((sum, item) => sum + item.count, 0);
+
+function getPercentage(count, total) {
+  return ((count / total) * 100).toFixed(1);
+}
+
+// Fungsi untuk membuat pie chart jenis kelamin
+function createGenderChart() {
+  if (!genderChartCanvas) return;
+  
+  const ctx = genderChartCanvas.getContext('2d');
+  const centerX = genderChartCanvas.width / 2;
+  const centerY = genderChartCanvas.height / 2;
+  const radius = Math.min(centerX, centerY) - 50;
+  
+  // Clear canvas
+  ctx.clearRect(0, 0, genderChartCanvas.width, genderChartCanvas.height);
+  
+  // Warna untuk setiap segmen
+  const colors = ['#4472C4', '#E58B47'];
+  
+  let startAngle = 0;
+  
+  // Gambar pie chart
+  genderData.forEach((item, index) => {
+    const sliceAngle = (item.count / genderTotal) * 2 * Math.PI;
+    
+    // Gambar slice
+    ctx.beginPath();
+    ctx.arc(centerX, centerY, radius, startAngle, startAngle + sliceAngle);
+    ctx.lineTo(centerX, centerY);
+    ctx.fillStyle = colors[index];
+    ctx.fill();
+    
+    // Gambar border
+    ctx.strokeStyle = '#ffffff';
+    ctx.lineWidth = 2;
+    ctx.stroke();
+    
+    startAngle += sliceAngle;
+  });
+  
+  // Gambar legend
+  const legendX = centerX - 60;
+  const legendY = centerY + radius + 20;
+  
+  genderData.forEach((item, index) => {
+    const x = legendX + (index * 80);
+    
+    // Kotak warna
+    ctx.fillStyle = colors[index];
+    ctx.fillRect(x, legendY, 12, 12);
+    
+    // Text
+    ctx.fillStyle = '#374151';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.gender, x + 18, legendY + 10);
+  });
+}
+
+// Fungsi untuk membuat bar chart pendidikan
+function createEducationChart() {
+  if (!educationChartCanvas) return;
+  
+  const ctx = educationChartCanvas.getContext('2d');
+  const width = educationChartCanvas.width;
+  const height = educationChartCanvas.height;
+  const padding = 60;
+  const chartWidth = width - (padding * 2);
+  const chartHeight = height - (padding * 2);
+  
+  // Clear canvas
+  ctx.clearRect(0, 0, width, height);
+  
+  // Warna untuk setiap bar
+  const colors = ['#4472C4', '#E58B47', '#A5A5A5', '#FFC000', '#5B9BD5'];
+  
+  // Cari nilai maksimum untuk scaling
+  const maxValue = Math.max(...educationData.map(item => item.count));
+  const scale = chartHeight / (maxValue + 2);
+  
+  // Lebar bar
+  const barWidth = chartWidth / educationData.length * 0.8;
+  const barSpacing = chartWidth / educationData.length;
+  
+  // Gambar grid lines
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= maxValue + 2; i += 2) {
+    const y = height - padding - (i * scale);
+    ctx.beginPath();
+    ctx.moveTo(padding, y);
+    ctx.lineTo(width - padding, y);
+    ctx.stroke();
+  }
+  
+  // Gambar bars
+  educationData.forEach((item, index) => {
+    const barHeight = item.count * scale;
+    const x = padding + (index * barSpacing) + (barSpacing - barWidth) / 2;
+    const y = height - padding - barHeight;
+    
+    // Gambar bar
+    ctx.fillStyle = colors[index];
+    ctx.fillRect(x, y, barWidth, barHeight);
+    
+    // Gambar label di atas bar
+    ctx.fillStyle = '#374151';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(item.count.toString(), x + barWidth / 2, y - 5);
+  });
+  
+  // Gambar Y-axis labels
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px Arial';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= maxValue + 2; i += 2) {
+    const y = height - padding - (i * scale);
+    ctx.fillText(i.toString(), padding - 10, y + 4);
+  }
+  
+  // Gambar legend
+  const legendStartX = padding;
+  const legendY = height - 30;
+  const legendItemWidth = 100;
+  
+  educationData.forEach((item, index) => {
+    const x = legendStartX + (index * legendItemWidth);
+    
+    // Kotak warna
+    ctx.fillStyle = colors[index];
+    ctx.fillRect(x, legendY, 12, 12);
+    
+    // Text
+    ctx.fillStyle = '#374151';
+    ctx.font = '10px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.education, x + 18, legendY + 10);
+  });
+}
+
+// Fungsi untuk membuat bar chart golongan
+function createGolonganChart() {
+  if (!golonganChartCanvas) return;
+  
+  const ctx = golonganChartCanvas.getContext('2d');
+  const width = golonganChartCanvas.width;
+  const height = golonganChartCanvas.height;
+  const padding = 60;
+  const chartWidth = width - (padding * 2);
+  const chartHeight = height - (padding * 2);
+  
+  // Clear canvas
+  ctx.clearRect(0, 0, width, height);
+  
+  // Warna untuk setiap bar (berbagai warna)
+  const colors = [
+    '#4472C4', '#E58B47', '#A5A5A5', '#FFC000', '#5B9BD5',
+    '#70AD47', '#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4',
+    '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F', '#BB8FCE',
+    '#85C1E9', '#F8C471', '#82E0AA', '#F1948A', '#D2B4DE'
+  ];
+  
+  // Filter data yang memiliki count > 0
+  const filteredData = golonganData.filter(item => item.count > 0);
+  
+  if (filteredData.length === 0) return;
+  
+  // Cari nilai maksimum untuk scaling
+  const maxValue = Math.max(...filteredData.map(item => item.count));
+  const scale = chartHeight / (maxValue + 1);
+  
+  // Lebar bar
+  const barWidth = chartWidth / filteredData.length * 0.8;
+  const barSpacing = chartWidth / filteredData.length;
+  
+  // Gambar grid lines
+  ctx.strokeStyle = '#e5e7eb';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= maxValue + 1; i += 1) {
+    const y = height - padding - (i * scale);
+    ctx.beginPath();
+    ctx.moveTo(padding, y);
+    ctx.lineTo(width - padding, y);
+    ctx.stroke();
+  }
+  
+  // Gambar bars
+  filteredData.forEach((item, index) => {
+    const barHeight = item.count * scale;
+    const x = padding + (index * barSpacing) + (barSpacing - barWidth) / 2;
+    const y = height - padding - barHeight;
+    
+    // Gambar bar
+    ctx.fillStyle = colors[index % colors.length];
+    ctx.fillRect(x, y, barWidth, barHeight);
+    
+    // Gambar label di atas bar
+    ctx.fillStyle = '#374151';
+    ctx.font = '12px Arial';
+    ctx.textAlign = 'center';
+    ctx.fillText(item.count.toString(), x + barWidth / 2, y - 5);
+  });
+  
+  // Gambar Y-axis labels
+  ctx.fillStyle = '#6b7280';
+  ctx.font = '12px Arial';
+  ctx.textAlign = 'right';
+  for (let i = 0; i <= maxValue + 1; i += 1) {
+    const y = height - padding - (i * scale);
+    ctx.fillText(i.toString(), padding - 10, y + 4);
+  }
+  
+  // Gambar legend dalam dua baris
+  const legendStartX = padding;
+  const legendY1 = height - 50;
+  const legendY2 = height - 30;
+  const legendItemWidth = 50;
+  const itemsPerRow = Math.ceil(filteredData.length / 2);
+  
+  filteredData.forEach((item, index) => {
+    const row = Math.floor(index / itemsPerRow);
+    const col = index % itemsPerRow;
+    const x = legendStartX + (col * legendItemWidth);
+    const y = row === 0 ? legendY1 : legendY2;
+    
+    // Kotak warna
+    ctx.fillStyle = colors[index % colors.length];
+    ctx.fillRect(x, y, 10, 10);
+    
+    // Text
+    ctx.fillStyle = '#374151';
+    ctx.font = '9px Arial';
+    ctx.textAlign = 'left';
+    ctx.fillText(item.golongan, x + 15, y + 8);
+  });
+}
+
+// Fungsi untuk merender semua chart
+function renderAllCharts() {
+  // Tambahkan delay kecil untuk memastikan DOM sudah ready
+  setTimeout(() => {
+    if (genderChartCanvas) {
+      genderChartCanvas.width = 350;
+      genderChartCanvas.height = 280;
+      createGenderChart();
+    }
+    
+    if (educationChartCanvas) {
+      educationChartCanvas.width = 500;
+      educationChartCanvas.height = 300;
+      createEducationChart();
+    }
+    
+    if (golonganChartCanvas) {
+      golonganChartCanvas.width = 900;
+      golonganChartCanvas.height = 350;
+      createGolonganChart();
+    }
+  }, 100);
+}
+
+// Reactive statement untuk merender chart ketika modal dibuka
+$: if (ModalStatistic) {
+  renderAllCharts();
+}
+
+onMount(() => {
+  // Hapus inisialisasi chart dari onMount karena akan dijalankan via reactive statement
+});
 </script>
 
 <svelte:head>
@@ -316,9 +666,78 @@
     {#if totalPosts === 0}
      <p>Saat ini Tidak Terdapat Data Pegawai Pada Tabel</p>
      {:else}
-     <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Tabel (Total dari Database: {data.TableDataPegawai?.total || 0}) / <strong style="border-bottom: 2px dotted;color:#4b4bdb;">Lihat Statistik</strong></p>
+     <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Tabel (Total dari Database: {data.TableDataPegawai?.total || 0}) / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Pegawai</strong></p>
      {/if}
      <br/>
+
+      <Modal size="xl" title="Statistik Pegawai di Biro Pemerintahan & Otonomi Daerah Sulawesi Tenggara" bind:open={ModalStatistic} autoclose outsideclose>
+          Jumlah Total Pegawai Keseluruhan adalah { TotalDataPegawai }  <br/>
+          Jumlah Total Pegawai Tetap adalah { TotalPegawaiTetap }  <br/>
+          Jumlah Total Pegawai Honorer adalah { TotalPHT } <br/>
+					<br/>
+				<div>
+          <div class="top-charts">
+           <!-- Pie Chart Jenis Kelamin -->
+            <div class="chart-section">
+            <h3>Statistik Berdasarkan Jenis Kelamin</h3>
+              <div class="chart-container">
+               <canvas bind:this={genderChartCanvas}></canvas>
+              </div>
+                	<div style="margin-top: 20px;display: flex;flex-direction: column;gap: 10px;font-size:14px;">
+		               <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			             <span class="stat-label" style="font-weight: 600;color: #374151;">Pria:</span>
+			             <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiPria } </span>
+		               </div>
+		               <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">Wanita:</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiWanita } </span>
+		                </div>
+	                </div>
+             </div>
+    
+          <!-- Bar Chart Pendidikan -->
+           <div class="chart-section">
+           <h3>Statistik Berdasarkan Pendidikan Terakhir</h3>
+           <div class="chart-container">
+           <canvas bind:this={educationChartCanvas}></canvas>
+           </div>
+               <div style="margin-top: 20px;display: flex;flex-direction: row;gap: 8px;font-size:14px;">
+		               <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			             <span class="stat-label" style="font-weight: 600;color: #374151;">SLTP:</span>
+			             <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiSLTP } </span>
+		               </div>
+		               <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">SLTA:</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiSLTA } </span>
+		                </div>
+                    <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">Diploma III (DIII):</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiDIII } </span>
+		                </div>
+                    <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">Sarjana (SI):</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiSarjana } </span>
+		                </div>
+                    <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">Pasca Sarjana (SII):</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiPascaSarjana } </span>
+		                </div>
+	                </div>
+           </div>
+            </div>
+  
+           <!-- Bar Chart Golongan -->
+           <div class="chart-section full-width">
+          <h3>Statistik Berdasarkan Golongan</h3>
+          <div class="chart-container">
+          <canvas bind:this={golonganChartCanvas} width="1100" height="400" style="width:1100px;height:340px;"></canvas>
+          </div>
+          </div>
+      </div>
+					<svelte:fragment slot="footer">
+					  <Button>Tutup</Button>
+					</svelte:fragment>
+				  </Modal>
 
     <!-- Search Form -->
     <form class="flex items-center w-full mx-auto" style="width:100%;">   
@@ -580,4 +999,65 @@
   .table-responsive th:nth-child(3) { width: 35%; } /* Detail */
   .table-responsive th:nth-child(4) { width: 15%; } /* Tombol */
  }
+
+ /* Modal Chart */
+ .top-charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .chart-section {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #90EE90;
+  }
+  
+  .full-width {
+    grid-column: 1 / -1;
+  }
+  
+  .chart-section h3 {
+    margin: 0 0 20px 0;
+    color: #1f2937;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .education-label {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+  
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Responsive */
+  @media (max-width: 768px) {
+    .top-charts {
+      grid-template-columns: 1fr;
+    }
+    
+    .container {
+      padding: 15px;
+    }
+    
+    .chart-section {
+      padding: 20px;
+    }
+  }
  </style>
