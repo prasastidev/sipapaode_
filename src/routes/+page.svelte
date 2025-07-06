@@ -368,9 +368,9 @@ function prevQuote() {
 		<div class="p-3 space-y-2" style="z-index:100;">
 		  <h3 class="font-semibold text-gray-900 dark:text-white">Informasi Jenis Layanan</h3>
 		  <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  <br/>
-		  Pelayanan akan dilakukan dengan mengisi formulir secara online yang telah disediakan, dengan melampirkan sejumlah dokumen yang telah dipersiapkan.<br/>
+		  Layanan dapat dilakukan dengan mengisi formulir yang telah disediakan secara online pada situs ini, dengan melampirkan sejumlah dokumen yang telah dipersiapkan.<br/>
 		   <Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  <br/>
-		   Pelayanan dapat dilakukan kantor Biro Pemerintahan dengan membawa sejumlah dokumen yang telah dipersiapkan. <br/>
+		   Layanan dapat dilakukan dengan langsung berkunjung ke kantor Biro Pemerintahan dan Otonomi Daerah Provinsi Sulawesi Tenggara.  <br/>
 		</div>
 	  </Popover>
 	
@@ -378,7 +378,7 @@ function prevQuote() {
 		<TabItem open style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
 		  <span slot="title" class="text-base">Bag. Kerjasama</span>
 		  <p class="text-2sm text-blue-400 dark:text-blue-300 pb-4 text-center"> 
-		Dibawah berikut adalah pilihan Layanan Online pada Bidang Bagian Kerjasama.
+		Dibawah berikut adalah Layanan Online pada Bidang Bagian Kerjasama.
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;"> 
@@ -440,7 +440,7 @@ function prevQuote() {
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Pemerintahan</span>
 		  <p class="text-2sm text-blue-400 dark:text-blue-300 pb-4 text-center"> 
-			Dibawah berikut adalah pilihan Layanan Online pada Bidang Koordinator Pemerintahan.
+			Dibawah berikut adalah Layanan Online pada Bidang Koordinator Pemerintahan.
 			  </p>  <center>
 		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">  
@@ -517,7 +517,7 @@ function prevQuote() {
 		<TabItem>
 		  <span slot="title" class="text-base">Koord. Otonomi Daerah</span>
 		  <p class="text-2sm text-blue-400 dark:text-blue-300 pb-4 text-center"> 
-			Dibawah berikut adalah pilihan Layanan Online pada Bidang Koordinator Otonomi Daerah.
+			Dibawah berikut adalah Layanan Online pada Bidang Koordinator Otonomi Daerah.
 			  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
@@ -1053,7 +1053,7 @@ function prevQuote() {
             <img 
                 src={currentItem.URL || '/placeholder-image.jpg'} 
                 alt={currentItem.Description || 'Gallery image'}
-                style="width:560px;height:260px;border-radius:40px;object-fit:cover;" 
+                style="width:680px;height:260px;border-radius:40px;object-fit:cover;" 
             />
         </div>
         
@@ -1071,7 +1071,7 @@ function prevQuote() {
     <!-- Optional: Counter untuk menunjukkan posisi -->
     {#if quotes.length > 0}
         <div class="text-center mt-2 text-sm text-gray-600">
-           Menampilkan gambar {currentIndex + 1} / dari {quotes.length}
+           Menampilkan gambar ke - {currentIndex + 1} / dari {quotes.length}
         </div>
     {/if}
 </section>
@@ -1112,21 +1112,21 @@ function prevQuote() {
 <Accordion class="w-full" activeClass="bg-blue-100 dark:bg-gray-800 text-blue-600 dark:text-white focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-800" inactiveClass="text-gray-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-gray-800">
 	<AccordionItem class="font-semibold text-lg" open>
 	  <span slot="header">Apa itu Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi tenggara</span>
-	  <p class="mb-2 text-gray-500 dark:text-gray-400">Sipapaode merupakan langkah maju dalam upaya meningkatkan pelayanan pemerintahan di Sulawesi Tenggara. Dengan memanfaatkan teknologi informasi, diharapkan sistem ini dapat menciptakan layanan yang lebih efisien, transparan, dan mudah diakses oleh masyarakat. </p>
+	  <p class="mb-2 text-gray-500 dark:text-gray-400">Sipapaode merupakan situs portal web Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara yang memberikan Informasi sehubungan dengan layanan Pemerintahan terutama pada Kantor Layanan Biro Pemerintahan dan Otonomi Daerah Setda Sultra. </p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
-	  <span slot="header">Bagaimana Pengajuan Proses Fasilitas Kerjasama Antar Pemerintah Dalam dan Luar Negeri atau Badan Usaha / Swasta.</span>
-	  <p class="mb-2 text-gray-500 dark:text-gray-400">Proses pengajuan fasilitas kerjasama dapat dilakukan melalui Fitur-Fitur Layanan di Tab Kerjasama. Anda akan diarahkan untuk mengisi Formulir serta mendapatkan informasi tambahan mengenai kerjasama tersebut.</p>
+	  <span slot="header">Bagaimana Proses Pengajuan Kerjasama dengan Pemerintah Prov. Sulawesi Tenggara melalui situs Sipapaode.</span>
+	  <p class="mb-2 text-gray-500 dark:text-gray-400">Informasi sehubungan dengan Pengajuan Kerjasama dengan Pemerintahan Prov. Sulawesi Tenggara dapat dilihat pada Fitur Layanan Online yang terdapat pada Tab Bidang Bag. Kerjasama.</p>
 	</AccordionItem>
 	<AccordionItem class="font-semibold text-lg">
-		<span slot="header">Dibagian mana menemukan informasi tentang Kode data wilayah pemerintahan, Pulau dan Rupa Bumi di Sulawesi Tenggara.</span>
-		<p class="mb-2 text-gray-500 dark:text-gray-400">Anda dapat menemukan Informasi tersebut pada halaman situs web Applikasi Sipapaode pada halaman di Bawah berikut ini:
-        <br/><a href="/maps-sultra" target="_blank" style="text-decoration:underline;">https://www.sipapaode.id/maps-sultra</a>
+		<span slot="header">Dimana menemukan informasi tentang Data Wilayah Pemerintah, Kode, Rupa Bumi, dan Letak Geografis Daerah Pemerintahan di Prov. Sultra.</span>
+		<p class="mb-2 text-gray-500 dark:text-gray-400">Informasi sehubungan dengan Data Wilayah Pemerintahan Daerah di Provinsi Sulawesi Tenggara dapat dilihat pada Fitur Layanan Online Tab Bidang Koordinator Pemerintahan atau dapat langsung mengunjungi halaman berikut:
+        <br/><a href="/maps-sultra" target="_blank" style="text-decoration:underline;font-weight:600;">https://www.sipapaode.id/maps-sultra</a>
 		</p>
 	  </AccordionItem>
 	  <AccordionItem class="font-semibold text-lg">
-		<span slot="header">Apa saja bidang di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara.</span>
-		<p class="mb-2 text-gray-500 dark:text-gray-400">Bidang di Biro Pemerintahan dan Otonomi Daerah Prov. Sulawesi Tenggara adalah Bagian Kerjasama, Koord. Pemerintahan dan Koord. Otonomi Daerah.</p>
+		<span slot="header">Terdapat Bidang apa saja di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara, sehubungan dengan layanan Pemerintahan</span>
+		<p class="mb-2 text-gray-500 dark:text-gray-400">Pada Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara, terdapat 3 Bidang yaitu: Bidang Bagian Kerjasama, Bidang Koordinator Pemerintahan dan Bidang Koordinator Otonomi Daerah, yang berhubungan dengan layanan Pemerintahan.</p>
 	  </AccordionItem>
   </Accordion>
 	<br/><br/>
