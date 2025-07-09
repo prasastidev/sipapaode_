@@ -153,7 +153,7 @@ function resetForm() {
                 {$user.prefs['Bidang']}
               </p>
               <p class="text-sm text-gray-500 truncate dark:text-gray-400">
-                {$user.email}  &nbsp;|&nbsp;  <Badge border color="indigo"> {$user.prefs['Role']}</Badge>
+                {$user.email}  &nbsp;|&nbsp;  <Badge border color="indigo"> {$user.prefs['Role'] || 'User'}</Badge>
               </p>
             </div>
             <div class="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">

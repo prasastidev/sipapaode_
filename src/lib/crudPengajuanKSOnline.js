@@ -20,13 +20,13 @@ export async function getTablePengajuanTerakhir() {
 		IDEAS_DATABASE_ID,
 		IDEAS_COLLECTION_ID,
 		// Use a query to show the latest ideas first
-		[ Query.limit(3), Query.orderDesc('$createdAt') ]
+		[ Query.limit(10), Query.orderDesc('$createdAt') ]
 	);
 }
 
 
-export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Instansi, Tentang, Catatan, Status, Estimasi, generateid) {
-	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {
+export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Instansi, Tentang, Catatan, Status, Estimasi, Posisi, Kota, Provinsi, OpsiPengajuan, IDBucketLampiranI, IDBucketLampiranII, IDBucketLampiranIII  ) {
+	await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, ID.unique(), {
 		Kategory_KS,
 		Nama,
 		Email,
@@ -35,7 +35,14 @@ export async function addTableData(Kategory_KS, Nama, Email, ContactPerson, Inst
 		Tentang,
 		Catatan,
 		Status, 
-		Estimasi
+		Estimasi,
+		Posisi,
+		Kota,
+		Provinsi,
+		OpsiPengajuan,
+		IDBucketLampiranI,
+		IDBucketLampiranII,
+        IDBucketLampiranIII
 	});
 }
 

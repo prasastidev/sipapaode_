@@ -66,7 +66,7 @@
                     <SidebarDropdownItem label="👤 Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
                     <SidebarDropdownItem label="🖼️ Photo Profil Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
-                  <SidebarItem label="Aktivasi Formulir Online" href="/dashboard-biro/status-layanan">
+                  <SidebarItem label="Setting Formulir Online" href="/dashboard-biro/status-layanan">
                     <svelte:fragment slot="icon">
                       <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
@@ -81,12 +81,12 @@
                       <FileImageSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Informasi PIC" href="/dashboard-biro/info-pic">
+                  <SidebarItem label="Pengelola Data" href="/dashboard-biro/info-pic">
                     <svelte:fragment slot="icon">
                       <UserHeadsetSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                <SidebarItem label="Users Terdaftar" href="/dashboard-biro/daftar-user">
+                <SidebarItem label="Daftar Users" href="/dashboard-biro/daftar-user">
                   <svelte:fragment slot="icon">
                     <UsersGroupSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>

@@ -6,6 +6,8 @@
     import { invalidateAll } from '$app/navigation';
     import { sineOut } from 'svelte/easing';
     import { onMount } from 'svelte';
+
+    import ScreenAlbumGalery from '$lib/images/ScreenAlbumGallery.jpg';
    
     let isUploadOpen = false;
     let visibleProgresBar = false;
@@ -236,15 +238,20 @@
 </script>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold md:text-3xl lg:text-4xl">Dokumentasi Photo Album Gallery (Beranda)</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold md:text-3xl lg:text-4xl">Dokumentasi Album Gallery Pada Halaman Beranda</Heading>
     <br/>
     <div class="modern-box">
         <div class="contentbox">
-            <label>Dibawah adalah Tombol untuk mengupload Dokumentasi Photo Gallery yang terdapat pada halaman Beranda. Klik Tombol [Buka Upload Photo] dan masukkan data Photo Gallery Dokumentasi.</label>
+            <label>Berikut dibawah ini adalah halaman untuk melakukan melakukan Update pada Album Gallery Halaman Beranda. Silahkan tekan Tombol <span style="border-radius:10px;padding:4px 8px;color:white;background-color:#1f2937;">Buka Upload Photo</span> dibawah untuk melakukan Penambahan Gambar ataupun Photo Kegiatan.</label>
         </div>
     </div>
+    <br/> <br/>
+    Contoh Tampilan pada halaman Beranda:<br/> <br/>
+    <img src={ScreenAlbumGalery} alt="screen info" style="width:100%;height:100%;border-radius:16px;" />
     <br/><br/>
   
+    <span style="color:blue;font-size:16px;">Silahkan Tekan Tombol Buka Upload Photo di bawah untuk membuka mengupload Gambar atau Photo:</span>
+    <br/> <br/> 
     <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>
         {!isUploadOpen ? 'Buka Upload Photo' : 'Tutup Upload Photo'}
     </Button>
@@ -253,6 +260,7 @@
     {#if isUploadOpen}
         <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
             <form class="space-y-6" on:submit={addDataFormtoTable}>
+                <h3 style="font-weight: 600;font-size: 18px;">Silahkan Memasukan Gambar/Photo, menyertakan lokasi photo serta deskripsi.</h3>
                 <Label class="text-base" style="margin-bottom: -20px;">Upload file Photo / Gambar (Type File: JPG, JPEG or PNG)</Label>
                 <Fileupload class="mb-1" id="uploadGalleryDoc" accept=".png, .jpg, .jpeg, .webp" required />
                 <Label class="pb-2 mb-1" style="margin-top: 10px;">(Max File Size: 10 MB)</Label>

@@ -226,7 +226,13 @@ const remove = async (id) => {
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;overflow-wrap:anywhere;"><b>Kategory:</b> <br/>{cetakTabel.Kategory_KS}<br/><br/><b>Tentang:</b> <br/>{cetakTabel.Tentang}</div></TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:160px;overflow-wrap:anywhere;">{cetakTabel.Catatan}</div></TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;">
-          <Badge color={cetakTabel.Status === "Ditolak" ? "red" : "indigo"} border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>
+          <Badge color={
+           cetakTabel.Status === "Proses Pengajuan" ? "yellow" :
+           cetakTabel.Status === "Proses Verifikasi" ? "blue" :
+           cetakTabel.Status === "Penandatanganan Naskah" ? "green" :
+           cetakTabel.Status === "Ditolak" ? "red" : "gray"
+            } 
+          border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>
         </TableBodyCell>
         {#if $user.prefs['Role'] === "PIC Kerjasama"}
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">

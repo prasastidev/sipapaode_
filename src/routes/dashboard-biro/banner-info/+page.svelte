@@ -2,8 +2,8 @@
   /** @type {import('./$types').PageData} */
   export let data=[];
 
-  import { Heading, Modal, Toast, Toggle, Button, Textarea, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
-  import {  EditOutline, CheckCircleSolid } from 'flowbite-svelte-icons';
+  import { Heading, Modal, Toast, Popover, Toggle, Button, Textarea, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import {  EditOutline, CheckCircleSolid, InfoCircleOutline } from 'flowbite-svelte-icons';
   import { databases } from '$lib/appwrite';
   import { UpdateTableTextInfo } from '$lib/textInfoBanner.js';
   import { invalidateAll } from '$app/navigation';
@@ -89,15 +89,15 @@ function upadateAktivasiBanner(Status_banner, id) {
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Info Pengumuman Halaman Depan</Heading>
+    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Info Pengumuman Pada Halaman Beranda</Heading>
     <br/>
     <div class="modern-box">
       <div class="contentbox">
-        <label>Dibawah berikut adalah pengeditan informasi pengumuman yang terdapat pada halaman depan situs. Pengeditan Text dan Penyetingan Aktivasi Tampil terdapat pada table halaman ini.</label>
+        <label>Berikut di bawah ini adalah halaman untuk melakukan perubahan informasi serta menampilkan (enable) ataupun tidak menampilkan (disable) Info Pengumuman yang terdapat pada halaman Beranda.</label>
       </div>
     </div>
     <br/> <br/>
-    Sample Gambar:<br/> <br/>
+    Contoh Tampilan pada halaman Beranda:<br/> <br/>
     <img src={ScreenInfo} alt="screen info" style="width:100%;height:100%;" />
     <br/><br/>
 
@@ -122,16 +122,28 @@ function upadateAktivasiBanner(Status_banner, id) {
     </Modal>
 
   <section>
-    Silahkan melakukan pengeditan informasi pengumuman pada tabel di bawah:
+    <span style="color:blue;font-size:16px;">Silahkan melakukan perubahan informasi serta mengaktifkan (enable) ataupun menonaktifkan (disable) info pengumuman pada Tabel di bawah ini:</span>
     <br/> <br/> 
     {#if data.TableDatasTextInfo.documents.length > 0}
     <Table shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto border-4 border-red-500">
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4">Lokasi</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4">Text Info</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4">Edit Text</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4">Status Aktif</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4">Text Info Pengumuman</TableHeadCell>
+        <TableHeadCell style="font-size: larger;display:flex;" class="py-4">Edit Text <button id="InfoEditText">
+			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button></TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4">Status Aktif <button id="InfoStatusAktif">
+			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button></TableHeadCell>
       </TableHead>
+      <Popover triggeredBy="#InfoEditText" class="w-40 md:w-64 lg:w-64 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
+		<div class="p-3 space-y-2" style="z-index:100;">
+		  Tekan tombol Edit dibawah untuk melakukan perubahan Text Info Pengumuman
+		</div>
+	  </Popover>
+     <Popover triggeredBy="#InfoStatusAktif" class="w-40 md:w-64 lg:w-64 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
+		<div class="p-3 space-y-2" style="z-index:100;">
+		  Tekan tombol Toggle dibawah untuk melakukan enable atau disable Info Pengumuman.
+		</div>
+	  </Popover>
       <TableBody tableBodyClass="divide-y">
         {#each data.TableDatasTextInfo.documents as cetakTabel, i}	
         <TableBodyRow>
@@ -148,7 +160,8 @@ function upadateAktivasiBanner(Status_banner, id) {
      {/each}
     
       </TableBody>
-    </Table>
+    </Table> 
+    
     {:else}
     <p class="alert alert-danger">No Data found</p>
     {/if}

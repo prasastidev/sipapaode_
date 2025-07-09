@@ -162,11 +162,11 @@ function startEdit(user) {
   </svelte:head>
   
   <div class="container">
-      <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Daftar User Terdaftar Sipapaode</Heading>
+      <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Daftar Users Terdaftar Sipapaode</Heading>
       <br/>
       <div class="modern-box">
         <div class="contentbox">
-          <label>Berikut adalah daftar informasi pengguna terdaftar di Sipapaode. Pendaftaran pengguna baru dapat dilakukan melalui halaman ini.</label>
+          <label>Berikut adalah daftar informasi user terdaftar di Sipapaode. Pendaftaran user baru dapat dilakukan pada halaman ini.</label>
         </div>
       </div>
       <br/><br/>
@@ -252,7 +252,7 @@ function startEdit(user) {
               <div style="display:flex;align-items:center;"><b style="margin-right:6px;">Nama:</b> {user.name}</div>
               <div style="display:flex;align-items:center;margin-top:-10px;margin-bottom:10px;"><b style="margin-right:6px;">Email:</b> {user.email}</div>
             </TableBodyCell>
-             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><Badge border color="indigo"> {user.prefs['Role']}</Badge></TableBodyCell> 
+             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><Badge border color="indigo"> {user.prefs['Role'] || 'User'} </Badge></TableBodyCell> 
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">

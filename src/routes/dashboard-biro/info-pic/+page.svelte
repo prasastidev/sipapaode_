@@ -8,7 +8,7 @@
       no: 1,
       nama: 'SUSI HASMIATI, S.STP. MM.',
       bidang: 'Bidang Bagian Kerjasama',
-      deskripsi: 'Verifikasi data pengajuan kerjasama secara online, monitoring, dan pembaruan informasi secara berkala. <br/>Mengelola serta mendata <b>Dokumen kerjasama</b>, baik yang aktif maupun yang telah selesai, untuk memastikan semua informasi terkini dan akurat demi kelancaran proses kerjasama. <br/>Serta Mengunggah foto dokumentasi kerjasama sebagai bukti kolaborasi yang efektif dan produktif antara pihak-pihak terlibat.',
+      deskripsi: '<b>Mengelola Dashboard Bagian Kerjasama:</b> Data pengajuan kerjasama secara online, Data File Dokumen Kerjasama, Gallery Photo Dokumentasi Kerjasama.',
       email: 'biropem.bagks@gmail.com',
       pic: 'PIC Kerjasama'
     },
@@ -16,7 +16,7 @@
       no: 2,
       nama: 'HERLINA UDDIN, S.STP. M.Si',
       bidang: 'Bidang Bagian Kerjasama',
-      deskripsi: 'menyampaikan informasi mengenai pengiriman <b>laporan evaluasi kerjasama</b> dari pemerintah kabupaten/kota, memastikan dokumentasi yang tepat dan akurat, serta meneruskannya ke pusat sesuai dengan prosedur dan waktu yang ditentukan untuk mendukung transparansi dan akuntabilitas.',
+      deskripsi: '<b>Mengelola Dashboard Bagian Kerjasama:</b> Arsip Database Laporan Evaluasi Kerjasama per Semester, Gallery Photo Dokumentasi Kerjasama',
       email: '--',
       pic: 'PIC Kerjasama'
     },
@@ -24,55 +24,39 @@
       no: 3,
       nama: 'MOH. ARIEF BUDIMAN, SE.',
       bidang: 'Bidang Koordinator Pemerintahan',
-      deskripsi: 'Mengupdate dan memelihara data informasi mengenai <b>kode wilayah pemerintahan</b>, administrasi, dan rupa bumi. Memastikan keakuratan dan konsistensi data, serta mendukung analisis dan pengambilan keputusan yang sehubungan dengan pengelolaan wilayah dan sumber daya, mendorong pelayanan publik yang efektif dan efisien.',
+      deskripsi: '<b>Mengelola Dashboard Koord. Pemerintahan:</b> Kode Data Wilayah Pemerintahan, Pulau dan Rupa Bumi, Gallery Photo Dokumentasi Pemerintahan.',
       email: 'bobexlbudiman@gmail.com',
       pic: 'PIC Pemerintahan'
     },
     {
       no: 4,
-      nama: 'MOH. ARIEF BUDIMAN, SE',
-      bidang: 'Bidang Koordinator Pemerintahan',
-      deskripsi: 'Memfasilitasi penataan wilayah pemerintahan serta mendukung proses <b>pembentukan daerah otonomi baru</b>, termasuk analisis kebijakan, koordinasi antar instansi, dan penyusunan rekomendasi untuk meningkatkan efisiensi pengelolaan daerah serta pelayanan publik yang lebih baik.',
-      email: 'bobexlbudiman@gmail.com',
-      pic: 'PIC Pemerintahan'
-    },
-    {
-      no: 5,
       nama: '--',
       bidang: 'Bidang Koordinator Pemerintahan',
-      deskripsi: 'memfasilitasi pelaporan <b>Standar Pelayanan Minimal (SPM)</b> secara akurat dan tepat waktu, serta memastikan pengiriman laporan ke Pusat sesuai dengan regulasi yang berlaku, guna mendukung peningkatan kualitas pelayanan dan akuntabilitas institusi.',
+      deskripsi: '<b>Mengelola Dashboard Koord. Pemerintahan:</b> ',
       email: '--',
       pic: 'PIC Pemerintahan'
     },
     {
-      no: 6,
+      no: 5,
       nama: 'RISKY TAHIR, S.Ip.',
       bidang: 'Bidang Koordinator Otonomi Daerah',
-      deskripsi: 'mendokumentasikan dan mengarsipkan <b>laporan LPPD dan LKPJ</b> dari Pemerintah Kabupaten/Kota, memastikan semua dokumen terorganisir dengan baik, serta meneruskan laporan tersebut ke instansi pusat sesuai dengan ketentuan yang berlaku untuk mendukung transparansi dan akuntabilitas.',
+      deskripsi: '<b>Mengelola Dashboard Koord. Otonomi Daerah:</b> Arsip Dokumen LPPD dan LKPJ, Gallery Photo Dokumentasi Otonomi Daerah.',
       email: 'biropemerintahanlppd@gmail.com',
       pic: 'PIC Otonomi'
     },
     {
-      no: 7,
-      nama: '',
-      bidang: 'Bidang Koordinator Otonomi Daerah',
-      deskripsi: 'Melakukan <b>inventarisasi</b> dan penataan urusan <b>daerah untuk Otonomi Baru</b> dengan tujuan memastikan pengelolaan yang efektif. Mencakup pengumpulan data, analisis kebijakan, serta penyusunan rekomendasi untuk pengembangan dan efektifitas pengelolaan daerah, guna mendukung implementasi otonomi yang lebih baik dan berkelanjutan.',
-      email: '',
-      pic: 'PIC Otonomi'
-    },
-    {
-      no: 8,
+      no: 6,
       nama: 'RESYA SAPUTRA, S.STP., M.Si.',
       bidang: 'Bidang Koordinator Otonomi Daerah',
-      deskripsi: 'Memfasilitasi penerbitan <b>Surat Keputusan (SK)</b> dengan kategory ditujukan kepada Gubernur, Bupati/Walikota dan Legislatif. Serta penyusunan dan pemeliharaan arsip dokumentasi sehubungan dengan SK, memastikan semua dokumen terorganisir dengan baik dan dapat diakses untuk administrasi dan audit.',
+      deskripsi: '<b>Mengelola Dashboard Koord. Otonomi Daerah:</b> Arsip Data Dokumen SK, Gallery Photo Dokumentasi Otonomi Daerah.',
       email: '',
       pic: 'PIC Otonomi'
     },
     {
-      no: 9,
+      no: 7,
       nama: 'IRMA FITAYANTI BASO, S.Kom',
       bidang: 'Tata Usaha',
-      deskripsi: 'Pendataan pegawai di Biro Pemerintahan</b> dan Otonomi Daerah, mengelola informasi pegawai dan keakuratan data, serta mendukung pengambilan keputusan melalui laporan yang tepat dan tepat waktu.',
+      deskripsi: '<b>Mengelola Dashboard Tata Usaha:</b> Data Pegawai, Photo Profil Pegawai.',
       email: 'oci25ocioci@gmail.com',
       pic: 'PIC Tata Usaha'
     }
@@ -93,12 +77,12 @@
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Informasi PIC Sipapaode</Heading>
+  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Pengelola Data dan Informasi Web Biro Pemerintahan dan Otonomi Daerah Sultra (Sipapaode)</Heading>
   <br/><br/>
 
   <div class="modern-box">
     <div class="contentbox">
-      <label>Berikut di Bawah ini adalah informasi PIC (person in charge), pejabat pengelola informasi, data dan layanan pada sipapaode.id.</label>
+      <label>Berikut di Bawah ini adalah daftar Nama pengelola data dan Informasi Web Biro Pemerintahan dan Otonomi daerah Sulawesi Tenggara, dalam melakukan proses update data dan pembaruan data, Baik penambahan data, pengupdate-an data ataupun penghapusan data.</label>
     </div>
   </div>
   <br/><br/><br/>
