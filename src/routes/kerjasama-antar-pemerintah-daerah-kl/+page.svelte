@@ -249,9 +249,23 @@ let RadioOpsiPengajuan = "Pengajuan Baru";
       }
     }
 
-  let currentStep = 1;
+let currentStep = 1;
+let steps = ['Langkah 1', 'Langkah 2'];
+
+  let pageForm = 1;
+    const nextPage = () => {
+        pageForm++;
+        currentStep = 2;
+    }
+
+    const prevPage = () => {
+        pageForm--;
+        currentStep = 1;
+    }
+
+
  // Data untuk setiap step
-  const steps = [
+  const procedureSteps = [
     {
       number: 1,
       title: "Proses Pengajuan /",
@@ -679,7 +693,7 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
 <div class="flex justify-center w-full">
    <div class="process-flow-container">
   <div class="process-flow">
-    {#each steps as step, index}
+    {#each procedureSteps as step, index}
       <div class="step-wrapper">
         <!-- Circle Step -->
         <div class="step-circle" class:completed={step.completed}>
@@ -693,7 +707,7 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
         </div>
         
         <!-- Arrow (tidak ditampilkan untuk step terakhir) -->
-        {#if index < steps.length - 1}
+        {#if index < procedureSteps.length - 1}
           <div class="arrow">
             <svg width="60" height="20" viewBox="0 0 60 20" fill="none">
               <path d="M0 10L50 10M45 5L50 10L45 15" stroke="#5B7FBF" stroke-width="2"/>
@@ -1035,6 +1049,10 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
       transform: scale(1);
     }
   }
+
+    /* Styling untuk multi-step form */
+  .pageFormulir { display: none; }
+  .pageFormulir.show { display: block; }
    
 
 </style>
