@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
  
     import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Select, Label, Badge } from 'flowbite-svelte';
-    import { PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
+    import { BuildingOutline, PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
     import { user } from '$lib/user';
     import { slide } from 'svelte/transition';
     import { v4 as uuidv4 } from "uuid";
@@ -14,7 +14,7 @@
     let counter = 6;
 
     let ConfirmDeleteModal = false;
-    let selectedId = null;
+    let selectedId, selectedMitra, selectedTentangKS = null;
    
     import { invalidateAll } from '$app/navigation';
 	  import { addTableData, deleteTableData, UpdateTableDataKS } from '$lib/crudDataRekapKerjasama.js';
@@ -43,34 +43,134 @@
    let getKategoryKS, getJenisKS, getSubjek, getTentang, getNoKS, getnamaOPD, getnamaMitra, getTahunMulai, getTanggalmulai, getTMTanpaTime;
    let getTanggalselesai, getTSTanpaTime, getKeterangan, getidData;  
   
-   const addDatatoTable = async (e) => {
+  // Tambahkan variabel untuk loading state
+    let isSubmitting = false;
+    let uploadProgress = 0;
+
+    // Fungsi untuk menampilkan progress upload (opsional)
+      const showUploadProgress = (progress) => {
+      uploadProgress = progress;
+    // Anda bisa menampilkan progress bar di UI
+};
+
+  const addDatatoTable = async (e) => {
+    if (isSubmitting) return; // Prevent double submission
+    
+    isSubmitting = true;
     uuid = uuidv4();   // generate id melalui uuid
-		e.preventDefault();
-		const formEl = e.target;
+    e.preventDefault();
+    const formEl = e.target;
+    
+    try {
+        // Validasi file sebelum upload
+        const fileInput = document.getElementById('uploadDocKS');
+        const file = fileInput.files[0];
+        
+        if (!file) {
+            alert('Silakan pilih file dokumen kerjasama yang akan diupload');
+            return;
+        }
+        
+        // Validasi ukuran file (contoh: maksimal 40MB)
+        const maxSize = 40 * 1024 * 1024; // 40MB
+        if (file.size > maxSize) {
+            alert('Ukuran file terlalu besar. Maksimal 40MB');
+            return;
+        }
+        
+        // Validasi format file
+        const allowedTypes = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+        if (!allowedTypes.includes(file.type)) {
+            alert('Format file tidak didukung. Hanya PDF dan DOC/DOCX yang diizinkan');
+            return;
+        }
+        
+        const formData = new FormData(formEl);
+        
         // Masukkan Data ke table melalui crudDataRekap
-		const formData = new FormData(formEl);
-		await addTableData(formData.get('kategoriKS'), formData.get('jenisKS'), formData.get('subjekKS'), formData.get('tentangKS'), formData.get('No_kerjasama'), formData.get('namaOPD'), formData.get('namaMitra'), formData.get('tahunMulai'), formData.get('tanggalMulai'), formData.get('tanggalSelesai'), formData.get('keteranganKS'), uuid);
+        await addTableData(
+            formData.get('kategoriKS'), 
+            formData.get('jenisKS'), 
+            formData.get('subjekKS'), 
+            formData.get('tentangKS'), 
+            formData.get('No_kerjasama'), 
+            formData.get('namaOPD'), 
+            formData.get('namaMitra'), 
+            formData.get('tahunMulai'), 
+            formData.get('tanggalMulai'), 
+            formData.get('tanggalSelesai'), 
+            formData.get('keteranganKS'), 
+            uuid
+        );
 
-    // Masukkan file ke Storage Bucket
-		  const promise = storage.createFile('674e4b10003a83fb0a30', uuid, document.getElementById('uploadDocKS').files[0]); 
-	     promise.then(function (response) {
-         console.log(response); 
-
-         }, function (error) {
-          console.log(error); // Failure
-           throw error;
-          });
-
-        invalidateAll();
-
-		// Reset form
-		formEl.reset();
-    // Notification Toast and Time
-    toastStatus = true;
-    counter = 6;
-    timeout();
-
-	};
+        // Masukkan file ke Storage Bucket dengan error handling
+        try {
+            const uploadResponse = await storage.createFile('674e4b10003a83fb0a30', uuid, file);
+            console.log('File berhasil diupload:', uploadResponse);
+            
+            // Jika semua berhasil, refresh data dan tutup modal
+            await invalidateAll();
+            
+            // Reset form
+            formEl.reset();
+            
+            // Notification Toast and Time
+            toastStatus = true;
+            counter = 6;
+            timeout();
+            
+        } catch (fileError) {
+            console.error('Error saat upload file:', fileError);
+            
+            // Jika upload file gagal, hapus data yang sudah tersimpan di database
+            try {
+                await deleteTableData(uuid);
+                console.log('Data berhasil dihapus karena upload file gagal');
+            } catch (deleteError) {
+                console.error('Error saat menghapus data:', deleteError);
+            }
+            
+            // Tampilkan pesan error yang user-friendly
+            let errorMessage = 'Gagal mengupload file dokumen. ';
+            
+            if (fileError.code === 400) {
+                errorMessage += 'File tidak valid atau format tidak didukung.';
+            } else if (fileError.code === 401) {
+                errorMessage += 'Tidak memiliki izin untuk mengupload file.';
+            } else if (fileError.code === 413) {
+                errorMessage += 'Ukuran file terlalu besar.';
+            } else if (fileError.code === 507) {
+                errorMessage += 'Penyimpanan penuh. Hubungi administrator.';
+            } else {
+                errorMessage += 'Terjadi kesalahan teknis. Silakan coba lagi.';
+            }
+            
+            alert(errorMessage);
+            return;
+        }
+        
+    } catch (error) {
+        console.error('Error saat menambah data:', error);
+        
+        // Tampilkan pesan error umum
+        let errorMessage = 'Gagal menambahkan data kerjasama. ';
+        
+        if (error.code === 400) {
+            errorMessage += 'Data yang dimasukkan tidak valid.';
+        } else if (error.code === 401) {
+            errorMessage += 'Tidak memiliki izin untuk menambah data.';
+        } else if (error.code === 409) {
+            errorMessage += 'Data dengan nomor kerjasama tersebut sudah ada.';
+        } else {
+            errorMessage += 'Terjadi kesalahan teknis. Silakan coba lagi.';
+        }
+        
+        alert(errorMessage);
+    } finally {
+        isSubmitting = false;
+        uploadProgress = 0;
+    }
+};
  
   
 function DownloadFile(id) {
@@ -78,8 +178,10 @@ function DownloadFile(id) {
 	return result;
 }
 
-function openDeleteModal(id) {
+function openDeleteModal(id, mitraInstansi, tentangKerjasama) {
     selectedId = id;
+    selectedMitra = mitraInstansi;
+    selectedTentangKS = tentangKerjasama;
     ConfirmDeleteModal = true;
   }
 
@@ -158,7 +260,7 @@ const updateDataKS = async (e) => {
       table = document.getElementById("TABLE_KSPK");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[3];
+        td = tr[i].getElementsByTagName("td")[4];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -170,17 +272,39 @@ const updateDataKS = async (e) => {
       }
     }
 
-  // Pagination 
-  let currentPage =1; // Update this to simulate page change.
-  let postsPerPage = 10;
-  let allPosts = data.TableDatas.documents;
-  let totalPosts = allPosts.length;
-  let totalPages = Math.ceil(totalPosts / postsPerPage);
+  // Items per page options
+  let itemsPerPageOptions = [
+    { value: 5, name: '5 per halaman' },
+    { value: 10, name: '10 per halaman' },
+    { value: 20, name: '20 per halaman' },
+    { value: 50, name: '50 per halaman' },
+    { value: 100, name: '100 per halaman' }
+  ];
+
+    // Pagination - menggunakan reactive statement
+  let currentPage = 1;
+  let postsPerPage = 20;
+
+    // Reactive statement untuk memastikan data selalu ter-update
+  $: allPosts = data.TableDatas?.documents || [];
+  $: totalPosts = allPosts.length;
+  $: totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
   $: postRangeLow = postRangeHigh - postsPerPage;
-	const setCurrentPage = newPage => {
-		currentPage = newPage;
+
+  const setCurrentPage = newPage => {
+    currentPage = newPage;
   }
+
+   // Function to handle items per page change
+  const changeItemsPerPage = (newItemsPerPage) => {
+    postsPerPage = newItemsPerPage;
+    currentPage = 1; // Reset to first page when changing items per page
+  }
+
+  // Debug log untuk melihat jumlah data
+  $: console.log('Total posts:', totalPosts, 'Current data:', allPosts.length);
+
 
   let getKeteranganKSColor = (Keterangan) => {
 		if (Keterangan == 'Masih Berlaku') return 'blue-50'
@@ -260,8 +384,23 @@ const updateDataKS = async (e) => {
         <li class="w-full"><Radio name="keteranganKS" class="p-3" value="Telah Selesai">Telah Selesai</Radio></li>
       </ul>  
       <div>
-        <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Tambah Data</button>
-      </div>     
+    <button 
+        type="submit" 
+        value="submit" 
+        disabled={isSubmitting}
+        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+        {#if isSubmitting}
+            <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+            Mengirim Data...
+        {:else}
+            Tambah Data
+        {/if}
+    </button>
+</div>    
     </form>  
     <svelte:fragment slot="footer">
       <Button color="alternative" on:click={()=> ModalAddData = !ModalAddData} >Batal</Button>
@@ -379,16 +518,60 @@ const updateDataKS = async (e) => {
   </select>
 </div>
 
-    <Table id="TABLE_KSPK" shadow hoverable={false} class="whitespace-break-spaces table-auto overflow-x-auto">
+<!-- Pagination dengan Items per Page -->
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+        <!-- Items per page selector -->
+        <div class="flex items-center gap-2">
+            <label for="items-per-page" class="font-medium text-gray-700">Show:</label>
+            <Select 
+                id="items-per-page"
+                items={itemsPerPageOptions} 
+                bind:value={postsPerPage}
+                on:change={() => changeItemsPerPage(postsPerPage)}
+                class="w-auto min-w-[140px]"
+            />
+        </div>
+
+        <!-- Pagination -->
+        <ul class="paginationTable" style="list-style-type: none;">
+          {#if currentPage > 1}
+            <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
+           <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
+          {/if}
+          {#each [3,2,1] as i}
+            {#if currentPage - i > 0}
+              <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
+            {/if}
+          {/each}
+          <li class:active={currentPage}><span>{currentPage}</span></li>
+          {#each Array(3) as _, i}
+            {#if currentPage + (i+1) <= totalPages}
+              <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
+            {/if}
+          {/each}
+          {#if currentPage < totalPages}
+            <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
+            <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
+          {/if}
+         </ul>
+    </div>
+     
+    <span style="margin-left: 6px; margin-top: 5px;display: block;">
+       Halaman {currentPage} dari {totalPages} | Menampilkan {Math.min(postRangeLow + 1, totalPosts)}-{Math.min(postRangeHigh, totalPosts)} dari {totalPosts} data
+     </span>
+<br/>
+
+    <Table id="TABLE_KSPK" shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
       <TableHead>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">No</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Document</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Detail</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">OPD & Mitra</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tahun Mulai</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tanggal</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">No</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Nama Mitra Instansi</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Document KS</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Detail</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">OPD</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Tahun Mulai</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Tanggal</TableHeadCell>
         {#if $user.prefs['Role'] === "PIC Kerjasama"}
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4">Tombol Aksi</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Tombol Aksi</TableHeadCell>
         {/if}
       </TableHead>
       {#await data.TableDatas.documents}
@@ -399,26 +582,27 @@ const updateDataKS = async (e) => {
         {#if i >= postRangeLow && i < postRangeHigh}
         <TableBodyRow class={`bg-${getKeteranganKSColor(cetakTabel.keteranganKS)}`}>
           <TableBodyCell>{i+1}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2"> 
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 flex content-start"><BuildingOutline class="w-14 h-14" style="color:#717b91;margin-right:4px;" /><span><b>{cetakTabel.Mitra}</b></span></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"> 
             <center><ButtonGroup class="*:!ring-primary-700"> 
              <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;">
                <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label></center>
           </TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:320px;margin-bottom:6px;"><b>Subjek:</b><br/>{cetakTabel.Subjek} <br/><br/><b>Jenis:</b><br/>{cetakTabel.Jenis}<br/><br/><b>Kategori:</b><br/>{cetakTabel.kategoryKS}<br/><br/><b>Tentang:</b><br/>{cetakTabel.Tentang} </div></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:200px;overflow-wrap: anywhere;"><b>OPD:</b> {cetakTabel.OPD}<br/><b>Mitra:</b> {cetakTabel.Mitra}<br/><br/><b>Nomor Kerjasama:</b><br/>{cetakTabel.No_kerjasama}</div></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2">{cetakTabel.TahunMulai}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><div style="width:180px;overflow-wrap: anywhere;"><b>Mulai:</b> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><b>Selesai: </b>{cetakTabel.tanggalSelesai.slice(0, 10)}<br/><br/><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:320px;margin-bottom:6px;"><b>▸ Subjek:</b><br/>{cetakTabel.Subjek} <br/><br/><b>▸ Jenis:</b><br/>{cetakTabel.Jenis}<br/><br/><b>▸ Kategori:</b><br/>{cetakTabel.kategoryKS}<br/><br/><b>▸ Tentang:</b><br/>{cetakTabel.Tentang} </div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;overflow-wrap: anywhere;"><b>▸ OPD:</b><br/> {cetakTabel.OPD}<br/><br/><b>▸ Mitra:</b><br/>{cetakTabel.Mitra}<b><br/><br/>▸ Nomor Kerjasama:</b><br/>{cetakTabel.No_kerjasama}</div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.TahunMulai}</TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;overflow-wrap: anywhere;"><b>▸ Mulai:</b><br/> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><br/><b>▸ Selesai: </b><br/>{cetakTabel.tanggalSelesai.slice(0, 10)}<br/><br/><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></div></TableBodyCell>
           {#if $user.prefs['Role'] === "PIC Kerjasama"}
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2"><ButtonGroup class="*:!ring-primary-700">
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataRekapKerjasama(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-            <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id) }><TrashBinOutline class="w-4 h-4 me-2" />Delete</Button>
+            <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Mitra, cetakTabel.Tentang) }><TrashBinOutline class="w-4 h-4 me-2" />Delete</Button>
            </ButtonGroup> 
         </TableBodyCell>
           {/if}
          <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
           <div class="text-center">
             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
-            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data rekap Kerjasama serta File Document</h3>
+            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Apakah Anda sudah memastikan akan menghapus data Dokumen Kerjasama dengan Instansi <b>{selectedMitra}</b> tentang <b>{selectedTentangKS}</b></h3>
             <Button color="red" class="me-2" on:click={() => remove(selectedId)}>Ya, Hapus Sekarang</Button>
             <Button color="alternative" on:click={()=> ConfirmDeleteModal = !ConfirmDeleteModal}>Tidak, Batal</Button>
           </div>
@@ -430,31 +614,50 @@ const updateDataKS = async (e) => {
       </TableBody>
       {/await} 
     </Table>
-    <br/>
 
- <ul class="paginationTable" style="list-style-type: none;">
-	{#if currentPage > 1}
-	  <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
-	 <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
-	{/if}
-  {#each [3,2,1] as i}
-    {#if currentPage - i > 0}
-      <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
-    {/if}
-  {/each}
-  <li class:active={ currentPage }><span>{currentPage}</span></li>
-  {#each Array(3) as _, i}
-    {#if currentPage + (i+1) <= totalPages}
-      <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
-    {/if}
-  {/each}
-  {#if currentPage < totalPages}
-	  <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
-    <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
-  {/if}
- </ul> 
+ <!-- Pagination bawah dengan Items per Page -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
+            <!-- Items per page selector -->
+            <div class="flex items-center gap-2">
+                <label for="items-per-page-bottom" class="font-medium text-gray-700">Show:</label>
+                <Select 
+                    id="items-per-page-bottom"
+                    items={itemsPerPageOptions} 
+                    bind:value={postsPerPage}
+                    on:change={() => changeItemsPerPage(postsPerPage)}
+                    class="w-auto min-w-[140px]"
+                />
+            </div>
  
- <span style="margin-left: 6px; margin-top: 5px;display: block;">Halaman Aktif Page: {currentPage} </span>
+            <!-- Pagination -->
+            <ul class="paginationTable" style="list-style-type: none;">
+              {#if currentPage > 1}
+                <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
+               <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
+              {/if}
+              {#each [3,2,1] as i}
+                {#if currentPage - i > 0}
+                  <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
+                {/if}
+              {/each}
+              <li class:active={currentPage}><span>{currentPage}</span></li>
+              {#each Array(3) as _, i}
+                {#if currentPage + (i+1) <= totalPages}
+                  <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
+                {/if}
+              {/each}
+              {#if currentPage < totalPages}
+                <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
+                <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
+              {/if}
+             </ul>
+        </div>
+         
+        <span style="margin-left: 6px; margin-top: 5px;display: block;">
+           Halaman {currentPage} dari {totalPages} | Menampilkan {Math.min(postRangeLow + 1, totalPosts)}-{Math.min(postRangeHigh, totalPosts)} dari {totalPosts} data
+         </span>
+       
+        <br/><br/>     
    
 </section>
 
@@ -462,20 +665,68 @@ const updateDataKS = async (e) => {
 </div>
 
 <style>
+ ul.paginationTable {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 20px 0;
+ }
+ 
+ ul.paginationTable li {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid #e0e2e7;
+  border-radius: 8px;
+  background: #fcfcfc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 40px;
+  text-align: center;
+ }
+ 
+ ul.paginationTable li:hover {
+  background: #e6f0ff;
+  border-color: #2196f3;
+  transform: translateY(-1px);
+ }
+ 
+ ul.paginationTable li.active {
+  background: #2196f3 !important;
+  color: white;
+  border-color: #2196f3;
+  font-weight: bold;
+ }
+ 
+ ul.paginationTable li.active:hover {
+  background: #1976d2 !important;
+  border-color: #1976d2;
+ }
+ 
+ /* Responsive pagination */
+ @media (max-width: 768px) {
   ul.paginationTable li {
-    display: inline-block;
-    padding: 4px 10px;
-    border: 2px solid #e0e2e7;
-    margin: 3px;
-    border-radius: 8px;
-    background: #fcfcfc;
-    cursor:pointer;
-	}  
-
-  ul.paginationTable li.active {
-    background: #8eb5ea !important;
-    color: white;
-		}
+    padding: 6px 10px;
+    font-size: 14px;
+    min-width: 35px;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .flex-col > * {
+    width: 100%;
+    justify-content: center;
+  }
+ }
+ 
+ /* Search input enhancements */
+ #simple-search:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+ }
 
 </style>
 
