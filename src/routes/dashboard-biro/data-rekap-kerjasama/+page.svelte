@@ -285,12 +285,14 @@ const updateDataKS = async (e) => {
   let currentPage = 1;
   let postsPerPage = 20;
 
+
     // Reactive statement untuk memastikan data selalu ter-update
   $: allPosts = data.TableDatas?.documents || [];
   $: totalPosts = allPosts.length;
   $: totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
   $: postRangeLow = postRangeHigh - postsPerPage;
+
 
   const setCurrentPage = newPage => {
     currentPage = newPage;
@@ -312,13 +314,16 @@ const updateDataKS = async (e) => {
 	}
 
   let selectedYear = 'all';
-  $: filteredData = selectedYear === 'all' 
-    ? data.TableDatas.documents 
-    : data.TableDatas.documents.filter(item => item.TahunMulai === selectedYear);
 
-  // Get unique years for filter options
-  const years = [...new Set(data.TableDatas.documents.map(item => item.TahunMulai))].sort((a, b) => b - a);
+    // Update filter untuk tahun
+$: filteredData = selectedYear === 'all' 
+    ? allPosts 
+    : allPosts.filter(item => item.TahunMulai === selectedYear);
 
+// Update years untuk filter options
+$: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b - a);
+
+  
 </script>
 
 <svelte:head>
@@ -347,7 +352,10 @@ const updateDataKS = async (e) => {
       <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
         <li class="w-full"><Radio name="jenisKS" class="p-3" value="Nota Kesepakatan">Nota Kesepakatan</Radio></li>
         <li class="w-full"><Radio name="jenisKS" class="p-3" value="Kesepakatan Bersama">Kesepakatan Bersama</Radio></li>
-        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Perjanjian Kerjasama">Perjanjian Kerjasama</Radio></li>   
+        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Perjanjian Kerjasama">Perjanjian Kerjasama</Radio></li>
+      </ul> 
+      <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+        <li class="w-full"><Radio name="jenisKS" class="p-3" value="Perjanjian Kerjasama (Addendum)">Perjanjian Kerjasama (Addendum)</Radio></li> 
       </ul> 
       <FloatingLabelInput style="filled" id="subjekKS" name="subjekKS" type="text">
         Subjek:
@@ -425,6 +433,9 @@ const updateDataKS = async (e) => {
         <li class="w-full"><Radio name="jenisKS" class="p-3" bind:group={getJenisKS} value="Kesepakatan Bersama">Kesepakatan Bersama</Radio></li>
         <li class="w-full"><Radio name="jenisKS" class="p-3" bind:group={getJenisKS} value="Perjanjian Kerjasama">Perjanjian Kerjasama</Radio></li>   
       </ul> 
+       <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
+        <li class="w-full"><Radio name="jenisKS" class="p-3" bind:group={getJenisKS} value="Perjanjian Kerjasama (Addendum)">Perjanjian Kerjasama (Addendum)</Radio></li>    
+      </ul>  
       <FloatingLabelInput style="filled" id="subjekKS" bind:value={getSubjek} name="subjekKS" type="text">
         Subjek:
       </FloatingLabelInput><br/>
@@ -590,8 +601,8 @@ const updateDataKS = async (e) => {
           </TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:320px;margin-bottom:6px;"><b>▸ Subjek:</b><br/>{cetakTabel.Subjek} <br/><br/><b>▸ Jenis:</b><br/>{cetakTabel.Jenis}<br/><br/><b>▸ Kategori:</b><br/>{cetakTabel.kategoryKS}<br/><br/><b>▸ Tentang:</b><br/>{cetakTabel.Tentang} </div></TableBodyCell>
           <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;overflow-wrap: anywhere;"><b>▸ OPD:</b><br/> {cetakTabel.OPD}<br/><br/><b>▸ Mitra:</b><br/>{cetakTabel.Mitra}<b><br/><br/>▸ Nomor Kerjasama:</b><br/>{cetakTabel.No_kerjasama}</div></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.TahunMulai}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;overflow-wrap: anywhere;"><b>▸ Mulai:</b><br/> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><br/><b>▸ Selesai: </b><br/>{cetakTabel.tanggalSelesai.slice(0, 10)}<br/><br/><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></div></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><span style="padding: 4px 8px;border-radius: 8px;background: #a3e1ff;">{cetakTabel.TahunMulai}</span></TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;overflow-wrap: anywhere;"><b>📅 Mulai:</b><br/> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><br/><b>🗓️ Selesai: </b><br/>{cetakTabel.tanggalSelesai.slice(0, 10)}<br/><br/><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></div></TableBodyCell>
           {#if $user.prefs['Role'] === "PIC Kerjasama"}
           <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataRekapKerjasama(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
