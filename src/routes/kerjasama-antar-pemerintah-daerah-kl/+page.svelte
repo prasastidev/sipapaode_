@@ -78,6 +78,13 @@ let ListProvinsi = [
 
 let RadioOpsiPengajuan = "Pengajuan Baru";
 
+// Reactive statements untuk mengubah label berdasarkan pilihan
+  $: labelDokumenII = RadioOpsiPengajuan === 'Pengajuan Baru' ? 'KAK' : 'Naskah KS Sebelumnya';
+  
+  $: labelDokumenIII = RadioOpsiPengajuan === 'Pengajuan Baru' ? 'Draf Naskah Baru' : 
+                       RadioOpsiPengajuan === 'Perpanjangan' ? 'Draf Perpanjangan' : 
+                       RadioOpsiPengajuan === 'Addendum' ? 'Draf Addendum' : 'Draf Naskah Baru/Perpanjangan/Addendum';
+
     const options = {
     series: [KSTelahBerakhir , KSAktif, KSAktifBaru],
     colors: ['#1C64F2', '#16BDCA', '#9061F9'],
@@ -242,31 +249,67 @@ let RadioOpsiPengajuan = "Pengajuan Baru";
       }
     }
 
-     // Pagination 
-   let currentPage =1; // Update this to simulate page change.
+  let currentStep = 1;
+ // Data untuk setiap step
+  const steps = [
+    {
+      number: 1,
+      title: "Proses Pengajuan /",
+      subtitle: "Submit Dokumen",
+      completed: false
+    },
+    {
+      number: 2,
+      title: "Proses",
+      subtitle: "Verifikasi Doc",
+      completed: false
+    },
+    {
+      number: 3,
+      title: "Penandatanganan",
+      subtitle: "Naskah",
+      completed: false
+    },
+    {
+      number: '',
+      title: "Perbaikan",
+      subtitle: "Pengajuan",
+      completed: true
+    }
+  ];
+
+   // Items per page options
+  let itemsPerPageOptions = [
+    { value: 5, name: '5 per halaman' },
+    { value: 10, name: '10 per halaman' },
+    { value: 20, name: '20 per halaman' },
+    { value: 50, name: '50 per halaman' }
+  ];
+
+    // Pagination - menggunakan reactive statement
+  let currentPage = 1;
   let postsPerPage = 5;
-  let allPosts = data.TableDataKSAntarPemerintah_Berlaku.documents;
-  let totalPosts = allPosts.length;
-  let totalPages = Math.ceil(totalPosts / postsPerPage);
+
+// Reactive statement untuk memastikan data selalu ter-update
+  $: allPosts = data.TableDataKSAntarPemerintah_Berlaku?.documents || [];
+  $: totalPosts = allPosts.length;
+  $: totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
   $: postRangeLow = postRangeHigh - postsPerPage;
+
+
 	const setCurrentPage = newPage => {
-		currentPage = newPage;
+    currentPage = newPage;
   }
 
-  let currentStep = 1;
-  let steps = ['Langkah 1 (Informasi Pengirim Dokumen)', 'Langkah 2 (Informasi Dokumen Kerjasama)'];
+  // Function to handle items per page change
+  const changeItemsPerPage = (newItemsPerPage) => {
+    postsPerPage = newItemsPerPage;
+    currentPage = 1; // Reset to first page when changing items per page
+  }
 
-  let pageForm = 1;
-    const nextPage = () => {
-        pageForm++;
-        currentStep = 2;
-    }
-
-    const prevPage = () => {
-        pageForm--;
-        currentStep = 1;
-    }
+  // Debug log untuk melihat jumlah data
+  $: console.log('Total posts:', totalPosts, 'Current data:', allPosts.length);
 
  // Lihat Prosedure   
  const procedure = {
@@ -374,12 +417,12 @@ let RadioOpsiPengajuan = "Pengajuan Baru";
     </div>
 
     <div class="mb-6">
-      <label class="text-sm" style="color:black;">*Upload Dokumen LAMPIRAN II: KAK (Pengajuan baru) / Naskah KS Sebelumnya (.pdf)</label><br/>
+      <label class="text-sm" style="color:black;">*Upload Dokumen LAMPIRAN II: {labelDokumenII} (.pdf)</label><br/>
       <Fileupload class="mb-2" name="UploadDokumenII" id="uploadDocDraftKSII" required />
     </div>
 
     <div class="mb-6">
-      <label class="text-sm" style="color:black;">*Upload Dokumen LAMPIRAN III: Draf Naskah Baru/Perpanjangan/Addendum (.doc)</label><br/>
+      <label class="text-sm" style="color:black;">*Upload Dokumen LAMPIRAN III: {labelDokumenIII} (.doc)</label><br/>
       <Fileupload class="mb-2" name="UploadDokumenIII" id="uploadDocDraftKSIII" required />
     </div>
     <Textarea id="Catatan" placeholder="Catatan (Optional)" rows="2" name="Catatan" /> <br/><br/>
@@ -509,18 +552,58 @@ Dibawah berikut adalah table informasi data Kerjasama Aktif antara Pemerintah Pr
         <span class="sr-only">Search</span>
     </button>
 </form>
-
 <br/>
 
-<section>
+<!-- Pagination dengan Items per Page -->
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+        <!-- Items per page selector -->
+        <div class="flex items-center gap-2">
+            <label for="items-per-page" class="font-medium text-gray-700">Show:</label>
+            <Select 
+                id="items-per-page"
+                items={itemsPerPageOptions} 
+                bind:value={postsPerPage}
+                on:change={() => changeItemsPerPage(postsPerPage)}
+                class="w-auto min-w-[140px]"
+            />
+        </div>
 
+        <!-- Pagination -->
+        <ul class="paginationTable" style="list-style-type: none;">
+          {#if currentPage > 1}
+            <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
+           <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
+          {/if}
+          {#each [3,2,1] as i}
+            {#if currentPage - i > 0}
+              <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
+            {/if}
+          {/each}
+          <li class:active={currentPage}><span>{currentPage}</span></li>
+          {#each Array(3) as _, i}
+            {#if currentPage + (i+1) <= totalPages}
+              <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
+            {/if}
+          {/each}
+          {#if currentPage < totalPages}
+            <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
+            <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
+          {/if}
+         </ul>
+    </div>
+     
+    <span style="margin-left: 6px; margin-top: 5px;display: block;">
+       Halaman {currentPage} dari {totalPages} | Menampilkan {Math.min(postRangeLow + 1, totalPosts)}-{Math.min(postRangeHigh, totalPosts)} dari {totalPosts} data
+     </span>
+<br/>
+<section>
   <table id="TABLE_KSAPD" class="ArsipTable table-striped" style="width:100%;display:block;overflow-wrap: anywhere;background-color: white;padding: 7px;border-radius: 8px;">
     <thead style="background:#ecf4fb;">
     <tr>
     <th style="width:6%;white-space: break-spaces;" class="hidekolom">No</th>
     <th style="width:8%;white-space: break-spaces;" class="hidekolom">Jenis</th>
     <th style="width:32%;white-space: break-spaces;">Subjek</th>
-    <th style="width:15%;white-space: break-spaces;" class="hidekolom">Hal</th>
+    <th style="width:15%;white-space: break-spaces;" class="hidekolom">Tentang</th>
     <th style="width:15%;white-space: break-spaces;">Mitra</th>
     <th style="width:10%;white-space: break-spaces;" class="hidekolom">Tanggal Mulai</th>
     <th style="width:10%;white-space: break-spaces;" class="hidekolom">Tanggal Selesai</th>
@@ -543,32 +626,49 @@ Dibawah berikut adalah table informasi data Kerjasama Aktif antara Pemerintah Pr
     {/if}
     {/each}
     </tbody>
-    </table> <br/>
-   
+    </table> 
 </section> 
-<ul class="paginationTable" style="list-style-type: none;">
-	{#if currentPage > 1}
-	  <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
-	 <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
-	{/if}
-  {#each [3,2,1] as i}
-    {#if currentPage - i > 0}
-      <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
-    {/if}
-  {/each}
-  <li class:active={ currentPage }><span>{currentPage}</span></li>
-  {#each Array(3) as _, i}
-    {#if currentPage + (i+1) <= totalPages}
-      <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
-    {/if}
-  {/each}
-  {#if currentPage < totalPages}
-	  <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
-    <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
-  {/if}
- </ul> 
+<!-- Pagination bawah dengan Items per Page -->
+        <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mt-4">
+            <!-- Items per page selector -->
+            <div class="flex items-center gap-2">
+                <label for="items-per-page-bottom" class="font-medium text-gray-700">Show:</label>
+                <Select 
+                    id="items-per-page-bottom"
+                    items={itemsPerPageOptions} 
+                    bind:value={postsPerPage}
+                    on:change={() => changeItemsPerPage(postsPerPage)}
+                    class="w-auto min-w-[140px]"
+                />
+            </div>
  
- <span style="margin-left: 6px; margin-top: 5px;display: block;">Halaman Aktif Page: {currentPage} </span>
+            <!-- Pagination -->
+            <ul class="paginationTable" style="list-style-type: none;">
+              {#if currentPage > 1}
+                <li on:click|preventDefault={() => setCurrentPage(1)}>pertama</li>
+               <li on:click|preventDefault={() => setCurrentPage(currentPage - 1)}> <span>&#8678;</span> </li>
+              {/if}
+              {#each [3,2,1] as i}
+                {#if currentPage - i > 0}
+                  <li on:click|preventDefault={() => setCurrentPage(currentPage - i)}>{currentPage - i}</li>
+                {/if}
+              {/each}
+              <li class:active={currentPage}><span>{currentPage}</span></li>
+              {#each Array(3) as _, i}
+                {#if currentPage + (i+1) <= totalPages}
+                  <li on:click|preventDefault={() => setCurrentPage(currentPage + (i+1))}>{currentPage + (i+1)}</li>
+                {/if}
+              {/each}
+              {#if currentPage < totalPages}
+                <li on:click|preventDefault={() => setCurrentPage(currentPage + 1)}> <span>&#8680;</span> </li>
+                <li on:click|preventDefault={() => setCurrentPage(totalPages)}>terakhir</li>
+              {/if}
+             </ul>
+        </div>
+         
+        <span style="margin-left: 6px; margin-top: 5px;display: block;">
+           Halaman {currentPage} dari {totalPages} | Menampilkan {Math.min(postRangeLow + 1, totalPosts)}-{Math.min(postRangeHigh, totalPosts)} dari {totalPosts} data
+         </span>
  <br/>
 <span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/>
 <br/>
@@ -577,30 +677,34 @@ Dibawah berikut adalah table informasi data Kerjasama Aktif antara Pemerintah Pr
 Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulawesi Tenggara.
 <br/><br/>
 <div class="flex justify-center w-full">
-  <div class="max-w-4xl w-full px-4">
-    <ol class="flex items-center justify-center">
-      {#each ["[1-Proses Pengajuan]", "[2-Proses Verifikasi Doc.]", "[3-Penandatanganan Naskah]", "[Perbaikan Pengajuan]"] as step, i}
-        <li class="relative mb-6 flex-1 max-w-xs">
-          <div class="flex items-center">
-            <Indicator size="xl" color={i < 3 ? undefined : "gray"} class={`z-10 shrink-0 ring-0 ring-white sm:ring-8 ${i < 3 ? "bg-primary-200 dark:bg-primary-900" : "dark:bg-gray-700 dark:ring-gray-900"}`}>
-              {#if i === 3}
-                <CheckCircleSolid class="h-6 w-6 text-gray-800 dark:text-gray-300" />
-              {:else}
-                <CheckCircleSolid class="text-green-600 dark:text-green-300 h-6 w-6" />
-              {/if}
-            </Indicator>
-            {#if i < 3}
-              <div class="flex h-1 w-full bg-gray-300 dark:bg-gray-800"></div>
-            {/if}
+   <div class="process-flow-container">
+  <div class="process-flow">
+    {#each steps as step, index}
+      <div class="step-wrapper">
+        <!-- Circle Step -->
+        <div class="step-circle" class:completed={step.completed}>
+          <span class="step-number">{step.number}</span>
+        </div>
+        
+        <!-- Step Label -->
+        <div class="step-label">
+          <div class="step-title">{step.title}</div>
+          <div class="step-subtitle">{step.subtitle}</div>
+        </div>
+        
+        <!-- Arrow (tidak ditampilkan untuk step terakhir) -->
+        {#if index < steps.length - 1}
+          <div class="arrow">
+            <svg width="60" height="20" viewBox="0 0 60 20" fill="none">
+              <path d="M0 10L50 10M45 5L50 10L45 15" stroke="#5B7FBF" stroke-width="2"/>
+            </svg>
           </div>
-          <div class="mt-3 text-center">
-            <h3 class="font-medium text-gray-900 dark:text-white text-sm" style="text-align:left;margin-left:-20px;">{step}</h3>
-          </div>
-        </li>
-      {/each}
-    </ol>
+        {/if}
+      </div>
+    {/each}
   </div>
-</div> Data Dibawah berikut adalah Data 10 Pengajuan Kerjasama Terakhir.
+</div> 
+</div> <br/>Data Dibawah berikut adalah Data 10 Pengajuan Kerjasama Terakhir.
 <br/><br/>
 <table style="width:100%;display:block;overflow-wrap: anywhere; background: linear-gradient(147deg, rgb(255, 255, 255) 4%, rgb(229 232 235) 99%, rgb(226, 237, 255) 100%, rgb(229, 231, 235) 100%);color:#2c526f;padding: 2px;border-radius: 8px;">
   <thead>
@@ -659,23 +763,68 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
 		}
 	}
 
+ ul.paginationTable {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 20px 0;
+ }
+ 
+ ul.paginationTable li {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 2px solid #e0e2e7;
+  border-radius: 8px;
+  background: #fcfcfc;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 40px;
+  text-align: center;
+ }
+ 
+ ul.paginationTable li:hover {
+  background: #e6f0ff;
+  border-color: #2196f3;
+  transform: translateY(-1px);
+ }
+ 
+ ul.paginationTable li.active {
+  background: #2196f3 !important;
+  color: white;
+  border-color: #2196f3;
+  font-weight: bold;
+ }
+ 
+ ul.paginationTable li.active:hover {
+  background: #1976d2 !important;
+  border-color: #1976d2;
+ }
+ 
+ /* Responsive pagination */
+ @media (max-width: 768px) {
   ul.paginationTable li {
-    display: inline-block;
-    padding: 4px 10px;
-    border: 2px solid #e0e2e7;
-    margin: 3px;
-    border-radius: 8px;
-    background: #fcfcfc;
-    cursor:pointer;
-	}  
-
-  ul.paginationTable li.active {
-    background: #8eb5ea !important;
-    color: white;
-		}
-    
-  .pageFormulir { display: none; }
-  .pageFormulir.show { display: block; }  
+    padding: 6px 10px;
+    font-size: 14px;
+    min-width: 35px;
+  }
+  
+  .flex-col {
+    flex-direction: column;
+  }
+  
+  .flex-col > * {
+    width: 100%;
+    justify-content: center;
+  }
+ }
+ 
+ /* Search input enhancements */
+ #simple-search:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+ }
 
   /**   Prosedure CSS   */
   
@@ -695,7 +844,7 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
     justify-content: center;
     width: 2.5rem;
     height: 2.5rem;
-    background: #4f46e5;
+    background: #46e5d9;
     color: white;
     border-radius: 50%;
     font-weight: bold;
@@ -715,5 +864,177 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
   .step-description {
     color: #4b5563;
   }   
+
+/** Step Pengajuan */
+.process-flow-container {
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: center;
+    background-color: #f8f9fa;
+  }
+
+  .process-flow {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 1200px;
+    width: 100%;
+  }
+
+  .step-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    flex: 1;
+  }
+
+  .step-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #E8F4FD;
+    border: 3px solid #90C695;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+
+  .step-circle.completed {
+    background-color: #90C695;
+    border-color: #6B8E6B;
+  }
+
+  .step-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .step-circle.completed .step-number {
+    color: white;
+  }
+
+  .step-label {
+    text-align: center;
+    max-width: 150px;
+  }
+
+  .step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+    line-height: 1.2;
+  }
+
+  .step-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    text-decoration: underline;
+    text-decoration-style: wavy;
+    text-decoration-color: #ff6b6b;
+    line-height: 1.2;
+  }
+
+  .arrow {
+    position: absolute;
+    top: 30px;
+    right: -40px;
+    z-index: 1;
+  }
+
+  .arrow svg {
+    width: 60px;
+    height: 20px;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .process-flow-container {
+      padding: 1rem;
+    }
+    
+    .process-flow {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .step-wrapper {
+      flex-direction: row;
+      justify-content: flex-start;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .step-circle {
+      margin-bottom: 0;
+      margin-right: 1rem;
+      flex-shrink: 0;
+    }
+
+    .step-label {
+      text-align: left;
+      max-width: none;
+      flex: 1;
+    }
+
+    .arrow {
+      position: static;
+      align-self: center;
+      margin: 1rem 0;
+    }
+
+    .arrow svg {
+      transform: rotate(90deg);
+      width: 20px;
+      height: 60px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .step-circle {
+      width: 50px;
+      height: 50px;
+    }
+
+    .step-number {
+      font-size: 1.25rem;
+    }
+
+    .step-title {
+      font-size: 0.9rem;
+    }
+
+    .step-subtitle {
+      font-size: 0.8rem;
+    }
+  }
+
+  /* Hover effects */
+  .step-circle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Animation untuk step completion */
+  .step-circle {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+   
 
 </style>
