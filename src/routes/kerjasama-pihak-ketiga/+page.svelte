@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
     import { Heading, StepIndicator, Indicator, Toast, Avatar, Button, Chart, Modal, Select, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Checkbox, Card, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
-    import { ArrowDownToBracketOutline, BuildingSolid, CheckCircleSolid } from 'flowbite-svelte-icons';
+    import { BuildingOutline, BuildingSolid, CheckCircleSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
@@ -605,7 +605,7 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
   <thead>
   <tr style="border-bottom: 1px solid white;background: linear-gradient(147deg, rgba(255, 255, 255, 1) 4%, rgb(171 196 215) 99%, rgba(226, 237, 255, 1) 100%, rgba(229, 231, 235, 1) 100%);">
   <th style="width:5%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">No</th>
-  <th style="width:18%;white-space: break-spaces;padding:6px;color:#94adbf;">Nama</th>
+  <th style="width:18%;white-space: break-spaces;padding:6px;color:#94adbf;">Instansi</th>
   <th style="width:10%;white-space: break-spaces;padding:6px;">Tanggal Pengajuan</th>
   <th style="width:15%;white-space: break-spaces;padding:6px;" class="hidekolom">Jenis Kerjasama</th>
   <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Kategori</th>
@@ -617,7 +617,7 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
     {#each data.TableDataPengajuanTerakhir.documents as cetakTabel, i}	 
   <tr style="border-bottom: 1px solid white;">
   <td class="hidekolom" style="padding:14px 6px;"><span>{i+1}</span></td>
-  <td style="padding:14px 6px;display:flex;"><Avatar class="grid mr-4" border /> <span><b>{cetakTabel.Instansi}</b><br/>{cetakTabel.Nama}  </span></td>
+  <td style="padding:14px 6px;display:flex;"><BuildingOutline class="w-14 h-14" style="color:#717b91;" /> <span><b>{cetakTabel.Instansi}</b><br/>{cetakTabel.Nama}  </span></td>
   <td style="padding:14px 6px;"><span>{cetakTabel.$updatedAt.slice(0, 10)}</span></td>
   <td class="hidekolom" style="padding:14px 6px;"><span>{cetakTabel.OpsiPengajuan}</span></td>
   <td class="hidekolom" style="padding:14px 6px;"><span>{cetakTabel.Kategory_KS}</span></td>
