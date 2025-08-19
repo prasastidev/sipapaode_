@@ -101,7 +101,7 @@ export async function getAllPegawaiData() {
 }
 
 // CRUD Functions (tetap sama)
-export async function addTableDataPegawai(Nama, URL_PhotoProfile, NIP, Golongan, Jabatan, Tanggal_lahir, Jenis_Kelamin, Pendidikan_Terakhir, Jenis_Pegawai) {
+export async function addTableDataPegawai(Nama, URL_PhotoProfile, NIP, Golongan, Jabatan, Tanggal_lahir, Jenis_Kelamin, Pendidikan_Terakhir, Jenis_Pegawai, jabatanOrganisasi) {
     await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, ID.unique(), {
         Nama,
         URL_PhotoProfile,
@@ -111,11 +111,12 @@ export async function addTableDataPegawai(Nama, URL_PhotoProfile, NIP, Golongan,
         Tanggal_lahir,
         Jenis_Kelamin,
         Pendidikan_Terakhir, 
-        Jenis_Pegawai
+        Jenis_Pegawai,
+        jabatanOrganisasi
     });
 }
 
-export async function UpdatePegawai(Nama, URL_PhotoProfile, NIP, Golongan, Jabatan, Tanggal_lahir, Jenis_Kelamin, Pendidikan_Terakhir, Jenis_Pegawai, id) {
+export async function UpdatePegawai(Nama, URL_PhotoProfile, NIP, Golongan, Jabatan, Tanggal_lahir, Jenis_Kelamin, Pendidikan_Terakhir, Jenis_Pegawai, jabatanOrganisasi, id) {
     await databases.updateDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, id, {
         Nama: Nama,
         URL_PhotoProfile : URL_PhotoProfile,
@@ -125,7 +126,8 @@ export async function UpdatePegawai(Nama, URL_PhotoProfile, NIP, Golongan, Jabat
         Tanggal_lahir: Tanggal_lahir,
         Jenis_Kelamin: Jenis_Kelamin,
         Pendidikan_Terakhir: Pendidikan_Terakhir,
-        Jenis_Pegawai: Jenis_Pegawai
+        Jenis_Pegawai: Jenis_Pegawai,
+        jabatanOrganisasi
     });
 }
 

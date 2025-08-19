@@ -11,8 +11,6 @@
 	<meta name="description" content="Gallery Foto & Video" />
 </svelte:head>
 
-<br/><br/>
-
 <div class="container">
     <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Coming Soon ..</Heading>
     <br/>

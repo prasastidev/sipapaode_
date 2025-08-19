@@ -1,6 +1,6 @@
 <script>
 import { Heading, Popover, Button, Avatar, Chart, Card, Modal, Tabs, TabItem } from 'flowbite-svelte';
-import { InfoCircleOutline } from 'flowbite-svelte-icons';
+import { InfoCircleOutline, ArrowRightAltOutline, ArrowRightAltSolid } from 'flowbite-svelte-icons';
 import { tooltip } from './toolTipicon.js';
 import mapSultrapng from '$lib/images/Map-sultra.webp';
 import ImagelogoSultra from '$lib/images/Sultra-Logo.webp';
@@ -377,7 +377,18 @@ function onWindowClick(e) {
       }
     }
 
-	
+	 const today = new Date();
+
+  // Opsi untuk memformat tanggal agar lebih mudah dibaca
+  const optionsTanggal = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  // Format tanggal ke dalam string yang mudah dibaca
+  const formattedDate = today.toLocaleDateString('id-ID', optionsTanggal);
 </script>
 
 <svelte:window on:click={onWindowClick} />
@@ -387,19 +398,42 @@ function onWindowClick(e) {
 	<meta name="description" content="Lanskap Sulawesi Tenggara - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
+<br/>
 
-<br/><br/><br/>
+<div class="page-container">
+  
+  <header class="info-card">
+    <div class="logo">
+      <img src="/LogoSultra.webp" alt="Logo Sulawesi Tenggara"/>
+    </div>
+    <div class="title-container">
+      <h1>INFORMASI DATA PEMERINTAHAN DI WILAYAH SULAWESI</h1>
+      <h2>TENGGARA</h2>
+    </div>
+  </header>
+
+  <nav class="nav-container">
+    <a href="/maps-sultra/#lanskap" class="nav-button">LANSKAP GEOGRAFIS</a>
+    <a href="/maps-sultra/#Maps" class="nav-button">MAPS SULTRA</a>
+    <a href="/maps-sultra/#TabelOtonomi" class="nav-button">DATA ADMINISTRASI</a>
+    <a href="/maps-sultra/#grafik" class="nav-button">DATA GRAFIK STATISTIK</a>
+  </nav>
+
+</div>
 
 
-<div class="container mt-14">
-	<Heading tag="h3" class="mb-4" customSize="text-3xl text-center font-extrabold  md:text-3xl lg:text-4xl">Peta Letak Geografis & Informasi Pemerintahan Daerah di Sulawesi Tenggara</Heading>
-	<br/>
-	Berikut dibawah ini adalah informasi data statistik Pemerintahan Daerah se-Kabupaten/Kota Provinsi Sulawesi Tenggara. Mencakup <a href="/maps-sultra/#Maps" style="text-decoration:underline;font-weight:600;">Letak Geografis (Maps)</a>, <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;font-weight:600;">Kode dan Data Administrasi Wilayah</a>, serta <a href="/maps-sultra/#grafik" style="text-decoration:underline;font-weight:600;">Data Statistik berdasarkan Grafik</a>.
-	<br/><br/>
-	<Heading tag="h4" class="mb-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Lanskap Geografis Sulawesi Tenggara</Heading>
+<div class="mt-8">
+	<p style="font-size:16px;text-align:center;">📅 Tanggal hari ini: <strong>{formattedDate}</strong></p>
+    <br/><br/>
 	
-	<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3">
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🗺️ Luas Wilayah (km2)</h5>
+	<Heading id="lanskap" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> 
+	 Lanskap Geografis Sulawesi Tenggara
+    </Heading>
+	 <p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding: 4px 14px;border-radius: 6px;">Berikut adalah data statistik utama yang menggambarkan lanskap geografis dan struktur administratif Provinsi Sulawesi Tenggara. Informasi ini mencakup luas wilayah, demografi, hingga rincian jumlah kabupaten/kota, kecamatan, desa/kelurahan, serta fitur geografis seperti gunung dan pulau di Sultra.</p>
+	<br/>
+	 <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-3" style="padding: 2px 12px;">
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🗺️ Luas Wilayah (km2)</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 			 <button id="infoLW"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			</div>
@@ -408,9 +442,10 @@ function onWindowClick(e) {
 				Informasi Luas Wilayah di Sulawesi Tenggara secara keseluruhan 
 			  </div>
 			</Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{formatter.format(Jum_LuasWilSultra)} </p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🧑🏽‍🤝‍🧑🏽 Jumlah Penduduk</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{formatter.format(Jum_LuasWilSultra)} </p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🧑🏽‍🤝‍🧑🏽 Jumlah Penduduk</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoJP"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
@@ -419,9 +454,10 @@ function onWindowClick(e) {
 				   Informasi Jumlah Penduduk di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{formatter.format(Jum_PendudukSultra)} </p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🌆 Kabupaten</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{formatter.format(Jum_PendudukSultra)} </p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🌆 Kabupaten</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoJK"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
@@ -430,9 +466,10 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kabupaten di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>	
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">15</p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏙️ Kota</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">15</p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏙️ Kota</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoKota"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
@@ -441,9 +478,10 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kota di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">2</p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏘️ Kecamatan</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">2</p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏘️ Kecamatan</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoKecamatan"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
@@ -452,20 +490,34 @@ function onWindowClick(e) {
 				   Informasi Jumlah Kecamatan di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{Jum_KecamatanSultra}</p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏡 Kelurahan / Desa</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{Jum_KecamatanSultra}</p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏡 Kelurahan </h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoKD"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
 			   <Popover triggeredBy="#infoKD" class="w-72 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
 				 <div class="p-3 space-y-2" style="z-index:100;">
-				   Informasi Jumlah Kelurahan / Desa di Sulawesi Tenggara secara keseluruhan
+				   Informasi Jumlah Kelurahan di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{Jum_KelurahanSultra} / {Jum_DesaSultra}</p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏞️ Gunung</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{Jum_KelurahanSultra} </p>
+		</Card>
+
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏡  Desa</h5>
+			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
+				<button id="infoKD"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
+			   </div>
+			   <Popover triggeredBy="#infoKD" class="w-72 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="bottom-start">
+				 <div class="p-3 space-y-2" style="z-index:100;">
+				   Informasi Jumlah Desa di Sulawesi Tenggara secara keseluruhan
+				 </div>
+			   </Popover>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;"> {Jum_DesaSultra}</p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏞️ Gunung</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoGunung"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
@@ -474,9 +526,10 @@ function onWindowClick(e) {
 				   Informasi Jumlah Gunung di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{Jum_GunungSultra}</p></Card>
-		</div>
-		<div><Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏝️ Pulau</h5>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{Jum_GunungSultra}</p>
+		</Card>
+		
+		<Card><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">🏝️ Pulau</h5>
 			<div class="flex items-center text-sm font-light text-gray-500 dark:text-gray-400" style="justify-content: right;position:relative;top:-54px;left:18px;">
 				<button id="infoPulau"><InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /></button>
 			   </div>
@@ -485,38 +538,45 @@ function onWindowClick(e) {
 				   Informasi Jumlah Pulau di Sulawesi Tenggara secara keseluruhan
 				 </div>
 			   </Popover>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{Jum_PulauSultra}</p></Card>
-		</div>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{Jum_PulauSultra}</p>
+		</Card>
+		
 		
 	</div>
-	<br/><br/>
-	<Heading id="Maps" tag="h4" class="mb-4 mt-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Maps Sulawesi Tenggara</Heading>
-	<Tabs>
-		<TabItem open title="Maps Sultra">
+	<br/><br/><br/>
+	<Heading id="Maps" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" />  
+	Maps Sulawesi Tenggara
+    </Heading>
+	<p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding: 4px 14px;border-radius: 6px;">Jelajahi geografi Provinsi Sulawesi Tenggara secara visual melalui berbagai pilihan peta. Anda dapat menggunakan peta interaktif dan citra satelit untuk melihat detail wilayah, atau merujuk pada gambar peta statis untuk gambaran umum dan referensi cepat.</p>
+	<br/><Tabs>
+		<TabItem open title="Peta Maps Sultra">
 		 <div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=provinsi%20sulawesi%20tenggara+(My%20Business%20Name)&amp;t=&amp;z=8&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps trackers</a></iframe></div>
 		</TabItem>
-		<TabItem open title="Satelite">
+		<TabItem open title="Citra Satelite">
 			<div style="width: 100%"><iframe width="100%" height="500" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=500&amp;hl=en&amp;q=sulawesi%20tenggara+(My%20Business%20Name)&amp;t=k&amp;z=9&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a href="https://www.gps.ie/">gps devices</a></iframe></div>
 		   </TabItem>
-		<TabItem title="Screenshot">
+		<TabItem title="Gambar Screenshot">
 			<img src={mapSultrapng} alt="Logo" style="width:100%;height:100%;border-radius: 16px;padding: 4px;border: 1px solid #cfcfd8;" />
 			Gambar: Map Sultra (Source: <a href="https://www.google.com/maps/place/Sulawesi+Tenggara/@-4.4942734,121.4209727,8z/data=!3m1!4b1!4m6!3m5!1s0x2d98ecde0b6b7183:0x621d7c439f04a4ed!8m2!3d-4.14491!4d122.174605!16zL20vMDJiZGox?entry=ttu&g_ep=EgoyMDI0MTAyNy4wIKXMDSoASAFQAw%3D%3D" style="color:blue;text-decoration:underline;">GoogleMaps Sultra</a>)	
 		</TabItem>
 	  </Tabs>
-	 <br/><br/>
-	<Heading id="TabelOtonomi" tag="h4" class="mb-4 mt-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Tabel Kode dan Data Wilayah Administrasi Pemerintahan Per Kab/Kota Sulawesi Tenggara</Heading>
-	<p class="pb-3">
-		Dibawah berikut ini adalah Peta Wilayah dan Informasi Pemerintahan di Wilayah Sulawesi Tenggara terdiri dari Kota dan Kabupaten. 
-	</p>
-
-	  <Modal title="Letak Geografis (Map) Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
+	 <br/><br/><br/>
+	 <Heading id="TabelOtonomi" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" />  
+	Tabel Kode dan Data Wilayah Administrasi Pemerintahan Per Kab/Kota Sulawesi Tenggara
+    </Heading>
+	
+	<p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding: 4px 14px;border-radius: 6px;">Temukan data wilayah administratif terperinci untuk setiap kabupaten dan kota di Sulawesi Tenggara. Tabel interaktif ini menyajikan kode wilayah, luas, populasi, serta data geografis lainnya dan dilengkapi dengan fitur pencarian untuk mempermudah navigasi Anda.</p>
+    <br/>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Bombana" bind:open={ModalmapBombana} autoclose>
         <div style="width: 100%">{@html DataBombana.Map}</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">{@html DataBombana.KetMap}</p>
 		<svelte:fragment slot="footer">
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	   <Modal title="Letak Geografis (Map) Kabupaten Buton" bind:open={ModalmapButon} autoclose>
+	   <Modal size="lg" title="Letak Geografis (Map) Kabupaten Buton" bind:open={ModalmapButon} autoclose>
 		<div style="width: 100%">{@html DataButon.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataButon.KetMap }
@@ -525,7 +585,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Buton Selatan" bind:open={ModalmapButonSelatan} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Buton Selatan" bind:open={ModalmapButonSelatan} autoclose>
 		<div style="width: 100%">{@html DataButonSelatan.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataButonSelatan.KetMap }
@@ -534,7 +594,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Buton Tengah" bind:open={ModalmapButonTengah} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Buton Tengah" bind:open={ModalmapButonTengah} autoclose>
 		<div style="width: 100%">{@html DataButonTengah.Map} </div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataButonTengah.KetMap}
@@ -543,7 +603,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Buton Utara" bind:open={ModalmapButonUtara} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Buton Utara" bind:open={ModalmapButonUtara} autoclose>
 		<div style="width: 100%">{@html DataButonUtara.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataButonUtara.KetMap }</p>
@@ -551,7 +611,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Kolaka" bind:open={ModalmapKolaka} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Kolaka" bind:open={ModalmapKolaka} autoclose>
 		<div style="width: 100%">{@html DataKolaka.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKolaka.KetMap  }
@@ -560,7 +620,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Kolaka Timur" bind:open={ModalmapKolakaTimur} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Kolaka Timur" bind:open={ModalmapKolakaTimur} autoclose>
 		<div style="width: 100%">{@html DataKolakaTimur.Map } </div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKolakaTimur.KetMap }
@@ -569,7 +629,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Kolaka Utara" bind:open={ModalmapKolakaUtara} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Kolaka Utara" bind:open={ModalmapKolakaUtara} autoclose>
 		<div style="width: 100%">{@html DataKolakaUtara.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKolakaUtara.KetMap }
@@ -578,7 +638,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Konawe" bind:open={ModalmapKonawe} autoclose>
 		<div style="width: 100%">{@html DataKonawe.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKonawe.KetMap }</p>
@@ -586,7 +646,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Konawe Kepulauan" bind:open={ModalmapKonaweKepulauan} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Konawe Kepulauan" bind:open={ModalmapKonaweKepulauan} autoclose>
 		<div style="width: 100%">{@html DataKonaweKepulauan.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKonaweKepulauan.KetMap }</p>
@@ -594,7 +654,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Konawe Selatan" bind:open={ModalmapKonaweSelatan} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Konawe Selatan" bind:open={ModalmapKonaweSelatan} autoclose>
 		<div style="width: 100%">{@html DataKonaweSelatan.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKonaweSelatan.KetMap }
@@ -603,7 +663,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Konawe Utara" bind:open={ModalmapKonaweUtara} autoclose>
 		<div style="width: 100%">{@html DataKonaweUtara.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKonaweUtara.KetMap }</p>
@@ -611,7 +671,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Muna" bind:open={ModalmapMuna} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Muna" bind:open={ModalmapMuna} autoclose>
 		<div style="width: 100%">{@html DataMuna.Map }</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataMuna.KetMap }</p>
@@ -619,7 +679,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Muna Barat" bind:open={ModalmapMunaBarat} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Muna Barat" bind:open={ModalmapMunaBarat} autoclose>
 		<div style="width: 100%">{@html DataMunaBarat.Map} </div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataMunaBarat.KetMap}</p>
@@ -627,7 +687,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kabupaten Wakatobi" bind:open={ModalmapWakatobi} autoclose>
 		<div style="width: 100%">{@html DataWakatobi.Map}</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataWakatobi.KetMap}</p>
@@ -635,7 +695,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kota Baubau" bind:open={ModalmapBaubau} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kota Baubau" bind:open={ModalmapBaubau} autoclose>
 		<div style="width: 100%">{@html DataKotaBaubau.Map}</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKotaBaubau.KetMap}</p>
@@ -643,7 +703,7 @@ function onWindowClick(e) {
 		  <Button color="alternative">Tutup</Button>
 		</svelte:fragment>
 	  </Modal>
-	  <Modal title="Letak Geografis (Map) Kota Kendari" bind:open={ModalmapKendari} autoclose>
+	  <Modal size="lg" title="Letak Geografis (Map) Kota Kendari" bind:open={ModalmapKendari} autoclose>
 		<div style="width: 100%">{@html DataKotaKendari.Map}</div>
 		<p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
 			{@html DataKotaKendari.KetMap}</p>
@@ -678,7 +738,7 @@ function onWindowClick(e) {
 		<th style="width:6%;" class="hidekolom">Kode</th>	
         <th style="width:22%;">Nama</th>
         <th style="width:28%;white-space: break-spaces;">Luas Wilayah / J. Penduduk <span use:tooltip={"Luas Wilayah dan Jumlah Penduduk tiap Kab/Kota"}></span> </th>
-		<th style="width:20%;white-space: break-spaces;" class="hidekolom">J. Rupa Bumi <span use:tooltip={"Jumlah Gunung saat ini yang di Update"}></span></th>
+		<th style="width:20%;white-space: break-spaces;" class="hidekolom">J. Rupa Bumi <span use:tooltip={"Jumlah Rupa Bumi saat ini yang di Update"}></span></th>
 		<th style="width:14%;white-space:break-spaces;" class="hidekolom">Koordinat <span use:tooltip={"Koordinat Map"}></span></th>
         <th style="width:10%;">Detail</th>
         </tr>
@@ -686,7 +746,7 @@ function onWindowClick(e) {
         <tbody>  
         <tr>
 		<td class="hidekolom">{ DataBombana.KodeW }</td>
-        <td><img class="object-center" src={LogoBombana} alt="Bombana" width="36px" height="36px" style="margin-right:5px;float:left;"/> { DataBombana.Nama } <Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button> 
+        <td><img class="object-center" src={LogoBombana} alt="Bombana" width="40px" height="40px" style="margin-right:5px;float:left;"/> { DataBombana.Nama } <Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button> 
 			<Popover triggeredBy="#popbombana" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 				<div class="p-3">
 				  <center>
@@ -701,11 +761,11 @@ function onWindowClick(e) {
 				</div>
 			  </Popover>	
 		</td>
-        <td> {formatter.format(DataBombana.Luas_Wilayah)} km2 / {formatter.format(DataBombana.J_Penduduk)}  </td>
+        <td><b>Luas Wilayah:</b><br/>{formatter.format(DataBombana.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataBombana.J_Penduduk)}  </td>
 		<td class="hidekolom">• Gunung: { DataBombana.J_Gunung } <br/>• Pulau: { DataBombana.J_Pulau } <br/>• Selat: { DataBombana.J_Selat } <br/>• Danau: { DataBombana.J_Danau } <br/>• Sungai: { DataBombana.J_Sungai } <br/>• Rawa: { DataBombana.J_Rawa} </td>
         <td class="hidekolom">{ DataBombana.Koordinat } </td>
 		 <td> 
-			<span class="buttonDetail" on:click={()=> visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+			<span class="buttonDetail" on:click={()=> visibleBombana = !visibleBombana} bind:this={closeBombana} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 				&#8285; 
 			</span>
 			<!-- menu -->
@@ -719,7 +779,7 @@ function onWindowClick(e) {
         </tr>
         <tr>
 		<td class="hidekolom">{ DataButon.KodeW }</td>	
-        <td><img class="object-center" src={LogoButon} alt="Buton" width="36px" height="36px" style="margin-right:5px;float:left;" /> { DataButon.Nama } <Button id="popbuton" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+        <td><img class="object-center" src={LogoButon} alt="Buton" width="40px" height="40px" style="margin-right:5px;float:left;" /> { DataButon.Nama } <Button id="popbuton" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 			<Popover triggeredBy="#popbuton" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 				<div class="p-3">
 				  <center>
@@ -734,11 +794,11 @@ function onWindowClick(e) {
 				</div>
 			  </Popover>
 		</td>
-        <td> {formatter.format(DataButon.Luas_Wilayah)} km2 / {formatter.format(DataButon.J_Penduduk)} </td>
+        <td><b>Luas Wilayah:</b><br/>{formatter.format(DataButon.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataButon.J_Penduduk)} </td>
 		<td class="hidekolom">• Gunung: { DataButon.J_Gunung }<br/>• Pulau: { DataButon.J_Pulau } <br/>• Selat: { DataButon.J_Selat } <br/>• Danau: { DataButon.J_Danau } <br/>• Sungai: { DataButon.J_Sungai } <br/>• Rawa: { DataButon.J_Rawa} </td>
          <td class="hidekolom">{ DataButon.Koordinat } </td>
          <td> 
-			<span class="buttonDetail" on:click={()=> visibleButon  = !visibleButon} bind:this={closeButon} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+			<span class="buttonDetail" on:click={()=> visibleButon  = !visibleButon} bind:this={closeButon} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 				&#8285; 
 			</span>
 			<!-- menu -->
@@ -753,7 +813,7 @@ function onWindowClick(e) {
         
 		<tr>
 			<td class="hidekolom">{DataButonSelatan.KodeW }</td>
-			<td><img class="object-center" src={LogoButonSelatan} alt="Buton Selatan" width="36px" height="36px" style="margin-right:5px;float:left;" /> { DataButonSelatan.Nama } <Button id="popbutonselatan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoButonSelatan} alt="Buton Selatan" width="40px" height="40px" style="margin-right:5px;float:left;" /> { DataButonSelatan.Nama } <Button id="popbutonselatan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbutonselatan" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -768,11 +828,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>	
 			</td>
-			<td> {formatter.format(DataButonSelatan.Luas_Wilayah)} km2 / {formatter.format(DataButonSelatan.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataButonSelatan.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataButonSelatan.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: { DataButonSelatan.J_Gunung }<br/>• Pulau: { DataButonSelatan.J_Pulau } <br/>• Selat: { DataButonSelatan.J_Selat } <br/>• Danau: { DataButonSelatan.J_Danau } <br/>• Sungai: { DataButonSelatan.J_Sungai } <br/>• Rawa: { DataButonSelatan.J_Rawa}    </td>
 			 <td class="hidekolom">{ DataButonSelatan.Koordinat }  </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleButonSelatan  = !visibleButonSelatan} bind:this={closeButonSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleButonSelatan  = !visibleButonSelatan} bind:this={closeButonSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -786,7 +846,7 @@ function onWindowClick(e) {
 		</tr>
 		<tr>
 			<td class="hidekolom">{DataButonTengah.KodeW }</td>
-			<td><img class="object-center" src={LogoButonTengah} alt="Buton Tengah" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataButonTengah.Nama} <Button id="popbutontengah" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoButonTengah} alt="Buton Tengah" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataButonTengah.Nama} <Button id="popbutontengah" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbutontengah" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -801,11 +861,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>	
 			</td>
-			<td> {formatter.format(DataButonTengah.Luas_Wilayah)} km2 / {formatter.format(DataButonTengah.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataButonTengah.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataButonTengah.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataButonTengah.J_Gunung} <br/>• Pulau: {DataButonTengah.J_Pulau} <br/>• Selat: { DataButonTengah.J_Selat } <br/>• Danau: { DataButonTengah.J_Danau } <br/>• Sungai: { DataButonTengah.J_Sungai } <br/>• Rawa: { DataButonTengah.J_Rawa} </td>
 			 <td class="hidekolom">{DataButonTengah.Koordinat} </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleButonTengah  = !visibleButonTengah} bind:this={closeButonTengah} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleButonTengah  = !visibleButonTengah} bind:this={closeButonTengah} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -820,7 +880,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataButonUtara.KodeW }</td>
-			<td><img class="object-center" src={LogoButonUtara} alt="Buton Utara" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataButonUtara.Nama } <Button id="popbutonutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoButonUtara} alt="Buton Utara" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataButonUtara.Nama } <Button id="popbutonutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbutonutara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -835,11 +895,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>	
 			</td>
-			<td> {formatter.format(DataButonUtara.Luas_Wilayah)} km2 / {formatter.format(DataButonUtara.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataButonUtara.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataButonUtara.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataButonUtara.J_Gunung } <br/>• Pulau: {DataButonUtara.J_Pulau } <br/>• Selat: { DataButonUtara.J_Selat } <br/>• Danau: { DataButonUtara.J_Danau } <br/>• Sungai: { DataButonUtara.J_Sungai } <br/>• Rawa: { DataButonUtara.J_Rawa}   </td>
 			 <td class="hidekolom">{DataButonUtara.Koordinat } </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleButonUtara  = !visibleButonUtara} bind:this={closeButonUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleButonUtara  = !visibleButonUtara} bind:this={closeButonUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -854,7 +914,7 @@ function onWindowClick(e) {
 
 		<tr id="kolakatabel">
 			<td class="hidekolom">{DataKolaka.KodeW }</td>
-			<td><img class="object-center" src={LogoKolaka} alt="Kolaka" width="36px" height="36px" style="margin-right:5px;float:left;"/> {DataKolaka.Nama } <Button id="popkolaka" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKolaka} alt="Kolaka" width="40px" height="40px" style="margin-right:5px;float:left;"/> {DataKolaka.Nama } <Button id="popkolaka" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkolaka" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -869,11 +929,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKolaka.Luas_Wilayah)} km2 / {formatter.format(DataKolaka.J_Penduduk)}  </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKolaka.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKolaka.J_Penduduk)}  </td>
 			<td class="hidekolom">• Gunung: {DataKolaka.J_Gunung } <br/>• Pulau: {DataKolaka.J_Pulau } <br/>• Selat: { DataKolaka.J_Selat } <br/>• Danau: { DataKolaka.J_Danau } <br/>• Sungai: { DataKolaka.J_Sungai } <br/>• Rawa: { DataKolaka.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolaka.Koordinat }</td>
 			 <td> 
-				<span class="buttonDetail" on:click={toogleKolaka} bind:this={closeKolaka} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={toogleKolaka} bind:this={closeKolaka} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -888,7 +948,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKolakaTimur.KodeW }</td>
-			<td><img class="object-center" src={LogoKolakaTimur} alt="Kolaka Timur" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKolakaTimur.Nama } <Button id="popkolakatimur" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKolakaTimur} alt="Kolaka Timur" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKolakaTimur.Nama } <Button id="popkolakatimur" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkolakatimur" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -903,11 +963,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKolakaTimur.Luas_Wilayah)} km2 / {formatter.format(DataKolakaTimur.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKolakaTimur.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKolakaTimur.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataKolakaTimur.J_Gunung} <br/>• Pulau: {DataKolakaTimur.J_Pulau } <br/>• Selat: { DataKolakaTimur.J_Selat } <br/>• Danau: { DataKolakaTimur.J_Danau } <br/>• Sungai: { DataKolakaTimur.J_Sungai } <br/>• Rawa: { DataKolakaTimur.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolakaTimur.Koordinat } </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKolakaTimur  = !visibleKolakaTimur} bind:this={closeKolakaTimur} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKolakaTimur  = !visibleKolakaTimur} bind:this={closeKolakaTimur} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -922,7 +982,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKolakaUtara.KodeW }</td>
-			<td><img class="object-center" src={LogoKolakaUtara} alt="Kolaka Utara" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKolakaUtara.Nama } <Button id="popkolakautara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKolakaUtara} alt="Kolaka Utara" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKolakaUtara.Nama } <Button id="popkolakautara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkolakautara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -937,11 +997,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKolakaUtara.Luas_Wilayah)} km2 / {formatter.format(DataKolakaUtara.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKolakaUtara.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKolakaUtara.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataKolakaUtara.J_Gunung }<br/>• Pulau: {DataKolakaUtara.J_Pulau }  <br/>• Selat: { DataKolakaUtara.J_Selat } <br/>• Danau: { DataKolakaUtara.J_Danau } <br/>• Sungai: { DataKolakaUtara.J_Sungai } <br/>• Rawa: { DataKolakaUtara.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKolakaUtara.Koordinat }</td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKolakaUtara = !visibleKolakaUtara} bind:this={closeKolakaUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKolakaUtara = !visibleKolakaUtara} bind:this={closeKolakaUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -956,7 +1016,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKonawe.KodeW }</td>
-			<td><img class="object-center" src={LogoKonawe} alt="Konawe" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKonawe} alt="Konawe" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonawe" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -971,11 +1031,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKonawe.Luas_Wilayah)} km2 / {formatter.format(DataKonawe.J_Penduduk)}</td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKonawe.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKonawe.J_Penduduk)}</td>
 			<td class="hidekolom">• Gunung: {DataKonawe.J_Gunung }<br/>• Pulau: {DataKonawe.J_Pulau } <br/>• Selat: { DataKonawe.J_Selat } <br/>• Danau: { DataKonawe.J_Danau } <br/>• Sungai: { DataKonawe.J_Sungai } <br/>• Rawa: { DataKonawe.J_Rawa}   </td>
 			 <td class="hidekolom">{DataKonawe.Koordinat } </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonawe  = !visibleKonawe} bind:this={closeKonawe} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -990,7 +1050,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKonaweKepulauan.KodeW }</td>
-			<td><img class="object-center" src={LogoKonaweKepulauan} alt="Konawe Kepulauan" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKonaweKepulauan.Nama} <Button id="popkonawekepulauan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKonaweKepulauan} alt="Konawe Kepulauan" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKonaweKepulauan.Nama} <Button id="popkonawekepulauan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonawekepulauan" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1005,11 +1065,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKonaweKepulauan.Luas_Wilayah)} km2 / {formatter.format(DataKonaweKepulauan.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKonaweKepulauan.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKonaweKepulauan.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataKonaweKepulauan.J_Gunung } <br/>• Pulau: {DataKonaweKepulauan.J_Pulau } <br/>• Selat: { DataKonaweKepulauan.J_Selat } <br/>• Danau: { DataKonaweKepulauan.J_Danau } <br/>• Sungai: { DataKonaweKepulauan.J_Sungai } <br/>• Rawa: { DataKonaweKepulauan.J_Rawa} </td>
 			 <td class="hidekolom">{DataKonaweKepulauan.Koordinat } </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKonaweKepulauan = !visibleKonaweKepulauan} bind:this={closeKonaweKepulauan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonaweKepulauan = !visibleKonaweKepulauan} bind:this={closeKonaweKepulauan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1024,7 +1084,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKonaweSelatan.KodeW }</td>
-			<td><img class="object-center" src={LogoKonaweSelatan} alt="Konawe Selatan" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKonaweSelatan.Nama }  <Button id="popkonaweselatan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKonaweSelatan} alt="Konawe Selatan" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKonaweSelatan.Nama }  <Button id="popkonaweselatan" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonaweselatan" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1039,11 +1099,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKonaweSelatan.Luas_Wilayah)} km2 / {formatter.format(DataKonaweSelatan.J_Penduduk)}  </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKonaweSelatan.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKonaweSelatan.J_Penduduk)}  </td>
 			<td class="hidekolom">• Gunung: {DataKonaweSelatan.J_Gunung } <br/>• Pulau: {DataKonaweSelatan.J_Pulau} <br/>• Selat: { DataKonaweSelatan.J_Selat } <br/>• Danau: { DataKonaweSelatan.J_Danau } <br/>• Sungai: { DataKonaweSelatan.J_Sungai } <br/>• Rawa: { DataKonaweSelatan.J_Rawa}</td>
 			 <td class="hidekolom">{DataKonaweSelatan.Koordinat} </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKonaweSelatan = !visibleKonaweSelatan} bind:this={closeKonaweSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonaweSelatan = !visibleKonaweSelatan} bind:this={closeKonaweSelatan} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1058,7 +1118,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKonaweUtara.KodeW }</td>
-			<td><img class="object-center" src={LogoKonaweUtara} alt="Konawe Utara" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKonaweUtara} alt="Konawe Utara" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkonaweutara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1073,11 +1133,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 / {formatter.format(DataKonaweUtara.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKonaweUtara.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKonaweUtara.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataKonaweUtara.J_Gunung }<br/>• Pulau: {DataKonaweUtara.J_Pulau } <br/>• Selat: { DataKonaweUtara.J_Selat } <br/>• Danau: { DataKonaweUtara.J_Danau } <br/>• Sungai: { DataKonaweUtara.J_Sungai } <br/>• Rawa: { DataKonaweUtara.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKonaweUtara.Koordinat }</td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKonaweUtara = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKonaweUtara = !visibleKonaweUtara} bind:this={closeKonaweUtara} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1092,7 +1152,7 @@ function onWindowClick(e) {
 
 		<tr id="muna">
 			<td class="hidekolom">{DataMuna.KodeW}</td>
-			<td><img class="object-center" src={LogoMuna} alt="Jese Leos" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataMuna.Nama} <Button id="popkabupatenmuna" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoMuna} alt="Jese Leos" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataMuna.Nama} <Button id="popkabupatenmuna" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkabupatenmuna" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1107,11 +1167,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataMuna.Luas_Wilayah)} km2 / {formatter.format(DataMuna.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataMuna.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataMuna.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataMuna.J_Gunung} <br/>• Pulau: {DataMuna.J_Pulau} <br/>• Selat: { DataMuna.J_Selat } <br/>• Danau: { DataMuna.J_Danau } <br/>• Sungai: { DataMuna.J_Sungai } <br/>• Rawa: { DataMuna.J_Rawa}  </td>
 			 <td class="hidekolom"> {DataMuna.Koordinat} </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleMuna = !visibleMuna} bind:this={closeMuna} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleMuna = !visibleMuna} bind:this={closeMuna} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1126,7 +1186,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataMunaBarat.KodeW}</td>
-			<td><img class="object-center" src={LogoMunaBarat} alt="Muna Barat" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataMunaBarat.Nama} <Button id="popkabupatenmunabarat" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoMunaBarat} alt="Muna Barat" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataMunaBarat.Nama} <Button id="popkabupatenmunabarat" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkabupatenmunabarat" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1141,11 +1201,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataMunaBarat.Luas_Wilayah)} km2 / {formatter.format(DataMunaBarat.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataMunaBarat.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataMunaBarat.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataMunaBarat.J_Gunung} <br/>• Pulau: {DataMunaBarat.J_Pulau} <br/>• Selat: { DataMunaBarat.J_Selat } <br/>• Danau: { DataMunaBarat.J_Danau } <br/>• Sungai: { DataMunaBarat.J_Sungai } <br/>• Rawa: { DataMunaBarat.J_Rawa}   </td>
 			 <td class="hidekolom">{DataMunaBarat.Koordinat} </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleMunaBarat = !visibleMunaBarat} bind:this={closeMunaBarat} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleMunaBarat = !visibleMunaBarat} bind:this={closeMunaBarat} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1160,7 +1220,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataWakatobi.KodeW}</td>
-			<td><img class="object-center" src={LogoWakatobi} alt="Wakatobi" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataWakatobi.Nama} <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoWakatobi} alt="Wakatobi" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataWakatobi.Nama} <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popwakatobi" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1175,11 +1235,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataWakatobi.Luas_Wilayah)} km2 / {formatter.format(DataWakatobi.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataWakatobi.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataWakatobi.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataWakatobi.J_Gunung}<br/> • Pulau: {DataWakatobi.J_Pulau} <br/>• Selat: { DataWakatobi.J_Selat } <br/>• Danau: { DataWakatobi.J_Danau } <br/>• Sungai: { DataWakatobi.J_Sungai } <br/>• Rawa: { DataWakatobi.J_Rawa}    </td>
 			 <td class="hidekolom">{DataWakatobi.Koordinat} </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleWakatobi  = !visibleWakatobi} bind:this={closeWakatobi} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1194,7 +1254,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKotaBaubau.KodeW}</td>
-			<td><img class="object-center" src={LogoBaubau} alt="Baubau" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKotaBaubau.Nama} <Button id="popbaubau" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoBaubau} alt="Baubau" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKotaBaubau.Nama} <Button id="popbaubau" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popbaubau" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1209,11 +1269,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKotaBaubau.Luas_Wilayah)} km2 / {formatter.format(DataKotaBaubau.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKotaBaubau.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKotaBaubau.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataKotaBaubau.J_Gunung} <br/>• Pulau: {DataKotaBaubau.J_Pulau} <br/>• Selat: { DataKotaBaubau.J_Selat } <br/>• Danau: {DataKotaBaubau.J_Danau } <br/>• Sungai: { DataKotaBaubau.J_Sungai } <br/>• Rawa: { DataKotaBaubau.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKotaBaubau.Koordinat} </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleBaubau  = !visibleBaubau} bind:this={closeBaubau} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleBaubau  = !visibleBaubau} bind:this={closeBaubau} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1228,7 +1288,7 @@ function onWindowClick(e) {
 
 		<tr>
 			<td class="hidekolom">{DataKotaKendari.KodeW}</td>
-			<td><img class="object-center" src={LogoKendari} alt="Kendari" width="36px" height="36px" style="margin-right:5px;float:left;" /> {DataKotaKendari.Nama} <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:cadetblue;font-size: 11px;width: 10px;height: 15px;">i</Button>
+			<td><img class="object-center" src={LogoKendari} alt="Kendari" width="40px" height="40px" style="margin-right:5px;float:left;" /> {DataKotaKendari.Nama} <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
 				<Popover triggeredBy="#popkendari" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
 					<div class="p-3">
 					  <center>
@@ -1243,11 +1303,11 @@ function onWindowClick(e) {
 					</div>
 				  </Popover>
 			</td>
-			<td>{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 / {formatter.format(DataKotaKendari.J_Penduduk)} </td>
+			<td><b>Luas Wilayah:</b><br/>{formatter.format(DataKotaKendari.Luas_Wilayah)} km2 <br/><br/><b>Jumlah Penduduk:</b><br/>{formatter.format(DataKotaKendari.J_Penduduk)} </td>
 			<td class="hidekolom">• Gunung: {DataKotaKendari.J_Gunung} <br/>• Pulau: {DataKotaKendari.J_Pulau} <br/>• Selat: { DataKotaKendari.J_Selat } <br/>• Danau: {DataKotaKendari.J_Danau } <br/>• Sungai: { DataKotaKendari.J_Sungai } <br/>• Rawa: { DataKotaKendari.J_Rawa}  </td>
 			 <td class="hidekolom">{DataKotaKendari.Koordinat}  </td>
 			 <td> 
-				<span class="buttonDetail" on:click={()=> visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid rgb(129 129 137 / 44%);"> 
+				<span class="buttonDetail" on:click={()=> visibleKendari  = !visibleKendari} bind:this={closeKendari} style="font-weight:600;padding: 6px 12px; font-size:14px; background-color: #e2e7eb; border-radius: 50%; margin-left:5px;color:black;cursor: pointer;border: 2px solid #5a86af;"> 
 					&#8285; 
 				</span>
 				<!-- menu -->
@@ -1263,9 +1323,13 @@ function onWindowClick(e) {
         </tbody>
         </table>
 
-	<br/><br/>
-	<Heading id="grafik" tag="h4" class="mb-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Grafik Kabupaten/Kota Sulawesi Tenggara</Heading>
-	<Card class="w-full max-w-full">
+	<br/><br/><br/>
+	<Heading id="grafik" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> 
+	Grafik Kabupaten/Kota Sulawesi Tenggara
+    </Heading>
+    <p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding:4px 14px;border-radius: 6px;">Visualisasikan data perbandingan antar kabupaten dan kota di Sulawesi Tenggara melalui grafik interaktif ini. Pilih metrik yang diinginkan—Jumlah Penduduk, Luas Wilayah, atau Jumlah Kecamatan—untuk melihat perbedaannya secara visual di seluruh provinsi.</p>
+	<br/><Card class="w-full max-w-full">
 		<div class="flex justify-between pb-4 mb-4 border-b border-gray-200 dark:border-gray-700 ">
 		  <div class="flex items-center">
 			<div class="w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-700 flex items-center justify-center me-3">
@@ -1307,6 +1371,124 @@ function onWindowClick(e) {
 
 
 <style>
+
+/** CSS HEADER */
+
+  /* Penataan Halaman Utama */
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+
+  }
+
+  /* Kartu Informasi Utama */
+  .info-card {
+
+    border-radius: 20px; /* Sudut yang sangat tumpul */
+    padding: 0.8rem 1.2rem; /* Padding atas/bawah lebih kecil */
+    width: 100%;
+    max-width: 1220px;
+    display: flex;
+    align-items: center; /* Membuat logo dan teks sejajar di tengah secara vertikal */
+    gap: 2rem; /* Jarak antara logo dan teks */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    margin-bottom: 1.5rem;
+	background-color: #f7fafc;
+  }
+
+  /* Logo */
+  .logo {
+    width: 90px;
+    height: 90px;
+    background-color: white; /* Latar belakang putih untuk logo */
+    border-radius: 50%;
+    flex-shrink: 0; /* Mencegah logo mengecil */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Memastikan gambar tetap bulat */
+  }
+
+  .logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Agar gambar pas tanpa distorsi */
+  }
+  
+  /* Kontainer Judul */
+  .title-container {
+    color: var(--text-color);
+  }
+
+  .title-container h1 {
+    font-size: 1.5rem; /* Ukuran font disesuaikan */
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .title-container h2 {
+    font-size: 1.5rem; /* Ukuran font disesuaikan */
+    font-weight: bold;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  /* Kontainer Tombol Navigasi */
+  .nav-container {
+    display: flex;
+    flex-wrap: wrap; /* Tombol akan turun ke baris baru jika tidak muat */
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  /* Tombol Navigasi */
+  .nav-button {
+	background-color: var(--primary-bg);
+    color: var(--primary-text);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    background: #f7fafc;
+  }
+
+  .nav-button:hover {
+     transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #f1f9ff;
+  }
+
+  /* Penyesuaian untuk layar lebih kecil (Mobile) */
+  @media (max-width: 768px) {
+    .info-card {
+      flex-direction: column; /* Ubah tata letak menjadi vertikal */
+      text-align: center;
+      padding: 1.5rem;
+    }
+    .title-container h1, .title-container h2 {
+      font-size: 1.2rem;
+    }
+    .nav-container {
+      gap: 0.75rem;
+    }
+    .nav-button {
+      width: 48%; /* Membuat tombol menjadi 2 kolom */
+      padding: 0.75rem 0.5rem;
+    }
+  }
+
+  /** END CSS HEADER */
+
 	table {
 	  border-collapse: collapse;
 	  border-spacing: 0;
@@ -1318,9 +1500,36 @@ function onWindowClick(e) {
 	  padding: 16px;
 	}
 	
+	/* Cell styling */
+td {
+    text-align: left;
+    padding: 16px;
+    vertical-align: top;
+    line-height: 1.5;
+}
+
+td:last-child {
+    border-right: none;
+}
+
 	tr:nth-child(even) {
 	  background-color: #f2f2f2;
 	}
+
+	/* Body tabel */
+tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: #e3f2fd;
+    cursor: pointer;
+}
 
 .dropdown-content {
 

@@ -16,17 +16,16 @@
 	<meta name="description" content="Dashboard Biro" />
 </svelte:head>
 
-
-<br/><br/>
 <div class="container max-w-full" style="width:100%; max-width: 100vw; margin: 0 auto; padding: 0 8px;margin-top: 30px;">
   <div style="border:2px solid #00b1ff;padding: 4px;border-radius:12px;width: max-content;"><Toggle class="w-64 text-base" bind:value={sidebarShow} checked={sidebarShow} on:click={() => (sidebarShow = !sidebarShow)}>
-    <svelte:fragment slot="offLabel"></svelte:fragment> {sidebarShow ? 'Hilangkan Menu Sidebar' : 'Tampilkan Menu Sidebar'} 
+    <svelte:fragment slot="offLabel"></svelte:fragment> {sidebarShow ? 'Hilangkan Sidebar' : 'Tampilkan Sidebar'} 
   </Toggle></div> <br/>
-  <div class="flex md:flex lg:grid grid-cols-12 gap-1 w-full">
+<div class="flex md:flex lg:grid grid-cols-10 gap-1 w-full">
+  
     {#if sidebarShow} 
-    <div class="col-span-3 w-full">
+    <div class="col-span-2 w-full">
         <Sidebar>
-            <SidebarWrapper>
+            <SidebarWrapper style="background:white;">
               <SidebarGroup>
                 <div style="font-size: 24px;font-weight: 600;text-align: left;color:#6b7280">SIPAPAODE</div>
                 <SidebarItem label="Dashboard" href="/dashboard-biro">
@@ -41,14 +40,14 @@
                   <SidebarDropdownItem label="👥 Data Pengajuan Kerjasama Online" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="📁 Data Pengarsipan Dokumen Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
                   <SidebarDropdownItem label="✅ Update Checklist Laporan Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/>
-                  <SidebarDropdownItem label="🖼️ Gallery Photo Dokumentasi Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>
                 </SidebarDropdownWrapper>
                 <SidebarDropdownWrapper label="Koord. Pemerintahan" {spanClass} style="text-align: left;background:#ffeacd;">
                   <svelte:fragment slot="icon">
                     <LandmarkSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
                   <SidebarDropdownItem label="🗺️ Kode Data Wilayah Pemerintahan, Pulau dan Rupa Bumi" href="/dashboard-biro/lanskap-sultra" class="pl-4 ps-8" />
-                  <SidebarDropdownItem label="🖼️ Gallery Photo Dokumentasi Pemerintahan" href="/dashboard-biro/gallery-photo-pemerintahan" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Pemerintahan" href="/dashboard-biro/gallery-photo-pemerintahan" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
                   <SidebarDropdownWrapper label="Koord. Otonomi Daerah" {spanClass} style="text-align: left;background:#ffeacd;">
                     <svelte:fragment slot="icon">
@@ -57,14 +56,14 @@
                     <SidebarDropdownItem label="✅ Update Checklist Laporan LPPD & LKPJ" href="/dashboard-biro/laporan-lppd" class="pl-4 ps-8" />
                     <SidebarDropdownItem label="📁 Data Dokumen LPPD & LKPJ" href="/dashboard-biro/rekap-lppd-lkpj" class="pl-4 ps-8" />
                     <SidebarDropdownItem label="🗂️ Data Dokumen SK" href="/dashboard-biro/arsip-sk" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="🖼️ Gallery Photo Dokumentasi Otonomi Daerah" href="/dashboard-biro/gallery-photo-otonomi" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Otonomi Daerah" href="/dashboard-biro/gallery-photo-otonomi" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
                   <SidebarDropdownWrapper label="Tata Usaha" {spanClass} style="text-align:left;background:#ffeacd;">
                     <svelte:fragment slot="icon">
                       <ObjectsColumnSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                     <SidebarDropdownItem label="👤 Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="🖼️ Photo Profil Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="🖼️ Browse Photo Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
                   <SidebarItem label="Setting Formulir Online" href="/dashboard-biro/status-layanan">
                     <svelte:fragment slot="icon">
@@ -76,7 +75,7 @@
                       <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Album Gallery (Beranda)" href="/dashboard-biro/album-gallery-beranda">
+                  <SidebarItem label="TimeLine Journal Kegiatan" href="/dashboard-biro/album-gallery-beranda">
                     <svelte:fragment slot="icon">
                       <FileImageSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
@@ -118,9 +117,9 @@
       </div>
       {/if}
       {#if sidebarShow} 
-    <div class="col-span-9 w-full" style="margin-left:14px;width:100%;"><slot></slot></div>
+    <div class="col-span-8 w-full" style="margin-left:2%;width:100%;margin-top:-60px;"><slot></slot></div>
     {:else}
-    <div class="col-span-12 w-max-full" style="margin-left:14px;width: 100%;"><slot></slot></div>
+    <div class="col-span-10 w-full" style="margin-left:2%;width: 100%;margin-top:-20px;"><slot></slot></div>
     {/if}
 </div>
 

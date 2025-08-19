@@ -11,8 +11,6 @@
 	<meta name="description" content="Formulir Pengajuan Informasi oleh Publik - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/>
-
 <div class="container">
     <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Formulir Pengajuan Informasi oleh Publik dan Tata Cara Pengajuan</Heading>
     <br/>

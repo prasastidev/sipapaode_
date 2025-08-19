@@ -6,6 +6,7 @@ export const csr = true;
 
 import { redirect } from '@sveltejs/kit';
 import { getDataPhotoPemerintahan } from '$lib/dataBucketGambarPemerintahan';
+import { getDataProfileBidang } from '$lib/updateProfileBidang';
 
 
 
@@ -16,9 +17,18 @@ export async function load({ parent }) {
 		throw redirect(303, '/');
 	} 
 		return {
-			DatasGambarPemerintahan : await getDataPhotoPemerintahan ()
-		};	
-		
+			DatasGambarPemerintahan : await getDataPhotoPemerintahan (),
+			DatasProfileBidang : await getDataProfileBidang()
+		};			
 }
+
+
+
+
+
+
+
+
+
 
 

@@ -30,12 +30,10 @@
 	<meta name="description" content="Regulasi - Produk Hukum - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/>
-
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Regulasi - Produk Hukum</Heading>
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Biro Pemerintahan dan Otonomi Daerah<br/>
-Sulawesi Tenggara <br/>Tahun 2024</Heading>
+Sulawesi Tenggara</Heading>
 <br/><br/>
 
     <form class="flex items-center w-full mx-auto" style="width:100%;">   

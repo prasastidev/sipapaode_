@@ -1,13 +1,39 @@
 <script>
     /** @type {import('./$types').PageData} */
-
+    export let data;
     import { Heading, Tabs, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
-    import { ArrowRightAltOutline, MoonOutline, BuildingSolid } from 'flowbite-svelte-icons';
+    import { ArrowRightAltOutline, MoonOutline, BuildingSolid, ArrowUpRightFromSquareSolid } from 'flowbite-svelte-icons';
     import PicProfileM from '$lib/images/ProfileM.webp';
 	import PicProfileF from '$lib/images/ProfileF.webp';
     import PicKabagKS from '$lib/images/Hidayat.webp';
 	import Karo from '$lib/images/Karo.webp';
     import PicTU from '$lib/images/Irma-Fitayanti.webp';
+
+   // Variabel untuk mempermudah akses data Pegawai di HTML
+    // Menggunakan $: (reactive statement) agar otomatis update jika data berubah
+    $: pegawai = data.pegawaiByJabatan || {};
+
+    // Pejabat Utama
+    $: kepalaBiro = pegawai['Kepala Biro'];
+    $: kabidTU = pegawai['Kepala Bidang Tata Usaha']; // Sesuai nama jabatan di DB
+    $: kabidKS = pegawai['Kepala Bidang Kerjasama'];
+    $: koorPemerintahan = pegawai['Kepala Bidang Koordinator Pemerintahan'];
+    $: koorOtda = pegawai['Kepala Bidang Koordinator Otonomi Daerah'];
+
+    // Staff Kerjasama
+    $: staffKS1 = pegawai['Staff I Bidang Kerjasama'];
+    $: staffKS2 = pegawai['Staff II Bidang Kerjasama'];
+    $: staffKS3 = pegawai['Staff III Bidang Kerjasama'];
+
+    // Staff Pemerintahan
+    $: staffPemerintahan1 = pegawai['Staff I Bidang Koordinator Pemerintahan'];
+    $: staffPemerintahan2 = pegawai['Staff II Bidang Koordinator Pemerintahan'];
+    $: staffPemerintahan3 = pegawai['Staff III Bidang Koordinator Pemerintahan'];
+
+    // Staff Otonomi Daerah
+    $: staffOtda1 = pegawai['Staff I Bidang Koordinator Otonomi Daerah'];
+    $: staffOtda2 = pegawai['Staff II Bidang Koordinator Otonomi Daerah'];
+    $: staffOtda3 = pegawai['Staff III Bidang Koordinator Otonomi Daerah'];
 
 
 </script>
@@ -17,37 +43,58 @@
 	<meta name="description" content="Profil Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/>
+<br/>
+
+<div class="page-container">
+  <header class="header-card">
+    <div class="logo">   <img src="/LogoSultra.webp" class="card-img-top" alt="Gambar logo sultra"/></div>
+    <div class="title-container">
+      <h1>BIRO PEMERINTAHAN DAN OTONOMI DAERAH</h1>
+      <h2>PROV. SULAWESI TENGGARA</h2>
+    </div>
+  </header>
+
+  <nav class="nav-container">
+    <a href="#profil" class="nav-button">PROFIL</a>
+    <a href="#visi-misi" class="nav-button">VISI MISI</a>
+    <a href="#tupoksi" class="nav-button">TUPOKSI</a>
+    <a href="#bidang" class="nav-button">BIDANG-BIDANG</a>
+    <a href="#struktur" class="nav-button">STRUKTUR ORGANISASI</a>
+    <a href="#alamat" class="nav-button">ALAMAT</a>
+  </nav>
+
+</div>
 
 
 <div class="container">
-<Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Profil</Heading>
+<Heading id="profil" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Profil</Heading>
 <br/>
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Selayang Pandang</Heading>
-Biro Pemerintahan dan Otonomi Daerah Sekretariat Daerah Provinsi Sulawesi Tenggara dipimpin oleh Kepala Biro yang berkedudukan dibawah dan bertanggung jawab kepada Gubernur melalui Sekretaris Deaerah yang dibentuk berdasarkan 
+<div style="padding:8px 16px;background:#f9fafb;border-radius:12px;">Biro Pemerintahan dan Otonomi Daerah Sekretariat Daerah Provinsi Sulawesi Tenggara dipimpin oleh Kepala Biro yang berkedudukan dibawah dan bertanggung jawab kepada Gubernur melalui Sekretaris Deaerah yang dibentuk berdasarkan 
 Peraturan Daerah Provinsi Sulawesi Tenggara Nomor 11 Tahun 2012 Tentang Organisasi dan Tata Kerja Sekretariat Daerah Provinsi dan Tata Kerja Sekretariat Dewan Perwakilan Rakyat Daerah Provinsi Sulawesi Tenggara, dan
-dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentang Kedudukan, Susunan Organisasi, Tugas dan Fungsi, Serta Tata Kerja Biro Pemerintahan dan Otonomi Daerah.
+dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentang Kedudukan, Susunan Organisasi, Tugas dan Fungsi, Serta Tata Kerja Biro Pemerintahan dan Otonomi Daerah.</div>
  <br/><br/> <hr/>
 
- <Heading id="Visi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Visi Misi</Heading>
+ <Heading id="visi-misi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Visi Misi</Heading>
  <br/>
  <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Visi</Heading>
- Pembangunan Sulawesi Tenggara periode Pemerintahan tahun 2018-2023 adalah terwujudnya Sulawesi Tenggara yang aman, maju, sejahtera dan bermartabat. <br/><br/>
+ <div style="padding:8px 16px;background:#f9fafb;border-radius:12px;">Pembangunan Sulawesi Tenggara periode Pemerintahan tahun 2018-2023 adalah terwujudnya Sulawesi Tenggara yang aman, maju, sejahtera dan bermartabat.</div> <br/><br/>
  
  <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Misi</Heading>
+ <div style="padding:8px 16px;background:#f9fafb;border-radius:12px;">
  1. Meningkatkan kualitas hidup masyarakat agar dapat berdaulat dan aman dalam bidang ekonomi, pangan, lingkungan, politik serta iman dan taqwa. <br/>
  2. Memajukan daya saing wilayah melalui penguatan ekonomi lokal dan peningkatan investasi. <br/>
  3. Mewujudkan birokrasi pemerintahan provinsi yang modern, tata kelola pemerintahan desa yang baik (good village governance) serta pengingkatan kapasitas pemerintahan kecamatan dan kelurahan sebagai pusat pelayanan pemerintahan. <br/>
  4. Meningkatkan konektivitas dan kemitraan antara pemerintah, swasta dan masyarakat dalam rangka pengingkatan daya saing daerah melalui pembangunan dan perbaikan infrastruktur, social ekonomi. <br/>
  5. Pembangunan yang bertumpu pada pelestarian sumber daya alam dan peningkatan nilai tambah dalam rangka peningkatan daya saing daerah.
- <br/><br/>
+ </div><br/><br/>
  <hr/>
 
- <Heading id="Visi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Tupoksi</Heading> 
+ <Heading id="tupoksi" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Tupoksi</Heading> 
  <Tabs class="mt-4">
     <TabItem open title="Tugas Pokok">
       <p class="text-2sm text-gray-500 dark:text-gray-400">
-        Biro Pemerintahan dan Otonomi Daerah mempunyai tugas antara lain: <br/><br/>
+        <b>Biro Pemerintahan dan Otonomi Daerah mempunyai tugas antara lain:</b> <br/><br/>
         a. Membantu Asisten Pemerintahan dan Kesejahteraan Rakyat dalam penyiapan perumusan kebijakan daerah, pengkoordinasian pelaksanaan tugas Perangkat Deaerah, pemantauan dan Evaluasi
         pelaksanaan kebijakan di bidang pemerintahan, otonomi daerah dan kerjasama. <br/>
         b. Menyiapkan bahan perumusan kebijakan daerah, pengkoordinasian perumusan kebijakan daerah, pengkoordinasian pelaksanaan tugas perangkat dearah,
@@ -61,7 +108,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
     </TabItem>
     <TabItem title="Fungsi">
       <p class="text-2sm text-gray-500 dark:text-gray-400">
-       Biro Pemerintahan dan Otonomi Daerah menyelenggarakan fungsi: <br/><br/>
+       <b>Biro Pemerintahan dan Otonomi Daerah menyelenggarakan fungsi:</b> <br/><br/>
        a. Penyiapan perumusan kebijakan daerah di bidang pemerintahan, otonomi daerah dan kerjasama; <br/>
        b. Penyiapan pengkoordinasian pelaksanaan tugas perangkat daerah di bidang pemerintahan, otonomi daerah dan kerjasama. <br/>
        c. Penyiapan pemantauan dan evaluasi pelaksanaan kebijakan di bidang pemeritahan, otonomi daerah dan kerjasama; <br/>
@@ -82,17 +129,19 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
   </Tabs> <br/><br/>
  <hr/>
 
-<Heading id="Bidang" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Bidang-Bidang</Heading>
+<Heading id="bidang" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Bidang-Bidang</Heading>
 <br/>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Bagian Kerjasama</Heading>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Pemerintahan</Heading>
-<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Otonomi Daerah</Heading>
+<a href="/profil-bidang-kerjasama" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Bagian Kerjasama <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
+<a href="/profil-bidang-pemerintahan" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Pemerintahan <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
+<a href="/profil-bidang-otonomi" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Otonomi Daerah <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
 <br/><br/><hr/>
 
-<Heading id="Struktur" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Struktur Organisasi</Heading>
+
+<!-- SECTION STRUKTUR ORGANISASI-->
+
+<Heading id="struktur" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Struktur Organisasi</Heading>
 <br/>
-  <!-- Awal -->
-  <div id="container_org">
+<div id="container_org">
     <ol class="static-org-chart">
         <li>
             <div class="staff_card">
@@ -101,90 +150,79 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
                 </div>
                 <div class="staff_info">
                     <div class="staff_image">
-                        <img src={ Karo } class="card-img-top" />
+                        <img src={kepalaBiro?.URL_PhotoProfile || (kepalaBiro ? (kepalaBiro.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM)} class="card-img-top" alt="Kepala Biro" />
                     </div>
                     <div class="staff_name_container">
-          Muliadi, S.ST
+                        {kepalaBiro?.Nama || 'Jabatan Kosong'}
                     </div>
                 </div>
             </div>
+
             <ol id="first">
-               
                 <li>
                     <div class="staff_card" style="width:280px !important;padding:6px;height:100px;"> 
-          <img src={ PicTU } style="width:60px;height:60px;border-radius:50%;" />
-        
-                        <div>Kasubag. Tata Usaha <br><label style="font-weight: 100;">Irma Fitayanti Baso, S.Kom</label></div>
+                        <img src={kabidTU?.URL_PhotoProfile || (kabidTU ? (kabidTU.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } style="width:60px;height:60px;border-radius:50%;" alt="Kasubag TU" />
+                        <div>Kepala Bidang Tata Usaha <br><label style="font-weight: 100;">{kabidTU?.Nama || 'Jabatan Kosong'}</label></div>
                     </div>
                 </li>
-              
-               
             </ol>
+
             <ol id="second">
                 <li>
                     <div class="staff_card">
-                        <div class="staff_title">
-                           Kabag. Kerjasama
-                        </div>
+                        <div class="staff_title">Kepala Bidang Kerjasama</div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src={ PicKabagKS } class="card-img-top" />
+                                <img src={kabidKS?.URL_PhotoProfile || (kabidKS ? (kabidKS.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } class="card-img-top" alt="Kabid Kerjasama" />
                             </div>
-                            <div class="staff_name_container">
-              Hidayat Agung Wibowo.S.STP
-                            </div>
+                            <div class="staff_name_container">{kabidKS?.Nama || 'Jabatan Kosong'}</div>
                         </div>
                     </div>
-                    <div><div>LM. Hartono Jaya, S.Ip.,MH</div></div>
-                    <div><div>Susi Hasmiati, S.STP. MM.</div></div>
-                    <div><div>Herlina Uddin, S.STP, M.Si</div></div>
+                    <div><div>{staffKS1?.Nama || 'Posisi Staff Kosong'}</div></div>
+                    <div><div>{staffKS2?.Nama || 'Posisi Staff Kosong'}</div></div>
+                    <div><div>{staffKS3?.Nama || 'Posisi Staff Kosong'}</div></div>
                 </li>
-             
+
                 <li>
                     <div class="staff_card">
-                        <div class="staff_title">
-                            Koordinator Pemerintahan
-                        </div>
+                        <div class="staff_title">Kepala Bidang Koordinator Pemerintahan</div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src={ PicProfileM } class="card-img-top" />
+                                <img src={koorPemerintahan?.URL_PhotoProfile || (koorPemerintahan ? (koorPemerintahan.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } class="card-img-top" alt="Koord. Pemerintahan"/>
                             </div>
-                            <div class="staff_name_container">               
-              Dudi Cahyanto, S.Sos
-                            </div>
+                            <div class="staff_name_container">{koorPemerintahan?.Nama || 'Jabatan Kosong'}</div>
                         </div>
                     </div>
-                    <div><div>Mila Karmila, S.IP.</div></div>
-                    <div><div>Sayidina Supahardi, S.Sos. M.Si.</div></div>
+                    <div><div>{staffPemerintahan1?.Nama || 'Posisi Staff Kosong'}</div></div>
+                    <div><div>{staffPemerintahan2?.Nama || 'Posisi Staff Kosong'}</div></div>
+                    <div><div>{staffPemerintahan3?.Nama || 'Posisi Staff Kosong'}</div></div>
                 </li>
+
                 <li>
                     <div class="staff_card">
-                        <div class="staff_title">
-                            Koordinator Otonomi Daerah
-                        </div>
+                        <div class="staff_title">Kepala Bidang Koordinator Otonomi Daerah</div>
                         <div class="staff_info">
                             <div class="staff_image">
-                                <img src={ PicProfileM } class="card-img-top" />
+                                <img src={koorOtda?.URL_PhotoProfile || (koorOtda ? (koorOtda.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } class="card-img-top" alt="Koord. Otda"/>
                             </div>
-                            <div class="staff_name_container">
-              Syahrin Ramadhan,S.STP.M.A
-                            </div>
+                            <div class="staff_name_container">{koorOtda?.Nama || 'Jabatan Kosong'}</div>
                         </div>
                     </div>
-                    <div><div>Resya Saputra, S.STP., M.Si.</div></div>
-                    <div><div>Risky Tahir, S.IP</div></div>
-                    <div><div>Irmawan, S.Sos</div></div>
+                     <div><div>{staffOtda1?.Nama || 'Posisi Staff Kosong'}</div></div>
+                    <div><div>{staffOtda2?.Nama || 'Posisi Staff Kosong'}</div></div>
+                    <div><div>{staffOtda3?.Nama || 'Posisi Staff Kosong'}</div></div>
                 </li>
             </ol>
         </li>
     </ol>
 </div>
+
 <br/>
-<!-- End -->
+<!-- END SECTION STRUKTUR ORGANISASI-->
 <br/><br/>
  <hr/>
 
- <Heading id="Alamat" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Alamat dan Kontak</Heading>
+ <Heading id="alamat" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Alamat dan Kontak</Heading>
  
  <div class="block grid-cols-12 gap-4 md:flex lg:flex">
   <div><BuildingSolid class="w-16 h-16 align-middle inline" /></div>
@@ -201,6 +239,125 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
 </div>
 
 <style>
+
+/** CSS HEADER */
+ /* Penataan Halaman Utama */
+  .page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-family);
+    padding: 0.5rem;
+    
+  }
+
+  /* Kartu Header */
+  .header-card {
+    background-color: var(--primary-bg);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    max-width: 1220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem;
+    background-color: #f7fafc;
+  }
+
+  /* Logo */
+  .logo {
+    width: 120px;
+    height: 120px;
+    background-color: var(--logo-bg);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-text);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Kontainer Judul */
+  .title-container {
+    text-align: center;
+    color: var(--primary-text);
+  }
+
+  .title-container h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .title-container h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin: 0.25rem 0 0 0;
+  }
+
+  /* Kontainer Tombol Navigasi */
+  .nav-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 920px; /* Sedikit lebih lebar dari header */
+  }
+
+  /* Tombol Navigasi */
+  .nav-button {
+    background-color: var(--primary-bg);
+    color: var(--primary-text);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    background: #f7fafc;
+  }
+
+  .nav-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background: #f1f9ff;
+ 
+  }
+
+  /* Penyesuaian untuk layar lebih kecil */
+  @media (max-width: 768px) {
+    .header-card {
+      padding: 1.5rem 1rem;
+    }
+    .logo {
+      width: 90px;
+      height: 90px;
+      font-size: 1.2rem;
+    }
+    .title-container h1 {
+      font-size: 1.25rem;
+    }
+    .title-container h2 {
+      font-size: 1rem;
+    }
+    .nav-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .nav-button {
+      width: 80%;
+    }
+  }
+
   /**CSS Organization  **/
 #container_org {
     padding: 10px;
@@ -525,4 +682,6 @@ ol.static-org-chart .staff_card + div {
 .staff_card:hover {
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
 }
+
+
 </style>

@@ -1,20 +1,26 @@
 <script>
   /** @type {{ data: import('./$types').PageData }} */
    import { onMount } from 'svelte';
-  export let data=[];
-  import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Popover, Modal, Radio, FloatingLabelInput, Input, Select, Label, Toast } from 'flowbite-svelte';
+  // export let data=[];
+
+  import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Popover, Modal, Radio, FloatingLabelInput, Input, Select, Label, Toast, Checkbox } from 'flowbite-svelte';
   import {  TrashBinOutline, CheckCircleSolid, FileLinesOutline, CheckPlusCircleOutline, EditOutline, BuildingSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
   import { storage, databases } from '$lib/appwrite';
   import { invalidateAll } from '$app/navigation';
   import { user } from '$lib/user';
-  import { addTableDataPegawai, UpdatePegawai, deleteTableData } from '$lib/dataPegawai.js';
+  import { addTableDataPegawai, UpdatePegawai, deleteTableData, getTableDataPegawai } from '$lib/dataPegawai.js';
   import { slide } from 'svelte/transition';
+
+  let allPosts = [];
+  let totalPosts = 0;
 
   let ModalAddDataPegawai = false;
   let ModalEditData = false;
   let ModalStatistic = false;
   let toastStatus = false;
   let counter = 6;
+
+  let tanggalLahirTidakDiketahui = false;
 
   let getnamaPegawai, getURLPhotoProfile, getNIPPegawai, getGolPegawai, getJabPegawai, getTanggalLahir, getJKPegawai, getPTPegawai, getjenisPegawai, getidData;
 
@@ -24,8 +30,11 @@
 
   let selectPendidikanTerakhir = '';
   let PendidikanTerakhir = [
+   { value: 'SD', name: 'SD' },
     { value: 'SLTP', name: 'SLTP' },
     { value: 'SLTA', name: 'SLTA' },
+    { value: 'Diploma I (D1)', name: 'Diploma I (D1)' },
+    { value: 'Diploma II (D2)', name: 'Diploma III (D2)' },
     { value: 'Diploma III (D3)', name: 'Diploma III (D3)' },
     { value: 'Sarjana (S1)', name: 'Sarjana (S1)' },
     { value: 'Pasca Sarjana (S2)', name: 'Pasca Sarjana (S2)' }
@@ -65,6 +74,31 @@
     { value: 'PENGADMINISTRASI PERKANTORAN', name: 'PENGADMINISTRASI PERKANTORAN' }
   ]; 
 
+  // DAFTAR BARU: 14 Jabatan Organisasi
+let selectJabatanOrganisasi = '';
+const semuaJabatanOrganisasi = [
+   
+    { value: 'TIDAK_DITAMPILKAN', name: '--- Tidak Ditampilkan ---' }, 
+    { value: 'Kepala Biro', name: 'Kepala Biro' },
+    { value: 'Kepala Bidang Tata Usaha', name: 'Kepala Bidang Tata Usaha' },
+    { value: 'Kepala Bidang Kerjasama', name: 'Kepala Bidang Kerjasama' },
+    { value: 'Kepala Bidang Koordinator Pemerintahan', name: 'Kepala Bidang Koordinator Pemerintahan' },
+    { value: 'Kepala Bidang Koordinator Otonomi Daerah', name: 'Kepala Bidang Koordinator Otonomi Daerah' },
+    { value: 'Staff I Bidang Kerjasama', name: 'Staff I Bidang Kerjasama' },
+    { value: 'Staff II Bidang Kerjasama', name: 'Staff II Bidang Kerjasama' },
+    { value: 'Staff III Bidang Kerjasama', name: 'Staff III Bidang Kerjasama' },
+    { value: 'Staff I Bidang Koordinator Pemerintahan', name: 'Staff I Bidang Koordinator Pemerintahan' },
+    { value: 'Staff II Bidang Koordinator Pemerintahan', name: 'Staff II Bidang Koordinator Pemerintahan' },
+    { value: 'Staff III Bidang Koordinator Pemerintahan', name: 'Staff III Bidang Koordinator Pemerintahan' },
+    { value: 'Staff I Bidang Koordinator Otonomi Daerah', name: 'Staff I Bidang Koordinator Otonomi Daerah' },
+    { value: 'Staff II Bidang Koordinator Otonomi Daerah', name: 'Staff II Bidang Koordinator Otonomi Daerah' },
+    { value: 'Staff III Bidang Koordinator Otonomi Daerah', name: 'Staff III Bidang Koordinator Otonomi Daerah' },
+];
+
+// VARIABEL BARU
+let jabatanOrganisasiTersedia = [];
+let getJabatanOrganisasi = '';
+
   // Items per page options
   let itemsPerPageOptions = [
     { value: 5, name: '5 per halaman' },
@@ -74,17 +108,25 @@
     { value: 100, name: '100 per halaman' }
   ];
 
+
   const addDatatoTable = async (e) => {
     e.preventDefault();
     const formEl = e.target;
-    // Masukkan Data ke table melalui dataPegawai
     const formData = new FormData(formEl);
-    await addTableDataPegawai(formData.get('namaPegawai'), formData.get('URLPhotoProfile'), formData.get('NIPPegawai'), formData.get('GolPegawai'), formData.get('JabPegawai'), formData.get('tanggalLahir'), formData.get('JKPegawai'), formData.get('PTPegawai'), formData.get('jenisPegawai'));
 
-    await invalidateAll();
+    // Cek checkbox dan tentukan nilai tanggal lahir
+    const tanggalLahirValue = tanggalLahirTidakDiketahui ? null : formData.get('tanggalLahir');
+    // Masukkan Data ke table melalui dataPegawai
+   
+    await addTableDataPegawai(formData.get('namaPegawai'), formData.get('URLPhotoProfile'), formData.get('NIPPegawai'), formData.get('GolPegawai'), formData.get('JabPegawai'), tanggalLahirValue, formData.get('JKPegawai'), formData.get('PTPegawai'), formData.get('jenisPegawai'), formData.get('JabOrganisasiPegawai'));
+
+    // GANTI invalidateAll() dengan refreshData()
+    await refreshData(); 
 
     // Reset form
     formEl.reset();
+    tanggalLahirTidakDiketahui = false; // <-- Reset juga status checkbox
+    selectJabatanOrganisasi = '';
     // Notification Toast and Time
     toastStatus = true;
     counter = 6;
@@ -113,13 +155,30 @@
       getnamaPegawai = response.Nama;
       getURLPhotoProfile = response.URL_PhotoProfile;
       getNIPPegawai = response.NIP;
-      getGolPegawai = response.Golongan;
-      getJabPegawai = response.Jabatan;
-      getTanggalLahir = response.Tanggal_lahir.slice(0, 10);
-      getJKPegawai = response.Jenis_Kelamin;
-      getPTPegawai = response.Pendidikan_Terakhir;
-      getjenisPegawai = response.Jenis_Pegawai;
+      // --- KOREKSI NAMA FIELD DI SINI ---
+        getGolPegawai = response.Golongan;
+        getJabPegawai = response.Jabatan;
+        getTanggalLahir = response.Tanggal_lahir ? response.Tanggal_lahir.slice(0, 10) : '';
+        getJKPegawai = response.Jenis_Kelamin;
+        getPTPegawai = response.Pendidikan_Terakhir;
+        getjenisPegawai = response.Jenis_Pegawai;
       getidData = response.$id;
+      getJabatanOrganisasi = response.jabatanOrganisasi;
+
+      // Ambil semua jabatan yang sudah diambil KECUALI jabatan milik pegawai ini
+        const jabatanSudahDiambilLainnya = allPosts
+            .map(p => p.jabatanOrganisasi)
+            .filter(Boolean)
+            .filter(j => j !== response.jabatanOrganisasi);
+
+        // MODIFIKASI  FILTER UNTUK EDIT
+        jabatanOrganisasiTersedia = semuaJabatanOrganisasi.filter(j => 
+            !jabatanSudahDiambilLainnya.includes(j.value) ||
+            j.value === response.jabatanOrganisasi ||
+            // MODIFIKASI PENGECEKAN VALUE
+            j.value === 'TIDAK_DITAMPILKAN' 
+        );
+
     }, function (error) {
       console.log(error); // Failure
       throw error;
@@ -130,8 +189,11 @@
     e.preventDefault();
     const formEl = e.target;
     const formData = new FormData(formEl);
-    await UpdatePegawai(formData.get('namaPegawai'), formData.get('URLPhotoProfile'), formData.get('NIPPegawai'), formData.get('GolPegawai'), formData.get('JabPegawai'), formData.get('tanggalLahir'), formData.get('JKPegawai'), formData.get('PTPegawai'), formData.get('jenisPegawai'), getidData);
-    await invalidateAll();
+   // Jika input tanggal kosong (bernilai ''), kirim null ke database.
+    const tanggalLahirValue = formData.get('tanggalLahir') === '' ? null : formData.get('tanggalLahir');
+
+    await UpdatePegawai(formData.get('namaPegawai'), formData.get('URLPhotoProfile'), formData.get('NIPPegawai'), formData.get('GolPegawai'), formData.get('JabPegawai'), tanggalLahirValue, formData.get('JKPegawai'), formData.get('PTPegawai'), formData.get('jenisPegawai'), formData.get('JabOrganisasiPegawai'), getidData);
+     await refreshData(); 
     // Reset form
     formEl.reset();
     // Notification Toast and Time
@@ -148,7 +210,12 @@
 
   const remove = async (id) => {
     await deleteTableData(id);
-    await invalidateAll();
+     await refreshData();
+     //  tambahan untuk pagination
+    if (postRangeLow >= totalPosts && currentPage > 1) {
+        currentPage = currentPage - 1;
+    }
+
     ConfirmDeleteModal = false;
   };
 
@@ -176,7 +243,7 @@
   let postsPerPage = 20;
 
   // Reactive statement untuk memastikan data selalu ter-update
-  $: allPosts = data.TableDataPegawai?.documents || [];
+  // $: allPosts = data.TableDataPegawai?.documents || [];
   $: totalPosts = allPosts.length;
   $: totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
@@ -195,37 +262,118 @@
   // Debug log untuk melihat jumlah data
   $: console.log('Total posts:', totalPosts, 'Current data:', allPosts.length);
 
+// Filter jabatan yang tersedia
+$: {
+    if (allPosts) {
+        const jabatanSudahDiambil = allPosts.map(p => p.jabatanOrganisasi).filter(Boolean);
+        
+        jabatanOrganisasiTersedia = semuaJabatanOrganisasi.filter(j => 
+            // MODIFIKASI PENGECEKAN VALUE
+            !jabatanSudahDiambil.includes(j.value) || j.value === 'TIDAK_DITAMPILKAN' 
+        );
+    }
+}
+
+
 
 // Chart Data Statistic 
-let TotalDataPegawai =  data.TableDataPegawai.total;
-let TotalPegawaiTetap =  data.TableDataSPegawai.total;
-let TotalPHT =  data.TableDataSHonorer.total;
-let TotalPegawaiPria =  data.TableDataPria.total;
-let TotalPegawaiWanita =  data.TableDataWanita.total;
-let TotalPegawaiSLTP =  data.TableDataSLTP.total;
-let TotalPegawaiSLTA =  data.TableDataSLTA.total;
-let TotalPegawaiDIII =  data.TableDataDIII.total;
-let TotalPegawaiSarjana =  data.TableDataSarjana.total;
-let TotalPegawaiPascaSarjana =  data.TableDataPascaSarjana.total;
-let TotalPegawaiGolIA =  data.TableDataGolIA.total;
-let TotalPegawaiGolIB =  data.TableDataGolIB.total;
-let TotalPegawaiGolIC =  data.TableDataGolIC.total;
-let TotalPegawaiGolID =  data.TableDataGolID.total;
-let TotalPegawaiGolIIA =  data.TableDataGolIIA.total;
-let TotalPegawaiGolIIB =  data.TableDataGolIIB.total;
-let TotalPegawaiGolIIC =  data.TableDataGolIIC.total;
-let TotalPegawaiGolIID =  data.TableDataGolIID.total;
-let TotalPegawaiGolIIIA =  data.TableDataGolIIIA.total;
-let TotalPegawaiGolIIIB =  data.TableDataGolIIIB.total;
-let TotalPegawaiGolIIIC =  data.TableDataGolIIIC.total;
-let TotalPegawaiGolIIID =  data.TableDataGolIIID.total;
-let TotalPegawaiGolIVA =  data.TableDataGolIVA.total;
-let TotalPegawaiGolIVB =  data.TableDataGolIVB.total;
-let TotalPegawaiGolIVC =  data.TableDataGolIVC.total;
-let TotalPegawaiGolIVD =  data.TableDataGolIVD.total;
-let TotalPegawaiGolIVE =  data.TableDataGolIVE.total;
+let TotalDataPegawai =  0;
+let TotalPegawaiTetap =  0;
+let TotalPHT =  0;
+let TotalPegawaiPria =  0;
+let TotalPegawaiWanita =  0;
+let TotalPegawaiSD = 0;
+let TotalPegawaiSLTP = 0;
+let TotalPegawaiSLTA =  0;
+let TotalPegawaiDI =  0;
+let TotalPegawaiDII =  0;
+let TotalPegawaiDIII =  0;
+let TotalPegawaiSarjana =  0;
+let TotalPegawaiPascaSarjana =  0;
+let TotalPegawaiGolIA =  0;
+let TotalPegawaiGolIB =  0;
+let TotalPegawaiGolIC = 0;
+let TotalPegawaiGolID =  0;
+let TotalPegawaiGolIIA =  0;
+let TotalPegawaiGolIIB =  0;
+let TotalPegawaiGolIIC =  0;
+let TotalPegawaiGolIID =  0;
+let TotalPegawaiGolIIIA = 0;
+let TotalPegawaiGolIIIB =  0;
+let TotalPegawaiGolIIIC =  0;
+let TotalPegawaiGolIIID =  0;
+let TotalPegawaiGolIVA =  0;
+let TotalPegawaiGolIVB =  0;
+let TotalPegawaiGolIVC =  0;
+let TotalPegawaiGolIVD = 0;
+let TotalPegawaiGolIVE =  0;
 
+// FUNGSI BARU UNTUK MENGHITUNG STATISTIK
+function updateStatistics(posts) {
+    TotalDataPegawai = posts.length;
+    TotalPegawaiTetap = posts.filter(p => p.Jenis_Pegawai === 'Pegawai').length;
+    TotalPHT = posts.filter(p => p.Jenis_Pegawai === 'PHT').length;
+    TotalPegawaiPria = posts.filter(p => p.Jenis_Kelamin === 'Pria').length;
+    TotalPegawaiWanita = posts.filter(p => p.Jenis_Kelamin === 'Wanita').length;
+    
+    // (Lanjutkan pola ini untuk semua kategori lainnya: Pendidikan dan Golongan)
+    TotalPegawaiSD = posts.filter(p => p.Pendidikan_Terakhir === 'SD').length;
+    TotalPegawaiSLTP = posts.filter(p => p.Pendidikan_Terakhir === 'SLTP').length;
+    TotalPegawaiSLTA = posts.filter(p => p.Pendidikan_Terakhir === 'SLTA').length;
+    TotalPegawaiDI = posts.filter(p => p.Pendidikan_Terakhir === 'Diploma III (D1)').length;
+    TotalPegawaiDII = posts.filter(p => p.Pendidikan_Terakhir === 'Diploma III (D2)').length;
+   TotalPegawaiDIII = posts.filter(p => p.Pendidikan_Terakhir === 'Diploma III (D3)').length;
+    TotalPegawaiSarjana = posts.filter(p => p.Pendidikan_Terakhir === 'Sarjana (S1)').length;
+    TotalPegawaiPascaSarjana = posts.filter(p => p.Pendidikan_Terakhir === 'Pasca Sarjana (S2)').length;
+    TotalPegawaiGolIA = posts.filter(p => p.Golongan === 'Golongan IA').length;
+    TotalPegawaiGolIB = posts.filter(p => p.Golongan === 'Golongan IB').length;
+    TotalPegawaiGolIC = posts.filter(p => p.Golongan === 'Golongan IC').length;
+    TotalPegawaiGolID = posts.filter(p => p.Golongan === 'Golongan ID').length;
+   TotalPegawaiGolIIA = posts.filter(p => p.Golongan === 'Golongan IIA').length;
+    TotalPegawaiGolIIB = posts.filter(p => p.Golongan === 'Golongan IIB').length;
+    TotalPegawaiGolIIC = posts.filter(p => p.Golongan === 'Golongan IIC').length;
+    TotalPegawaiGolIID= posts.filter(p => p.Golongan === 'Golongan IID').length;
+    TotalPegawaiGolIIIA = posts.filter(p => p.Golongan === 'Golongan IIIA').length;
+    TotalPegawaiGolIIIB = posts.filter(p => p.Golongan === 'Golongan IIIB').length;
+    TotalPegawaiGolIIIC = posts.filter(p => p.Golongan === 'Golongan IIIC').length;
+   TotalPegawaiGolIIID = posts.filter(p => p.Golongan === 'Golongan IIID').length;
+    TotalPegawaiGolIVA = posts.filter(p => p.Golongan === 'Golongan IVA').length;
+    TotalPegawaiGolIVB = posts.filter(p => p.Golongan === 'Golongan IVB').length;
+    TotalPegawaiGolIVC = posts.filter(p => p.Golongan === 'Golongan IVC').length;
+    TotalPegawaiGolIVD = posts.filter(p => p.Golongan === 'Golongan IVD').length;
+    TotalPegawaiGolIVE = posts.filter(p => p.Golongan === 'Golongan IVE').length;
+    
+    // Setelah menghitung, update data untuk chart
+    genderData[0].count = TotalPegawaiPria;
+    genderData[1].count = TotalPegawaiWanita;
+    // Lanjutkan untuk educationData dan golonganData
+    educationData[0].count = TotalPegawaiSD;
+    educationData[1].count = TotalPegawaiSLTP;
+    educationData[2].count = TotalPegawaiSLTA;
+    educationData[3].count = TotalPegawaiDI;
+    educationData[4].count = TotalPegawaiDII;
+    educationData[5].count = TotalPegawaiDIII;
+    educationData[6].count = TotalPegawaiSarjana;
+    educationData[7].count = TotalPegawaiPascaSarjana;
 
+    golonganData[0].count = TotalPegawaiGolIA;
+    golonganData[1].count = TotalPegawaiGolIB;
+    golonganData[2].count = TotalPegawaiGolIC;
+    golonganData[3].count =  TotalPegawaiGolID;
+    golonganData[4].count = TotalPegawaiGolIIA;
+    golonganData[5].count =  TotalPegawaiGolIIB;
+    golonganData[6].count = TotalPegawaiGolIIC;
+    golonganData[7].count = TotalPegawaiGolIID;
+    golonganData[8].count = TotalPegawaiGolIIIA;
+    golonganData[9].count = TotalPegawaiGolIIIB;
+    golonganData[10].count = TotalPegawaiGolIIIC;
+    golonganData[11].count = TotalPegawaiGolIIID;
+    golonganData[12].count = TotalPegawaiGolIVA;
+    golonganData[13].count = TotalPegawaiGolIVB;
+    golonganData[14].count = TotalPegawaiGolIVC;
+     golonganData[15].count =  TotalPegawaiGolIVD;
+      golonganData[16].count = TotalPegawaiGolIVE;
+}
 
 let genderChartCanvas;
 let educationChartCanvas;
@@ -239,8 +387,11 @@ const genderData = [
 
 // Data pendidikan terakhir
 const educationData = [
+   { education: 'SD', count: TotalPegawaiSD },
   { education: 'SLTP', count: TotalPegawaiSLTP },
   { education: 'SLTA', count: TotalPegawaiSLTA },
+  { education: 'Diploma I (DI)', count: TotalPegawaiDI },
+  { education: 'Diploma II (DII)', count: TotalPegawaiDII },
   { education: 'Diploma III (DIII)', count: TotalPegawaiDIII },
   { education: 'Sarjana (S1)', count: TotalPegawaiSarjana },
   { education: 'Pasca Sarjana (S2)', count: TotalPegawaiPascaSarjana }
@@ -267,10 +418,27 @@ const golonganData = [
   { golongan: 'Gol IVE', count: TotalPegawaiGolIVE }
 ];
 
-// Hitung total dan persentase
-const genderTotal = genderData.reduce((sum, item) => sum + item.count, 0);
-const educationTotal = educationData.reduce((sum, item) => sum + item.count, 0);
-const golonganTotal = golonganData.reduce((sum, item) => sum + item.count, 0);
+  async function refreshData() {
+    try {
+        const pegawaiData = await getTableDataPegawai();
+        allPosts = pegawaiData.documents || [];
+        totalPosts = allPosts.length;
+
+        // PANGGIL FUNGSI UPDATE STATISTIK DI SINI
+        updateStatistics(allPosts);
+        
+    } catch (error) {
+        console.error("Gagal memuat data pegawai:", error);
+        allPosts = [];
+        totalPosts = 0;
+    }
+}
+
+onMount(() => {
+    refreshData();
+});
+
+
 
 function getPercentage(count, total) {
   return ((count / total) * 100).toFixed(1);
@@ -279,6 +447,12 @@ function getPercentage(count, total) {
 // Fungsi untuk membuat pie chart jenis kelamin
 function createGenderChart() {
   if (!genderChartCanvas) return;
+
+  const genderTotal = genderData.reduce((sum, item) => sum + item.count, 0);
+
+  // Jika total 0, jangan gambar chart untuk menghindari error
+    if (genderTotal === 0) return; 
+
   
   const ctx = genderChartCanvas.getContext('2d');
   const centerX = genderChartCanvas.width / 2;
@@ -334,6 +508,9 @@ function createGenderChart() {
 // Fungsi untuk membuat bar chart pendidikan
 function createEducationChart() {
   if (!educationChartCanvas) return;
+
+   const educationTotal = educationData.reduce((sum, item) => sum + item.count, 0);
+    if (educationTotal === 0) return;
   
   const ctx = educationChartCanvas.getContext('2d');
   const width = educationChartCanvas.width;
@@ -416,6 +593,9 @@ function createEducationChart() {
 // Fungsi untuk membuat bar chart golongan
 function createGolonganChart() {
   if (!golonganChartCanvas) return;
+
+    const golonganTotal = golonganData.reduce((sum, item) => sum + item.count, 0);
+    if (golonganTotal === 0) return;
   
   const ctx = golonganChartCanvas.getContext('2d');
   const width = golonganChartCanvas.width;
@@ -560,7 +740,7 @@ onMount(() => {
      {/if}
      
      <!-- Modal Add Data Pegawai -->
-     <Modal title="Form Data Pegawai Baru" bind:open={ModalAddDataPegawai} autoclose={false}>
+     <Modal size="lg" title="Form Data Pegawai Baru" bind:open={ModalAddDataPegawai} autoclose={false}>
         <form class="space-y-6" on:submit={addDatatoTable} >
          <h2 style="font-weight:600;margin-bottom:8px;color:#5850ec;">Silahkan mengisi Data Pegawai Baru pada Form di bawah berikut:</h2>
          <FloatingLabelInput style="filled" id="namaPegawai" name="namaPegawai" type="text">
@@ -569,7 +749,7 @@ onMount(() => {
         <div class="grid grid-cols-8 gap-4" style=" background: white;border-radius: 12px;">
           <div style="font-size:54px;margin-right:2px; margin-top:-14px;">🖼️</div>
           <div class="col-span-7"> <FloatingLabelInput style="filled" id="URLPhotoProfile" name="URLPhotoProfile" type="text">
-            Enter URL Photo Profile: </FloatingLabelInput>  </div>
+            Paste URL Gambar dari Browse Photo Pegawai </FloatingLabelInput>  </div>
          </div>
         <FloatingLabelInput style="filled" id="NIPPegawai" name="NIPPegawai" type="text">
           NIP Pegawai:
@@ -580,10 +760,18 @@ onMount(() => {
          <Label>Jabatan:
          <Select class="mt-2" items={Jabatan} name="JabPegawai" bind:value={selectJabatan} />
          </Label>
+         <Label>Jabatan Struktur Organisasi:
+        <Select class="mt-2" items={jabatanOrganisasiTersedia} name="JabOrganisasiPegawai" bind:value={selectJabatanOrganisasi} />
+        </Label>
         <div class="mb-6">
           <label for="tanggalLahir" class="text-sm">Tanggal Lahir Pegawai:</label>
-          <Input style="margin-top:3px;" type="date" id="tanggalLahir" placeholder="Tanggal Lahir" name="tanggalLahir" />
-        </div><br/>
+          <Input style="margin-top:3px;" type="date" id="tanggalLahir" placeholder="Tanggal Lahir" name="tanggalLahir" disabled={tanggalLahirTidakDiketahui} />
+        </div>
+        <div class="flex items-center gap-2 mb-4"><Checkbox bind:checked={tanggalLahirTidakDiketahui}>
+        Tanggal lahir tidak diketahui
+        </Checkbox>
+      </div>
+        <br/>
         <label class="text-sm">Jenis Kelamin:</label>
           <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
           <li class="w-full"><Radio name="JKPegawai" class="p-3" value="Pria">Pria</Radio></li>
@@ -612,7 +800,7 @@ onMount(() => {
         </Modal>
         
     <!-- Modal Edit Data Pegawai -->
-    <Modal title="Form Pengeditan Data Pegawai" bind:open={ModalEditData} autoclose={false}>
+    <Modal size="lg" title="Form Pengeditan Data Pegawai" bind:open={ModalEditData} autoclose={false}>
       <form class="space-y-6" on:submit={updateDataPegawai}>
        <FloatingLabelInput style="filled" id="namaPegawai" bind:value={getnamaPegawai} name="namaPegawai" type="text">
        Nama Pegawai:
@@ -620,7 +808,7 @@ onMount(() => {
        <div class="grid grid-cols-8 gap-4" style="background: white;border-radius: 12px;">
         <div style="font-size:54px;margin-right:2px; margin-top:-14px;">🖼️</div>
         <div class="col-span-7"> <FloatingLabelInput style="filled" id="URLPhotoProfile" bind:value={getURLPhotoProfile} name="URLPhotoProfile" type="text">
-          Enter URL Photo Profile: </FloatingLabelInput>  </div>
+          Paste URL Gambar dari Browse Photo Pegawai </FloatingLabelInput>  </div>
         </div>
        <FloatingLabelInput style="filled" id="NIPPegawai" bind:value={getNIPPegawai} name="NIPPegawai" type="text">
        NIP Pegawai:
@@ -630,6 +818,9 @@ onMount(() => {
        </Label>  
         <Label>Jabatan:
         <Select class="mt-2" items={Jabatan} name="JabPegawai" bind:value={getJabPegawai} />
+        </Label>
+        <Label>Jabatan Struktur Organisasi:
+        <Select class="mt-2" items={jabatanOrganisasiTersedia} name="JabOrganisasiPegawai" bind:value={getJabatanOrganisasi} />
         </Label>
         <div class="mb-6">
         <label for="tanggalLahir" class="text-sm">Tanggal Lahir Pegawai:</label>
@@ -666,7 +857,7 @@ onMount(() => {
     {#if totalPosts === 0}
      <p>Saat ini Tidak Terdapat Data Pegawai Pada Tabel</p>
      {:else}
-     <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Tabel (Total dari Database: {data.TableDataPegawai?.total || 0}) / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Pegawai</strong></p>
+    <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Tabel / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Pegawai</strong></p>
      {/if}
      <br/>
 
@@ -703,12 +894,24 @@ onMount(() => {
            </div>
                <div style="margin-top: 20px;display: flex;flex-direction: row;gap: 8px;font-size:14px;">
 		               <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			             <span class="stat-label" style="font-weight: 600;color: #374151;">SD:</span>
+			             <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiSD } </span>
+		               </div>
+                  <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
 			             <span class="stat-label" style="font-weight: 600;color: #374151;">SLTP:</span>
 			             <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiSLTP } </span>
 		               </div>
 		               <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
 			              <span class="stat-label" style="font-weight: 600;color: #374151;">SLTA:</span>
 			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiSLTA } </span>
+		                </div>
+                    <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">Diploma I (DI):</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiDI } </span>
+		                </div>
+                    <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
+			              <span class="stat-label" style="font-weight: 600;color: #374151;">Diploma II (DII):</span>
+			              <span class="stat-value" style="font-weight: bold;color: #1f2937;">{ TotalPegawaiDII } </span>
 		                </div>
                     <div class="stat-item" style="display: flex;justify-content: space-between;align-items: center;padding: 10px 15px;background: #f8fafc;border-radius: 8px;border-left: 4px solid #3b82f6;">
 			              <span class="stat-label" style="font-weight: 600;color: #374151;">Diploma III (DIII):</span>
@@ -822,7 +1025,7 @@ onMount(() => {
                   <div style="width:160px;">
                       <Avatar src={cetakTabel.URL_PhotoProfile || undefined } class="align-middle" border rounded size="lg" /> 
                       <br/>{cetakTabel.Nama} 
-                      <br/><br/><b>Tanggal Lahir:</b> {cetakTabel.Tanggal_lahir.slice(0, 10)}
+                     <br/><br/><b>Tanggal Lahir:</b> {cetakTabel.Tanggal_lahir ? cetakTabel.Tanggal_lahir.slice(0, 10) : 'Tidak diketahui'}
                       <br/><br/><b>Gender:</b><br/>{cetakTabel.Jenis_Kelamin}
                   </div> 
               </TableBodyCell>
@@ -830,7 +1033,13 @@ onMount(() => {
                   <div style="width:180px;">
                       <b>NIP:</b><br/>{cetakTabel.NIP}<br/>
                       <br/><b>Golongan:</b><br/>{cetakTabel.Golongan}<br/>
-                      <br/><b>Jabatan:</b><br/>{cetakTabel.Jabatan}
+                      <br/><b>Jabatan:</b><br/>{cetakTabel.Jabatan}<br/>
+                       <br/><b>Jabatan Struktur Organisasi:</b><br/>
+                              {#if cetakTabel.jabatanOrganisasi === 'TIDAK_DITAMPILKAN'}
+                              Tidak Ditampilkan
+                               {:else}
+                               {cetakTabel.jabatanOrganisasi || 'Belum Diatur'}
+                              {/if}
                       <br/><br/><b>Pendidikan Terakhir:</b><br/>{cetakTabel.Pendidikan_Terakhir}  
                       <br/><br/><b>Status Pegawai:</b><br/>{cetakTabel.Jenis_Pegawai}
                   </div>

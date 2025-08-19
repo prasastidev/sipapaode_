@@ -26,7 +26,9 @@
 	"type": "module",
 	"dependencies": {
 		"appwrite": "^16.0.2",
+		"chart.js": "^4.5.0",
 		"node-appwrite": "^15.0.0",
+		"svelte-chartjs": "^3.1.5",
 		"uuid": "^11.0.3"
 	}
 }

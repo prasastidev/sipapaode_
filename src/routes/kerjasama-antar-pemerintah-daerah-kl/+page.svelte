@@ -357,8 +357,6 @@ let steps = ['Langkah 1', 'Langkah 2'];
 	<meta name="description" content="Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/> 
-
 <Modal title="Prosedure Kerjasama" bind:open={ModalProsedure} size="md" autoclose={false}>
   <div class="procedure">
     <h1>{procedure.title}</h1>

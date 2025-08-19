@@ -19,7 +19,7 @@
 	<meta name="description" content="Login Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/><br/><br/>
+<br/>
 
 
 <div class="flex container justify-center mb-16">

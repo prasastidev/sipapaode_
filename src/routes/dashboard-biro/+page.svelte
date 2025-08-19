@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     import { Heading, Card, Listgroup, Avatar, Button, Modal, FloatingLabelInput, Toast, Badge } from 'flowbite-svelte';
-    import { ArrowRightToBracketOutline, UserHeadsetOutline, CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid } from 'flowbite-svelte-icons';
+    import { ArrowRightToBracketOutline, UserHeadsetOutline, CheckCircleSolid, UsersSolid, LandmarkSolid, BuildingSolid, ObjectsColumnSolid, HammerSolid } from 'flowbite-svelte-icons';
     import { user } from '$lib/user';
 
     let ModalGantiPassword = false;
@@ -101,8 +101,8 @@ function resetForm() {
 	<meta name="description" content="Dashboard Biro" />
 </svelte:head>
 
-<div>
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Dashboard</Heading>
+   <div>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Hai {$user.name}, Welcome di Dashboard Anda </Heading>
     <br/>
 
     <Modal title="Update Password" bind:open={ModalGantiPassword} autoclose={false} on:close={resetForm}>
@@ -135,15 +135,13 @@ function resetForm() {
           <Button color="alternative" on:click={resetForm} >Batal</Button>
         </svelte:fragment>
       </Modal>
- 
-     Hai {$user.name}, Selamat Datang di Dashboard Anda .... <br/><br/>
 
      <div class="flex justify-between items-center mb-4">
       <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Informasi Profile Anda</h5>
     </div>
-     <Card padding="xl" size="xl" class="hover:bg-blue-100">
+     <Card padding="md" size="xl">
         <!-- <Listgroup class="border-0 hover:bg-blue-100"> -->
-          <div class="flex items-center space-x-4 rtl:space-x-reverse">
+          <div class="flex items-center space-x-4 rtl:space-x-reverse mb-4">
             <Avatar class="border flex-shrink-0 w-14 h-14" size="none" />
             <div class="flex-1 min-w-0">
               <p class="text-xl font-medium text-gray-900 truncate dark:text-white">
@@ -161,7 +159,7 @@ function resetForm() {
                     <CheckCircleSolid class="w-5 h-5" style="color:green;" />
                 </span>
             </div>
-          </div><br/>
+          </div><hr/>
           <div class="grid grid-cols-3 gap-4">
            
             <div class="flex col-span-2 mt-4 gap-4">

@@ -4,17 +4,17 @@ export const prerender = true;
 export const ssr = true;
 export const csr = true;
 
+import { getDataPhotoPemerintahan } from '$lib/dataBucketGambarPemerintahan';
 import { getTableDataPegawai } from '$lib/dataPegawai.js';
+import { getDataProfileBidang } from '$lib/updateProfileBidang';
 
-/** @type {import('./$types').PageServerLoad} */
+
 export async function load() {
-    // 1. Ambil semua data pegawai dari database
+     // 1. Ambil semua data pegawai dari database
     const allPegawaiData = await getTableDataPegawai();
     const documents = allPegawaiData.documents || [];
 
     // 2. Proses data agar mudah diakses berdasarkan jabatanOrganisasi
-    // objek di mana 'key' adalah nama jabatan 
-    // dan 'value' adalah data pegawai yang memegang jabatan tersebut.
     const pegawaiByJabatan = {};
     for (const pegawai of documents) {
         if (pegawai.jabatanOrganisasi) {
@@ -22,8 +22,16 @@ export async function load() {
         }
     }
 
-    // 3. Kirim data yang sudah diproses ke komponen +page.svelte
-    return {
-        pegawaiByJabatan
-    };
+	return {
+        
+        DatasGambarPemerintahan : await getDataPhotoPemerintahan(),
+        pegawaiByJabatan,
+         DatasProfileBidang : await getDataProfileBidang()
+	};
 }
+
+
+
+
+
+

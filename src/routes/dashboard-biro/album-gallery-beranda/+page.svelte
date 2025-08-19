@@ -1,5 +1,5 @@
 <script>
-    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, FloatingLabelInput, Textarea, Modal } from 'flowbite-svelte';
+    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, FloatingLabelInput, Input, Textarea, Modal } from 'flowbite-svelte';
     import { UploadOutline, ZoomInOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';  
     import { addGalleryAlbumDepan, deleteGalleryAlbumDepan } from '$lib/crudGalleryDokumentasi.js';
     import { storage, ID } from '$lib/appwrite';
@@ -7,7 +7,6 @@
     import { sineOut } from 'svelte/easing';
     import { onMount } from 'svelte';
 
-    import ScreenAlbumGalery from '$lib/images/ScreenAlbumGallery.jpg';
    
     let isUploadOpen = false;
     let visibleProgresBar = false;
@@ -18,6 +17,9 @@
     let selectedFileId = null;
     let isLoading = true;
     let isDeleting = false;
+
+    let descriptionText = ''; // Variabel untuk menyimpan teks dari textarea
+    const maxChars = 400; // Definisikan batas maksimal karakter
    
     // Accept data from parent component
     export let data = [];
@@ -99,8 +101,10 @@
             
             // Simpan dengan file ID yang sama dengan storage
             await addGalleryAlbumDepan(
+                formData.get('Title'), 
                 formData.get('Location'), 
                 formData.get('Description'), 
+                formData.get('TanggalKegiatan'), 
                 URL, 
                 customImageId // Gunakan customImageId sebagai file ID
             );
@@ -238,37 +242,36 @@
 </script>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold md:text-3xl lg:text-4xl">Dokumentasi Album Gallery Pada Halaman Beranda</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl">Halaman Penerbitan TimeLine Journal Kegiatan Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
     <br/>
-    <div class="modern-box">
-        <div class="contentbox">
-            <label>Berikut dibawah ini adalah halaman untuk melakukan melakukan Update pada Album Gallery Halaman Beranda. Silahkan tekan Tombol <span style="border-radius:10px;padding:4px 8px;color:white;background-color:#1f2937;">Buka Upload Photo</span> dibawah untuk melakukan Penambahan Gambar ataupun Photo Kegiatan.</label>
-        </div>
-    </div>
-    <br/> <br/>
-    Contoh Tampilan pada halaman Beranda:<br/> <br/>
-    <img src={ScreenAlbumGalery} alt="screen info" style="width:100%;height:100%;border-radius:16px;" />
-    <br/><br/>
+    <br/>
   
-    <span style="color:blue;font-size:16px;">Silahkan Tekan Tombol Buka Upload Photo di bawah untuk membuka mengupload Gambar atau Photo:</span>
+    <span style="color:#5a86af;font-size:16px;">Silahkan Tekan Tombol Buka Upload Photo di bawah untuk membuka mengupload Gambar atau Photo:</span>
     <br/> <br/> 
     <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>
-        {!isUploadOpen ? 'Buka Upload Photo' : 'Tutup Upload Photo'}
+        {!isUploadOpen ? 'Buka Formulir Upload Journal Kegiatan' : 'Tutup Formulir Upload Journal Kegiatan'}
     </Button>
     <br/><br/>
   
     {#if isUploadOpen}
         <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
             <form class="space-y-6" on:submit={addDataFormtoTable}>
-                <h3 style="font-weight: 600;font-size: 18px;">Silahkan Memasukan Gambar/Photo, menyertakan lokasi photo serta deskripsi.</h3>
-                <Label class="text-base" style="margin-bottom: -20px;">Upload file Photo / Gambar (Type File: JPG, JPEG or PNG)</Label>
+                <h3 style="font-weight: 600;font-size: 18px;">Silahkan Memasukan Kegiatan yang Akan di Update di Timeline Journal.</h3>
+                <FloatingLabelInput style="filled" id="Title" name="Title" type="text" required>Judul Kegiatan* :</FloatingLabelInput>  
+                <Label class="text-base" style="margin-bottom: -20px;">Upload Dokumentasi Photo Kegiatan (Type File: JPG, JPEG or PNG)</Label>
                 <Fileupload class="mb-1" id="uploadGalleryDoc" accept=".png, .jpg, .jpeg, .webp" required />
                 <Label class="pb-2 mb-1" style="margin-top: 10px;">(Max File Size: 10 MB)</Label>
-                <FloatingLabelInput style="filled" id="Location" name="Location" type="text" required>Lokasi Photo* :</FloatingLabelInput>  
-                <Textarea id="Description" placeholder="Deskripsi Photo*" rows="2" name="Description" required />  
+                <Textarea id="Description" maxlength={maxChars} placeholder="Deskripsi Kegiatan*" rows="2" name="Description" bind:value={descriptionText} required />  
+                <label class="text-sm text-left" class:text-red-600={descriptionText.length >= maxChars}>
+                {descriptionText.length} / {maxChars}</label>
+                <div class="mb-6">
+                <label for="TanggalKegiatan" class="text-sm">Tanggal Kegiatan:</label>
+                <Input style="margin-top:3px;" type="date" id="TanggalKegiatan" placeholder="Tanggal Kegiatan" name="TanggalKegiatan" />
+                </div>
+                <FloatingLabelInput style="filled" id="Location" name="Location" type="text" required>Lokasi Kegiatan* :</FloatingLabelInput>  
                 <ButtonGroup class="*:!ring-primary-700">
                     <Button outline color="dark" type="submit" value="submit">
-                        <UploadOutline class="w-4 h-4 me-2" />Simpan Photo
+                        <UploadOutline class="w-4 h-4 me-2" />Upload Kegiatan ke Timeline Journal
                     </Button>
                 </ButtonGroup>
             </form> 
@@ -439,60 +442,5 @@
         color: white;
     }
 
-    .modern-box {
-        position: relative;
-        display: inline-block;
-        padding: 12px;
-    }
-    
-    .modern-box::before,
-    .modern-box::after,
-    .contentbox::before,
-    .contentbox::after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border: 4px solid #c7c7e7;
-    }
-    
-    .modern-box::before {
-        top: 0;
-        left: 0;
-        border-right: none;
-        border-bottom: none;
-    }
-    
-    .modern-box::after {
-        top: 0;
-        right: 0;
-        border-left: none;
-        border-bottom: none;
-    }
   
-    .contentbox {
-        background: white;
-        padding: 6px 12px;
-        border-radius: 8px;
-    }
-    
-    .contentbox::before {
-        bottom: 0;
-        left: 0;
-        border-right: none;
-        border-top: none;
-    }
-    
-    .contentbox::after {
-        bottom: 0;
-        right: 0;
-        border-left: none;
-        border-top: none;
-    }
-    
-    .contentbox label {
-        font-size: 0.94rem;
-        margin: 0;
-        padding: 0;
-    }
 </style>

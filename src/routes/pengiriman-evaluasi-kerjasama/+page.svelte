@@ -33,8 +33,6 @@
 	<meta name="description" content="Laporan Pengiriman Evaluasi Kerjasama - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/>
-
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Laporan Pengiriman Evaluasi Kerjasama</Heading>
 <br/><br/>

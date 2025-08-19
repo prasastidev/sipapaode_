@@ -1,21 +1,95 @@
 <script>
-    /** @type {import('./$types').PageData} */
-    
-    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, Modal  } from 'flowbite-svelte';
-    import { UploadOutline, ZoomInOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+ /** @type {import('./$types').PageData} */
+    export let data = [];
+    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, Modal, Textarea, Toast, Alert   } from 'flowbite-svelte';
+    import { UploadOutline, ZoomInOutline, TrashBinOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline } from 'flowbite-svelte-icons';
     import { storage, ID } from '$lib/appwrite';
-    import { user } from '$lib/user';
     import { invalidateAll } from '$app/navigation';
     import { sineOut } from 'svelte/easing';
-  
+    import { user } from '$lib/user';
+    import { slide } from 'svelte/transition';
+    import { UpdateDataProfileBidang } from '$lib/updateProfileBidang.js';
    
     let isUploadOpen = false;
     let visibleProgresBar = false;
-    export let data = [];
-     let progress = '0';
+    
+    let progress = '0';
     let ConfirmDeleteModal = false;
     let selectedId = null;
 
+   
+   // Modal validasi upload gambar jika bukan type file gambar
+   let invalidFileModal = false; // Untuk membuka/menutup modal error
+   let modalErrorMessage = ''; // Untuk menyimpan pesan error
+
+    let toastStatus = false;
+    let counter = 6;
+
+    // Sesuaikan nama properti di sini
+$: profilePemerintahan = data.DatasProfileBidang?.documents.find(
+    (profil) => profil.namaBidang === "Koordinator Otonomi Daerah"
+);
+
+    let ModalUpdateProfile = false;
+   // Deklarasi variabel itanpa nilai awal
+    let tentangText = '';
+    let tupoksiText = '';
+    let programPrioritasText = '';
+
+    const maxCharsTentang = 1000; // Definisikan batas maksimal karakter
+    const maxCharsTupoksi = 12000;
+    const maxCharsprogramPrioritas = 12000;
+
+     // Fungsi baru untuk membuka modal dan mengisi form
+function openUpdateModal() {
+  if (profilePemerintahan) {
+    // Isi variabel form dengan data dari profilePemerintahan
+    tentangText = profilePemerintahan.tentang;
+    tupoksiText = profilePemerintahan.tupoksi;
+    programPrioritasText = profilePemerintahan.programPrioritas;
+    
+    // Buka modal
+    ModalUpdateProfile = true;
+  } else {
+    alert("Data profil tidak ditemukan, tidak bisa melakukan update.");
+  }
+}
+
+const updateDataProfile = async (e) => {
+  e.preventDefault();
+
+  if (!profilePemerintahan) {
+      alert("Error: Data profil tidak ditemukan.");
+      return;
+  }
+  
+  // Ambil ID dokumen dari profilePemerintahan
+  const docId = profilePemerintahan.$id;
+
+  // Panggil fungsi update dengan data dari variabel dan docId yang benar
+  await UpdateDataProfileBidang(tentangText, tupoksiText, programPrioritasText, docId);
+  
+  // Refresh data di halaman
+  invalidateAll();
+
+  // Notification Toast and Time
+  toastStatus = true;
+  counter = 6;
+  timeout();
+};
+
+function timeout() {
+    if (--counter > 0) return setTimeout(timeout, 1000);
+    toastStatus = false;
+    ModalUpdateProfile = false;
+  } 
+
+  function scrollTo(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 
 function showimage(id) {
     const result = storage.getFileView('67920a70002df0712bce', id);
@@ -24,17 +98,47 @@ function showimage(id) {
 
  // Masukkan file ke Storage Bucket
  const UploadImage = async (e) => {
-   visibleProgresBar = true;
     e.preventDefault();
-		const formEl = e.target;
-    await storage.createFile('67920a70002df0712bce', ID.unique(), document.getElementById('UploadImageOtonomi').files[0]); 
-    progress = 100;
-    // Reset form
-		formEl.reset();   
-    await invalidateAll();
-    progress = 0;
-    visibleProgresBar = false;
- }
+    const formEl = e.target;
+    const fileInput = document.getElementById('UploadImageOtonomi');
+    const file = fileInput.files[0];
+
+    // Jika tidak ada file yang dipilih, hentikan fungsi
+    if (!file) {
+        modalErrorMessage = 'Anda belum memilih file untuk diunggah.';
+        invalidFileModal = true;
+        return;
+    }
+
+    // --- VALIDASI TIPE FILE DIMULAI DI SINI ---
+    const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+
+    if (!allowedExtensions.includes(fileExtension)) {
+        // Jika ekstensi file tidak ada dalam daftar yang diizinkan
+        modalErrorMessage = 'Upload gagal! Format file harus JPG, JPEG, PNG, GIF, atau WEBP.';
+        invalidFileModal = true; // Tampilkan modal error
+        formEl.reset(); // Bersihkan input file
+        return; // Hentikan eksekusi fungsi agar tidak mengupload
+    }
+    // --- VALIDASI SELESAI ---
+
+    // Jika validasi berhasil, lanjutkan proses upload
+    visibleProgresBar = true;
+    try {
+        await storage.createFile('67920a70002df0712bce', ID.unique(), file);
+        progress = 100;
+        formEl.reset();
+        await invalidateAll();
+    } catch (error) {
+        console.error("Upload Error:", error);
+        modalErrorMessage = 'Terjadi kesalahan saat mengunggah file. Silakan coba lagi.';
+        invalidFileModal = true;
+    } finally {
+        progress = 0;
+        visibleProgresBar = false;
+    }
+};
  
  function openDeleteModal(id) {
     selectedId = id;
@@ -64,59 +168,139 @@ function showimage(id) {
   </script>
   
   <svelte:head>
-  <title>Info User</title>
-  <meta name="description" content="Info User" />
+  <title>Gallery Photo Koordinator Otonomi Daerah</title>
+  <meta name="description" content="Gallery Photo - Koordinator Otonomi Daerah" />
   </svelte:head>
 
-  
-  <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Photo Dokumentasi - Koordinator Otonomi Daerah</Heading>
-    <br/>
-    <div class="modern-box">
-      <div class="contentbox">
-        <label>Silakan klik tombol "Buka Upload Photo" untuk mengunggah foto atau gambar dokumentasi ke dalam galeri Koordinator Otonomi Daerah. Dokumen foto yang diunggah dapat diakses oleh publik melalui <a href="/gallery" style="text-decoration:underline;color:blue;">halaman berikut.</a>
-        </label>
-      </div>
-    </div>
-    <br/><br/>
-    {#if $user.prefs['Role'] === "PIC Otonomi"}
-    <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>{!isUploadOpen ? 'Buka Upload Photo' : 'Tutup Upload Photo'} </Button> <br/><br/>
+ <div class="container">
+  <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profile dan Photo Gallery - Bidang Koordinator Otonomi Daerah</Heading>
+ <br/>
+
+ <div class="flex justify-start space-x-4">
+    <button on:click={() => scrollTo('updateProfile')} class="px-5 py-2.5 text-sm font-medium text-sky-700 bg-slate-100 border border-sky-700 rounded-lg focus:ring-4 focus:ring-slate-300 focus:outline-none transition-all duration-200 hover:shadow-[3px_3px_rgb(90,134,175)]">📝 Update Profile</button>
+    <button on:click={() => scrollTo('uploadPhoto')} type="button" class="px-5 py-2.5 text-sm font-medium text-sky-700 bg-slate-100 border border-sky-700 rounded-lg focus:ring-4 focus:ring-slate-300 focus:outline-none transition-all duration-200 hover:shadow-[3px_3px_rgb(90,134,175)]">🖼️ Upload Photo Gallery</button>
+  </div> 
+  <br/>
+
+ {#if $user.prefs['Role'] !== "PIC Otonomi"}
+  <Alert color="yellow">
+  <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Otonomi Daerah</span>
+  </Alert>
+  <br/>
+  {/if}
+
+     <!-- Modal Update Profile Bidang -->
+     <Modal size="lg" title="Update Profile Bidang Koordinator Otonomi Daerah" bind:open={ModalUpdateProfile} autoclose={false}>
+        <form class="space-y-6" on:submit|preventDefault={updateDataProfile} >
+        
+        <h2 style="font-size: 20px;font-weight: 600;margin-bottom: -20px;">Tentang:</h2>
+         <Textarea id="Tentang" maxlength={maxCharsTentang} placeholder="Tentang*" rows="2" name="Tentang" bind:value={tentangText}  />  
+         <label class="text-sm text-left" class:text-red-600={tentangText.length >= maxCharsTentang}>
+        {tentangText.length} / {maxCharsTentang}</label>
+       
+        <h2 style="font-size: 20px;font-weight: 600;margin-bottom: -20px;">Tupoksi:</h2>
+         <Textarea id="Tupoksi" maxlength={maxCharsTupoksi} placeholder="Tupoksi*" rows="8" name="Tupoksi" bind:value={tupoksiText}  />  
+         <label class="text-sm text-left" class:text-red-600={tupoksiText.length >= maxCharsTupoksi}>
+        {tupoksiText.length} / {maxCharsTupoksi}</label>
+
+        <h2 style="font-size: 20px;font-weight: 600;margin-bottom: -20px;">Program Prioritas:</h2>
+         <Textarea id="programPrioritas" maxlength={maxCharsprogramPrioritas} placeholder="programPrioritas*" rows="4" name="programPrioritas" bind:value={programPrioritasText}  />  
+         <label class="text-sm text-left" class:text-red-600={programPrioritasText.length >= maxCharsprogramPrioritas}>
+        {programPrioritasText.length} / {maxCharsprogramPrioritas}</label>
+      
+            <div>
+              <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update Profile</button>
+            </div>     
+          </form>  
+          <svelte:fragment slot="footer">
+            <Button color="alternative" on:click={()=> ModalUpdateProfile = !ModalUpdateProfile} >Batal</Button>
+           <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
+           <CheckCircleSolid slot="icon" class="w-5 h-5" />
+           Data Profile Bidang Koordinator Otonomi Daerah berhasil diperbaharui. Form akan tutup dalam {counter}s.
+           </Toast>
+          </svelte:fragment>
+    </Modal>
+
+    <div id="updateProfile" class="flex items-center gap-4 mb-10">
+    <h4 class="text-xl font-extrabold md:text-xl lg:text-2xl">📝 Update Halaman Profile</h4>
+      {#if $user.prefs['Role'] === "PIC Otonomi"}
+    <button on:click={openUpdateModal} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
+    <EditOutline class="shrink-0 h-6 w-6" /><span>EDIT</span>
+   </button>
+       {/if}
+    </div>  
+   
+  <div class="mx-auto my-10 p-8 border-2 border-neutral-500 rounded-2xl font-sans">
+    <div class="space-y-6">
+      {#if profilePemerintahan}
+        <div>
+            <h2 class="inline-block text-xl font-bold text-gray-800 mb-3"><span class="pb-1 border-b-4 border-sky-600">Tentang</span></h2>
+            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]">{ profilePemerintahan.tentang } </p>
+        </div>
+        <div>
+            <h2 class="inline-block text-xl font-bold text-gray-800 mb-3"><span class="pb-1 border-b-4 border-sky-600">Tupoksi</span></h2>
+            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]">{ profilePemerintahan.tupoksi } </p>
+        </div>
+         <div>
+            <h2 class="inline-block text-xl font-bold text-gray-800 mb-3"> <span class="pb-1 border-b-4 border-sky-600">Program Prioritas</span></h2>
+            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]"> { profilePemerintahan.programPrioritas } </p>
+        </div>
+    {:else}
+        <p class="text-center text-gray-500">
+            Data profil untuk "Koordinator Otonomi Daerah" tidak ditemukan.
+        </p>
     {/if}
+    </div>
+    
+</div>
+ 
+
+    <br/><br/> 
+
+    <div id="uploadPhoto" class="flex items-center gap-4 mb-10">
+    <h4 class="text-xl font-extrabold md:text-xl lg:text-2xl">🖼️ Upload Photo Gallery</h4>
+    {#if $user.prefs['Role'] === "PIC Otonomi"}
+    <button on:click={() => (isUploadOpen = !isUploadOpen)} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
+    <EditOutline class="shrink-0 h-6 w-6" /><span>{!isUploadOpen ? 'UPLOAD PHOTO' : 'TUTUP UPLOAD PHOTO'}</span>
+   </button>
+    {/if}
+    </div> 
+    
     
     {#if isUploadOpen}
-  <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
-    <form class="space-y-6" on:submit|preventDefault ={UploadImage} >
-   <Label class="pb-2 text-base">Upload file Photo / Gambar (Type File: JPG, JPEG or PNG)</Label>
-   <Fileupload class="mb-2" id="UploadImageOtonomi" accept=".png, .jpg, .jpeg, .webp" required />
+      <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
+     <form class="space-y-6" on:submit|preventDefault ={UploadImage} >
+     <Label class="pb-2 text-base">Upload file Photo atau Gambar (Type File diizinkan: <b>jpg</b>, <b>jpeg</b>, <b>gif</b>, <b>webp</b> dan <b>png</b>)</Label>
+    <Fileupload class="mb-2" id="UploadImageOtonomi" accept=".png, .jpg, .jpeg, .webp" required />
     <Label class="pb-2 mb-3">(Max File Size: 10 MB)</Label>
     <ButtonGroup class="*:!ring-primary-700"><Button outline color="dark" type="submit" value="submit" >
     <UploadOutline  class="w-4 h-4 me-2" />Simpan Gambar</Button> </ButtonGroup>
     </form> 
+
+       <Modal bind:open={invalidFileModal} size="sm" autoclose>
+            <div class="text-center">
+                <ExclamationCircleOutline class="mx-auto mb-4 h-12 w-12 text-gray-400 dark:text-gray-200" />
+                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                    {modalErrorMessage}
+                </h3>
+                <Button color="alternative" on:click={() => invalidFileModal = false}>Tutup</Button>
+            </div>
+        </Modal>
     <br/>
 
-  {#if visibleProgresBar} 
-  <Progressbar
-  {progress}
-  animate
-  precision={2}
-  labelOutside="Progress Upload Gambar"
-  labelInside
-  tweenDuration={1500}
-  easing={sineOut}
-  size="h-4"
-  labelInsideClass="bg-blue-600 text-blue-100 text-sm font-medium text-center leading-none rounded-full"
-  class="mb-4"
-    />{/if}
-  
-  </div>
+    {#if visibleProgresBar} 
+    <Progressbar {progress} animate precision={2} labelOutside="Progress Upload Gambar" labelInside
+     tweenDuration={1500} easing={sineOut}
+     size="h-4"
+     labelInsideClass="bg-blue-600 text-blue-100 text-sm font-medium text-center leading-none rounded-full"
+     class="mb-4"
+     />
+     {/if}
+    </div>
     {/if}
     <br/>
-    <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
 
-    <br/><br/> 
-
-  <Heading tag="h4" customSize="text-xl text-left font-extrabold  md:text-xl lg:text-2xl">🖼️ List Photo</Heading>
-  <br/>
+ 
   {#if data.DatasGambarOtonomi.total === 0}
   <p>Saat ini Tidak terdapat Gambar pada Gallery Photo.</p>
   {:else}
@@ -198,68 +382,9 @@ function showimage(id) {
       color: white;
       }
 
-
-  .modern-box {
-    position: relative;
-    display: inline-block;
-    padding: 12px;
-  }
-  
-  .modern-box::before,
-  .modern-box::after,
-  .contentbox::before,
-  .contentbox::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #c7c7e7;
-  }
-  
-  /* Top left corner */
-  .modern-box::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  /* Top right corner */
-  .modern-box::after {
-    top: 0;
-    right: 0;
-    border-left: none;
-    border-bottom: none;
-  }
-
-  .contentbox {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-  
-  /* Bottom left corner */
-  .contentbox::before {
-    bottom: 0;
-    left: 0;
-    border-right: none;
-    border-top: none;
-  }
-  
-  /* Bottom right corner */
-  .contentbox::after {
-    bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
-  }
-  
-  .contentbox label {
-    font-size: 0.94rem;
-    margin: 0;
-    padding: 0;
-  }
-
-
+      .preserve-lines {
+        white-space: pre-wrap;
+        font-family: inherit; /* Opsional: Agar font mengikuti style halaman */
+    }
     
   </style>

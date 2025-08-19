@@ -1,9 +1,22 @@
 <script>
     /** @type {import('./$types').PageData} */
-    export let data;
+ 
     import { Heading, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
     import { EyeOutline } from 'flowbite-svelte-icons';
 
+    // Buat objek Date baru saat komponen dimuat
+  const today = new Date();
+
+  // Opsi untuk memformat tanggal agar lebih mudah dibaca
+  const options = {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+
+  // Format tanggal ke dalam string yang mudah dibaca
+  const formattedDate = today.toLocaleDateString('id-ID', options);
 </script>
 
 <svelte:head>
@@ -11,12 +24,11 @@
 	<meta name="description" content="Daftar Informasi Publik - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/>
-
 <div class="container">
 <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Daftar Informasi Publik</Heading>
 <Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">Biro Pemerintahan dan Otonomi Daerah<br/>
-Sulawesi Tenggara <br/>Tahun 2024</Heading>
+Sulawesi Tenggara </Heading>
+<p style="font-size:20px;">📅 Tanggal hari ini: <strong>{formattedDate}</strong></p>
 <br/>
 
 <br/>

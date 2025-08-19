@@ -356,7 +356,6 @@ const procedure = {
 	<meta name="description" content="Sipapaode | Kerjasama dengan Pihak Ketiga - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/> 
 
 <Modal title="Prosedure Kerjasama" bind:open={ModalProsedure} size="md" autoclose={false}>
   <div class="procedure">

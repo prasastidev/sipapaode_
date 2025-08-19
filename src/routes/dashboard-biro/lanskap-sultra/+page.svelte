@@ -17,7 +17,7 @@
   let toastStatus = false;
   let counter = 6;
 
-  /** Edit Run 2 function: GetDataDocumentLPPD and update*/
+  /** Edit Run 2 function */
 
 function getDataWilayah(id) {
 

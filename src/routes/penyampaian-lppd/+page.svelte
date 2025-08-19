@@ -100,7 +100,6 @@ const addDataFormtoTable = async (e) => {
 	<meta name="description" content="Sipapaode | Laporan Penyampaian LPPD LKPJ - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/>
 <Modal title="Formulir Pengiriman Dokumen LPPD dan LKPJ Kabupaten / Kota" bind:open={ModalKirimLPPD}  autoclose={false}>
   <form class="space-y-6" on:submit={addDataFormtoTable}>
     <Label>

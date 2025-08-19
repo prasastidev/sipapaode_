@@ -60,12 +60,14 @@ export async function getTableGalleryFront() {
     );
 }
 
-export async function addGalleryAlbumDepan(Location, Description, URL, ImageId) {
+export async function addGalleryAlbumDepan(Title, Location, Description, TanggalKegiatan, URL, ImageId) {
     await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, ID.unique(), {
+        Title,
         Location,
         Description,
+        TanggalKegiatan,
         URL,
-        ImageId
+        ImageId  
     });
 }
 

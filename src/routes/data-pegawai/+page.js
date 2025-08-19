@@ -1,25 +1,17 @@
-// +page.js - Versi dengan multiple queries parallel
 export const prerender = true;
-export const ssr = false;
+export const ssr = true;
 export const csr = true;
 
-import { redirect } from '@sveltejs/kit';
-import { getTableDataPegawai, getDataByField } from '$lib/dataPegawai';
+import {  getTableDataPegawai, getDataByField } from '$lib/dataPegawai.js';
 
-/** @type {import('./$types').PageLoad} */
-export async function load({ parent }) {
-    const { account } = await parent();
-    if (!account) {
-        throw redirect(303, '/');
-    }
-
-    // Definisikan semua query yang diperlukan
-    const queries = [
+/** @type {import('./$types').PageServerLoad} */
+export async function load() {
+     const queries = [
         ['Jenis_Pegawai', 'Pegawai'],
         ['Jenis_Pegawai', 'PHT'],
         ['Jenis_Kelamin', 'Pria'],
         ['Jenis_Kelamin', 'Wanita'],
-        ['Pendidikan_Terakhir', 'SD'],
+         ['Pendidikan_Terakhir', 'SD'],
         ['Pendidikan_Terakhir', 'SLTP'],
         ['Pendidikan_Terakhir', 'SLTA'],
         ['Pendidikan_Terakhir', 'Diploma I (D1)'],

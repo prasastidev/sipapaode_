@@ -2,7 +2,7 @@
     /** @type {import('./$types').PageData} */
     
     import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, Modal  } from 'flowbite-svelte';
-    import { UploadOutline, ZoomInOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import { UploadOutline, ZoomInOutline, FileCopyOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, ID } from '$lib/appwrite';
     import { user } from '$lib/user';
     import { invalidateAll } from '$app/navigation';
@@ -15,6 +15,37 @@
      let progress = '0';
     let ConfirmDeleteModal = false;
     let selectedId = null;
+
+     let copiedId = null; // Untuk melacak ID gambar yang URL-nya baru saja disalin
+
+    async function copyUrlToClipboard(id) {
+    // 1. Dapatkan URL gambar dan ubah menjadi string secara eksplisit
+    const urlToCopy = showimage(id).toString();
+
+    // Pastikan URL tidak kosong atau undefined sebelum menyalin
+    if (!urlToCopy) {
+        console.error('URL tidak valid atau kosong.');
+        alert('Gagal mendapatkan URL untuk disalin.');
+        return;
+    }
+
+    try {
+        // 2. Gunakan Clipboard API untuk menyalin teks
+        await navigator.clipboard.writeText(urlToCopy);
+
+        // 3. Beri tahu pengguna bahwa penyalinan berhasil
+        copiedId = id; // Set ID yang baru disalin
+        
+        // 4. Kembalikan teks tombol ke semula setelah 2 detik
+        setTimeout(() => {
+            copiedId = null;
+        }, 2000);
+
+    } catch (err) {
+        console.error('Gagal menyalin URL:', err);
+        alert('Gagal menyalin URL. Pastikan Anda mengakses halaman ini melalui koneksi aman (HTTPS).');
+    }
+}
 
 
 function showimage(id) {
@@ -136,8 +167,15 @@ function showimage(id) {
      <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
      {#if $user.prefs['Role'] === "PIC Tata Usaha"}
       <ButtonGroup class="*:!ring-primary-700">
-        <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-4 h-4 me-2" />Lihat</a></Button>
-        <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+       <Button style={copiedId === cetakTabel.$id ? 'color:green;' : 'color:blue;'} on:click={() => copyUrlToClipboard(cetakTabel.$id)}>
+         <FileCopyOutline class="w-6 h-6 me-2" />
+           {#if copiedId === cetakTabel.$id} URL Dicopy!
+            {:else}
+            Copy URL
+            {/if}
+        </Button>
+        <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-5 h-5 me-2" />Lihat</a></Button>
+        <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-5 h-5 me-2" />Hapus</Button>
      </ButtonGroup> 
      {/if}
      </div>

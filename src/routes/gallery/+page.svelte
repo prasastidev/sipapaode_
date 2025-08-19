@@ -1,25 +1,10 @@
 <script>
     /** @type {import('./$types').PageData} */
-    export let data = [];
-    import { Heading, Tabs, TabItem, Gallery, ButtonGroup, Button } from 'flowbite-svelte';
-    import { ZoomInOutline, ImageOutline } from 'flowbite-svelte-icons';
-    import { storage, ID } from '$lib/appwrite';
+  
+    import { Heading} from 'flowbite-svelte';
    
 
-  function showimageKS(id) {
-    const result = storage.getFileView('67545c85000bd5d33ef2', id);
-    return result;  
-  }
 
-  function showimageOtonomi(id) {
-    const result = storage.getFileView('67920a70002df0712bce', id);
-    return result;  
-  }
-
-  function showimagePemerintahan(id) {
-    const result = storage.getFileView('6791fea50005705fec23', id);
-    return result;  
-  }
 
 </script>
 
@@ -28,87 +13,171 @@
 	<meta name="description" content="Gallery Foto & Kegiatan - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/><br/>
+
+
 
 <div class="container">
-    <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Foto & Kegiatan</Heading>
-    <br/>Berikut adalah dokumentasi kegiatan yang dilaksanakan oleh berbagai bidang di Biro Pemerintahan dan Otonomi Daerah Sekretariat Daerah Sulawesi Tenggara. Dokumentasi ini disajikan dalam bentuk gambar atau foto yang menggambarkan berbagai aktivitas dan program yang telah dilaksanakan. Untuk melihat lebih lanjut, silakan pilih tab masing-masing bidang untuk mengakses galeri foto terkait. Kami berharap dokumentasi ini dapat memberikan gambaran yang jelas mengenai komitmen dan kontribusi Biro dalam meningkatkan pemerintahan dan otonomi daerah di Sulawesi Tenggara.
-    <br/> <br/>
+    <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Gallery Foto & Kegiatan</Heading>
+    <br/><br/>
+    <div class="card-gallery">
 
-    <Tabs tabStyle="underline">
-      <TabItem open>
-        <div slot="title" class="flex items-center gap-2 text-lg">
-          <ImageOutline size="lg" /> Bagian Kerjasama
-        </div>   
-          {#if data.DatasGambarKS.total === 0}
-          <p>Saat ini Tidak terdapat Gambar pada Gallery Photo Bagian Kerjasama.</p>
-          {:else}
-          <p>Terdapat {data.DatasGambarKS.total} Gambar dalam Folder Gallery Bagian Kerjasama</p>
-        {/if}
-         <br/>
-          <div style="padding:18px;border-radius:12px;border:2px solid #e4e4ff;">
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-              {#each data.DatasGambarKS.files as cetakTabel,i}
-             <div style="float:left;text-align:center;">
-             <img src={showimageKS(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
-             <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
-              <ButtonGroup class="*:!ring-primary-700">
-                <Button style="color:blue;"><a href={showimageKS(cetakTabel.$id)} target="_blank" style="color:blue;display:flex;align-items: center;"><ZoomInOutline class="w-4 h-4 me-2 flex" />Lihat</a></Button>
-             </ButtonGroup> 
-              </div>
-             {/each}
-            </div>    
-      </TabItem>
-      <TabItem>
-        <div slot="title" class="flex items-center gap-2 text-lg">
-          <ImageOutline size="lg" /> Koordinator Pemerintahan
-        </div>
-        {#if data.DatasGambarPemerintahan.total === 0}
-        <p>Saat ini Tidak terdapat Gambar pada Gallery Photo Koordinator Pemerintahan.</p>
-        {:else}
-        <p>Terdapat {data.DatasGambarPemerintahan.total} Gambar dalam Folder Gallery Koordinator Pemerintahan</p>
-      {/if}
-       <br/>
-        <div style="padding:18px;border-radius:12px;border:2px solid #e4e4ff;">
-          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-            {#each data.DatasGambarPemerintahan.files as cetakTabel,i}
-           <div style="float:left;text-align:center;">
-           <img src={showimagePemerintahan(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
-           <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
-            <ButtonGroup class="*:!ring-primary-700">
-              <Button style="color:blue;"><a href={showimagePemerintahan(cetakTabel.$id)} target="_blank" style="color:blue;display:flex;align-items: center;"><ZoomInOutline class="w-4 h-4 me-2 flex" />Lihat</a></Button>
-           </ButtonGroup> 
-            </div>
-           {/each}
-          </div> 
-      </TabItem>
-      <TabItem>
-        <div slot="title" class="flex items-center gap-2 text-lg">
-          <ImageOutline size="lg" /> Koordinator Otonomi Daerah
-        </div>
-        {#if data.DatasGambarOtonomi.total === 0}
-          <p>Saat ini Tidak terdapat Gambar pada Gallery Photo Koordinator Otonomi Daerah.</p>
-          {:else}
-          <p>Terdapat {data.DatasGambarOtonomi.total} Gambar dalam Folder Gallery Koordinator Otonomi Daerah</p>
-        {/if}
-         <br/>
-          <div style="padding:18px;border-radius:12px;border:2px solid #e4e4ff;">
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-4">
-              {#each data.DatasGambarOtonomi.files as cetakTabel,i}
-             <div style="float:left;text-align:center;">
-             <img src={showimageOtonomi(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
-             <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
-              <ButtonGroup class="*:!ring-primary-700">
-                <Button style="color:blue;"><a href={showimageOtonomi(cetakTabel.$id)} target="_blank" style="color:blue;display:flex;align-items: center;"><ZoomInOutline class="w-4 h-4 me-2 flex" />Lihat</a></Button>
-             </ButtonGroup> 
-              </div>
-             {/each}
-            </div> 
-      </TabItem>
-    </Tabs>
+  <a href="/profil-bidang-kerjasama#gallery"><div class="card-wrapper">
+    <div class="card-shadow"></div>
+    <div class="card-content">
+      <div class="image-placeholder">
+        <span>👥</span>
+      </div>
+      <div class="card-title">
+        <p>Gallery Photo Bidang</p>
+        <p>Bagian Kerjasama</p>
+      </div>
+    </div>
+  </div></a>
 
+   <a href="/profil-bidang-pemerintahan#gallery"><div class="card-wrapper">
+    <div class="card-shadow"></div>
+    <div class="card-content">
+      <div class="image-placeholder">
+        <span>🗺️</span>
+      </div>
+      <div class="card-title">
+        <p>Gallery Photo Bidang</p>
+        <p>Koordinator Pemerintahan</p>
+      </div>
+    </div>
+  </div></a>
 
+  <a href="/profil-bidang-otonomi#gallery"><div class="card-wrapper">
+    <div class="card-shadow"></div>
+    <div class="card-content">
+      <div class="image-placeholder">
+        <span>🏦</span>
+      </div>
+      <div class="card-title">
+        <p>Gallery Photo Bidang</p>
+        <p>Koordinator Otonomi Daerah</p>
+      </div>
+    </div>
+  </div></a>
+
+</div>
+    
+    
+    
+   <br/>
     <br/>
 
     <br/>
 </div>
+
+
+<style>
+  /* Variabel Warna */
+  :root {
+    --card-bg: #ccdef0;       
+    --shadow-bg: #d4ddea;      /* Warna bayangan sedikit lebih gelap */
+    --image-bg: #f0f4fa;       /* Biru sangat terang untuk area gambar */
+    --text-color: #1f2937;     /* Hitam keabuan untuk teks */
+    --font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  /* Mengatur agar komponen berada di tengah Playground */
+  :global(body) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #ffffff;
+    font-family: var(--font-family);
+  }
+
+  /* Wadah untuk semua kartu */
+  .card-gallery {
+    display: flex;
+    flex-wrap: wrap; /* Kartu akan turun ke bawah di layar kecil */
+    justify-content: center;
+    gap: 6rem; /* Jarak antar kartu */
+    padding: 2rem;
+  }
+
+  /* Pembungkus untuk setiap kartu (mengatur posisi relatif) */
+  .card-wrapper {
+    position: relative;
+    width: 280px;
+    height: 320px;
+  }
+
+  /* Lapisan Bayangan di Belakang */
+  .card-shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--shadow-bg);
+    border-radius: 28px; /* Sudut tumpul */
+    transform: rotate(5deg); /* Memberi efek miring */
+    transition: transform 0.3s ease;
+  }
+
+  /* Konten Kartu Utama */
+  .card-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--card-bg);
+    border-radius: 28px;
+    padding: 1.5rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+
+  /* Efek saat mouse di atas kartu */
+  .card-wrapper:hover .card-content {
+    transform: translate(-8px, -8px);
+  }
+  .card-wrapper:hover .card-shadow {
+    transform: rotate(0deg);
+  }
+
+  /* Placeholder untuk Gambar */
+  .image-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: var(--image-bg);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #a0aec0; /* Warna teks placeholder */
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+
+  }
+
+  .image-placeholder span {
+  font-size: 4rem; 
+  line-height: 1;  
+}
+
+  /* Judul di dalam kartu */
+  .card-title {
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: 1.4;
+  }
+
+  .card-title p {
+    margin: 0;
+    font-weight: 600;
+  }
+</style>
