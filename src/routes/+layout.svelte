@@ -25,7 +25,7 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 	</div> <br/>
 	 <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
 		<FooterLink href="/about" style="color:rgb(60, 93, 124);">About</FooterLink>
-		<FooterLink href="/profil#Alamat" style="color:rgb(60, 93, 124);">Contact</FooterLink> 	
+		<FooterLink href="/profil#alamat" style="color:rgb(60, 93, 124);">Contact</FooterLink> 	
 	  </FooterLinkGroup>
 	<hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
 	<FooterCopyright href="/" by="SiPapaOde" /> 
