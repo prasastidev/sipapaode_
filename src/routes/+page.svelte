@@ -5,7 +5,7 @@
 	let clickOutsideModal = false;
 	import { cascade } from 'svelte-typewriter';
 	import {slide } from 'svelte/transition';
-	import { BriefcaseSolid, ClockOutline, DrawSquareSolid, NewspaperSolid, BuildingSolid, ProfileCardSolid, ArrowRightOutline, CalendarWeekSolid, ImageSolid, RectangleListOutline, DrawSquareOutline, InfoCircleOutline, FileCheckOutline, UserHeadsetOutline } from 'flowbite-svelte-icons';
+	import { BriefcaseSolid, InfoCircleSolid, ClockOutline, DrawSquareSolid, NewspaperSolid, BuildingSolid, ProfileCardSolid, ArrowRightOutline, CalendarWeekSolid, ImageSolid, RectangleListOutline, DrawSquareOutline, InfoCircleOutline, FileCheckOutline, UserHeadsetOutline } from 'flowbite-svelte-icons';
 	import ImageKSwasta from '$lib/images/Kerjasama-Pihak-Swasta.webp';
 	import ImageKAinstansi from '$lib/images/Kerjasama-Antar-Instansipemerintah.webp';
 	import ImageKLuarNegeri from '$lib/images/Kerjasama-Luar-Negeri.webp';
@@ -370,7 +370,7 @@ function prevQuote() {
 		{#if BannerInfo.Status_banner}
         <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="background:#E3EBF2;border:2px solid rgb(207 224 240);border-radius:10px;color:#345472;">
 			<img class="w-14 h-14 rounded-full" src={ImagelogoSultra} alt="Sultra Pictures" />
-			<h4 class="text-xl text-left"> {@html BannerInfo.Text_Banner} </h4>
+			<h4 class="text-sm md:text-base lg:text-xl text-left"> {@html BannerInfo.Text_Banner} </h4>
          <CloseButton class="border-2 bg-red-500 hover:bg-red-700" style="color:white;" on:click={() => (BannerInfo.Status_banner = false)} />
          </div> 
          {/if}
@@ -690,14 +690,13 @@ function prevQuote() {
 			<h2 id="BeritaTerbaruSultra" class="text-2xl font-bold mb-2" style="box-shadow: #83A4C3 15px -20px;margin-bottom:18px;">Berita Terbaru Hari Ini di Sulawesi Tenggara
 			</h2> 
 			
-			<div id="BeritaSultra" style="position: relative;">
-			<!--	<iframe 
-					src="https://rss.app/embed/v1/list/tAep0D0iP9KiHpnj" 
+			<div>
+				<!-- <iframe 
+					src="https://rss.app/embed/v1/list/ttwGK2p1QDwAt0Yh" 
 					frameborder="0" 
 					style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;">
-				</iframe>
-				-->
-				<rssapp-list id="ttwGK2p1QDwAt0Yh"></rssapp-list><script src="https://widget.rss.app/v1/list.js" type="text/javascript" async></script>
+				</iframe>	-->
+				<iframe width="100%" height="640" src="https://rss.app/embed/v1/list/ttwGK2p1QDwAt0Yh" frameborder="0"></iframe>
 			</div>
 
 		 </div>  
@@ -775,17 +774,15 @@ function prevQuote() {
 				</thead>
 				<tbody>  
 				<tr>
-				<td style="display:flex;margin:4px;white-space: break-spaces;;"><img class="object-center" src={LogoBombana} alt="Kabupaten Bombana" width="40px" height="40px" style="margin-right: 5px;" /> {DataBombana.Nama } <Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button> 
-					<Popover triggeredBy="#popbombana" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-						<div class="p-3">
+				<td class="block md:flex lg:flex" style="margin:4px;white-space:break-spaces;;"><img class="object-center" src={LogoBombana} alt="Kabupaten Bombana" width="40px" height="40px" style="margin-right: 5px;" /> {DataBombana.Nama } <Button id="popbombana" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button> 
+					<Popover triggeredBy="#popbombana" class="w-72 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+						<div class="p-2">
 						  <center>
 							<img class="object-center" src={LogoBombana} alt="Kabupaten Bombana" width="90px" height="90px" />
 						 </center>
-						 <p class="mt-3">
-							<b>{ DataBombana.Nama }</b><br/>
-							Ibukota : { DataBombana.Ibukota } <br/>
-							Kecamatan : { DataBombana.J_Kecamatan }<br/>
-							Kelurahan/Desa : { DataBombana.J_Kelurahan }/{ DataBombana.J_Desa }	<br/>
+						 <p class="mt-2">
+							<b>{ DataBombana.Nama } </b>
+							<br/>Ibukota: { DataBombana.Ibukota }<br/>Kecamatan: { DataBombana.J_Kecamatan }<br/>Kelurahan: { DataBombana.J_Kelurahan }<br/>Desa: { DataBombana.J_Desa }
 						 </p>
 						</div>
 					  </Popover>	
@@ -806,17 +803,15 @@ function prevQuote() {
 				</tr>
 				
 				<tr>
-					<td style="display:flex;margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoWakatobi} alt="Kabupaten Wakatobi" width="40px" height="40px" style="margin-right: 5px;" /> { DataWakatobi.Nama } <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
-						<Popover triggeredBy="#popwakatobi" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-							<div class="p-3">
+					<td class="block md:flex lg:flex" style="margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoWakatobi} alt="Kabupaten Wakatobi" width="40px" height="40px" style="margin-right: 5px;" /> { DataWakatobi.Nama } <Button id="popwakatobi" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
+						<Popover triggeredBy="#popwakatobi" class="w-72 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+							<div class="p-2">
 							  <center>
 								<img class="object-center" src={LogoWakatobi} alt="Kabupaten Wakatobi" width="90px" height="90px" />
 							 </center>
-							 <p class="mt-3">
-								<b>{ DataWakatobi.Nama }</b><br/>
-								Ibukota : { DataWakatobi.Ibukota } <br/>
-								Kecamatan : { DataWakatobi.J_Kecamatan }<br/>
-								Kelurahan/Desa : { DataWakatobi.J_Kelurahan }/{ DataWakatobi.J_Desa }	<br/>
+							 <p class="mt-2">
+								<b>{ DataWakatobi.Nama }</b>
+								<br/>Ibukota: { DataWakatobi.Ibukota }<br/>Kecamatan: { DataWakatobi.J_Kecamatan }<br/>Kelurahan: { DataWakatobi.J_Kelurahan }<br/>Desa: { DataWakatobi.J_Desa }<br/>
 							 </p>
 							</div>
 						  </Popover>
@@ -836,17 +831,15 @@ function prevQuote() {
 					 </td>
 				</tr>
 				<tr>
-					<td style="display:flex;margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoKendari} alt="Kota Kendari" width="40px" height="40px" style="margin-right: 5px;"/> { DataKotaKendari.Nama } &nbsp; &emsp; &emsp; <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
-						<Popover triggeredBy="#popkendari" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-							<div class="p-3">
+					<td class="block md:flex lg:flex" style="margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoKendari} alt="Kota Kendari" width="40px" height="40px" style="margin-right: 5px;"/> { DataKotaKendari.Nama } &nbsp; &emsp; &emsp; <Button id="popkendari" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
+						<Popover triggeredBy="#popkendari" class="w-72 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+							<div class="p-2">
 							  <center>
 								<img class="object-center" src={LogoKendari} alt="Kota Kendari" width="90px" height="90px" />
 							 </center>
-							 <p class="mt-3">
-								<b>{ DataKotaKendari.Nama }</b><br/>
-								Ibukota : { DataKotaKendari.Ibukota } <br/>
-								Kecamatan : { DataKotaKendari.J_Kecamatan }<br/>
-								Kelurahan/Desa : { DataKotaKendari.J_Kelurahan }/{ DataKotaKendari.J_Desa }<br/>	
+							 <p class="mt-2">
+								<b>{ DataKotaKendari.Nama }</b>
+								<br/>Ibukota: { DataKotaKendari.Ibukota }<br/>Kecamatan: { DataKotaKendari.J_Kecamatan }<br/>Kelurahan: { DataKotaKendari.J_Kelurahan }<br/>Desa:{ DataKotaKendari.J_Desa }<br/>	
 							 </p>
 							</div>
 						  </Popover>
@@ -867,17 +860,15 @@ function prevQuote() {
 				</tr>
 			   
 				<tr>
-					<td style="display:flex;margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoKonawe} alt="Kabupaten Konawe" width="40px" height="40px" style="margin-right: 5px;" /> {DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
-						<Popover triggeredBy="#popkonawe" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-							<div class="p-3">
+					<td class="block md:flex lg:flex" style=";margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoKonawe} alt="Kabupaten Konawe" width="40px" height="40px" style="margin-right: 5px;" /> {DataKonawe.Nama } <Button id="popkonawe" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
+						<Popover triggeredBy="#popkonawe" class="w-72 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+							<div class="p-2">
 							  <center>
 								<img class="object-center" src={LogoKonawe} alt="Kabupaten Konawe" width="90px" height="90px" />
 							 </center>
-							 <p class="mt-3">
-								<b>{DataKonawe.Nama }</b><br/>
-								Ibukota : {DataKonawe.Ibukota  } <br/>
-								Kecamatan : {DataKonawe.J_Kecamatan }<br/>
-								Kelurahan/Desa : {DataKonawe.J_Kelurahan }/{DataKonawe.J_Desa}	<br/>
+							 <p class="mt-2">
+								<b>{DataKonawe.Nama }</b>
+								<br/>Ibukota: {DataKonawe.Ibukota  }<br/>Kecamatan: {DataKonawe.J_Kecamatan }<br/>Kelurahan : {DataKonawe.J_Kelurahan }<br/>Desa: {DataKonawe.J_Desa}<br/>
 							 </p>
 							</div>
 						  </Popover>
@@ -898,17 +889,15 @@ function prevQuote() {
 				</tr>
 
 				<tr>
-					<td style="display:flex;margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoKonaweUtara} alt="Kabupaten Konawe Utara" width="40px" height="40px" style="margin-right: 5px;" /> {DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
-						<Popover triggeredBy="#popkonaweutara" class="w-64 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
-							<div class="p-3">
+					<td class="block md:flex lg:flex" style="margin:4px;white-space: break-spaces;"><img class="object-center" src={LogoKonaweUtara} alt="Kabupaten Konawe Utara" width="40px" height="40px" style="margin-right: 5px;" /> {DataKonaweUtara.Nama } <Button id="popkonaweutara" class="px-2 py-0.1 -mb-2" style="width:fit-content;border-radius:50%;background:#5a86af;font-size: 11px;width: 10px;height: 15px;">i</Button>
+						<Popover triggeredBy="#popkonaweutara" class="w-72 text-sm font-light text-gray-500 bg-white dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+							<div class="p-2">
 							  <center>
 								<img class="object-center" src={LogoKonaweUtara} alt="Kabupaten Konawe Utara" width="90px" height="90px" />
 							 </center>
-							 <p class="mt-3">
-								<b>{DataKonaweUtara.Nama }</b><br/>
-								Ibukota : {DataKonaweUtara.Ibukota }<br/>
-								Kecamatan : {DataKonaweUtara.J_Kecamatan }<br/>
-								Kelurahan/Desa : {DataKonaweUtara.J_Kelurahan }/{DataKonaweUtara.J_Desa }
+							 <p class="mt-2">
+								<b>{DataKonaweUtara.Nama }</b>
+								<br/>Ibukota: {DataKonaweUtara.Ibukota }<br/>Kecamatan: {DataKonaweUtara.J_Kecamatan }<br/>Kelurahan: {DataKonaweUtara.J_Kelurahan }<br/>Desa: {DataKonaweUtara.J_Desa } <br/>
 							 </p>
 							</div>
 						  </Popover>
@@ -949,7 +938,7 @@ function prevQuote() {
 				<!-- <Chart {options} />  -->
 
 		
-		<div style="text-align:center;font-size: 15px;">Statistik Berdasarkan {currentDataName} </div>
+		<div style="text-align:center;font-size: 15px;"><Badge rounded color="yellow"><InfoCircleSolid class="shrink-0 h-5 w-5" /> Statistik Berdasarkan {currentDataName}</Badge></div>
 
 		<div class="container mx-auto p-1">
 			
@@ -1774,14 +1763,6 @@ ol.static-org-chart .staff_card + div {
 width: 100%;
 }
 
-@media screen and (max-width: 767px) {
-#BeritaSultra {
-
-width: 112%;
-margin-left: -6%;
-}
-
-}
 
 .buttonDetail:hover {
   box-shadow: 0 0 10px #a5b8f2;
