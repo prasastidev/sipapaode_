@@ -131,6 +131,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
 
 <Heading id="bidang" tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;"><MoonOutline class="w-11 h-11 align-middle inline" /> Bidang-Bidang</Heading>
 <br/>
+<a href="/profil-tata-usaha" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Sub Bagian Tata Usaha <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
 <a href="/profil-bidang-kerjasama" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Bagian Kerjasama <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
 <a href="/profil-bidang-pemerintahan" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Pemerintahan <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
 <a href="/profil-bidang-otonomi" class="no-underline text-inherit group"><Heading tag="h4" class="mb-4" customSize="flex items-center gap-2 text-2xl text-left font-extrabold md:text-3xl lg:text-3xl"><ArrowRightAltOutline class="w-10 h-10 align-middle inline" /> Koordinator Otonomi Daerah <ArrowUpRightFromSquareSolid class="shrink-0 h-8 w-8 transition-transform duration-300 ease-in-out group-hover:translate-x-1" /></Heading></a>
@@ -162,7 +163,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
                 <li>
                     <div class="staff_card" style="width:280px !important;padding:6px;height:100px;"> 
                         <img src={kabidTU?.URL_PhotoProfile || (kabidTU ? (kabidTU.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } style="width:60px;height:60px;border-radius:50%;" alt="Kasubag TU" />
-                        <div>Kepala Bidang Tata Usaha <br><label style="font-weight: 100;">{kabidTU?.Nama || 'Jabatan Kosong'}</label></div>
+                        <div>Kasubag. Tata Usaha <br><label style="font-weight: 100;">{kabidTU?.Nama || 'Jabatan Kosong'}</label></div>
                     </div>
                 </li>
             </ol>
@@ -170,7 +171,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
             <ol id="second">
                 <li>
                     <div class="staff_card">
-                        <div class="staff_title">Kepala Bidang Kerjasama</div>
+                        <div class="staff_title">Kabag. Kerjasama</div>
                         <div class="staff_info">
                             <div class="staff_image">
                                 <img src={kabidKS?.URL_PhotoProfile || (kabidKS ? (kabidKS.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } class="card-img-top" alt="Kabid Kerjasama" />
@@ -185,7 +186,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
 
                 <li>
                     <div class="staff_card">
-                        <div class="staff_title">Kepala Bidang Koordinator Pemerintahan</div>
+                        <div class="staff_title">Kabag. Koordinator Pemerintahan</div>
                         <div class="staff_info">
                             <div class="staff_image">
                                 <img src={koorPemerintahan?.URL_PhotoProfile || (koorPemerintahan ? (koorPemerintahan.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } class="card-img-top" alt="Koord. Pemerintahan"/>
@@ -200,7 +201,7 @@ dijabarkan dalam Peraturan Gubernur Sulawesi Tenggara Nomor 43 Tahun 2020 tentan
 
                 <li>
                     <div class="staff_card">
-                        <div class="staff_title">Kepala Bidang Koordinator Otonomi Daerah</div>
+                        <div class="staff_title">Kabag. Koordinator Otonomi Daerah</div>
                         <div class="staff_info">
                             <div class="staff_image">
                                 <img src={koorOtda?.URL_PhotoProfile || (koorOtda ? (koorOtda.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } class="card-img-top" alt="Koord. Otda"/>

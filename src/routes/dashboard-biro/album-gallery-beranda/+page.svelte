@@ -246,10 +246,10 @@
     <br/>
     <br/>
   
-    <span style="color:#5a86af;font-size:16px;">Silahkan Tekan Tombol Buka Upload Photo di bawah untuk membuka mengupload Gambar atau Photo:</span>
+    <span style="color:#5a86af;font-size:16px;">Silahkan Tekan Tombol di bawah berikut untuk mengupdate Timeline Journal Kegiatan:</span>
     <br/> <br/> 
     <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>
-        {!isUploadOpen ? 'Buka Formulir Upload Journal Kegiatan' : 'Tutup Formulir Upload Journal Kegiatan'}
+        {!isUploadOpen ? 'Buka Formulir Input Update Journal Kegiatan' : 'Tutup Formulir Input Update Journal Kegiatan'}
     </Button>
     <br/><br/>
   
@@ -297,7 +297,7 @@
     <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
     <br/><br/> 
 
-    <Heading tag="h4" customSize="text-xl text-left font-extrabold md:text-xl lg:text-2xl">🖼️ List Photo</Heading>
+    <Heading tag="h4" customSize="text-xl text-left font-extrabold md:text-xl lg:text-2xl">🖼️ Daftar Kegiatan Biro Pemerintahan dan Otonomi Daerah Prov. Sultra</Heading>
     <br/>
     
     <!-- Debug info 
@@ -318,7 +318,7 @@
     {:else if totalPosts === 0}
         <p>Saat ini Tidak terdapat Gambar pada Gallery Photo.</p>
     {:else}
-        <p>Terdapat {totalPosts} Gambar dalam Folder Gallery Koordinator Otonomi Daerah</p>
+        <p>Terdapat {totalPosts} Dokumentasi Journal Kegiatan</p>
     {/if}
     
     <br/>

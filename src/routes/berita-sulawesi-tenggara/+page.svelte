@@ -47,7 +47,7 @@
 <div class="container">
     <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Berita Terkini di Sulawesi Tenggara</Heading>
     <br/>
-    <div id="weather-container"></div>
+    <div id="weather-container" style="border-radius:10px !important;"></div>
     <br/>
     <p style="font-size:22px;">📅 Tanggal hari ini: <strong>{formattedDate}</strong></p>
     <br/><br/>
@@ -60,6 +60,8 @@
  
 
     </div>
-  
+  <br/><br/><br/><br/><br/><br/>
 </div>
+<br/><br/>
+<br/><br/>
 <br/><br/>

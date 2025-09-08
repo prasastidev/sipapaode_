@@ -2,8 +2,8 @@
     /** @type {import('./$types').PageData} */
     export let data;
     import { user } from '$lib/user';
-    import {  Sidebar, Toggle, SidebarWrapper, SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
-    import { ChartPieSolid, FileImageSolid, BadgeCheckSolid, ObjectsColumnSolid, UserHeadsetSolid, BuildingSolid, LandmarkSolid, UserCircleSolid, UsersSolid, BullhornSolid, UsersGroupSolid } from 'flowbite-svelte-icons';
+    import {  Sidebar, Toggle, SidebarWrapper,  SidebarBrand, SidebarItem, SidebarGroup, SidebarDropdownItem, SidebarDropdownWrapper } from 'flowbite-svelte';
+    import { ChartPieSolid, FileImageSolid, AddressBookSolid, BadgeCheckSolid, ObjectsColumnSolid, UserHeadsetSolid, BuildingSolid, LandmarkSolid, UserCircleSolid, UsersSolid, BullhornSolid, UsersGroupSolid } from 'flowbite-svelte-icons';
     let spanClass = 'flex-1 ms-3 whitespace-break-spaces';
     
 
@@ -37,16 +37,16 @@
                   <svelte:fragment slot="icon">
                     <UsersSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                  <SidebarDropdownItem label="👥 Data Pengajuan Kerjasama Online" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
-                  <SidebarDropdownItem label="📁 Data Pengarsipan Dokumen Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
-                  <SidebarDropdownItem label="✅ Update Checklist Laporan Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/>
+                   <SidebarDropdownItem label="📁 Data Arsip File Dokumen Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="📩 Data Submit Pengajuan Kerjasama" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
+                 <!--  <SidebarDropdownItem label="✅ Update Checklist Laporan Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/> -->
                   <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>
                 </SidebarDropdownWrapper>
                 <SidebarDropdownWrapper label="Koord. Pemerintahan" {spanClass} style="text-align: left;background:#ffeacd;">
                   <svelte:fragment slot="icon">
                     <LandmarkSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                  <SidebarDropdownItem label="🗺️ Kode Data Wilayah Pemerintahan, Pulau dan Rupa Bumi" href="/dashboard-biro/lanskap-sultra" class="pl-4 ps-8" />
+                  <SidebarDropdownItem label="🗺️ Data Pemerintahan, Kode Wilayah, Pulau dan Rupa Bumi" href="/dashboard-biro/lanskap-sultra" class="pl-4 ps-8" />
                   <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Pemerintahan" href="/dashboard-biro/gallery-photo-pemerintahan" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
                   <SidebarDropdownWrapper label="Koord. Otonomi Daerah" {spanClass} style="text-align: left;background:#ffeacd;">
@@ -63,33 +63,41 @@
                       <ObjectsColumnSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                     <SidebarDropdownItem label="👤 Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="🖼️ Browse Photo Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="📷 Browse Photo Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Tata Usaha" href="/dashboard-biro/gallery-photo-tatausaha" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
-                  <SidebarItem label="Setting Formulir Online" href="/dashboard-biro/status-layanan">
-                    <svelte:fragment slot="icon">
-                      <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                    </svelte:fragment>
-                  </SidebarItem>
-                  <SidebarItem label="Info Pengumuman (Beranda)" href="/dashboard-biro/banner-info">
-                    <svelte:fragment slot="icon">
-                      <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
-                    </svelte:fragment>
-                  </SidebarItem>
                   <SidebarItem label="TimeLine Journal Kegiatan" href="/dashboard-biro/album-gallery-beranda">
                     <svelte:fragment slot="icon">
                       <FileImageSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Pengelola Data" href="/dashboard-biro/info-pic">
+                   <SidebarItem label="Data Pengajuan Permohonan Informasi" href="/dashboard-biro/data-formulir-permohonan-informasi">
+                    <svelte:fragment slot="icon">
+                      <AddressBookSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    </svelte:fragment>
+                  </SidebarItem>
+                    <SidebarItem label="Text Banner" href="/dashboard-biro/banner-info">
+                    <svelte:fragment slot="icon">
+                      <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    </svelte:fragment>
+                  </SidebarItem>
+                  <SidebarItem label="Visibility Formulir" href="/dashboard-biro/status-layanan">
+                    <svelte:fragment slot="icon">
+                      <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
+                    </svelte:fragment>
+                  </SidebarItem>
+                  <SidebarItem label="Info User PIC" href="/dashboard-biro/info-pic">
                     <svelte:fragment slot="icon">
                       <UserHeadsetSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                <SidebarItem label="Daftar Users" href="/dashboard-biro/daftar-user">
+                 
+                <SidebarItem label="Manajemen Users" href="/dashboard-biro/daftar-user">
                   <svelte:fragment slot="icon">
                     <UsersGroupSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
                 </SidebarItem>
+            
             </SidebarGroup>
               <SidebarGroup border> <br/>
                 <div style="font-size: 16px;text-align: left;color:#515b6d">SipapaOde Versi 1.1</div>

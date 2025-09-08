@@ -2,8 +2,8 @@
     /** @type {{ data: import('./$types').PageData }} */
     export let data=[];
     
-    import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge, Modal, Radio, FloatingLabelInput, Toast, Select } from 'flowbite-svelte';
-    import {  BuildingOutline, TrashBinOutline, FileLinesOutline, EditOutline, CheckCircleSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
+    import { Heading, Button, Avatar, Alert, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Badge, Modal, Radio, FloatingLabelInput, Toast, Select } from 'flowbite-svelte';
+    import {  BuildingOutline, TrashBinOutline, FileLinesOutline, EditOutline, CheckCircleSolid, ExclamationCircleOutline, FilePdfOutline } from 'flowbite-svelte-icons';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
     import { slide } from 'svelte/transition';
@@ -18,6 +18,25 @@
 
     let toastStatus = false;
     let counter = 6;
+
+    function formatTanggal(tanggalString) {
+        // Pengaman jika tanggalnya kosong atau null
+        if (!tanggalString) {
+            return 'Tanggal tidak valid';
+        }
+
+        const tanggalObjek = new Date(tanggalString);
+
+        // Opsi format tanggal
+        const options = {
+            day: 'numeric',    // -> 27
+            month: 'long',     // -> Mei (bukan May)
+            year: 'numeric'    // -> 2026
+        };
+
+        // 'id-ID' adalah kode untuk Bahasa Indonesia 🇮🇩
+        return new Intl.DateTimeFormat('id-ID', options).format(tanggalObjek);
+    }
 
 /** Edit Run 2 function: GetDataPengajuanKS and update*/
 
@@ -186,15 +205,15 @@ const remove = async (id) => {
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Dokumen Pengajuan Kerjasama secara Online</Heading>
+  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Informasi Data Submit Pengajuan Kerjasama</Heading>
   <br/>
-  <div class="modern-box">
-    <div class="contentbox">
-      <label>Dibawah berikut adalah Data Dokumen pengajuan Kerjasama dengan Pemerintah Prov. Sulawesi Tenggara yang dilakukan oleh Pihak Ketiga/Swasta ataupun Pemerintah Daerah dan K/L, melalui penginputan formulir dokumen secara Online.</label>
-    </div>
-  </div>
-  <br/><br/>
-
+ 
+  {#if $user.prefs['Role'] !== "PIC Kerjasama"}
+    <Alert color="yellow">
+    <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Kerjasama</span>
+    </Alert>
+    <br/>
+    {/if}
 
 <Modal title="Edit Data Proses Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
   <form class="space-y-6" on:submit={updateStatusPengajuan}>
@@ -298,17 +317,9 @@ const remove = async (id) => {
     <TableHead>
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">No</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Instansi</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Tanggal Pengajuan</TableHeadCell>
-      <TableHeadCell style="font-size: larger;width:140px;" class="py-3 px-2 content-start">Berkas Lampiran I (surat permohonan)</TableHeadCell>
-      <TableHeadCell style="font-size: larger;width:140px;" class="py-3 px-2 content-start">Berkas Lampiran II (kak/naskah ks sebelumnya)</TableHeadCell>
-             <TableHeadCell style="font-size: larger;width:140px;" class="py-3 px-2 content-start">Berkas Lampiran III (naskah ks baru)</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Detail Pengirim</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Detail Kerjasama</TableHeadCell>
+      <TableHeadCell style="font-size: larger;width:140px;" class="py-3 px-2 content-start">Berkas Lampiran</TableHeadCell>
       <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Catatan Pengirim</TableHeadCell>
-      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Status & Estimasi</TableHeadCell>
-      {#if $user.prefs['Role'] === "PIC Kerjasama"}
-      <TableHeadCell style="font-size: larger;" class="py-3 px-2 content-start">Aksi</TableHeadCell>
-      {/if}
     </TableHead>
     {#await data.TableDataPengajuanKSOnline.documents}
       loading...
@@ -318,44 +329,70 @@ const remove = async (id) => {
       {#if i >= postRangeLow && i < postRangeHigh}
       <TableBodyRow class="hover:bg-blue-100">
         <TableBodyCell class="content-start">{i+1}</TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start flex"><BuildingOutline class="w-14 h-14" style="color:#717b91;" /><span><b>{cetakTabel.Instansi}</b> </span></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">{cetakTabel.$updatedAt.slice(0, 10)}</TableBodyCell>
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start flex">
+           <div style="width: 280px; overflow-wrap: anywhere;">
+            <div class="flex items-center"><BuildingOutline class="w-14 h-14 text-gray-500 shrink-0" style="color:#717b91;" />
+             <span class="font-bold" style="font-size:16px;">{cetakTabel.Instansi}</span>
+            </div>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Tanggal Pengajuan:</b><br />{formatTanggal(cetakTabel.$updatedAt.slice(0, 10))}</p>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Tentang:</b><br />{cetakTabel.Tentang}</p>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Jenis Pengajuan Kerjasama:</b><br />{cetakTabel.OpsiPengajuan}</p>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Kategori:</b><br />{cetakTabel.Kategory_KS}</p>
+           <br/>
+          </div>
+        </TableBodyCell>
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
-         <div style="width:120px;">
-          <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.IDBucketLampiranI)} target="_blank"><Button style="color:#89aae4;height: 80px;"><FileLinesOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh berkas Lampiran I</label>  
-         </div>
+           <div style="width:260px;margin-bottom:6px;">
+            <p class="text-sm text-gray-700"><b class="font-semibold">Nama:</b><br />{cetakTabel.Nama}</p> 
+            <p class="text-sm text-gray-700"><b class="font-semibold">Posisi:</b><br />{cetakTabel.Posisi}</p>
+            <p class="text-sm text-gray-700"><b class="font-semibold">Email:</b><br />{cetakTabel.Email}</p>
+            <p class="text-sm text-gray-700"><b class="font-semibold">Contact:</b><br />{cetakTabel.ContactPerson}</p>
+            <p class="text-sm text-gray-700"><b class="font-semibold">Kota/Provinsi:</b><br />{cetakTabel.Kota}, {cetakTabel.Provinsi}</p>
+            <br/>
+          </div>
         </TableBodyCell>
-         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
-         <div style="width:120px;">
-          <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.IDBucketLampiranII)} target="_blank"><Button style="color:#89aae4;height: 80px;"><FileLinesOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh berkas Lampiran II</label>  
-         </div>
-        </TableBodyCell>
-         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
-         <div style="width:120px;">
-          <ButtonGroup class="*:!ring-primary-700"> <a href={DownloadFile(cetakTabel.IDBucketLampiranIII)} target="_blank"><Button style="color:#89aae4;height: 80px;"><FileLinesOutline class="w-11 h-11" /> </Button></a></ButtonGroup><label style="color:#89aae4;margin-top:5px;display: block;">Unduh berkas Lampiran III</label>  
-         </div>
-        </TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:240px;overflow-wrap: anywhere;"><b>▸ Nama:</b> {cetakTabel.Nama} <br/><b>▸ Posisi:</b> {cetakTabel.Posisi} <br/><b>▸ Email:</b> {cetakTabel.Email} <br/><b>▸ Contact:</b> {cetakTabel.ContactPerson} <br/><b>▸ Kota:</b> {cetakTabel.Kota} <br/><b>▸ Provinsi:</b> {cetakTabel.Provinsi}
-        </div></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;overflow-wrap:anywhere;"><b>▸ Kategory:</b> <br/>{cetakTabel.Kategory_KS}<br/><b>▸ Jenis Pengajuan Kerjasama:</b> <br/>{cetakTabel.OpsiPengajuan}<br/><b>▸ Tentang:</b> <br/>{cetakTabel.Tentang}</div></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:160px;overflow-wrap:anywhere;">{cetakTabel.Catatan}</div></TableBodyCell>
-        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;">
-          <Badge color={
-           cetakTabel.Status === "Proses Pengajuan" ? "yellow" :
-           cetakTabel.Status === "Proses Verifikasi" ? "blue" :
-           cetakTabel.Status === "Penandatanganan Naskah" ? "green" :
-           cetakTabel.Status === "Perbaikan Pengajuan" ? "red" : "gray"
-            } 
-          border>{cetakTabel.Status}</Badge><br/><br/><b>Estimasi Proses: </b><br/>{cetakTabel.Estimasi}</div>
-        </TableBodyCell>
-        {#if $user.prefs['Role'] === "PIC Kerjasama"}
         <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
-          <ButtonGroup class="*:!ring-primary-700">
-            <Button style="color:blue;" on:click={() => getDataPengajuanKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-            <Button style="color:red;"on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama, cetakTabel.Instansi)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
-          </ButtonGroup>
+        <div style="width:250px;margin-bottom:6px;"> 
+          <p class="text-sm text-gray-700"><b class="font-semibold">Lampiran I (Surat Permohonan):</b><br />
+             <ButtonGroup class="*:!ring-primary-700 mt-2"> 
+             <a href={DownloadFile(cetakTabel.IDBucketLampiranI)} target="_blank"><Button style="color:#ff6767;height: 50px;">
+               <FilePdfOutline class="w-8 h-8" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label>
+           </p>  
+
+            <p class="text-sm text-gray-700"><b class="font-semibold">Lampiran II (KAK/Naskah KS Sebelumnya):</b><br />
+             <ButtonGroup class="*:!ring-primary-700 mt-2"> 
+             <a href={DownloadFile(cetakTabel.IDBucketLampiranII)} target="_blank"><Button style="color:#ff6767;height: 50px;">
+               <FilePdfOutline class="w-8 h-8" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label>
+            </p>  
+
+             <p class="text-sm text-gray-700"><b class="font-semibold">Lampiran III (Naskah KS Baru):</b><br />
+             <ButtonGroup class="*:!ring-primary-700 mt-2"> 
+             <a href={DownloadFile(cetakTabel.IDBucketLampiranIII)} target="_blank"><Button style="color:#89aae4;height: 50px;">
+               <FileLinesOutline class="w-8 h-8" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label>
+            </p>  
+        </div>
         </TableBodyCell>
-        {/if}
+        <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+           <div style="width:260px;margin-bottom:6px;">
+            <p class="text-sm text-gray-700"><b class="font-semibold">Catatan Pengirim:</b><br />{cetakTabel.Catatan}</p> 
+            <p class="text-sm text-gray-700"><b class="font-semibold">Status:</b><br />
+              <Badge color={ cetakTabel.Status === "Proses Pengajuan" ? "yellow" : cetakTabel.Status === "Proses Verifikasi" ? "blue" : cetakTabel.Status === "Penandatanganan Naskah" ? "green" : cetakTabel.Status === "Perbaikan Pengajuan" ? "red" : "gray"} 
+              border>{cetakTabel.Status}</Badge>
+            </p>
+            <p class="text-sm text-gray-700"><b class="font-semibold">Estimasi Proses:</b><br />{cetakTabel.Estimasi}</p>
+            <br/> 
+            {#if $user.prefs['Role'] === "PIC Kerjasama"}
+            <p class="text-sm text-gray-700"><b class="font-semibold">Tombol Aksi:</b><br />
+            <ButtonGroup class="*:!ring-primary-700 mt-4">
+             <Button style="color:blue;" on:click={() => getDataPengajuanKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
+             <Button style="color:red;"on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama, cetakTabel.Instansi)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+             </ButtonGroup>
+            </p>
+            {/if}
+            <br/>
+          </div>
+          
+          </TableBodyCell>    
         <Modal bind:open={ConfirmDeleteModal} size="md" autoclose={false}>
           <div class="text-center">
             <ExclamationCircleOutline class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" />
@@ -488,68 +525,6 @@ const remove = async (id) => {
  }
  
 
-  .modern-box {
-    position: relative;
-    display: inline-block;
-    padding: 12px;
-  }
-  
-  .modern-box::before,
-  .modern-box::after,
-  .contentbox::before,
-  .contentbox::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #c7c7e7;
-  }
-  
-  /* Top left corner */
-  .modern-box::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  /* Top right corner */
-  .modern-box::after {
-    top: 0;
-    right: 0;
-    border-left: none;
-    border-bottom: none;
-  }
-
-  .contentbox {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-  
-  /* Bottom left corner */
-  .contentbox::before {
-    bottom: 0;
-    left: 0;
-    border-right: none;
-    border-top: none;
-  }
-  
-  /* Bottom right corner */
-  .contentbox::after {
-    bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
-  }
-  
-  .contentbox label {
-    font-size: 0.94rem;
-    margin: 0;
-    padding: 0;
-  }
-
-	
 </style>
 
 

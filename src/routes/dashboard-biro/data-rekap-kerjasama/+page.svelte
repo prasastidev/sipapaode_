@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
  
-    import { Heading, Card, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Select, Label, Badge } from 'flowbite-svelte';
+    import { Heading, Alert, Fileupload, Toast, Modal, Textarea, Radio, Input, FloatingLabelInput, Button, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Select, Label, Badge } from 'flowbite-svelte';
     import { BuildingOutline, PlusOutline, CheckPlusCircleOutline, ExclamationCircleOutline, CheckCircleSolid, EditOutline, TrashBinOutline, DownloadOutline, FilePdfOutline } from 'flowbite-svelte-icons';
     import { user } from '$lib/user';
     import { slide } from 'svelte/transition';
@@ -22,6 +22,25 @@
   
   
    export let data=[]; 
+
+    function formatTanggal(tanggalString) {
+        // Pengaman jika tanggalnya kosong atau null
+        if (!tanggalString) {
+            return 'Tanggal tidak valid';
+        }
+
+        const tanggalObjek = new Date(tanggalString);
+
+        // Opsi format tanggal
+        const options = {
+            day: 'numeric',    // -> 27
+            month: 'long',     // -> Mei (bukan May)
+            year: 'numeric'    // -> 2026
+        };
+
+        // 'id-ID' adalah kode untuk Bahasa Indonesia 🇮🇩
+        return new Intl.DateTimeFormat('id-ID', options).format(tanggalObjek);
+    }
 
    let selectTahunMulai = '';
     let tahunmulaiAKtif = [
@@ -260,7 +279,7 @@ const updateDataKS = async (e) => {
       table = document.getElementById("TABLE_KSPK");
       tr = table.getElementsByTagName("tr");
       for (i = 0; i < tr.length; i++) {
-        td = tr[i].getElementsByTagName("td")[4];
+        td = tr[i].getElementsByTagName("td")[1];
         if (td) {
           txtValue = td.textContent || td.innerText;
           if (txtValue.toUpperCase().indexOf(filter) > -1) {
@@ -332,15 +351,25 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Document Kerjasama - Pemerintahan Prov. Sulawesi Tenggara</Heading>
-  <br/><br/>
+  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Arsip File Dokumen Kerjasama - Prov. Sulawesi Tenggara</Heading>
+  <br/>
+
+    {#if $user.prefs['Role'] !== "PIC Kerjasama"}
+    <Alert color="yellow">
+    <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Kerjasama</span>
+    </Alert>
+    <br/>
+    {/if}
+  
   {#if $user.prefs['Role'] === "PIC Kerjasama"}
-  <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
-    <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambah Data Dokumen Kerjasama pada Tombol di samping berikut</div>
+  <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;border:1px solid rgb(203, 213, 225);">
+    <div class="col-span-2" style="font-size:22px;margin-left:10px;">Klik tombol di samping untuk menambah Data Kerjasama Baru</div>
     <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddData = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Kerjasama</Button>  </div>
    </div>
    {/if}
-  <Modal title="Form Pengisian Data Kerjasama Baru" bind:open={ModalAddData} autoclose={false}>
+   <br/>
+
+  <Modal size="lg" title="Form Pengisian Data Kerjasama Baru" bind:open={ModalAddData} autoclose={false}>
     <form class="space-y-6" on:submit={addDatatoTable} >
       <h2 style="font-weight:600;margin-bottom:8px;color:#5850ec;">Silahkan Isi data Kerjasama Baru pada Form di bawah berikut:</h2>
      <label class="text-sm">Kategori Kerjasama:</label>
@@ -478,23 +507,29 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
       </Toast>
     </svelte:fragment>
   </Modal>
-  <br/>
-
+ 
   <section>
-  
-    <div class="grid grid-cols-2 gap-4">
-      <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #ebf5ff;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Aktif (Masih Berlaku)</h5>
-      <p id="count2" class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2"> <span>{data.TableDatasKSBerlaku.total}</span> </p>
-      </Card></div> 
-      <div><Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><label style="padding: 2px;width: 16px;height: 16px;background-color: #fff8f1;display: block;float: left;margin-top: 7px;margin-right: 6px;border: 1px solid;"></label> Kerjasama Telah Berakhir (Expire)</h5>
-      <p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2"><span>{data.TableDatas.total - data.TableDatasKSBerlaku.total}</span></p>
-      </Card></div> 
+
+     <div class="flex items-center justify-center gap-2 p-2">
+     <div class="flex w-full items-center justify-between rounded-xl border-2 border-slate-300 bg-white p-4 shadow-lg">
+      <p class="text-xl font-semibold text-gray-700">Total Kerjasama Aktif:</p>
+      <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-blue-100">
+      <span class="text-3xl font-bold text-blue-400">{data.TableDatasKSBerlaku.total}</span>
+      </div>
+     </div>
+      <div class="flex w-full items-center justify-between rounded-xl border-2 border-slate-300 bg-white p-4 shadow-lg">
+       <p class="text-xl font-semibold text-gray-700">Total Kerjasama Telah Selesai:</p>
+        <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-blue-100">
+       <span class="text-3xl font-bold text-blue-400">{data.TableDatas.total - data.TableDatasKSBerlaku.total}</span>
+       </div>
+      </div>
     </div>
+  
     <br/> 
     {#if data.TableDatas.total === 0}
       <p>No TableDatas yet.</p>
     {:else}
-      <p>Saat ini Terdapat {data.TableDatas.total} Data Kerjasama Terdaftar</p>
+    <p>Terdapat {data.TableDatas.total} Data Kerjasama Terdaftar</p> 
     {/if}
     <br/>
     <form class="flex items-center w-full mx-auto" style="width:100%;">   
@@ -505,7 +540,7 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
                   <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
               </svg>
           </div>
-          <input on:keyup={SearchTable} type="text" id="simple-search" class="bg-white-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Data berdasarkan Nama Mitra, OPD atau Nomor Kerjasama ..." required />
+          <input on:keyup={SearchTable} type="text" id="simple-search" class="bg-white-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-white-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Cari Data berdasarkan Nama Mitra atau Judul Kerjasama ..." required />
       </div>
       <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -516,7 +551,7 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
   </form>
     
 <br/>
-<div class="mb-4">
+<div class="mb-2">
   <label class="mr-2 font-medium">Tahun:</label>
   <select 
     bind:value={selectedYear}
@@ -530,7 +565,7 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
 </div>
 
 <!-- Pagination dengan Items per Page -->
-    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
         <!-- Items per page selector -->
         <div class="flex items-center gap-2">
             <label for="items-per-page" class="font-medium text-gray-700">Show:</label>
@@ -576,11 +611,9 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">No</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Nama Mitra Instansi</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Document KS</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Detail</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">OPD</TableHeadCell>
+         <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Unduh File Dokumen</TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Tahun Mulai</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Tanggal</TableHeadCell>
         {#if $user.prefs['Role'] === "PIC Kerjasama"}
         <TableHeadCell style="font-size: larger;" class="py-4 px-4 content-start">Tombol Aksi</TableHeadCell>
         {/if}
@@ -591,18 +624,39 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
       <TableBody tableBodyClass="divide-y align-top">
         {#each filteredData as cetakTabel, i}	
         {#if i >= postRangeLow && i < postRangeHigh}
-        <TableBodyRow class={`bg-${getKeteranganKSColor(cetakTabel.keteranganKS)}`}>
+        <TableBodyRow class="bg-white hover:bg-slate-50 transition-colors">
           <TableBodyCell>{i+1}</TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 flex content-start"><BuildingOutline class="w-14 h-14" style="color:#717b91;margin-right:4px;" /><span><b>{cetakTabel.Mitra}</b></span></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"> 
-            <center><ButtonGroup class="*:!ring-primary-700"> 
-             <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#89aae4;height: 80px;">
-               <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label></center>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2">
+           <div style="width: 280px; overflow-wrap: anywhere;">
+            <div class="flex items-center"><BuildingOutline class="w-14 h-14 mr-2 text-gray-500 shrink-0" />
+             <span class="font-bold" style="font-size:16px;">{cetakTabel.Mitra}</span>
+            </div>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Judul Kerjasama:</b><br />{cetakTabel.Subjek}</p>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Tanggal Mulai:</b><br />{formatTanggal(cetakTabel.tanggalMulai.slice(0, 10))}</p>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Tanggal Selesai:</b><br />{formatTanggal(cetakTabel.tanggalSelesai.slice(0, 10))}</p>
+           <p class="text-sm text-gray-700"><b class="font-semibold">Status:</b><br /><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></p>
+           <br/>
+          </div>
+         </TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+          <div style="width:320px;margin-bottom:6px;">
+            <p class="text-sm text-gray-700"><b class="font-semibold">Jenis Kerjasama:</b><br />{cetakTabel.Jenis}</p> 
+            <p class="text-sm text-gray-700"><b class="font-semibold">Tentang:</b><br />{cetakTabel.Tentang}</p>
+            <p class="text-sm text-gray-700"><b class="font-semibold">Kategori:</b><br />{cetakTabel.kategoryKS}</p>
+            <p class="text-sm text-gray-700"><b class="font-semibold">OPD:</b><br />{cetakTabel.OPD}</p>
+            <br/>
+          </div>
           </TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:320px;margin-bottom:6px;"><b>▸ Subjek:</b><br/>{cetakTabel.Subjek} <br/><br/><b>▸ Jenis:</b><br/>{cetakTabel.Jenis}<br/><br/><b>▸ Kategori:</b><br/>{cetakTabel.kategoryKS}<br/><br/><b>▸ Tentang:</b><br/>{cetakTabel.Tentang} </div></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:200px;overflow-wrap: anywhere;"><b>▸ OPD:</b><br/> {cetakTabel.OPD}<br/><br/><b>▸ Mitra:</b><br/>{cetakTabel.Mitra}<b><br/><br/>▸ Nomor Kerjasama:</b><br/>{cetakTabel.No_kerjasama}</div></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><span style="padding: 4px 8px;border-radius: 8px;background: #a3e1ff;">{cetakTabel.TahunMulai}</span></TableBodyCell>
-          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><div style="width:180px;overflow-wrap: anywhere;"><b>📅 Mulai:</b><br/> {cetakTabel.tanggalMulai.slice(0, 10)}<br/><br/><b>🗓️ Selesai: </b><br/>{cetakTabel.tanggalSelesai.slice(0, 10)}<br/><br/><Badge color={cetakTabel.keteranganKS === "Telah Selesai" ? "red" : "indigo"} border>{cetakTabel.keteranganKS}</Badge></div></TableBodyCell>
+           <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start">
+            <div style="width:250px;margin-bottom:6px;"> 
+            <ButtonGroup class="*:!ring-primary-700"> 
+             <a href={DownloadFile(cetakTabel.$id)} target="_blank"><Button style="color:#ff6767;height: 80px;">
+               <FilePdfOutline class="w-11 h-11" /> </Button> </a> </ButtonGroup> <label style="color:#89aae4;margin-top:5px;display: block;">Unduh File</label>
+             <p class="text-sm text-gray-700"><b class="font-semibold">Nomor Kerjasama:</b><br />{cetakTabel.No_kerjasama}</p>
+           
+            </div>
+            </TableBodyCell>
+          <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><span style="padding: 4px 8px;border-radius: 6px;background: #a3e1ff;">{cetakTabel.TahunMulai}</span></TableBodyCell>
           {#if $user.prefs['Role'] === "PIC Kerjasama"}
           <TableBodyCell class="whitespace-break-spaces py-3 px-2 content-start"><ButtonGroup class="*:!ring-primary-700">
             <Button style="color:blue;" on:click={() => getDataRekapKerjasama(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>

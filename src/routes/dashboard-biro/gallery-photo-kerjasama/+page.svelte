@@ -225,7 +225,7 @@ function showimage(id) {
     <div id="updateProfile" class="flex items-center gap-4 mb-10">
     <h4 class="text-xl font-extrabold md:text-xl lg:text-2xl">📝 Update Halaman Profile</h4>
       {#if $user.prefs['Role'] === "PIC Kerjasama"}
-    <button on:click={openUpdateModal} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
+    <button style="box-shadow: rgba(102, 144, 246, 0.4) 5px 7px;" on:click={openUpdateModal} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
     <EditOutline class="shrink-0 h-6 w-6" /><span>EDIT</span>
    </button>
        {/if}
@@ -260,7 +260,7 @@ function showimage(id) {
      <div id="uploadPhoto" class="flex items-center gap-4 mb-10">
     <h4 class="text-xl font-extrabold md:text-xl lg:text-2xl">🖼️ Upload Photo Gallery</h4>
     {#if $user.prefs['Role'] === "PIC Kerjasama"}
-    <button on:click={() => (isUploadOpen = !isUploadOpen)} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
+    <button style="box-shadow: rgba(102, 144, 246, 0.4) 5px 7px;" on:click={() => (isUploadOpen = !isUploadOpen)} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
     <EditOutline class="shrink-0 h-6 w-6" /><span>{!isUploadOpen ? 'UPLOAD PHOTO' : 'TUTUP UPLOAD PHOTO'}</span>
    </button>
     {/if}

@@ -15,6 +15,7 @@
   let counter = 8;
 
   let getTextBanner, getidDoc;
+  const maxChars = 300; // Definisikan batas maksimal karakter
 
   function timeout() {
     if (--counter > 0) return setTimeout(timeout, 1000);
@@ -89,14 +90,9 @@ function upadateAktivasiBanner(Status_banner, id) {
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Info Pengumuman Pada Halaman Beranda</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Halaman Pengeditan dan Aktivasi Text Banner</Heading>
     <br/>
-    <div class="modern-box">
-      <div class="contentbox">
-        <label>Berikut di bawah ini adalah halaman untuk melakukan perubahan informasi serta menampilkan (enable) ataupun tidak menampilkan (disable) Info Pengumuman yang terdapat pada halaman Beranda.</label>
-      </div>
-    </div>
-    <br/> <br/>
+
     Contoh Tampilan pada halaman Beranda:<br/> <br/>
     <img src={ScreenInfo} alt="screen info" style="width:100%;height:100%;" />
     <br/><br/>
@@ -104,8 +100,10 @@ function upadateAktivasiBanner(Status_banner, id) {
     <Modal title="Edit Text Info Banner" bind:open={ModalEditTextBanner} autoclose={false}>
       <form class="space-y-6" on:submit={updateDataText}>
         <div class="mb-6">
-          <label class="text-sm">Masukan Text Info Banner (max: 150):</label> <br/>  <br/>
-          <Textarea id="infoTextbanner" bind:value={getTextBanner} rows="3" name="infoTextbanner" maxlength="250" />
+          <label class="text-sm">Masukan Text Info Banner (max: 300):</label> <br/>  <br/>
+          <Textarea id="infoTextbanner" maxlength={maxChars} bind:value={getTextBanner} rows="3" name="infoTextbanner" />
+          <label class="text-sm text-left" class:text-red-600={getTextBanner.length >= maxChars}>
+                {getTextBanner.length} / {maxChars}</label>
         </div>
         <div>
           <button type="submit" value="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Update Text Banner</button>
@@ -122,13 +120,12 @@ function upadateAktivasiBanner(Status_banner, id) {
     </Modal>
 
   <section>
-    <span style="color:blue;font-size:16px;">Silahkan melakukan perubahan informasi serta mengaktifkan (enable) ataupun menonaktifkan (disable) info pengumuman pada Tabel di bawah ini:</span>
-    <br/> <br/> 
+     <br/> 
     {#if data.TableDatasTextInfo.documents.length > 0}
     <Table shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto border-4 border-red-500">
       <TableHead>
         <TableHeadCell style="font-size: larger;" class="py-4">Lokasi</TableHeadCell>
-        <TableHeadCell style="font-size: larger;" class="py-4">Text Info Pengumuman</TableHeadCell>
+        <TableHeadCell style="font-size: larger;" class="py-4">Text Banner Info</TableHeadCell>
         <TableHeadCell style="font-size: larger;display:flex;" class="py-4">Edit Text <button id="InfoEditText">
 			<InfoCircleOutline class="w-5 h-5 ms-1.5 mr-1" /> </button></TableHeadCell>
         <TableHeadCell style="font-size: larger;" class="py-4">Status Aktif <button id="InfoStatusAktif">
@@ -136,12 +133,12 @@ function upadateAktivasiBanner(Status_banner, id) {
       </TableHead>
       <Popover triggeredBy="#InfoEditText" class="w-40 md:w-64 lg:w-64 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
-		  Tekan tombol Edit dibawah untuk melakukan perubahan Text Info Pengumuman
+		  Tekan tombol Edit dibawah untuk melakukan perubahan pada info Text
 		</div>
 	  </Popover>
      <Popover triggeredBy="#InfoStatusAktif" class="w-40 md:w-64 lg:w-64 text-sm font-light text-gray-500 bg-white dark:bg-gray-800 dark:border-gray-600 dark:text-gray-400 z-20" placement="left-start">
 		<div class="p-3 space-y-2" style="z-index:100;">
-		  Tekan tombol Toggle dibawah untuk melakukan enable atau disable Info Pengumuman.
+		  Tekan tombol Toggle dibawah untuk melakukan aktivasi Text banner.
 		</div>
 	  </Popover>
       <TableBody tableBodyClass="divide-y">
@@ -171,64 +168,5 @@ function upadateAktivasiBanner(Status_banner, id) {
 
 
 <style>
-  .modern-box {
-    position: relative;
-    display: inline-block;
-    padding: 12px;
-  }
-  
-  .modern-box::before,
-  .modern-box::after,
-  .contentbox::before,
-  .contentbox::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #c7c7e7;
-  }
-  
-  /* Top left corner */
-  .modern-box::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  /* Top right corner */
-  .modern-box::after {
-    top: 0;
-    right: 0;
-    border-left: none;
-    border-bottom: none;
-  }
 
-  .contentbox {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-  
-  /* Bottom left corner */
-  .contentbox::before {
-    bottom: 0;
-    left: 0;
-    border-right: none;
-    border-top: none;
-  }
-  
-  /* Bottom right corner */
-  .contentbox::after {
-    bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
-  }
-  
-  .contentbox label {
-    font-size: 0.94rem;
-    margin: 0;
-    padding: 0;
-  }
 </style>

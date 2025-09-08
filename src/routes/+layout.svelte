@@ -16,10 +16,11 @@ import { MapPinAltOutline, BuildingOutline } from 'flowbite-svelte-icons';
 <Footer footerType="logo">
 	<div class="sm:flex sm:items-center sm:justify-between">
 	  <FooterBrand href="/" src={logo} alt="Logo" name="SiPaPaODe" style="color:rgb(60, 93, 124);"/>
-	   <FooterLinkGroup ulClass="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
-		<FooterLink href="/profil-bidang-kerjasama" style="color:rgb(60, 93, 124);">Bidang Kerjasama</FooterLink>
-		<FooterLink href="/profil-bidang-pemerintahan" style="color:rgb(60, 93, 124);">Bidang Pemerintahan</FooterLink>
-		<FooterLink href="/profil-bidang-otonomi" style="color:rgb(60, 93, 124);">Bidang Otonomi Daerah</FooterLink> 
+	   <FooterLinkGroup ulClass="flex flex-wrap items-center mt-2 mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
+		<FooterLink href="/profil-tata-usaha" style="color:rgb(60, 93, 124);text-decoration:underline;">Tata Usaha</FooterLink>
+		<FooterLink href="/profil-bidang-kerjasama" style="color:rgb(60, 93, 124);text-decoration:underline;">Kerjasama</FooterLink>
+		<FooterLink href="/profil-bidang-pemerintahan" style="color:rgb(60, 93, 124);text-decoration:underline;">Pemerintahan</FooterLink>
+		<FooterLink href="/profil-bidang-otonomi" style="color:rgb(60, 93, 124);text-decoration:underline;">Otonomi Daerah</FooterLink> 
 	  </FooterLinkGroup>
 	  
 	</div> <br/>

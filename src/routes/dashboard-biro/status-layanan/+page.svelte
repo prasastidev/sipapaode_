@@ -46,14 +46,10 @@
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Pengaturan Enable/Disable Pengisian Formulir Online Pada Fitur Layanan</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Pengaturan Visibility Formulir Layanan</Heading>
     <br/>
 
-    <div class="modern-box">
-        <div class="contentbox">
-            <label>Berikut dibawah ini adalah pengaturan untuk menampilkan (Enable) ataupun tidak menampilkan (Disable) Pengisian Formulir Online yang terdapat pada Fitur Layanan pada setiap Bidang. Pengisian Formulir Online sewaktu-waktu dapat di aktifkan ataupun di nonaktifkan sesuai dengan tombol toggle pengaturan pada table dibawah.</label>
-        </div>
-    </div> <br/><br/><br/>
+   <br/>
 
     <!-- Filter Buttons -->
     <div class="mb-4 flex gap-2">
@@ -134,64 +130,4 @@
         text-align: center;
     }
 
-    .modern-box {
-        position: relative;
-        display: inline-block;
-        padding: 12px;
-    }
-    
-    .modern-box::before,
-    .modern-box::after,
-    .contentbox::before,
-    .contentbox::after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        border: 4px solid #c7c7e7;
-    }
-    
-    /* Top left corner */
-    .modern-box::before {
-        top: 0;
-        left: 0;
-        border-right: none;
-        border-bottom: none;
-    }
-    
-    /* Top right corner */
-    .modern-box::after {
-        top: 0;
-        right: 0;
-        border-left: none;
-        border-bottom: none;
-    }
-
-    .contentbox {
-        background: white;
-        padding: 6px 12px;
-        border-radius: 8px;
-    }
-    
-    /* Bottom left corner */
-    .contentbox::before {
-        bottom: 0;
-        left: 0;
-        border-right: none;
-        border-top: none;
-    }
-    
-    /* Bottom right corner */
-    .contentbox::after {
-        bottom: 0;
-        right: 0;
-        border-left: none;
-        border-top: none;
-    }
-    
-    .contentbox label {
-        font-size: 0.94rem;
-        margin: 0;
-        padding: 0;
-    }
 </style>

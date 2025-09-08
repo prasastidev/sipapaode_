@@ -6,7 +6,7 @@ import mapSultrapng from '$lib/images/Map-sultra.webp';
 import ImagelogoSultra from '$lib/images/Sultra-Logo.webp';
 import { parseNumber } from './NumberParser.js'
 	// In this locale "," is the decimal separator and "." is the group separator
-	const locale = 'en-EN'
+	const locale = 'id-ID'
 	const numDecimals = 2;
 	const formatter = new Intl.NumberFormat(locale, {maximumFractionDigits: numDecimals});
 
@@ -418,7 +418,6 @@ function onWindowClick(e) {
     <a href="/maps-sultra/#TabelOtonomi" class="nav-button">DATA ADMINISTRASI</a>
     <a href="/maps-sultra/#grafik" class="nav-button">DATA GRAFIK STATISTIK</a>
   </nav>
-
 </div>
 
 
@@ -427,7 +426,7 @@ function onWindowClick(e) {
     <br/><br/>
 	
 	<Heading id="lanskap" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
-    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> 
+    <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> 
 	 Lanskap Geografis Sulawesi Tenggara
     </Heading>
 	 <p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding: 4px 14px;border-radius: 6px;">Berikut adalah data statistik utama yang menggambarkan lanskap geografis dan struktur administratif Provinsi Sulawesi Tenggara. Informasi ini mencakup luas wilayah, demografi, hingga rincian jumlah kabupaten/kota, kecamatan, desa/kelurahan, serta fitur geografis seperti gunung dan pulau di Sultra.</p>
@@ -545,7 +544,7 @@ function onWindowClick(e) {
 	</div>
 	<br/><br/><br/>
 	<Heading id="Maps" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
-    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" />  
+   <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" />  
 	Maps Sulawesi Tenggara
     </Heading>
 	<p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding: 4px 14px;border-radius: 6px;">Jelajahi geografi Provinsi Sulawesi Tenggara secara visual melalui berbagai pilihan peta. Anda dapat menggunakan peta interaktif dan citra satelit untuk melihat detail wilayah, atau merujuk pada gambar peta statis untuk gambaran umum dan referensi cepat.</p>
@@ -563,7 +562,7 @@ function onWindowClick(e) {
 	  </Tabs>
 	 <br/><br/><br/>
 	 <Heading id="TabelOtonomi" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
-    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" />  
+  <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" />  
 	Tabel Kode dan Data Wilayah Administrasi Pemerintahan Per Kab/Kota Sulawesi Tenggara
     </Heading>
 	
@@ -1325,7 +1324,7 @@ function onWindowClick(e) {
 
 	<br/><br/><br/>
 	<Heading id="grafik" tag="h4" class="mb-4 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
-    <ArrowRightAltSolid class="h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /><ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> 
+   <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> 
 	Grafik Kabupaten/Kota Sulawesi Tenggara
     </Heading>
     <p class="ml-6 text-sm md:text-base lg:text-base" style="background: white;padding:4px 14px;border-radius: 6px;">Visualisasikan data perbandingan antar kabupaten dan kota di Sulawesi Tenggara melalui grafik interaktif ini. Pilih metrik yang diinginkan—Jumlah Penduduk, Luas Wilayah, atau Jumlah Kecamatan—untuk melihat perbedaannya secara visual di seluruh provinsi.</p>

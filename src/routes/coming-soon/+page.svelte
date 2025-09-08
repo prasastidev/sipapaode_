@@ -15,7 +15,7 @@
     <Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Coming Soon ..</Heading>
     <br/>
 
-    <Heading tag="h4" class="mb-4" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">LAYANAN INI AKAN LAUNCHING KEMUDIAN... </Heading>
+   
 
 <br/>
 

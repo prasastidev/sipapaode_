@@ -1,13 +1,33 @@
 <script>
     /** @type {import('./$types').PageData} */
    import { Heading, StepIndicator, Indicator, Toast, Avatar, Button, Chart, Modal, Select, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Checkbox, Card, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
-    import { ArrowDownToBracketOutline, BuildingSolid, CheckCircleSolid } from 'flowbite-svelte-icons';
+    import { ArrowRightAltSolid, BuildingSolid, CheckCircleSolid } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
     import { slide } from 'svelte/transition';
 	  import { addTableData } from '$lib/crudPengajuanKSOnline.js';
     import { v4 as uuidv4 } from "uuid";
+
+     // Fungsi untuk memformat tanggal
+	function formatTanggal(tanggalString) {
+		// Pengaman jika tanggalnya kosong atau null
+		if (!tanggalString) {
+			return 'Tanggal tidak valid';
+		}
+
+		const tanggalObjek = new Date(tanggalString);
+
+		// Opsi format tanggal
+		const options = {
+			day: 'numeric', // -> 27
+			month: 'long', // -> Mei (bukan May)
+			year: 'numeric' // -> 2026
+		};
+
+		// 'id-ID' adalah kode untuk Bahasa Indonesia 🇮🇩
+		return new Intl.DateTimeFormat('id-ID', options).format(tanggalObjek);
+	}
 
 let uuid = "";
 let uuidLampiran1 = "";
@@ -264,34 +284,6 @@ let steps = ['Langkah 1', 'Langkah 2'];
     }
 
 
- // Data untuk setiap step
-  const procedureSteps = [
-    {
-      number: 1,
-      title: "Proses Pengajuan /",
-      subtitle: "Submit Dokumen",
-      completed: false
-    },
-    {
-      number: 2,
-      title: "Proses",
-      subtitle: "Verifikasi Doc",
-      completed: false
-    },
-    {
-      number: 3,
-      title: "Penandatanganan",
-      subtitle: "Naskah",
-      completed: false
-    },
-    {
-      number: '',
-      title: "Perbaikan",
-      subtitle: "Pengajuan",
-      completed: true
-    }
-  ];
-
    // Items per page options
   let itemsPerPageOptions = [
     { value: 5, name: '5 per halaman' },
@@ -327,24 +319,24 @@ let steps = ['Langkah 1', 'Langkah 2'];
 
  // Lihat Prosedure   
  const procedure = {
-    title: "Prosedur Kerjasama",
+    title: "Prosedur Kerjasama dengan Pemerintah Daerah dan K/L",
     steps: [
-      {
-        title: "Formulir Kerjasama",
-        description: "Pemerintah Daerah dan K/L diminta untuk melengkapi Formulir Online dan Mengupload draft Kerjasama. Ini adalah langkah awal untuk memulai kerjasama dan kolaborasi."
-      },
-      {
-        title: "Rekap Data Usulan",
-        description: "Setelah Pengisian, data usulan Anda akan direkap di Administrasi Biro Pemerintahan. Pastikan semua informasi terisi dengan benar."
-      },
-      {
-        title: "Follow Up Kerjasama",
-        description: "Biro Pemerintahan yang ditunjuk akan melakukan tindak lanjut terhadap dokumen kerjasama. Proses Penelaahan lebih lanjut akan dilakukan untuk memastikan kelancaran kerjasama." 
-      },
-			  {
-        title: "Info dan Tindak Lanjut",
-        description: "Info lebih lanjut akan dikirim via email atau kontak di Formulir. Selanjutnya akan disusun PKS untuk formalitas kerjasama." 
-       }
+        {
+            title: "Pengisian Formulir & Unggah Dokumen 📝",
+            description: "Langkah pertama adalah mengisi formulir pengajuan secara online dan mengunggah dokumen proposal Anda. Pastikan semua data yang dimasukkan sudah benar dan lengkap untuk mempercepat proses."
+        },
+        {
+            title: "Verifikasi & Administrasi Usulan 📂",
+            description: "Setelah formulir diterima, tim kami di Biro Pemerintahan akan merekapitulasi dan memverifikasi kelengkapan administrasi usulan Anda. Sistem akan secara otomatis memeriksa data yang masuk."
+        },
+        {
+            title: "Penelaahan dan Tindak Lanjut 🔍",
+            description: "Dokumen Anda akan diteruskan kepada tim terkait untuk ditelaah lebih lanjut. Pada tahap ini, kami akan menganalisis kelayakan dan potensi kerja sama yang diajukan." 
+        },
+        {
+            title: "Informasi Hasil & Perjanjian Kerja Sama (PKS) 🤝",
+            description: "Anda akan menerima informasi mengenai status pengajuan Anda melalui email atau kontak yang terdaftar. Jika usulan disetujui, langkah selanjutnya adalah penyusunan Perjanjian Kerja Sama (PKS) untuk meresmikan kolaborasi." 
+        }
     ]
   };
 
@@ -357,7 +349,26 @@ let steps = ['Langkah 1', 'Langkah 2'];
 	<meta name="description" content="Sipapaode | Kerjasama antar Pemerintah Daerah dan K/L - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<Modal title="Prosedure Kerjasama" bind:open={ModalProsedure} size="md" autoclose={false}>
+<br/>
+<div class="page-container">
+    <header class="info-card">
+        <div class="logo">
+            <img src="/LogoSultra.webp" alt="Logo Sulawesi Tenggara"/>
+        </div>
+        <div class="title-container">
+            <h1>INFORMASI KERJASAMA PEMPROV. SULAWESI TENGGARA DENGAN</h1>
+            <h2>PEMERINTAH DAERAH DAN K/L</h2>
+        </div>
+    </header>
+
+    <nav class="nav-container">
+        <a href="/kerjasama-antar-pemerintah-daerah-kl/#pengajuan" class="nav-button">PENGAJUAN KERJASAMA</a>
+        <a href="/kerjasama-antar-pemerintah-daerah-kl/#statistik" class="nav-button">DATA STATISTIK</a>
+        <a href="/kerjasama-antar-pemerintah-daerah-kl/#data_kerjasama" class="nav-button">DATA KERJASAMA</a>
+    </nav>
+</div>
+
+<Modal title="Prosedure Kerjasama" bind:open={ModalProsedure} size="xl" autoclose={false}>
   <div class="procedure">
     <h1>{procedure.title}</h1>
     {#each procedure.steps as step, i}
@@ -375,7 +386,7 @@ let steps = ['Langkah 1', 'Langkah 2'];
   </svelte:fragment>
 </Modal>
 
-<Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir} size="lg"  autoclose={false}>
+<Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir} size="xl"  autoclose={false}>
   <form class="space-y-6" on:submit={addDataFormtoTable} >
     <h2 style="font-weight:600;margin-bottom:8px;color:green;">Silahkan mengisi data Formulir dengan lengkap di bawah berikut:</h2>
     Pengiriman Dokumen Pengajuan Kerjasama dilakukan melalui formulir ini, Pastikan untuk mengisi setiap bagian dengan tepat. Siapkan semua dokumen yang akan dilampirkan sebelum mengirim pengajuan.
@@ -465,14 +476,17 @@ let steps = ['Langkah 1', 'Langkah 2'];
 
 
 <div class="container">
-<Heading tag="h3" class="mb-4 mt-14" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl" style="color:#1f4d8c;">Kerjasama Pemprov. Sultra dengan Pemerintah Daerah dan K/L</Heading>
+ <Heading id="pengajuan" tag="h3" class="mb-4 mt-14 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+        <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> PENGAJUAN KERJASAMA
+  </Heading>
+<p>
+    Bagi Pemerintah Daerah atau K/L yang ingin mengajukan kerja sama dengan Pemprov Sultra, kami menyediakan dua metode pengajuan. {#if OnlineKSpemerintahdaerahkl.Status_raw} Metode utama adalah melalui <Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge> yang tersedia di bawah ini. {/if} Selain itu, dokumen juga dapat diantar secara langsung melalui <Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Kunjungan Langsung</Badge> ke Kantor Biro Pemerintahan dan Otonomi Daerah Provinsi Sultra.
+</p>
 <br/>
-<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#statistikKerjasama" class="mb-2 mr-4 text-sm md:text-base lg:text-base" style="box-shadow:rgb(102 144 246 / 40%) 4px 8px;">► Informasi Statistik Kerjasama</Button>
-<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#DataKerjsamaAktif" class="mb-2 mr-4 text-sm md:text-base lg:text-base" style="box-shadow:rgb(102 144 246 / 40%) 4px 8px;">► Data Kerjasama Aktif</Button>
-<Button color="alternative" href="/kerjasama-antar-pemerintah-daerah-kl/#3PengirimTerakhir" class="mb-2 mr-4 text-sm md:text-base lg:text-base" style="box-shadow:rgb(102 144 246 / 40%) 4px 8px;">► Data Pengajuan Kerjasama Saat ini</Button>
-<br/><br/><br/>
+<!-- <br/>
   Pengajuan dokumen kerjasama antara Pemerintah Daerah dan K/L dengan Pemprov. Sultra dapat dilakukan melalui {#if OnlineKSpemerintahdaerahkl.Status_raw } <Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge> yang terdapat dibawah berikut. Pengajuan Dokumen Kerjasama juga dapat langsung diantarkan {/if} <Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge> ke Kantor Biro Pemerintahan dan Otonomi Daerah Provinsi Sultra. <br/>
 <br/>
+-->
 {#if !OnlineKSpemerintahdaerahkl.Status_raw }
 <Alert color="yellow">
   Sehubungan dengan Pengisian Formulir Online saat ini sedang ditutup, pengajuan dokumen Kerjasama dapat langsung diantar melalui visit kantor.
@@ -484,19 +498,39 @@ let steps = ['Langkah 1', 'Langkah 2'];
   {#if OnlineKSpemerintahdaerahkl.Status_raw }
   <div style="padding: 14px;border-radius: 16px;border: 4px solid green;"><Badge color="green" rounded border><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge> <br/>
     <br/> Silakan mengisi formulir dibawah berikut untuk melanjutkan proses: 
-    <GradientButton id="ButtonFormulir" on:click={() => (ModalFormulir = true)} outline color="redToYellow" class="inline-flex w-full h-12 mt-4">Pengisian Formulir Kerjasama</GradientButton>
-    <Tooltip triggeredBy="#ButtonFormulir">Formulir Pengajuan Kerjasama melalui Online</Tooltip>
-    <br/><br/><br/>
-    Baca Prosedur dan Peraturan Menteri Dalam Negeri di bawah berikut.
-    <br/>
-    <GradientButton id="ButtonProsedur" on:click={() => (ModalProsedure = true)} outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Lihat Prosedur</GradientButton> 
-    <Tooltip triggeredBy="#ButtonProsedur">Alur Prosedur</Tooltip>
-    <GradientButton id="ButtonTatacara" href={ TataCaraKerjasama } outline color="redToYellow" class="inline-flex w-full h-12 mr-4 mt-4">Peraturan Menteri Dalam Negeri</GradientButton>
-   <Tooltip triggeredBy="#ButtonTatacara">Peraturan Menteri Dalam Negeri Nomor 22 Tahun 2020</Tooltip>
-<br/><br/>
+
+    <div class="w-full p-8 rounded-2xl shadow-lg border border-gray-200">
+      <div on:click={() => (ModalFormulir = true)} class="flex flex-col sm:flex-row items-center gap-6 mb-10 text-center sm:text-left p-4 rounded-lg cursor-pointer hover:bg-gray-100 transition-colors duration-200">
+          <div  class="flex-shrink-0">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-20 w-20 text-blue-500" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19,2H14.82A3,3,0,0,0,9.18,2H5A3,3,0,0,0,2,5V20a3,3,0,0,0,3,3H19a3,3,0,0,0,3-3V5A3,3,0,0,0,19,2ZM12,4a1,1,0,0,1,1,1,1,1,0,0,1-1,1,1,1,0,0,1-1-1A1,1,0,0,1,12,4Zm7,16a1,1,0,0,1-1,1H5a1,1,0,0,1-1-1V5A1,1,0,0,1,5,4H7V6A1,1,0,0,0,8,7h8a1,1,0,0,0,1-1V4h2a1,1,0,0,1,1,1V20Z"/>
+                    <path d="M8 12h8v2H8zM8 16h8v2H8zM8 8h8v2H8z"/>
+                </svg>
+            </div>
+            <div>
+                <h2 class="text-xl md:text-2xl font-extrabold">
+                    <span class="block">Formulir Submit Dokumen</span>
+                    <span class="block">Pengajuan Kerjasama</span>
+                </h2>
+            </div>
+        </div>
+
+        <div class="space-y-4">
+            <a href="#" on:click={() => (ModalProsedure = true)} class="block text-blue-600 hover:underline hover:text-blue-800 transition-colors">
+                Baca Prosedur Kerjasama
+            </a>   
+            <a href={ TataCaraKerjasama } class="block text-blue-600 hover:underline hover:text-blue-800 transition-colors">
+                Baca Permendagri Tentang Kerjasama
+            </a>  
+             <a href="/tracking-pengajuan-kerjasama" class="block text-blue-600 hover:underline hover:text-blue-800 transition-colors">
+                Tracking Status Pengajuan Kerjasama
+            </a>    
+        </div>
+    </div>
+
   </div> 
    {/if} 
-  <div style="padding: 14px;border-radius: 16px;border: 4px solid orange;"><Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Via Kantor</Badge> <br/>
+  <div style="padding: 14px;border-radius: 16px;border: 4px solid orange;"><Badge color="yellow" rounded border><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge> <br/>
   <br/> Silakan membawa berkas dokumen permohonan kerjasama Anda ke alamat di bawah berikut. <br/><br/>
     <div class="text-2xl font-extrabold"><BuildingSolid class="w-10 h-10 align-middle inline-flex" /> Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara <br/>
     <br/><span class="text-lg font-normal">Kompleks Bumi Praja Anduonohu, Kecamatan Poasia, <br/>Kota Kendari, Sulawesi Tenggara 93231
@@ -505,8 +539,10 @@ let steps = ['Langkah 1', 'Langkah 2'];
   </div>
 </div>
 
-<br/><br/><br/>
-<Heading id="statistikKerjasama" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">⮞ Data Statistik (Thn: ) </Heading>
+<br/><br/>
+ <Heading id="statistik" tag="h3" class="mb-4 mt-14 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+        <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> DATA STATISTIK
+  </Heading>
 Berikut dibawah ini adalah data Informasi Statistik tentang Kerjasama antara Pemerintah Prov. Sulawesi Tenggara dengan Pemerintah Daerah dan K/L.
 <br/><br/>
 
@@ -525,21 +561,22 @@ Berikut dibawah ini adalah data Informasi Statistik tentang Kerjasama antara Pem
 			<p  id="count1" class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{KSAktifBaru}</p>
         </Card> --> <br/>
         <Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Kerjasama Aktif Masih Berlaku</h5>
-			<p  id="count2" class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{KSAktif}</p>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{KSAktif}</p>
         </Card> <br/>
         <Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Kerjasama Telah Berakhir</h5>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{KSTelahBerakhir}</p>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{KSTelahBerakhir}</p>
         </Card> <br/>
         <Card class="w-full max-w-lg"><h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Total Kerjasama Aktif dan Berakhir</h5>
-			<p class="font-semibold text-xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2">{KSTotal}</p>
+			<p class="font-semibold text-xl md:text-2xl lg:text-3xl text-[#5f9ea0] dark:text-[#5f9ea0] leading-tight pl-2" style="background: aliceblue;width: fit-content;padding:2px 6px;border-radius: 6px;">{KSTotal}</p>
         </Card> <br/>
     </div>
  </div> <br/><br/>
 
 </div>
 <br/>
-<Heading id="DataKerjsamaAktif" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">⮞ Data Kerjasama Aktif Sampai dengan Saat ini</Heading>
-<br/>
+<Heading id="data_kerjasama" tag="h3" class="mb-4 mt-14 flex items-center gap-2" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl" style="color:#1f4d8c;">
+        <ArrowRightAltSolid class="-ml-3 h-7 w-7 md:h-8 md:w-8 lg:h-8 lg:w-8" /> DATA KERJASAMA SEDANG BERLANGSUNG DENGAN PEMERINTAH DAERAH DAN K/L SAAT INI
+  </Heading>
 {#if data.TableDataKSAntarPemerintah_Berlaku.total === 0}
 <p>No TableDatas yet.</p>
 {:else}
@@ -631,8 +668,8 @@ Dibawah berikut adalah table informasi data Kerjasama Aktif antara Pemerintah Pr
     <td>{cetakTabel.Subjek}</td>
     <td class="hidekolom">{cetakTabel.Tentang}</td>
     <td>{cetakTabel.Mitra}</td>
-    <td class="hidekolom">{cetakTabel.tanggalMulai.slice(0, 10)}</td>
-    <td class="hidekolom">{cetakTabel.tanggalSelesai.slice(0, 10)}</td>
+    <td class="hidekolom">{formatTanggal(cetakTabel.tanggalMulai.slice(0, 10))}</td>
+    <td class="hidekolom">{formatTanggal(cetakTabel.tanggalSelesai.slice(0, 10))}</td>
    
     </tr>
     {/if}
@@ -684,75 +721,96 @@ Dibawah berikut adalah table informasi data Kerjasama Aktif antara Pemerintah Pr
  <br/>
 <span style="color:#a75710;"> //** Data diatas merupakan Tabel kerjasama antar Pemerintah Daerah dan K/L .</span> <br/>
 <br/>
-<Heading id="3PengirimTerakhir" tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl">⮞ Data Pengajuan Dokumen Kerjasama Saat ini</Heading>
 <br/>
-Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulawesi Tenggara.
-<br/><br/>
-<div class="flex justify-center w-full">
-   <div class="process-flow-container">
-  <div class="process-flow">
-    {#each procedureSteps as step, index}
-      <div class="step-wrapper">
-        <!-- Circle Step -->
-        <div class="step-circle" class:completed={step.completed}>
-          <span class="step-number">{step.number}</span>
-        </div>
-        
-        <!-- Step Label -->
-        <div class="step-label">
-          <div class="step-title">{step.title}</div>
-          <div class="step-subtitle">{step.subtitle}</div>
-        </div>
-        
-        <!-- Arrow (tidak ditampilkan untuk step terakhir) -->
-        {#if index < procedureSteps.length - 1}
-          <div class="arrow">
-            <svg width="60" height="20" viewBox="0 0 60 20" fill="none">
-              <path d="M0 10L50 10M45 5L50 10L45 15" stroke="#5B7FBF" stroke-width="2"/>
-            </svg>
-          </div>
-        {/if}
-      </div>
-    {/each}
-  </div>
-</div> 
-</div> <br/>Data Dibawah berikut adalah Data 10 Pengajuan Kerjasama Terakhir.
-<br/><br/>
-<table style="width:100%;display:block;overflow-wrap: anywhere; background: linear-gradient(147deg, rgb(255, 255, 255) 4%, rgb(229 232 235) 99%, rgb(226, 237, 255) 100%, rgb(229, 231, 235) 100%);color:#2c526f;padding: 2px;border-radius: 8px;">
-  <thead>
-  <tr style="border-bottom: 1px solid white;background: linear-gradient(147deg, rgba(255, 255, 255, 1) 4%, rgb(171 196 215) 99%, rgba(226, 237, 255, 1) 100%, rgba(229, 231, 235, 1) 100%);">
-  <th style="width:5%;white-space: break-spaces;padding:6px;color:#94adbf;" class="hidekolom">No</th>
-  <th style="width:18%;white-space: break-spaces;padding:6px;color:#94adbf;">Nama</th>
-  <th style="width:10%;white-space: break-spaces;padding:6px;">Tanggal Pengajuan</th>
-  <th style="width:15%;white-space: break-spaces;padding:6px;" class="hidekolom">Jenis Kerjasama</th>
-  <th style="width:12%;white-space: break-spaces;padding:6px;" class="hidekolom">Kategori</th>
-  <th style="width:16%;white-space: break-spaces;padding:6px;">Status Tahapan</th>
-  <th style="width:14%;white-space: break-spaces;padding:6px;" class="hidekolom">Estimasi Proses</th>
-  </tr>
-  </thead>
-  <tbody> 
-    {#each data.TableDataPengajuanTerakhir.documents as cetakTabel, i}	 
-  <tr style="border-bottom: 1px solid white;">
-  <td class="hidekolom" style="padding:14px 6px;"><span>{i+1}</span></td>
-  <td style="padding:14px 6px;display:flex;"><Avatar class="grid mr-4" border /> <span><b>{cetakTabel.Instansi}</b><br/>{cetakTabel.Nama}  </span></td>
-  <td style="padding:14px 6px;"><span>{cetakTabel.$updatedAt.slice(0, 10)}</span></td>
-  <td class="hidekolom" style="padding:14px 6px;"><span>{cetakTabel.OpsiPengajuan}</span></td>
-  <td class="hidekolom" style="padding:14px 6px;"><span>{cetakTabel.Kategory_KS}</span></td>
-  <td style="padding:14px 4px;"><Badge color={
-    cetakTabel.Status === "Proses Pengajuan" ? "yellow" :
-    cetakTabel.Status === "Proses Verifikasi" ? "blue" :
-    cetakTabel.Status === "Penandatanganan Naskah" ? "green" :
-    cetakTabel.Status === "Ditolak" ? "red" : "gray"
-    } 
-    border>{cetakTabel.Status}</Badge></td>
-  <td class="hidekolom" style="padding:14px 6px;">{cetakTabel.Estimasi} Kerja</td>
-  </tr>
-  {/each}
-
-  </tbody>
-  </table> <br/><br/><br/>
 
 <style>
+
+ /** CSS HEADER TETAP SAMA */
+    .page-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 0.5rem;
+    }
+    .info-card {
+        border-radius: 20px;
+        padding: 0.8rem 1.2rem;
+        width: 100%;
+        max-width: 1220px;
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 1.5rem;
+        background-color: #f7fafc;
+    }
+    .logo {
+        width: 90px;
+        height: 90px;
+        background-color: white;
+        border-radius: 50%;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    .title-container h1, .title-container h2 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+        line-height: 1.3;
+    }
+    .nav-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+        width: 100%;
+        max-width: 900px;
+    }
+    .nav-button {
+        color: var(--primary-text);
+        text-decoration: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        background: #f7fafc;
+    }
+    .nav-button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background: #f1f9ff;
+    }
+    @media (max-width: 768px) {
+        .info-card {
+            flex-direction: column;
+            text-align: center;
+            padding: 1.5rem;
+        }
+        .title-container h1, .title-container h2 {
+            font-size: 1.2rem;
+        }
+        .nav-container {
+            gap: 0.75rem;
+        }
+        .nav-button {
+            width: 48%;
+            padding: 0.75rem 0.5rem;
+        }
+    }
+
+
     table {
       border-collapse: collapse;
       border-spacing: 0;
@@ -877,176 +935,6 @@ Dibawah berikut adalah Tahapan Pengajuan Kerjasama dengan Pemerintah Prov. Sulaw
     color: #4b5563;
   }   
 
-/** Step Pengajuan */
-.process-flow-container {
-    width: 100%;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-    background-color: #f8f9fa;
-  }
-
-  .process-flow {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    max-width: 1200px;
-    width: 100%;
-  }
-
-  .step-wrapper {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    position: relative;
-    flex: 1;
-  }
-
-  .step-circle {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background-color: #E8F4FD;
-    border: 3px solid #90C695;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .step-circle.completed {
-    background-color: #90C695;
-    border-color: #6B8E6B;
-  }
-
-  .step-number {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-  }
-
-  .step-circle.completed .step-number {
-    color: white;
-  }
-
-  .step-label {
-    text-align: center;
-    max-width: 150px;
-  }
-
-  .step-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 0.25rem;
-    line-height: 1.2;
-  }
-
-  .step-subtitle {
-    font-size: 0.9rem;
-    color: #666;
-    text-decoration: underline;
-    text-decoration-style: wavy;
-    text-decoration-color: #ff6b6b;
-    line-height: 1.2;
-  }
-
-  .arrow {
-    position: absolute;
-    top: 30px;
-    right: -40px;
-    z-index: 1;
-  }
-
-  .arrow svg {
-    width: 60px;
-    height: 20px;
-  }
-
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .process-flow-container {
-      padding: 1rem;
-    }
-    
-    .process-flow {
-      flex-direction: column;
-      gap: 2rem;
-    }
-
-    .step-wrapper {
-      flex-direction: row;
-      justify-content: flex-start;
-      width: 100%;
-      max-width: 400px;
-    }
-
-    .step-circle {
-      margin-bottom: 0;
-      margin-right: 1rem;
-      flex-shrink: 0;
-    }
-
-    .step-label {
-      text-align: left;
-      max-width: none;
-      flex: 1;
-    }
-
-    .arrow {
-      position: static;
-      align-self: center;
-      margin: 1rem 0;
-    }
-
-    .arrow svg {
-      transform: rotate(90deg);
-      width: 20px;
-      height: 60px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .step-circle {
-      width: 50px;
-      height: 50px;
-    }
-
-    .step-number {
-      font-size: 1.25rem;
-    }
-
-    .step-title {
-      font-size: 0.9rem;
-    }
-
-    .step-subtitle {
-      font-size: 0.8rem;
-    }
-  }
-
-  /* Hover effects */
-  .step-circle:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Animation untuk step completion */
-  .step-circle {
-    animation: fadeIn 0.5s ease-in-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.8);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
 
     /* Styling untuk multi-step form */
   .pageFormulir { display: none; }

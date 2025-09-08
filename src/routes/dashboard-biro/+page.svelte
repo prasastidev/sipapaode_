@@ -102,7 +102,7 @@ function resetForm() {
 </svelte:head>
 
    <div>
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Hai {$user.name}, Welcome di Dashboard Anda </Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-2xl">Hai {$user.name}, Selamat Datang di Dashboard Anda </Heading>
     <br/>
 
     <Modal title="Update Password" bind:open={ModalGantiPassword} autoclose={false} on:close={resetForm}>
@@ -174,20 +174,10 @@ function resetForm() {
         <!-- </Listgroup> -->
       </Card>
       <br/><br/>
-      <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
-      <br/><br/>
-      <Card padding="xl" size="xl" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-2 hover:bg-blue-100">
-        <div class="col-span-2 rounded-xl pr-3">
-          <h1 class="text-lg" style="text-align:left;color:#242a38;font-weight: 600;">
-             Lihat informasi PIC, Pejabat Pengelola data dan Informasi Sipapaode pada Link Tombol di samping berikut
-          </h1></div>
-          <div class="rounded-xl"><a href="/dashboard-biro/info-pic" style="text-decoration:none;"><button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded float-right">
-            <UserHeadsetOutline class="w-6 h-6 mr-1 text-white-800" /> Informasi PIC</button></a> 
-            </div>   
-      </Card>
-      <br/><br/>
+      <div class="w-full wavy-divider"></div>
+      
       <center><hr style="width:80%;height:2px;background:#d6d6d6;"/><br/>
-      Di bawah berikut jumlah informasi Data yang terdapat dalam Database Informasi Sipapaode.
+      Berikut adalah Ringkasan Informasi Data.
       </center>
       <br/><br/>
 
@@ -282,4 +272,12 @@ function resetForm() {
   .buttonPIC:hover {
     box-shadow: rgb(46 103 240 / 40%) 5px 5px;
   }
+
+
+ :global(.wavy-divider) {
+ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 120' preserveAspectRatio='none'%3E%3Cpath fill='%23cbd5e1' fill-opacity='1' d='M0 90c144 0 144-30 288-30s144 30 288 30 144-30 288-30S1300 90 1440 90V0H0z'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: auto 60px;
+  height: 60px; 
+}
 </style>

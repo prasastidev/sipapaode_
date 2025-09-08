@@ -38,7 +38,7 @@
 
 	
 	// In this locale "," is the decimal separator and "." is the group separator
-	const locale = 'en-EN'
+	const locale = 'id-ID'
 	const numDecimals = 2;
 	const formatter = new Intl.NumberFormat(locale, {maximumFractionDigits: numDecimals});
 
@@ -368,9 +368,13 @@ function prevQuote() {
 	
 	<div style="text-align:center;margin:10px 0px;padding:14px;width:100%;">
 		{#if BannerInfo.Status_banner}
-        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="background:#E3EBF2;border:2px solid rgb(207 224 240);border-radius:10px;color:#345472;">
+        <div id="banner" tabindex="-1" class="flex z-50 gap-3 justify-between items-start py-3 px-4 w-full bg-gray-50 border border-b border-gray-200 sm:items-center dark:border-gray-700 lg:py-4 dark:bg-gray-800" style="background:#f9fbfd;border:2px solid rgb(207 224 240);border-radius:10px;color:#345472;">
 			<img class="w-14 h-14 rounded-full" src={ImagelogoSultra} alt="Sultra Pictures" />
-			<h4 class="text-sm md:text-base lg:text-xl text-left"> {@html BannerInfo.Text_Banner} </h4>
+		<h4 class="marquee-container text-sm md:text-base lg:text-xl text-left">
+        <span class="marquee-text">
+            {@html BannerInfo.Text_Banner}
+        </span>
+    </h4>
          <CloseButton class="border-2 bg-red-500 hover:bg-red-700" style="color:white;" on:click={() => (BannerInfo.Status_banner = false)} />
          </div> 
          {/if}
@@ -403,7 +407,7 @@ function prevQuote() {
 		<TabItem open style="box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;">
 		  <span slot="title" class="text-base">Bag. Kerjasama</span>
 		  <p class="text-2sm text-slate-500 dark:text-slate-400 pb-4 text-center"> 
-		Dibawah berikut adalah Layanan Online pada Bidang Bagian Kerjasama.
+		Dibawah berikut adalah Layanan Online pada Bidang Bagian Kerjasama. <a href="/profil-bidang-kerjasama" class="text-blue-600 underline hover:text-blue-800 transition-colors">Lihat Profil Bidang</a>.
 		  </p> <center>
 		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;"> 
@@ -463,11 +467,11 @@ function prevQuote() {
 		</div></center> <br/><span style="color:#a75710;"> //** Klik Icon Untuk Melanjutkan</span> <br/>
 		</TabItem>
 		<TabItem>
-		  <span slot="title" class="text-base">Koord. Pemerintahan</span>
+		  <span slot="title" class="text-base">Bag. Koordinator Pemerintahan</span>
 		  <p class="text-2sm text-slate-500 dark:text-slate-400 pb-4 text-center"> 
-			Dibawah berikut adalah Layanan Online pada Bidang Koordinator Pemerintahan.
+			Dibawah berikut adalah Layanan Online pada Bidang Bagian Koordinator Pemerintahan. <a href="/profil-bidang-pemerintahan" class="text-blue-600 underline hover:text-blue-800 transition-colors">Lihat Profil Bidang</a>.
 			  </p>  <center>
-		  <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-6 mr-6">
+		  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">  
 				{#if standarPM.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
@@ -496,29 +500,13 @@ function prevQuote() {
 				  </div>
 				</div>
 				<h3 class="title text-1xl font-bold" style="line-height:normal;background:#C8D7E4;padding:2px 8px;border-radius: 6px;">
-				  <a href="/coming-soon">Fasilitas Penataan Wilayah Pemerintahan & Fasilitas Penegasan Batas Daerah</a>
+				  <a href="/coming-soon">Fasilitasi Penetapan lokasi (Penlok)</a>
 				</h3>
 				<p class="textKetFitur" style="color:#224362;">
-					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal informasi Fasilitasi Penataan Wilayah Pemerintahan dan Penegasan Batas Daerah.
+					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal informasi Fasilitasi Penataan Wilayah Pemerintahan dan Penlok.
 				</p>
 			  </div> </div>
-			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
-				{#if DaerahOB.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
-				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
-				<br/>
-				<div class="imgBox">
-			      <img src={ Otonomiimg } alt="Kerjasama Luar Negeri"> 
-				  <div class="img-blur">
-					<a href="/coming-soon">Lanjutkan ></a>
-				  </div>
-				</div>
-				<h3 class="title text-sm font-bold" style="line-height:normal;background:#C8D7E4;padding:2px 8px;border-radius: 6px;">
-				  <a href="/coming-soon">Pembentukan Daerah Otonomi Baru</a>
-				</h3>
-				<p class="textKetFitur" style="color:#224362;">
-					Layanan ini diperuntukan untuk Pemerintah Daerah di Sultra dalam hal informasi pembentukan daerah Otonomi Baru.
-				</p>
-			  </div> </div>
+			
 			<div class="p-0"> <div class="card_fitur" style="width:100%;box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;">
 				{#if infoKDW.Status_raw } <Badge color="green" rounded class="mb-4"><Indicator color="green" size="xs" class="me-1" />Pengisian Formulir Online</Badge>  {/if}    
 				<Badge color="yellow" rounded class="mb-4"><Indicator color="yellow" size="xs" class="me-1" />Visit Kantor</Badge>  
@@ -540,9 +528,9 @@ function prevQuote() {
 		</div></center> <br/><span style="color:#a75710;"> //** Klik Icon Untuk Melanjutkan</span> <br/>
 		</TabItem>
 		<TabItem>
-		  <span slot="title" class="text-base">Koord. Otonomi Daerah</span>
+		  <span slot="title" class="text-base">Bag. Koordinator Otonomi Daerah</span>
 		  <p class="text-2sm text-slate-500 dark:text-slate-400 pb-4 text-center"> 
-			Dibawah berikut adalah Layanan Online pada Bidang Koordinator Otonomi Daerah.
+			Dibawah berikut adalah Layanan Online pada Bidang Bagian Koordinator Otonomi Daerah. <a href="/profil-bidang-otonomi" class="text-blue-600 underline hover:text-blue-800 transition-colors">Lihat Profil Bidang</a>.
 			  </p>
 		  <center>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 mr-6">
@@ -574,7 +562,7 @@ function prevQuote() {
 					</div>
 				  </div>
 				  <h3 class="title text-1xl font-bold" style="line-height:normal;background:#C8D7E4;padding:2px 8px;border-radius: 6px;">
-					<a href="/penyampaian-lppd">Laporan dan Evaluasi: LKPJ & LPPD</a>
+					<a href="/penyampaian-lppd">LKPJ & LPPD</a>
 				  </h3>
 				  <p class="textKetFitur" style="color:#224362;">
 					Layanan ini diperuntukan untuk Pemerintah Daerah se-Sultra dalam hal pengiriman laporan LKPJ ataupun LPPD.
@@ -673,19 +661,41 @@ function prevQuote() {
 		 </div>
 		 <div class="col-span-2 rounded-xl p-2 pb-4">
 			<h2 class="text-2xl font-bold mb-2" style="box-shadow: #83A4C3 15px -20px;">Kotak Saran & Info</h2>
-			
-			<div style="padding:10px;background:white;">
-				<div class="block grid-cols-8 gap-2 md:flex lg:flex">
-					<div class="col-span-6">
-						<b>Alamat:</b> <br/>
-						<b>Biro Pemerintahan dan Otonomi Daerah Sultra</b><br/>
-						Kompleks Bumi Praja Anduonohu, <br/>Kota Kendari, Sulawesi Tenggara 93231 <br/>	
-					</div>
-					<div><img src="https://app.wondersites.org/templates/review-widget.net/assets/img/widgets/square-widget-7.png" style="height:100px;width:250px;margin-left:10px;" /></div> 			 
-				   </div>
-			
-   
-			</div> <br/><br/><br/>
+
+  <div class="w-full max-w-4xl bg-white border border-blue-200 rounded-2xl p-2 sm:p-4 shadow-sm">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+      <div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3">
+          Alamat:
+        </h3>
+        <p class="text-gray-700 leading-relaxed">
+          <b>Biro Pemerintahan dan Otonomi Daerah Sultra</b><br>
+          Kompleks Bumi Praja Anduonohu,<br>
+          Kota Kendari, Sulawesi Tenggara
+        </p>
+      </div>
+      
+      <div>
+        <h3 class="text-xl font-bold text-gray-800 mb-3">
+          Permohonan Informasi Publik
+        </h3>
+        
+        <div class="flex items-center gap-4 mt-2">
+          <a href="/formulir-pengajuan-informasi-publik" style="text-decoration:none;"><div class="flex-shrink-0 bg-blue-100 p-3 rounded-lg hover:bg-blue-200 transition-colors duration-200" style="font-size:50px;">
+             📑
+            </div></a>
+          <p class="text-gray-700">
+             Permohonan Informasi Publik dapat diajukan secara online melalui formulir yang diakses pada ikon di samping.
+          </p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+	<br/><br/>
 	
 			<h2 id="BeritaTerbaruSultra" class="text-2xl font-bold mb-2" style="box-shadow: #83A4C3 15px -20px;margin-bottom:18px;">Berita Terbaru Hari Ini di Sulawesi Tenggara
 			</h2> 
@@ -756,7 +766,7 @@ function prevQuote() {
 	<div style="padding:12px;background:white;border-radius:14px;">
 		  <div class="block grid-cols-12 gap-2 md:flex lg:flex">
 			 <div><span style="font-size:40px;">🗺️</span></div> 
-			  <div class="col-span-11">Provinsi Sulawesi Tenggara secara administratif terbagi menjadi 17 daerah otonom, yang terdiri dari 15 kabupaten dan 2 kota. Bagian ini menyajikan data informasi statistik Pemerintah Kab/Kota Sulawesi tenggara mencakup luas wilayah, jumlah penduduk, Map Geografis, serta Situs Web Portal Pemerintahan. 
+			  <div class="col-span-11 text-sm md:text-base lg:text-base">Provinsi Sulawesi Tenggara secara administratif terbagi menjadi 17 daerah otonom, yang terdiri dari 15 kabupaten dan 2 kota. Bagian ini menyajikan data informasi statistik Pemerintah Kab/Kota Sulawesi tenggara mencakup luas wilayah, jumlah penduduk, Map Geografis, serta Situs Web Portal Pemerintahan. 
 				Untuk pratinjau, data 5 kabupaten/kota ditampilkan di bawah. Silakan klik tombol 'Lihat Selengkapnya' untuk mengakses informasi seluruh wilayah.
 				</div>
 			</div>
@@ -965,7 +975,7 @@ function prevQuote() {
    <!-- Section Organization -->
 <section>
 	<Heading id="StrukturOrganisasi" tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid #83A4C3;">STRUKTUR ORGANISASI BIRO PEM. & OTDA SULTRA</Span></Heading>
-	<span style="padding: 2px 12px;background:white;border-radius: 6px;">Dibawah berikut adalah Struktur Organisasi Biro Pemerintahan dan Otonomi Daerah Setda Sulawesi Tenggara</span>
+	<span class="text-sm md:text-base lg:text-base" style="padding: 2px 12px;background:white;border-radius: 6px;">Dibawah berikut adalah Struktur Organisasi Biro Pemerintahan dan Otonomi Daerah Setda Sulawesi Tenggara. <a href="/data-pegawai" class="text-blue-600 underline hover:text-blue-800 transition-colors">Lihat Data Statistik Pegawai</a>.</span>
 	<br/> 
 	<div id="container_org">
         <ol class="static-org-chart">
@@ -988,7 +998,7 @@ function prevQuote() {
                     <li>
                        <div class="staff_card" style="width:280px !important;padding:6px;height:100px;"> 
                         <img src={kabidTU?.URL_PhotoProfile || (kabidTU ? (kabidTU.Jenis_Kelamin === 'Wanita' ? PicProfileF : PicProfileM) : PicProfileM) } style="width:60px;height:60px;border-radius:50%;border: 1px solid #d0d0ec;padding: 1px 2px;background: white;" alt="Kasubag TU" />
-                        <div>Kepala Bidang Tata Usaha <br><label style="font-weight: 100;">{kabidTU?.Nama || 'Jabatan Kosong'}</label></div>
+                        <div>Kasubag. Tata Usaha <br><label style="font-weight: 100;">{kabidTU?.Nama || 'Jabatan Kosong'}</label></div>
                     </div>
                     </li>
                   
@@ -1057,14 +1067,15 @@ function prevQuote() {
 <section style="align-items: normal;">
     <center>
         <h3 id="JournalKegiatan" class="justify-start font-semibold text-xl sm:text-2xl lg:text-3xl mb-4">📆 Journal Kegiatan Biro Pemerintahan & Otonomi Daerah Sultra:</h3>
+          <span class="text-sm md:text-base lg:text-base" style="padding: 4px 12px;background:white;border-radius: 6px;">Lihat dan Ikuti Rangkuman agenda dan kegiatan terbaru di Biro Pemerintahan & Otonomi Daerah Sultra.</span>
     </center>
-    
+
     <div class="flex justify-end mt-4" style="text-align:right;margin-bottom:14px;">
         <button on:click={prevQuote} class="button-74 mr-2">&#8678; Sebelumnya</button>
         <button on:click={nextQuote} class="button-74">Berikutnya &#8680;</button>
     </div>
     
-    <div class="textquote grid grid-cols-1 lg:grid-cols-12 gap-4" style="width: 100%;min-height: 390px;background:linear-gradient(135deg, rgb(255, 255, 255), rgb(241, 245, 248));margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: 15px 20px rgb(90, 134, 175);box-sizing: border-box;margin-bottom:6px;">
+    <div class="textquote grid grid-cols-1 lg:grid-cols-12 gap-4" style="width: 100%;min-height: 390px;background:linear-gradient(135deg, rgb(255, 255, 255), rgb(241, 245, 248));margin: 0;border-radius: 15px;padding:20px;padding-top:40px;box-shadow: rgb(90, 134, 175) 10px 15px, rgba(90, 134, 175, 0.5) 20px 25px;box-sizing: border-box;margin-bottom:6px;">
         <div class="lg:col-span-8 rounded-xl lg:pr-2 order-2 lg:order-1">
             <img 
                 src={currentItem.URL || '/placeholder-image.jpg'} 
@@ -1084,7 +1095,7 @@ function prevQuote() {
             
             <!-- Title dengan responsive font size -->
             <span class="font-semibold text-lg sm:text-xl lg:text-2xl text-slate-700 block mb-3 leading-tight" style="font-family: Libre Franklin, sans-serif;">
-                🔘 {currentItem.Title || 'undefined'}.
+                🎯 {currentItem.Title || 'undefined'}.
             </span>
             
             <br/>
@@ -1111,7 +1122,7 @@ function prevQuote() {
  <section> 
 	<br/> <br/>
 	<Heading tag="h3" class="mb-5 text-center" customSize="text-3xl font-extrabold  md:text-3xl lg:text-4xl"><Span decorationClass="decoration-8 decoration-blue-400 dark:decoration-blue-600" style="border-bottom: 8px solid #83A4C3;">SINERGI PORTAL INFORMASI LAINNYA</Span></Heading> 
-  <p style="padding: 2px 12px;background:white;border-radius: 6px;">Berikut adalah Daftar Situs yang bisa Anda kunjungi sehubungan dengan Informasi di Biro Pemerintahan.</p> <br/>
+  <p class="text-sm md:text-base lg:text-base" style="padding: 2px 12px;background:white;border-radius: 6px;">Berikut adalah Daftar Situs yang bisa Anda kunjungi sehubungan dengan Informasi di Biro Pemerintahan.</p> <br/>
    <Marquee shadow speed={0.4} hoverSpeed={0.1} class="py-16 px-8"> 
 	<div class="portallain grid grid-cols-1 md:grid-cols-1 lg:grid-cols-4 gap-4">
 		<a href="https://ula.kemendagri.go.id/" target="_blank" style="color:cadetblue;"><div style="padding:12px 20px;border:1px solid;border-radius:12px;margin:10px;">
@@ -1830,7 +1841,32 @@ width: 100%;
   }
 }
 
+ /* 1. Wadah untuk teks berjalan */
+    .marquee-container {
+        overflow: hidden;      /* Menyembunyikan teks saat keluar dari area h4 */
+        white-space: nowrap;   /* Memastikan teks tidak turun ke baris baru */
+        width: 100%;           /* Mengisi sisa ruang yang tersedia */
+    }
 
+    /* 2. Teks yang akan berjalan */
+    .marquee-text {
+        display: inline-block; /* Diperlukan agar animasi transform berfungsi */
+        animation: marquee-animation 20s linear infinite;
+    }
 
+    /* 3. Definisi animasi marquee */
+    @keyframes marquee-animation {
+        0% {
+            transform: translateX(100%); /* Mulai dari luar sisi kanan container */
+        }
+        100% {
+            transform: translateX(-100%);/* Berakhir di luar sisi kiri container */
+        }
+    }
+
+     /* 4. BARIS BARU: Hentikan animasi saat kursor mouse di atasnya */
+    .marquee-container:hover .marquee-text {
+        animation-play-state: paused;
+    }
 
 </style>

@@ -165,7 +165,7 @@
                         
                         <div class="content-details">
                             <div class="activity-title">
-                                {entry.Title || `Kegiatan ${startIndex + index + 1}`}
+                               🎯 {entry.Title || `Kegiatan ${startIndex + index + 1}`}
                             </div>
                             
                             <div class="description">

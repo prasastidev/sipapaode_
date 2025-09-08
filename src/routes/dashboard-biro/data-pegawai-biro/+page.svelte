@@ -3,7 +3,7 @@
    import { onMount } from 'svelte';
   // export let data=[];
 
-  import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Popover, Modal, Radio, FloatingLabelInput, Input, Select, Label, Toast, Checkbox } from 'flowbite-svelte';
+  import { Heading, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Popover, Modal, Radio, FloatingLabelInput, Input, Select, Label, Toast, Checkbox, Alert } from 'flowbite-svelte';
   import {  TrashBinOutline, CheckCircleSolid, FileLinesOutline, CheckPlusCircleOutline, EditOutline, BuildingSolid, ExclamationCircleOutline } from 'flowbite-svelte-icons';
   import { storage, databases } from '$lib/appwrite';
   import { invalidateAll } from '$app/navigation';
@@ -730,14 +730,38 @@ onMount(() => {
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Data Pegawai Biro Pemerintahan - Sultra</Heading>
-    <br/><br/>
-    {#if $user.prefs['Role'] === "PIC Tata Usaha"}
-    <div class="grid grid-cols-3 gap-4" style=" background: white;padding: 18px 10px;border-radius: 12px;">
-      <div class="col-span-2" style="font-size:22px;margin-left:10px;">Silahkan menambah Data Pegawai pada Tombol di samping berikut</div>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Pegawai Biro Pemerintahan & Otonomi Daerah - Sultra</Heading>
+    <br/>
+
+      {#if $user.prefs['Role'] !== "PIC Tata Usaha"}
+    <Alert color="yellow">
+    <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Tata Usaha</span>
+    </Alert>
+    <br/>
+    {/if}
+
+     {#if $user.prefs['Role'] === "PIC Tata Usaha"}
+    <div class="grid grid-cols-3 gap-4" style=" background:white;padding: 18px 10px;border-radius: 12px;border:1px solid #cbd5e1;">
+      <div class="col-span-2" style="font-size:22px;margin-left:10px;">Klik tombol di samping untuk menambah Data Pegawai Baru</div>
       <div class=""><Button style="box-shadow:rgb(102 144 246 / 40%) 5px 10px" color="blue" class="float-right" on:click={() => (ModalAddDataPegawai = true)}> <CheckPlusCircleOutline class="inline-flex w-6 h-6 mr-2 text-white-500 dark:text-white-400" /> Tambah Data Pegawai</Button>  </div>
      </div>
+     <br/>
      {/if}
+
+    <div class="flex items-center justify-center gap-2 p-2">
+     <div class="flex w-full items-center justify-between rounded-xl border-2 border-slate-300 bg-white p-4 shadow-lg">
+      <p class="text-xl font-semibold text-gray-700">Total Pegawai Tetap:</p>
+      <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-blue-100">
+      <span class="text-3xl font-bold text-blue-400">{ TotalPegawaiTetap }</span>
+      </div>
+     </div>
+      <div class="flex w-full items-center justify-between rounded-xl border-2 border-slate-300 bg-white p-4 shadow-lg">
+       <p class="text-xl font-semibold text-gray-700">Total Pegawai Honorer:</p>
+        <div class="flex h-12 w-16 items-center justify-center rounded-lg bg-blue-100">
+       <span class="text-3xl font-bold text-blue-400">{ TotalPHT }</span>
+       </div>
+      </div>
+    </div>
      
      <!-- Modal Add Data Pegawai -->
      <Modal size="lg" title="Form Data Pegawai Baru" bind:open={ModalAddDataPegawai} autoclose={false}>
@@ -857,7 +881,7 @@ onMount(() => {
     {#if totalPosts === 0}
      <p>Saat ini Tidak Terdapat Data Pegawai Pada Tabel</p>
      {:else}
-    <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Tabel / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Pegawai</strong></p>
+    <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Biro Pemerintahan dan Otonomi Daerah Sultra / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Pegawai</strong></p>
      {/if}
      <br/>
 
@@ -960,10 +984,9 @@ onMount(() => {
             <span class="sr-only">Search</span>
         </button>
     </form>
-    <br/>
 
     <!-- Pagination dengan Items per Page -->
-    <div class="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-2 mb-2">
         <!-- Items per page selector -->
         <div class="flex items-center gap-2">
             <label for="items-per-page" class="font-medium text-gray-700">Show:</label>

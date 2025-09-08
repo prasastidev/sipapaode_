@@ -2,9 +2,13 @@
     /** @type {import('./$types').PageData} */
     export let data=[];
     
-    import { Heading, Modal, Toast, Toggle, Badge, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
+    import { Heading, Modal, Toast, Alert, Badge, Button, Avatar, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell } from 'flowbite-svelte';
     import {  EditOutline, UserAddOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
-   
+    import { user } from '$lib/user';
+
+     // ✅ TAMBAHKAN DUA BARIS INI
+    let userRole;
+    $: userRole = $user?.prefs?.['Role']; // Tanda ?. untuk keamanan jika user belum login
 
     let users = [];
     let editingUser = null;
@@ -151,7 +155,16 @@ function startEdit(user) {
 
   getUsers();
 
+ function formatTanggal(tanggalString) {
+        // Hentikan jika tanggal tidak valid
+        if (!tanggalString) return 'Tanggal tidak tersedia';
 
+        // Opsi untuk format: hari, bulan (panjang), tahun
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+
+        // Buat objek tanggal baru dan format dengan lokal 'id-ID' (Indonesia)
+        return new Date(tanggalString).toLocaleDateString('id-ID', options);
+    }
   
   </script>
   
@@ -162,18 +175,20 @@ function startEdit(user) {
   </svelte:head>
   
   <div class="container">
-      <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Daftar Users Terdaftar Sipapaode</Heading>
+      <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Manajemen User Sipapaode</Heading>
       <br/>
-      <div class="modern-box">
-        <div class="contentbox">
-          <label>Berikut adalah daftar informasi user terdaftar di Sipapaode. Pendaftaran user baru dapat dilakukan pada halaman ini.</label>
-        </div>
-      </div>
-      <br/><br/>
-
+      {#if $user.prefs['Role'] !== "PIC Tata Usaha"}
+    <Alert color="yellow">
+    <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Tata Usaha</span>
+    </Alert>
+    <br/>
+    {/if}
+  
+    {#if $user.prefs['Role'] === "PIC Tata Usaha"}
       <button class="flex buttonPIC bg-blue-500 text-white px-6 py-2 rounded" on:click={() => showAddForm = true}>
-        <UserAddOutline class="w-6 h-6 mr-1 text-white-800" /> Tambah User
+        <UserAddOutline class="w-6 h-6 mr-1 text-white-800" /> Tambah User Baru
       </button> 
+     {/if}
   
       {#if showAddForm}
         <div class="form-container">
@@ -203,7 +218,7 @@ function startEdit(user) {
         </div>
       {/if}
   
-      <br/><br/>
+      <br/>
       
       <Table shadow hoverable={true} class="whitespace-break-spaces table-auto overflow-x-auto">
         <TableHead>
@@ -212,15 +227,21 @@ function startEdit(user) {
           <TableHeadCell style="font-size: larger;" class="py-4">Role</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Aktivitas Terakhir</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4">Tanggal Registrasi</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4">Aksi</TableHeadCell>
+           {#if $user.prefs['Role'] === "PIC Tata Usaha"}
+          <TableHeadCell style="font-size: larger;" class="py-4">
+           Aksi   
+          </TableHeadCell>
+           {/if}
+       
         </TableHead>
         <TableBody tableBodyClass="divide-y">
           {#each users as user, i}
           <TableBodyRow>   
             
             {#if editingUser && editingUser.$id === user.$id}
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{i+1}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><div style="width:340px;"><Avatar class="grid -mb-3 align-middle" border />
+            <TableBodyCell style="font-size: medium;" class="py-2 whitespace-break-spaces">{i+1}</TableBodyCell>
+            <TableBodyCell style="font-size: medium;" class="py-2 whitespace-break-spaces">
+              <div style="width:340px;"><Avatar class="grid -mb-3 align-middle" border />
               <br/>
               <div style="display:flex;align-items:center;">
                 <b style="margin-right:6px;">Nama:</b>
@@ -237,8 +258,8 @@ function startEdit(user) {
           
             </TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><Badge border color="indigo"> {user.prefs['Role']}</Badge></TableBodyCell> 
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
+            <TableBodyCell style="font-size: medium;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
+            <TableBodyCell style="font-size: medium;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">
               <ButtonGroup class="*:!ring-primary-700">
                 <button class="save-btn" on:click={() => editUser(editingUser)}>Simpan</button>
@@ -253,14 +274,16 @@ function startEdit(user) {
               <div style="display:flex;align-items:center;margin-top:-10px;margin-bottom:10px;"><b style="margin-right:6px;">Email:</b> {user.email}</div>
             </TableBodyCell>
              <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces"><Badge border color="indigo"> {user.prefs['Role'] || 'User'} </Badge></TableBodyCell> 
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$updatedAt.slice(0, 10)}</TableBodyCell>
-            <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">{user.$createdAt.slice(0, 10)}</TableBodyCell>
+            <TableBodyCell style="font-size: medium;" class="py-2 whitespace-break-spaces">{formatTanggal(user.$updatedAt.slice(0, 10))}</TableBodyCell>
+            <TableBodyCell style="font-size: medium;" class="py-2 whitespace-break-spaces">{formatTanggal(user.$createdAt.slice(0, 10))}</TableBodyCell>
+             {#if userRole === "PIC Tata Usaha"}
             <TableBodyCell style="font-size: larger;" class="py-2 whitespace-break-spaces">
-              <ButtonGroup class="*:!ring-primary-700">
+               <ButtonGroup class="*:!ring-primary-700">
                 <button class="edit-btn" on:click={() => startEdit(user)}>Edit</button>
                 <button class="delete-btn" on:click={() => openDeleteModal(user.$id)}>Delete</button>
-              </ButtonGroup>
+              </ButtonGroup>     
             </TableBodyCell>
+                {/if} 
             {/if}
             <Modal bind:open={ConfirmDeleteModal} size="xs" autoclose={false}>
               <div class="text-center">
@@ -280,68 +303,7 @@ function startEdit(user) {
   
   
   <style>
-    .modern-box {
-      position: relative;
-      display: inline-block;
-      padding: 12px;
-    }
-    
-    .modern-box::before,
-    .modern-box::after,
-    .contentbox::before,
-    .contentbox::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      border: 4px solid #c7c7e7;
-    }
-    
-    /* Top left corner */
-    .modern-box::before {
-      top: 0;
-      left: 0;
-      border-right: none;
-      border-bottom: none;
-    }
-    
-    /* Top right corner */
-    .modern-box::after {
-      top: 0;
-      right: 0;
-      border-left: none;
-      border-bottom: none;
-    }
-  
-    .contentbox {
-      background: white;
-      padding: 6px 12px;
-      border-radius: 8px;
-    }
-    
-    /* Bottom left corner */
-    .contentbox::before {
-      bottom: 0;
-      left: 0;
-      border-right: none;
-      border-top: none;
-    }
-    
-    /* Bottom right corner */
-    .contentbox::after {
-      bottom: 0;
-      right: 0;
-      border-left: none;
-      border-top: none;
-    }
-    
-    .contentbox label {
-      font-size: 0.94rem;
-      margin: 0;
-      padding: 0;
-    }
-
-
+   
     .container {
     padding: 20px;
   }

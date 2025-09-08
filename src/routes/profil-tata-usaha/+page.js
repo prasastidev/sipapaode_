@@ -4,7 +4,7 @@ export const prerender = true;
 export const ssr = true;
 export const csr = true;
 
-import { getDataPhotoKerjaSama } from '$lib/dataBucketGambar';
+import { getDataPhotoTataUsaha } from '$lib/dataBucketGambarTataUsaha';
 import { getTableDataPegawai } from '$lib/dataPegawai.js';
 import { getDataProfileBidang } from '$lib/updateProfileBidang';
 
@@ -23,7 +23,7 @@ export async function load() {
     }
 
 	return {  
-        DatasGambarKS : await getDataPhotoKerjaSama(),
+        DatasGambarTataUsaha : await getDataPhotoTataUsaha(),
         pegawaiByJabatan,
         DatasProfileBidang : await getDataProfileBidang()
 	};

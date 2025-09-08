@@ -215,7 +215,7 @@ Sulawesi Tenggara </Heading>
 </Table>
 
 <br/><br/>
-Formulir pengajuan informasi oleh Publik dapat dilihat pada link berikut: <a href="/formulir-pengajuan-informasi-publik" style="text-decoration:underline;">Pengajuan Informasi</a>
+Formulir Permohonan informasi Publik dapat dilihat pada link berikut: <a href="/formulir-pengajuan-informasi-publik" style="text-decoration:underline;">Permohonan Informasi</a>
 <br/><br/><br/>
 
 </div>

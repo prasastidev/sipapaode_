@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
     
-    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, Modal  } from 'flowbite-svelte';
+    import { Heading, Fileupload, Progressbar, Label, Button, ButtonGroup, Modal, Alert  } from 'flowbite-svelte';
     import { UploadOutline, ZoomInOutline, FileCopyOutline, TrashBinOutline, ExclamationCircleOutline } from 'flowbite-svelte-icons';
     import { storage, ID } from '$lib/appwrite';
     import { user } from '$lib/user';
@@ -19,33 +19,27 @@
      let copiedId = null; // Untuk melacak ID gambar yang URL-nya baru saja disalin
 
     async function copyUrlToClipboard(id) {
-    // 1. Dapatkan URL gambar dan ubah menjadi string secara eksplisit
-    const urlToCopy = showimage(id).toString();
+        // 1. Dapatkan URL gambar dalam bentuk teks
+        const urlToCopy = showimage(id).href;
 
-    // Pastikan URL tidak kosong atau undefined sebelum menyalin
-    if (!urlToCopy) {
-        console.error('URL tidak valid atau kosong.');
-        alert('Gagal mendapatkan URL untuk disalin.');
-        return;
+        try {
+            // 2. Gunakan Clipboard API untuk menyalin teks
+            await navigator.clipboard.writeText(urlToCopy);
+
+            // 3. Beri tahu pengguna bahwa penyalinan berhasil
+            copiedId = id; // Set ID yang baru disalin
+            
+            // 4. Kembalikan teks tombol ke semula setelah 2 detik
+            setTimeout(() => {
+                copiedId = null;
+            }, 2000);
+
+        } catch (err) {
+            console.error('Gagal menyalin URL:', err);
+            // Beri tahu pengguna jika terjadi error (misalnya di koneksi http)
+            alert('Gagal menyalin URL. Pastikan Anda mengakses halaman ini melalui koneksi aman (HTTPS).');
+        }
     }
-
-    try {
-        // 2. Gunakan Clipboard API untuk menyalin teks
-        await navigator.clipboard.writeText(urlToCopy);
-
-        // 3. Beri tahu pengguna bahwa penyalinan berhasil
-        copiedId = id; // Set ID yang baru disalin
-        
-        // 4. Kembalikan teks tombol ke semula setelah 2 detik
-        setTimeout(() => {
-            copiedId = null;
-        }, 2000);
-
-    } catch (err) {
-        console.error('Gagal menyalin URL:', err);
-        alert('Gagal menyalin URL. Pastikan Anda mengakses halaman ini melalui koneksi aman (HTTPS).');
-    }
-}
 
 
 function showimage(id) {
@@ -101,15 +95,15 @@ function showimage(id) {
 
   
   <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Gallery Photo Profil Pegawai - Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Photo Profile Pegawai - Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
     <br/>
-    <div class="modern-box">
-      <div class="contentbox">
-        <label>Silahkan mengklik tombol buka Upload Photo untuk melakukan Upload Photo Pegawai. Ukuran 200x200 px.
-        </label>
-      </div>
-    </div>
-    <br/><br/>
+
+     {#if $user.prefs['Role'] !== "PIC Tata Usaha"}
+    <Alert color="yellow">
+    <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Tata Usaha</span>
+    </Alert>
+    <br/>
+    {/if}
 
     {#if $user.prefs['Role'] === "PIC Tata Usaha"}
     <Button color="dark" pill on:click={() => (isUploadOpen = !isUploadOpen)}>{!isUploadOpen ? 'Buka Upload Photo' : 'Tutup Upload Photo'} </Button> <br/><br/>
@@ -147,12 +141,12 @@ function showimage(id) {
 
     <br/><br/> 
 
-  <Heading tag="h4" customSize="text-xl text-left font-extrabold  md:text-xl lg:text-2xl">🖼️ List Photo</Heading>
+  <Heading tag="h4" customSize="text-xl text-left font-extrabold  md:text-xl lg:text-2xl">🖼️ List Photo Profile</Heading>
   <br/>
   {#if data.DatasGambarPegawai.total === 0}
-  <p>Saat ini Tidak terdapat Gambar pada Gallery Photo.</p>
+  <p>Saat ini Tidak terdapat Gambar Photo pada Gallery Photo Profile Pegawai.</p>
   {:else}
-  <p>Terdapat {data.DatasGambarPegawai.total} Gambar dalam Folder Gallery Photo Pegawai</p>
+  <p>Terdapat {data.DatasGambarPegawai.total} Gambar Photo dalam Folder Photo Profile Pegawai</p>
 {/if}
  <br/>
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
@@ -169,11 +163,12 @@ function showimage(id) {
       <ButtonGroup class="*:!ring-primary-700">
        <Button style={copiedId === cetakTabel.$id ? 'color:green;' : 'color:blue;'} on:click={() => copyUrlToClipboard(cetakTabel.$id)}>
          <FileCopyOutline class="w-6 h-6 me-2" />
-           {#if copiedId === cetakTabel.$id} URL Dicopy!
-            {:else}
-            Copy URL
-            {/if}
-        </Button>
+{#if copiedId === cetakTabel.$id}
+        URL Dicopy!
+    {:else}
+        Copy URL
+    {/if}
+</Button>
         <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-5 h-5 me-2" />Lihat</a></Button>
         <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-5 h-5 me-2" />Hapus</Button>
      </ButtonGroup> 
@@ -236,68 +231,6 @@ function showimage(id) {
       background: #8eb5ea !important;
       color: white;
       }
-
-
-  .modern-box {
-    position: relative;
-    display: inline-block;
-    padding: 12px;
-  }
-  
-  .modern-box::before,
-  .modern-box::after,
-  .contentbox::before,
-  .contentbox::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #c7c7e7;
-  }
-  
-  /* Top left corner */
-  .modern-box::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  /* Top right corner */
-  .modern-box::after {
-    top: 0;
-    right: 0;
-    border-left: none;
-    border-bottom: none;
-  }
-
-  .contentbox {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-  
-  /* Bottom left corner */
-  .contentbox::before {
-    bottom: 0;
-    left: 0;
-    border-right: none;
-    border-top: none;
-  }
-  
-  /* Bottom right corner */
-  .contentbox::after {
-    bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
-  }
-  
-  .contentbox label {
-    font-size: 0.94rem;
-    margin: 0;
-    padding: 0;
-  }
 
 
     

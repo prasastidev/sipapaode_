@@ -21,39 +21,39 @@
 
 function getDataWilayah(id) {
 
-const promise = databases.getDocument(
-  '673dd7b2001a83873b47', 
-  '675788570020efff440b',
-  id,
-  []
-);
+   const promise = databases.getDocument(
+       '673dd7b2001a83873b47', 
+       '675788570020efff440b',
+       id,
+       []
+     );
 
-promise.then(function (response) {
-  ModalUpdateDataWilayah  = true;
-  console.log(response); // Success
-getKabKota = response.Nama;
-getKodeW = response.KodeW;
-getJ_Kecamatan = response.J_Kecamatan;
-getJ_Kelurahan = response.J_Kelurahan;
-getJ_Desa = response.J_Desa;
-getLuas_Wilayah = response.Luas_Wilayah;
-getJ_Penduduk= response.J_Penduduk;
-getJ_Gunung= response.J_Gunung;
-getJ_Pulau= response.J_Pulau;
-getJ_Selat= response.J_Selat;
-getJ_Danau= response.J_Danau;
-getJ_Sungai= response.J_Sungai;
-getJ_Rawa= response.J_Rawa;
-getKoordinat= response.Koordinat;
-getKetMap= response.KetMap;
-getSitus= response.Situs;
-getidDoc = response.$id;
+   promise.then(function (response) {
+   ModalUpdateDataWilayah  = true;
+   console.log(response); // Success
+   getKabKota = response.Nama;
+   getKodeW = response.KodeW;
+   getJ_Kecamatan = response.J_Kecamatan;
+   getJ_Kelurahan = response.J_Kelurahan;
+   getJ_Desa = response.J_Desa;
+   getLuas_Wilayah = response.Luas_Wilayah;
+   getJ_Penduduk= response.J_Penduduk;
+   getJ_Gunung= response.J_Gunung;
+   getJ_Pulau= response.J_Pulau;
+   getJ_Selat= response.J_Selat;
+   getJ_Danau= response.J_Danau;
+   getJ_Sungai= response.J_Sungai;
+   getJ_Rawa= response.J_Rawa;
+   getKoordinat= response.Koordinat;
+   getKetMap= response.KetMap;
+   getSitus= response.Situs;
+   getidDoc = response.$id;
 
-}, function (error) {
+   }, function (error) {
   console.log(error); // Failure
   throw error;
-});
-}
+    });
+  }
 
 const updateDataWilayah = async (e) => {
   e.preventDefault();
@@ -102,7 +102,7 @@ function timeout() {
 	<meta name="description" content="Dashboard Biro" />
 </svelte:head>
 
-<Modal title="Update Data Wilayah {getKabKota}" bind:open={ModalUpdateDataWilayah } autoclose={false}>
+<Modal size="lg" title="Update Data Wilayah {getKabKota}" bind:open={ModalUpdateDataWilayah } autoclose={false}>
   <form class="space-y-6" on:submit={updateDataWilayah} >
     Nama Kab/Kota : {getKabKota} <br/>
     Kode Wilayah: { getKodeW } <br/>
@@ -119,9 +119,11 @@ function timeout() {
   <FloatingLabelInput style="filled" id="Luas_Wilayah" bind:value={getLuas_Wilayah} name="Luas_Wilayah" type="text">
     Masukan Luas Wilayah Terbaru {getKabKota}:
   </FloatingLabelInput> 
+  <label style="font-size:14px;color:red;">Contoh: 12345.67 (gunakan titik untuk desimal, bukan koma)</label>
   <FloatingLabelInput style="filled" id="J_Penduduk" bind:value={getJ_Penduduk} name="J_Penduduk" type="text">
     Masukan Jumlah Penduduk Terbaru {getKabKota}:
   </FloatingLabelInput> 
+    <label style="font-size:14px;color:red;">Ketik angka saja, tanpa titik atau koma. Contoh: 1500000.</label>
   <br/><h4 style="font-weight:600;">&#10149; Rupa Bumi</h4>
   <FloatingLabelInput style="filled" id="	J_Gunung" bind:value={getJ_Gunung} name="J_Gunung" type="text">
     Masukan Jumlah Gunung {getKabKota}:
@@ -164,15 +166,16 @@ function timeout() {
 </Modal>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Informasi Kode, Data Wilayah Pemerintahan, Pulau dan Rupa Bumi</Heading>
-    <br/>  <br/>
-    <div class="modern-box">
-      <div class="contentbox">
-        <label>Berikut adalah informasi mengenai Kode Data Wilayah, Administratif Pemerintahan dan Rupa Bumi di Sulawesi Tenggara.
-          Setiap Perubahan Data pada Tabel di Bawah, Dapat diakses oleh publik pada <a href="/maps-sultra/#TabelOtonomi" style="text-decoration:underline;color:blue;">halaman berikut.</a></label>
-      </div>
-    </div>
-    <br/><br/><br/>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Wilayah Pemerintahan, Kode, Pulau dan Rupa Bumi</Heading>
+    
+    <br/>  
+     {#if $user.prefs['Role'] !== "PIC Pemerintahan"}
+  <Alert color="yellow">
+  <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Pemerintahan</span>
+  </Alert>
+  <br/>
+  {/if}
+   
     <section>
 
       <form class="flex items-center w-full mx-auto" style="width:100%;">   
@@ -199,31 +202,50 @@ function timeout() {
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Aksi</TableHeadCell>
           {/if}
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Kode</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Nama</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Ibukota</TableHeadCell>
+          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Map</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Administratif Wilayah Pemerintahan</TableHeadCell>
           <TableHeadCell style="font-size: larger;" class="py-4 content-start">Rupa Bumi</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Map</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Keterangan Map</TableHeadCell>
-          <TableHeadCell style="font-size: larger;" class="py-4 content-start">Situs Pemerintahan</TableHeadCell>
         </TableHead>
         <TableBody tableBodyClass="divide-y">
           {#each data.TableDatasWilayah.documents as cetakTabel}	
           <TableBodyRow>
             {#if $user.prefs['Role'] === "PIC Pemerintahan"}
             <TableBodyCell class="whitespace-break-spaces content-start"><ButtonGroup class="*:!ring-primary-700">
-              <Button style="color:blue;" on:click={() => getDataWilayah(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
+              <Button style="color:blue;box-shadow: rgba(102, 144, 246, 0.4) 5px 7px;" on:click={() => getDataWilayah(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
             </ButtonGroup></TableBodyCell>
             {/if}
-            <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.KodeW}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces font-bold text-xl content-start">{cetakTabel.Nama}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start">{cetakTabel.Ibukota}</TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:190px;overflow-wrap: anywhere;"><b>Luas Wilayah:</b> {cetakTabel.Luas_Wilayah} km2<br/><b>Jum. Penduduk:</b> {cetakTabel.J_Penduduk} <br/>
-            <br/><b>Jumlah Kecamatan:</b> {cetakTabel.J_Kecamatan} <br/><b>Jumlah Kelurahan:</b> {cetakTabel.J_Kelurahan}<br/><b>Jumlah Desa:</b> {cetakTabel.J_Desa}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:170px;overflow-wrap: anywhere;"><b>Jum. Gunung:</b> {cetakTabel.J_Gunung}<br/><b>Jum. Pulau:</b> {cetakTabel.J_Pulau}<br/><b>Jum. Selat:</b> {cetakTabel.J_Selat}<br/><b>Jum. Danau:</b> {cetakTabel.J_Danau}<br/><b>Jum. Sungai:</b> {cetakTabel.J_Sungai}<br/><b>Jum. Rawa:</b> {cetakTabel.J_Rawa}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:300px;">{@html cetakTabel.Map}<br/><b>Koordinat:</b> {cetakTabel.Koordinat}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start"><div style="width:200px;">{@html cetakTabel.KetMap}</div></TableBodyCell>
-            <TableBodyCell class="whitespace-break-spaces content-start flex"><GlobeOutline class="w-5 h-5 mr-1 align-middle" /> {cetakTabel.Situs}</TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start">
+            <div class="font-sans mx-auto">
+             <div class="flex items-center gap-4">
+             <div class="bg-blue-100 text-blue-800 text-sm font-semibold px-3 py-1 rounded-md">{cetakTabel.KodeW}</div>
+              <h1 class="text-3xl font-bold text-gray-800">{cetakTabel.Nama}</h1>
+              </div>
+             <p class="text-lg text-gray-700">
+              Ibukota: <strong class="font-semibold text-gray-900 underline decoration-red-500 decoration-dotted">{cetakTabel.Ibukota}</strong>
+              </p>
+              <p class="text-lg text-gray-700 mb-2">
+              <b>Situs Portal:</b> <a href={cetakTabel.Situs} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">{cetakTabel.Situs}</a>
+              </p>
+               <div class="w-full h-80 bg-blue-50 border border-blue-200 rounded-2xl flex items-center justify-center">
+               <p class="text-gray-500">{@html cetakTabel.Map} </p>
+               </div>
+               <p class="text-lg text-gray-700 mt-1">
+               <b>Koordinat:</b><br/>{cetakTabel.Koordinat}
+               </p>
+              </div>
+            </TableBodyCell>
+             <TableBodyCell class="whitespace-break-spaces content-start">
+            <div class="font-sans mx-auto" style="width:250px;overflow-wrap: anywhere;">
+               <p class="mt-2 text-lg text-gray-700">
+                <b>Keterangan:</b> <br/>{@html cetakTabel.KetMap}
+              </p>
+              </div>
+            </TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start text-lg text-gray-700"><div style="width:190px;overflow-wrap: anywhere;">
+            <b>Luas Wilayah:</b><br/>{cetakTabel.Luas_Wilayah} km2<br/><br/><b>Jum. Penduduk:</b><br/>{cetakTabel.J_Penduduk}<br/>
+            <br/><b>Jumlah Kecamatan:</b><br/>{cetakTabel.J_Kecamatan}<br/><br/><b>Jumlah Kelurahan:</b><br/>{cetakTabel.J_Kelurahan}<br/><br/><b>Jumlah Desa:</b><br/>{cetakTabel.J_Desa}</div><br/></TableBodyCell>
+            <TableBodyCell class="whitespace-break-spaces content-start text-lg text-gray-700"><div style="width:160px;overflow-wrap: anywhere;">
+            <b>Jumlah Gunung:</b><br/>{cetakTabel.J_Gunung}<br/><br/><b>Jumlah Pulau:</b><br/>{cetakTabel.J_Pulau}<br/><br/><b>Jumlah Selat:</b><br/>{cetakTabel.J_Selat}<br/><br/><b>Jumlah Danau:</b><br/>{cetakTabel.J_Danau}<br/><br/><b>Jumlah Sungai:</b><br/>{cetakTabel.J_Sungai}<br/><br/><b>Jumlah Rawa:</b><br/>{cetakTabel.J_Rawa}</div><br/></TableBodyCell>
           </TableBodyRow>
        {/each}
     
@@ -242,64 +264,5 @@ function timeout() {
 </div>
 
 <style>
-  .modern-box {
-    position: relative;
-    display: inline-block;
-    padding: 12px;
-  }
-  
-  .modern-box::before,
-  .modern-box::after,
-  .contentbox::before,
-  .contentbox::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #c7c7e7;
-  }
-  
-  /* Top left corner */
-  .modern-box::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  /* Top right corner */
-  .modern-box::after {
-    top: 0;
-    right: 0;
-    border-left: none;
-    border-bottom: none;
-  }
 
-  .contentbox {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-  
-  /* Bottom left corner */
-  .contentbox::before {
-    bottom: 0;
-    left: 0;
-    border-right: none;
-    border-top: none;
-  }
-  
-  /* Bottom right corner */
-  .contentbox::after {
-    bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
-  }
-  
-  .contentbox label {
-    font-size: 0.94rem;
-    margin: 0;
-    padding: 0;
-  }
 </style>

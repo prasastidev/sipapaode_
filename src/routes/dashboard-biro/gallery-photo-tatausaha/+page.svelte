@@ -25,8 +25,8 @@
     let counter = 6;
 
 // Sesuaikan nama properti di sini
-$: profilePemerintahan = data.DatasProfileBidang?.documents.find(
-    (profil) => profil.namaBidang === "Koordinator Pemerintahan"
+$: profileTataUsaha = data.DatasProfileBidang?.documents.find(
+    (profil) => profil.namaBidang === "Tata Usaha"
 );
 
 
@@ -42,11 +42,11 @@ $: profilePemerintahan = data.DatasProfileBidang?.documents.find(
 
     // Fungsi baru untuk membuka modal dan mengisi form
 function openUpdateModal() {
-  if (profilePemerintahan) {
+  if (profileTataUsaha) {
     // Isi variabel form dengan data dari profilePemerintahan
-    tentangText = profilePemerintahan.tentang;
-    tupoksiText = profilePemerintahan.tupoksi;
-    programPrioritasText = profilePemerintahan.programPrioritas;
+    tentangText = profileTataUsaha.tentang;
+    tupoksiText = profileTataUsaha.tupoksi;
+    programPrioritasText = profileTataUsaha.programPrioritas;
     
     // Buka modal
     ModalUpdateProfile = true;
@@ -58,13 +58,13 @@ function openUpdateModal() {
 const updateDataProfile = async (e) => {
   e.preventDefault();
 
-  if (!profilePemerintahan) {
+  if (!profileTataUsaha) {
       alert("Error: Data profil tidak ditemukan.");
       return;
   }
   
   // Ambil ID dokumen dari profilePemerintahan
-  const docId = profilePemerintahan.$id;
+  const docId = profileTataUsaha.$id;
 
   // Panggil fungsi update dengan data dari variabel dan docId yang benar
   await UpdateDataProfileBidang(tentangText, tupoksiText, programPrioritasText, docId);
@@ -93,7 +93,7 @@ function scrollTo(elementId) {
   }
 
 function showimage(id) {
-    const result = storage.getFileView('6791fea50005705fec23', id);
+    const result = storage.getFileView('68becd03000631cf9bda', id);
     return result;  
 }
 
@@ -101,7 +101,7 @@ function showimage(id) {
  const UploadImage = async (e) => {
     e.preventDefault();
     const formEl = e.target;
-    const fileInput = document.getElementById('UploadImagePemerintahan');
+    const fileInput = document.getElementById('UploadImageTataUsaha');
     const file = fileInput.files[0];
 
     // Jika tidak ada file yang dipilih, hentikan fungsi
@@ -127,7 +127,7 @@ function showimage(id) {
     // Jika validasi berhasil, lanjutkan proses upload
     visibleProgresBar = true;
     try {
-        await storage.createFile('6791fea50005705fec23', ID.unique(), file);
+        await storage.createFile('68becd03000631cf9bda', ID.unique(), file);
         progress = 100;
         formEl.reset();
         await invalidateAll();
@@ -150,7 +150,7 @@ function showimage(id) {
 
  const remove = async (id) => {
     // Delete File Storage
-    await storage.deleteFile('6791fea50005705fec23', id );
+    await storage.deleteFile('68becd03000631cf9bda', id );
     ConfirmDeleteModal = false;
     await invalidateAll();
 	};
@@ -158,7 +158,7 @@ function showimage(id) {
   // Pagination 
   let currentPage =1; // Update this to simulate page change.
   let postsPerPage = 9;
-  let allPosts = data.DatasGambarPemerintahan.files;
+  let allPosts = data.DatasGambarTataUsaha.files;
   let totalPosts = allPosts.length;
   let totalPages = Math.ceil(totalPosts / postsPerPage);
   $: postRangeHigh = currentPage * postsPerPage;
@@ -170,13 +170,13 @@ function showimage(id) {
   </script>
   
   <svelte:head>
-  <title>Gallery Photo Koordinator Pemerintahan</title>
-  <meta name="description" content="Gallery Photo - Koordinator Pemerintahan Sipapaode" />
+  <title>Gallery Photo Tata Usaha</title>
+  <meta name="description" content="Gallery Photo - Tata Usaha Sipapaode" />
   </svelte:head>
 
   
   <div class="container">
-    <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profile dan Photo Gallery - Bidang Koordinator Pemerintahan</Heading>
+    <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profile dan Photo Gallery - Sub Bagian Tata Usaha</Heading>
   <br/>
 
      
@@ -186,15 +186,15 @@ function showimage(id) {
   </div> 
   <br/>
 
-  {#if $user.prefs['Role'] !== "PIC Pemerintahan"}
+  {#if $user.prefs['Role'] !== "PIC Tata Usaha"}
   <Alert color="yellow">
-  <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Pemerintahan</span>
+  <span class="font-medium" style="font-weight:600;">Halaman ini hanya bisa di Update oleh PIC Tata Usaha</span>
   </Alert>
   <br/>
   {/if}
 
    <!-- Modal Update Profile Bidang -->
-     <Modal size="lg" title="Update Profile Bidang Koordinator Pemerintahan" bind:open={ModalUpdateProfile} autoclose={false}>
+     <Modal size="lg" title="Update Profile Sub Bagian Tata Usaha" bind:open={ModalUpdateProfile} autoclose={false}>
         <form class="space-y-6" on:submit|preventDefault={updateDataProfile} >
         
         <h2 style="font-size: 20px;font-weight: 600;margin-bottom: -20px;">Tentang:</h2>
@@ -220,14 +220,14 @@ function showimage(id) {
             <Button color="alternative" on:click={()=> ModalUpdateProfile = !ModalUpdateProfile} >Batal</Button>
            <Toast class="max-w-2xl" color="green" transition={slide} bind:toastStatus>
            <CheckCircleSolid slot="icon" class="w-5 h-5" />
-           Data Profile Bidang Koordinator Pemerintahan berhasil diperbaharui. Form akan tutup dalam {counter}s.
+           Data Profile Sub Bagian Tata Usaha berhasil diperbaharui. Form akan tutup dalam {counter}s.
            </Toast>
           </svelte:fragment>
         </Modal>
 
 <div id="updateProfile" class="flex items-center gap-4 mb-10">
     <h4 class="text-xl font-extrabold md:text-xl lg:text-2xl">📝 Update Halaman Profile</h4>
-     {#if $user.prefs['Role'] === "PIC Pemerintahan"}
+     {#if $user.prefs['Role'] === "PIC Tata Usaha"}
     <button style="box-shadow: rgba(102, 144, 246, 0.4) 5px 7px;" on:click={openUpdateModal} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
      <EditOutline class="shrink-0 h-6 w-6" /><span>EDIT</span>
     </button>
@@ -236,22 +236,22 @@ function showimage(id) {
 
 <div class="mx-auto my-10 p-8 border-2 border-neutral-500 rounded-2xl font-sans">
     <div class="space-y-6">
-      {#if profilePemerintahan}
+      {#if profileTataUsaha}
         <div>
             <h2 class="inline-block text-xl font-bold text-gray-800 mb-3"><span class="pb-1 border-b-4 border-sky-600">Tentang</span></h2>
-            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]">{ profilePemerintahan.tentang } </p>
+            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]">{ profileTataUsaha.tentang } </p>
         </div>
         <div>
             <h2 class="inline-block text-xl font-bold text-gray-800 mb-3"><span class="pb-1 border-b-4 border-sky-600">Tupoksi</span></h2>
-            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]">{ profilePemerintahan.tupoksi } </p>
+            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]">{ profileTataUsaha.tupoksi } </p>
         </div>
          <div>
             <h2 class="inline-block text-xl font-bold text-gray-800 mb-3"> <span class="pb-1 border-b-4 border-sky-600">Program Prioritas</span></h2>
-            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]"> { profilePemerintahan.programPrioritas } </p>
+            <p class="preserve-lines text-gray-700 bg-slate-100 leading-relaxed text-justify py-1 px-2 rounded-md border border-[#d4d4f1]"> { profileTataUsaha.programPrioritas } </p>
         </div>
     {:else}
         <p class="text-center text-gray-500">
-            Data profil untuk "Koordinator Pemerintahan" tidak ditemukan.
+            Data profil untuk "Sub Bagian Tata Usaha" tidak ditemukan.
         </p>
     {/if}
   </div>
@@ -262,7 +262,7 @@ function showimage(id) {
 
    <div id="uploadPhoto" class="flex items-center gap-4 mb-10">
     <h4 class="text-xl font-extrabold md:text-xl lg:text-2xl">🖼️ Upload Photo Gallery</h4>
-    {#if $user.prefs['Role'] === "PIC Pemerintahan"}
+    {#if $user.prefs['Role'] === "PIC Tata Usaha"}
     <button style="box-shadow: rgba(102, 144, 246, 0.4) 5px 7px;" on:click={() => (isUploadOpen = !isUploadOpen)} class="flex items-center justify-center gap-2 rounded-lg bg-white px-8 py-2 font-semibold text-slate-800 transition duration-200 hover:shadow-md active:scale-95">
     <EditOutline class="shrink-0 h-6 w-6" /><span>{!isUploadOpen ? 'UPLOAD PHOTO' : 'TUTUP UPLOAD PHOTO'}</span>
    </button>
@@ -273,7 +273,7 @@ function showimage(id) {
       <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
      <form class="space-y-6" on:submit|preventDefault ={UploadImage} >
      <Label class="pb-2 text-base">Upload file Photo atau Gambar (Type File diizinkan: <b>jpg</b>, <b>jpeg</b>, <b>gif</b>, <b>webp</b> dan <b>png</b>)</Label>
-    <Fileupload class="mb-2" id="UploadImagePemerintahan" accept=".png, .jpg, .jpeg, .webp" required />
+    <Fileupload class="mb-2" id="UploadImageTataUsaha" accept=".png, .jpg, .jpeg, .webp" required />
     <Label class="pb-2 mb-3">(Max File Size: 10 MB)</Label>
     <ButtonGroup class="*:!ring-primary-700"><Button outline color="dark" type="submit" value="submit" >
     <UploadOutline  class="w-4 h-4 me-2" />Simpan Gambar</Button> </ButtonGroup>
@@ -303,14 +303,14 @@ function showimage(id) {
     <br/>
  
    
-  {#if data.DatasGambarPemerintahan.total === 0}
+  {#if data.DatasGambarTataUsaha.total === 0}
   <p>Saat ini tidak terdapat Gambar pada Gallery Photo.</p>
   {:else}
-  <p>Terdapat {data.DatasGambarPemerintahan.total} Gambar dalam Folder Gallery Koordinator Pemerintahan</p>
+  <p>Terdapat {data.DatasGambarTataUsaha.total} Gambar dalam Folder Gallery Tata Usaha</p>
 {/if}
  <br/>
   <div style="padding:18px;border-radius:12px;border:2px solid #88888b;">
-    {#await data.DatasGambarPemerintahan.files}
+    {#await data.DatasGambarTataUsaha.files}
      loading...
     {:then allPosts}
     <div class="grid grid-cols-3 gap-4">
@@ -319,7 +319,7 @@ function showimage(id) {
      <div style="float:left;text-align:center;">
      <img src={showimage(cetakTabel.$id)} alt="image" style="width:460px;height:240px;margin:10px;border-radius:10px;"/>
      <span style="font-size:14px;">{cetakTabel.name}</span> <br/>
-     {#if $user.prefs['Role'] === "PIC Pemerintahan"}
+     {#if $user.prefs['Role'] === "PIC Tata Usaha"}
       <ButtonGroup class="*:!ring-primary-700">
         <Button style="color:blue;"><a href={showimage(cetakTabel.$id)} target="_blank" style="color:blue;"><ZoomInOutline class="w-4 h-4 me-2" />Lihat</a></Button>
         <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
