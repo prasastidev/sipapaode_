@@ -48,8 +48,10 @@ border-bottom-left-radius: 24px;border-bottom-right-radius: 24px;">
         <DropdownItem href="/pengiriman-evaluasi-kerjasama" class="text-[#4a494d]">Informasi Laporan Evaluasi Kerjasama</DropdownItem>
         <DropdownItem href="/data-pegawai" class="text-[#4a494d]">Infografis Data Pegawai</DropdownItem>
 		<DropdownDivider />
-		<DropdownItem href="/regulasi-produk" class="text-[#4a494d]">Produk Hukum (Download Center)</DropdownItem>
-       <DropdownItem href="/berita-sulawesi-tenggara" class="text-[#4a494d]">Berita Terkini Sulawesi Tenggara</DropdownItem>
+		<!--
+     <DropdownItem href="/regulasi-produk" class="text-[#4a494d]">Produk Hukum (Download Center)</DropdownItem>
+     --> 
+   <DropdownItem href="/berita-sulawesi-tenggara" class="text-[#4a494d]">Berita Terkini Sulawesi Tenggara</DropdownItem>
 	</Dropdown>
       {#if $user}
         <div style="width: 120px;display:flex;color:#3C5D7C;">Hi, <a id="gotoDashboard" href="/dashboard-biro" style="display:flex;color:#3C5D7C;"><UserCircleSolid class="w-6 h-6" /> {$user.name}</a>

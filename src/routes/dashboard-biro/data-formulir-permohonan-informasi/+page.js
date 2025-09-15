@@ -5,7 +5,7 @@ export const ssr = false;
 export const csr = true;
 
 import { redirect } from '@sveltejs/kit';
-import { getTableData} from '$lib/crudPengajuanKSOnline';
+import { getTableDataPermohonanInformasi} from '$lib/DatapermohonanInformasiOnline';
 
 
 
@@ -17,7 +17,7 @@ export async function load({ parent }) {
 	}
 
 	return {
-		TableDataPengajuanKSOnline : await getTableData ()
+		TableDataPermohonanInformasi : await getTableDataPermohonanInformasi ()
 	};	
 }
 

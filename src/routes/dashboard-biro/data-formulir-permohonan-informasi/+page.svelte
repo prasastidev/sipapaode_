@@ -1,49 +1,85 @@
 <script>
     /** @type {{ data: import('./$types').PageData }} */
-    export let data;
+     export let data;
     
     import { Button, ButtonGroup, Label, Heading } from 'flowbite-svelte';
     import { FilePdfOutline, ImageOutline } from 'flowbite-svelte-icons';
+    import { storage, databases } from '$lib/appwrite';
+    import { invalidateAll } from '$app/navigation';
+    import { slide } from 'svelte/transition';
+	  import { deleteTableData, UpdateStatusPermohonanInformasi } from '$lib/DatapermohonanInformasiOnline.js';
+
 
     // --- State Management ---
-    // Untuk tujuan demonstrasi, saya tambahkan lebih banyak data dummy
-    let submissions = [
-        { id: 1, data: { nama: 'Budiman Astrodinoto', nik: '112455598234', email: 'budiman@email.com', kontak: '081235432', alamat: 'Jl. Artadinata B No. 5', permintaan: 'Informasi Dokumen LPPD Prov. Sultra tahun 2025', tujuan: 'Riset', infoMethod: 'salinan', pemberianMethod: 'email' }, ktpFile: { name: 'ktp_budiman.jpg' }, pengesahanFile: { name: 'pengesahan_a.pdf' }, status: 'Telah Diproses' },
-        { id: 2, data: { nama: 'Citra Lestari', nik: '345678901234', email: 'citra@email.com', kontak: '08122343', alamat: 'Jl. Bangkok No 10', permintaan: 'Informasi Laporan Kerjasama Prov. Sultra tahun 2025', tujuan: 'Research', infoMethod: 'salinan', pemberianMethod: 'email' }, ktpFile: { name: 'ktp_citra.jpg' }, pengesahanFile: null, status: 'Telah Diproses' },
-        { id: 3, data: { nama: 'Andi Wijaya', nik: '567890123456', email: 'andi@email.com', kontak: '0812213', alamat: 'Jl. Cluster', permintaan: 'Info C', tujuan: 'Riset C', infoMethod: 'lihat', pemberianMethod: 'langsung' }, ktpFile: { name: 'ktp_andi.jpg' }, pengesahanFile: { name: 'pengesahan_c.pdf' }, status: 'Telah Diproses' },
-        { id: 4, data: { nama: 'Dewi Sartika', nik: '789012345678', email: 'dewi@email.com', kontak: '08123443', alamat: 'Jl. Dominggo', permintaan: 'Info D', tujuan: 'Riset D', infoMethod: 'salinan', pemberianMethod: 'email' }, ktpFile: { name: 'ktp_dewi.jpg' }, pengesahanFile: { name: 'pengesahan_d.pdf' }, status: 'Telah Diproses' },
-        { id: 5, data: { nama: 'Eko Prasetyo', nik: '901234567890', email: 'eko@email.com', kontak: '0812333', alamat: 'Jl. Eralangga', permintaan: 'Info E', tujuan: 'Riset E', infoMethod: 'lihat', pemberianMethod: 'langsung' }, ktpFile: { name: 'ktp_eko.jpg' }, pengesahanFile: null, status: 'Menunggu Proses' },
-        { id: 6, data: { nama: 'Fajar Nugroho', nik: '123456789012', email: 'fajar@email.com', kontak: '08122223', alamat: 'Jl. Fahrenhait', permintaan: 'Info F', tujuan: 'Riset F', infoMethod: 'salinan', pemberianMethod: 'email' }, ktpFile: { name: 'ktp_fajar.jpg' }, pengesahanFile: { name: 'pengesahan_f.pdf' }, status: 'Telah Diproses' }
-    ];
+  
+// PERUBAHAN: Inisialisasi 'submissions' dari prop 'data' yang diterima dari +page.js
+    // Gunakan reactive statement ($:) agar 'submissions' otomatis update jika 'data' berubah.
+    $: submissions = data.TableDataPermohonanInformasi.documents || [];
+
+    function DownloadFile(id) {
+        const result = storage.getFileView('68a48e3400216612eab6', id);
+        return result.href; // PERUBAHAN: Kembalikan href untuk digunakan di tag <a>
+    }
+
+    const remove = async (id) => {
+        try {
+            const document = await databases.getDocument(
+                '673dd7b2001a83873b47', 
+                'data_pengajuan_permohonan_informasi_',
+                id
+            );
+            
+            const deletePromises = [];
+            
+            if (document.IDBucketLampiranKTP) {
+                deletePromises.push(
+                    storage.deleteFile('68a48e3400216612eab6', document.IDBucketLampiranKTP)
+                );
+            }
+            
+            if (document.IDBucketLampiranPengesahan) {
+                deletePromises.push(
+                    storage.deleteFile('68a48e3400216612eab6', document.IDBucketLampiranPengesahan)
+                );
+            }
+            
+            await Promise.all(deletePromises);
+            await deleteTableData(id);
+            
+            console.log('Berhasil menghapus data dan semua lampiran');
+            await invalidateAll(); // Panggil invalidateAll untuk memuat ulang data dari server
+            
+        } catch (error) {
+            console.error('Error saat menghapus data:', error);
+            // Anda bisa menambahkan notifikasi error ke user di sini
+        }
+    };
 
     // --- LOGIKA PENCARIAN ---
     let searchTerm = '';
     $: filteredSubmissions = searchTerm
         ? submissions.filter(submission => {
             const lowerCaseSearch = searchTerm.toLowerCase();
+            // PERUBAHAN: Akses properti langsung dari 'submission', bukan 'submission.data'
             return (
-                submission.data.nama.toLowerCase().includes(lowerCaseSearch) ||
-                submission.data.nik.includes(searchTerm)
+                submission.NamaLengkap.toLowerCase().includes(lowerCaseSearch) ||
+                submission.NIK.includes(searchTerm)
             );
         })
         : submissions;
     
     // --- LOGIKA PAGINATION ---
     let currentPage = 1;
-    let itemsPerPage = 3; // Tampilkan 3 data per halaman
+    let itemsPerPage = 3; 
 
-    // Reactive statements untuk pagination
     $: totalItems = filteredSubmissions.length;
     $: totalPages = Math.ceil(totalItems / itemsPerPage);
-    // Potong data yang sudah difilter sesuai halaman saat ini
     $: paginatedSubmissions = filteredSubmissions.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
-    // Reset ke halaman 1 setiap kali hasil pencarian berubah
-    $: if (filteredSubmissions) currentPage = 1;
+    $: if (searchTerm) currentPage = 1; // Reset ke halaman 1 saat pencarian berubah
 
-    function handleDelete(id) {
-        submissions = submissions.filter(sub => sub.id !== id);
-    }
+    // PERUBAHAN: Fungsi handleDelete dihapus karena tidak digunakan dan tidak efisien.
+    // Kita langsung memanggil fungsi 'remove' yang berinteraksi dengan database.
 </script>
 
 <svelte:head>
@@ -77,47 +113,61 @@
     </div>
 
     <div class="space-y-6">
-      {#each paginatedSubmissions as submission, i (submission.id)}
-        <div class="bg-white rounded-lg shadow-lg p-6 border-l-8 border-sky-700 flex items-start gap-6">
+      {#each paginatedSubmissions as submission, i (submission.$id)}
+        <div class="bg-white rounded-lg shadow-lg p-6 border-l-8 border-sky-700 flex items-start gap-6" transition:slide>
             <div class="w-10 h-10 bg-sky-700 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0 ring-4 ring-white">
                 {(currentPage - 1) * itemsPerPage + i + 1}
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-x-6 gap-y-4 flex-grow">
               <div class="space-y-3">
-                <div><Label><b>Nama Lengkap:</b></Label><p class="text-gray-700">{submission.data.nama}</p></div>
-                <div><Label><b>NIK:</b></Label><p class="text-gray-700">{submission.data.nik}</p></div>
-                <div><Label><b>Email:</b></Label><p class="text-gray-700">{submission.data.email}</p></div>
-                <div><Label><b>Kontak:</b></Label><p class="text-gray-700">{submission.data.kontak}</p></div>
-                <div><Label><b>Alamat:</b></Label><p class="text-gray-700">{submission.data.alamat}</p></div>
-              </div>
-              <div class="space-y-3">
-                <div><Label><b>Permintaan Informasi:</b></Label><p class="text-gray-700">{submission.data.permintaan}</p></div>
-                <div><Label><b>Tujuan:</b></Label><p class="text-gray-700">{submission.data.tujuan}</p></div>
-                <div><Label><b>Cara Mendapatkan:</b></Label><p class="text-gray-700 capitalize">{submission.data.infoMethod}</p></div>
-                <div><Label><b>Cara Pemberian:</b></Label><p class="text-gray-700 capitalize">{submission.data.pemberianMethod}</p></div>
-              </div>
-              <div class="space-y-3">
-                <div>
-                  <Label><b>File KTP:</b></Label>
-                  {#if submission.ktpFile} <span class="text-blue-600 flex items-center gap-1"><ImageOutline class="w-5 h-5" /> {submission.ktpFile.name}</span> {:else} - {/if}
+                    <div><Label><b>Nama Lengkap:</b></Label><p class="text-gray-700">{submission.NamaLengkap}</p></div>
+                    <div><Label><b>NIK:</b></Label><p class="text-gray-700">{submission.NIK}</p></div>
+                    <div><Label><b>Email:</b></Label><p class="text-gray-700">{submission.Email}</p></div>
+                    <div><Label><b>Kontak:</b></Label><p class="text-gray-700">{submission.NoContact}</p></div>
+                    <div><Label><b>Alamat:</b></Label><p class="text-gray-700">{submission.Alamat}</p></div>
                 </div>
-                <div>
-                  <Label><b>File Pengesahan:</b></Label>
-                  {#if submission.pengesahanFile} <span class="text-red-600 flex items-center gap-1"><FilePdfOutline class="w-5 h-5" /> {submission.pengesahanFile.name}</span> {:else} - {/if}
+                <div class="space-y-3">
+                    <div><Label><b>Permintaan Informasi:</b></Label><p class="text-gray-700">{submission.PermintaanInformasi}</p></div>
+                    <div><Label><b>Tujuan:</b></Label><p class="text-gray-700">{submission.TujuanPengajuan}</p></div>
+                    <div><Label><b>Cara Mendapatkan:</b></Label><p class="text-gray-700 capitalize">{submission.CaraMendapatkan}</p></div>
+                    <div><Label><b>Cara Pemberian:</b></Label><p class="text-gray-700 capitalize">{submission.CaraPemberian}</p></div>
                 </div>
-                  <div><Label><b>Status:</b></Label><p class="font-semibold text-green-600">{submission.status}</p></div>
-                  <div class="flex gap-2 pt-4">
-                   <Button size="sm" color="light">Edit</Button>
-                   <Button size="sm" color="red" on:click={() => handleDelete(submission.id)}>Delete</Button>
-                  </div>
-              </div>
+                <div class="space-y-3">
+                    <div>
+                        <Label><b>File KTP:</b></Label>
+                        {#if submission.IDBucketLampiranKTP}
+                            <a href={DownloadFile(submission.IDBucketLampiranKTP)} target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline flex items-center gap-1">
+                                <ImageOutline class="w-5 h-5" /> Lihat/Unduh File
+                            </a>
+                        {:else} - {/if}
+                    </div>
+                    <div>
+                        <Label><b>File Pengesahan:</b></Label>
+                        {#if submission.IDBucketLampiranPengesahan}
+                            <a href={DownloadFile(submission.IDBucketLampiranPengesahan)} target="_blank" rel="noopener noreferrer" class="text-red-600 hover:underline flex items-center gap-1">
+                                <FilePdfOutline class="w-5 h-5" /> Lihat/Unduh File
+                            </a>
+                        {:else} - {/if}
+                    </div>
+                    <div><Label><b>Status:</b></Label><p class="font-semibold text-green-600">{submission.Status}</p></div>
+                    <div class="flex gap-2 pt-4">
+                        <Button size="sm" color="light">Edit</Button>
+                        <Button size="sm" color="red" on:click={() => remove(submission.$id)}>Delete</Button>
+                    </div>
+                </div>
             </div>
         </div>
       {:else}
         <div class="text-center py-10 border rounded-lg bg-gray-50">
             <p class="text-gray-600 font-semibold">Data Tidak Ditemukan</p>
-            <p class="text-gray-500 mt-1">Tidak ada data yang cocok dengan pencarian "{searchTerm}".</p>
+            <p class="text-gray-500 mt-1">
+                {#if searchTerm}
+                    Tidak ada data yang cocok dengan pencarian "{searchTerm}".
+                {:else}
+                    Belum ada data pengajuan yang masuk.
+                {/if}
+            </p>
         </div>
       {/each}
     </div>
