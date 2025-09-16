@@ -1,64 +1,62 @@
 <script>
+  // Komponen dari Flowbite Svelte
+  import { Button, Label, Input } from 'flowbite-svelte';
+  
+  // Aset gambar (logo dan gambar latar)
+  import ImagelogoSipapaOde from '$lib/images/SipapaOde-logo.webp';
+  // GANTI URL INI dengan path ke gambar gedung Anda
+  import ImageGedung from '$lib/images/Gedung-Kantor.png'; 
 
-    import { Heading, Card, Button, Label, Input, Checkbox } from 'flowbite-svelte';
-    import ImagelogoSipapaOde from '$lib/images/SipapaOde-logo.webp';
+  import { user } from '$lib/user';
 
-    import { user } from '$lib/user';
-
-
-	const login = async (e) => {
-		e.preventDefault();
-		const formData = new FormData(e.target);
-		await user.login(formData.get('email'), formData.get('password'));
-	};
-
+  // Fungsi login tetap sama
+  const login = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    await user.login(formData.get('email'), formData.get('password'));
+  };
 </script>
 
 <svelte:head>
-	<title>Login Sipapaode</title>
-	<meta name="description" content="Login Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
+  <title>Login Sipapaode</title>
+  <meta name="description" content="Login Sipapaode - Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara" />
 </svelte:head>
 
-<br/>
-
-
-<div class="flex container justify-center mb-16">
-  <Card horizontal size="lg">
-
-<div class="flex w-full flex-col justify-center px-6 py-12 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    <img class="mx-auto w-24 h-20" src={ ImagelogoSipapaOde } alt="sipapaode">
-    <h2 class="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">Login Ke Akun Dashboard Anda</h2>
+<main class="flex items-center justify-center min-h-screen p-2">
+  
+  <div class="flex w-full shadow-2xl rounded-2xl overflow-hidden bg-gray-100 gap-2">
+    
+    <div class="relative hidden md:block w-1/2 bg-blue-100 p-6">
+      <img src={ImageGedung} alt="Biro Pemerintahan dan Otonomi Daerah" class="w-full h-full object-cover rounded-xl shadow-md"  style="object-fit: fill;">
+      
+      </div>
+    
+    <div class="w-full md:w-1/2 bg-white p-8 sm:p-12 flex flex-col justify-center">
+      
+      <div class="text-center mb-8">
+        <img class="mx-auto w-24 h-20 mb-4" src={ImagelogoSipapaOde} alt="Logo Sipapaode">
+        <h2 class="text-2xl font-bold text-gray-800">Login Ke Dashboard Anda</h2>
+      </div>
+      
+      <form class="space-y-6" on:submit={login}>
+        <div>
+          <Label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email address</Label>
+          <Input type="email" id="email" name="email" placeholder="nama@email.com" required />
+        </div>
+        
+        <div>
+          <Label for="password" class="block mb-2 text-sm font-medium text-gray-700">Password</Label>
+          <Input type="password" id="password" name="password" placeholder="••••••••" required />
+        </div>
+        
+        <Button type="submit" class="w-full" color="purple">Log In</Button>
+      </form>
+      
+      <p class="mt-8 text-center text-sm text-gray-600">
+        Tidak Punya Akun? <a href="/registrasi" class="font-semibold text-purple-600 hover:text-purple-500">Registrasi</a>
+      </p>
+      
+    </div>
   </div>
-
-  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-    <form class="space-y-6" action="#" method="POST" on:submit={login}>
-      <div>
-        <label for="email" class="block text-sm/6 font-medium text-gray-900">Email address</label>
-        <div class="mt-2">
-          <input id="email" name="email" type="email" autocomplete="email" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-        </div>
-      </div>
-
-      <div>
-        <div class="flex items-center justify-between">
-          <label for="password" class="block text-sm/6 font-medium text-gray-900">Password</label>
-        </div>
-        <div class="mt-2">
-          <input id="password" name="password" type="password" autocomplete="current-password" required class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm/6">
-        </div>
-      </div>
-
-      <div>
-        <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Log In</button>
-      </div>
-    </form>
-
-    <p class="mt-10 text-center text-sm/6 text-gray-500">
-      Tidak Punya Akun?
-      <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">Registrasi</a>
-    </p>
-  </div>
-</div>
-
-</Card></div>
+  
+</main>

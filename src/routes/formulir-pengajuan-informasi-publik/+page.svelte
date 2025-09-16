@@ -261,7 +261,7 @@ let defaultStatus = "Proses Pengajuan";
   </div>
 
   <div>
-    <Label class="mb-2">Lembar Pengesahan Badan Hukum (jika kelompok pemohon / organisasi)</Label>
+    <Label class="mb-2">Unggah Lembar Pengesahan Badan Hukum (jika kelompok pemohon / organisasi)</Label>
     <div
       class="flex items-center justify-center w-full text-center p-6 border-2 border-dashed rounded-lg cursor-pointer transition-colors {isDraggingPengesahan ? 'border-blue-500 bg-blue-50 dark:bg-gray-700' : 'border-gray-300 dark:border-gray-600 hover:bg-gray-50 dark:hover:bg-gray-700'}"
       on:dragenter|preventDefault|stopPropagation={(e) => (isDraggingPengesahan = true)}
