@@ -83,7 +83,7 @@ const updateStatusPengajuan = async (e) => {
   function timeout() {
     if (--counter > 0) return setTimeout(timeout, 1000);
     toastStatus = false;
-    ModalFormulir = false;
+    ModalEditData = false;
   } 
 
 
@@ -215,7 +215,7 @@ const remove = async (id) => {
     <br/>
     {/if}
 
-<Modal title="Edit Data Proses Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
+<Modal size="lg" title="Edit Data Proses Pengajuan Kerjasama Atas Nama {getNama}" bind:open={ModalEditData} autoclose={false}>
   <form class="space-y-6" on:submit={updateStatusPengajuan}>
     <b>Instansi:</b>  {getInstansi}  <br/>
   <b>Tentang:</b> {getTentang}  <br/> <br/>
@@ -385,7 +385,7 @@ const remove = async (id) => {
             <p class="text-sm text-gray-700"><b class="font-semibold">Tombol Aksi:</b><br />
             <ButtonGroup class="*:!ring-primary-700 mt-4">
              <Button style="color:blue;" on:click={() => getDataPengajuanKS(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
-             <Button style="color:red;"on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama, cetakTabel.Instansi)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
+             <Button style="color:red;" on:click={() => openDeleteModal(cetakTabel.$id, cetakTabel.Nama, cetakTabel.Instansi)} ><TrashBinOutline class="w-4 h-4 me-2" />Hapus</Button>
              </ButtonGroup>
             </p>
             {/if}
