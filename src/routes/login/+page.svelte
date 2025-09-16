@@ -53,7 +53,7 @@
       </form>
       
       <p class="mt-8 text-center text-sm text-gray-600">
-        Tidak Punya Akun? <a href="/registrasi" class="font-semibold text-purple-600 hover:text-purple-500">Registrasi</a>
+        Tidak Punya Akun? <a href="#" class="font-semibold text-purple-600 hover:text-purple-500">Registrasi</a>
       </p>
       
     </div>
