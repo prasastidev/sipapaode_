@@ -46,7 +46,7 @@
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Pengaturan Visibility Formulir Layanan</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Pengaturan Visibilitas Formulir Layanan - Biro Pemerintahan dan Otonomi Daerah</Heading>
     <br/>
 
    <br/>

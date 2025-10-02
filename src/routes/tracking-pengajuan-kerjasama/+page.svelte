@@ -138,7 +138,7 @@
 		customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl"
 		style="color:#1f4d8c;"
 	>
-		Tracking Status Pengiriman Pengajuan Kerjasama
+		Tracking dan Pemantauan Status Pengiriman Pengajuan Kerjasama
 	</Heading>
 	<Heading tag="h4" class="mb-4" customSize="text-2xl text-left font-extrabold  md:text-3xl lg:text-3xl"
 		>Biro Pemerintahan dan Otonomi Daerah<br />

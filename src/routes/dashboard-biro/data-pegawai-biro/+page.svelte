@@ -730,7 +730,7 @@ onMount(() => {
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Pegawai Biro Pemerintahan & Otonomi Daerah - Sultra</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Informasi Data Pegawai Biro Pemerintahan & Otonomi Daerah - Prov. Sultra</Heading>
     <br/>
 
       {#if $user.prefs['Role'] !== "PIC Tata Usaha"}
@@ -881,7 +881,7 @@ onMount(() => {
     {#if totalPosts === 0}
      <p>Saat ini Tidak Terdapat Data Pegawai Pada Tabel</p>
      {:else}
-    <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Biro Pemerintahan dan Otonomi Daerah Sultra / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Pegawai</strong></p>
+    <p>Terdapat <strong>{totalPosts}</strong> Data Pegawai Pada Biro Pemerintahan dan Otonomi Daerah Sultra / <strong style="border-bottom: 2px dotted;color:#4b4bdb;cursor: pointer;" on:click={() => (ModalStatistic = true)}>Lihat Statistik Data Pegawai</strong></p>
      {/if}
      <br/>
 

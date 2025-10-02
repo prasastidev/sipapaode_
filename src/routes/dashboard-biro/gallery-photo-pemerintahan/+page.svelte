@@ -176,7 +176,7 @@ function showimage(id) {
 
   
   <div class="container">
-    <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profile dan Photo Gallery - Bidang Koordinator Pemerintahan</Heading>
+    <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profil dan Galeri Foto - Bagian Koordinator Pemerintahan</Heading>
   <br/>
 
      

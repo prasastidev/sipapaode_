@@ -1,7 +1,7 @@
 <script>
   /** @type {import('./$types').PageData} */
   export let data=[];
-  import { Heading, Modal, Toast, Button, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
+  import { Heading, Modal, Alert, Toast, Button, Radio, ButtonGroup, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Checkbox, TableSearch } from 'flowbite-svelte';
   import { EditOutline, InfoCircleSolid, FileLinesOutline, ClockOutline, CheckCircleSolid } from 'flowbite-svelte-icons';
   import { slide } from 'svelte/transition';
   import { invalidateAll } from '$app/navigation';
@@ -13,7 +13,7 @@
   let getNamaKabupatenKota, getidDoc, getSLPPD, getSLPKJ, getKirimLPPD, getKirimLKPJ;
   let ModalUpdateDataLPPD = false;
   let toastStatus = false;
-  let counter = 7;
+  let counter = 5;
  
 
 /** Edit Run 2 function: GetDataDocumentLPPD and update*/
@@ -29,7 +29,7 @@ function getDataDocumentLPPD(id) {
 
 	promise.then(function (response) {
     ModalUpdateDataLPPD = true;
-    console.log(response); // Success
+    // console.log(response); // Success
 	getNamaKabupatenKota = response.Kabupaten_Kota;
   getSLPPD = response.SLPPD;
   getSLPKJ = response.SLPKJ;
@@ -54,7 +54,7 @@ const updateData = async (e) => {
 		formEl.reset();
      // Notification Toast and Time
      toastStatus = true;
-     counter = 7;
+     counter = 5;
      timeout();
 	};
 
@@ -91,9 +91,9 @@ const updateData = async (e) => {
 </svelte:head>
 
 
-<Modal title="Update Data Pengiriman LPPD {getNamaKabupatenKota}" bind:open={ModalUpdateDataLPPD} autoclose={false}>
+<Modal size="lg" title="Informasi Checklist Pengiriman LPPD & LKPJ Akhir Tahun {getNamaKabupatenKota}" bind:open={ModalUpdateDataLPPD} autoclose={false}>
   <form class="space-y-6" on:submit={updateData} >
-   <label class="text-sm">Apakah LPPD {getNamaKabupatenKota} sudah mengirim:</label>
+   <label class="text-sm" style="font-weight:600;">Apakah LPPD {getNamaKabupatenKota} sudah mengirim:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="SLPPD" class="p-3" bind:group={getSLPPD} value="✔️">Ya</Radio></li>
       <li class="w-full"><Radio name="SLPPD" class="p-3" bind:group={getSLPPD} value="➖">Belum</Radio></li>
@@ -104,7 +104,7 @@ const updateData = async (e) => {
       <li class="w-full"><Radio name="PengirimanLPPD" bind:group={getKirimLPPD} class="p-3" value="🟥 Terlambat">Terlambat</Radio></li> 
       <li class="w-full"><Radio name="PengirimanLPPD" bind:group={getKirimLPPD} class="p-3" value="🟨 Belum Mengirim">Belum Mengirim</Radio></li> 
     </ul> <br/> 
-    <label class="text-sm">Apakah LKPJ {getNamaKabupatenKota} sudah mengirim:</label>
+    <label class="text-sm" style="font-weight:600;">Apakah LKPJ {getNamaKabupatenKota} sudah mengirim:</label>
     <ul style="margin-top:3px;" class="items-center w-full rounded-lg border border-gray-200 sm:flex dark:bg-gray-800 dark:border-gray-600 divide-x rtl:divide-x-reverse divide-gray-200 dark:divide-gray-600">
       <li class="w-full"><Radio name="SLPKJ" bind:group={getSLPKJ} class="p-3" value="✔️" >Ya</Radio></li>
       <li class="w-full"><Radio name="SLPKJ" bind:group={getSLPKJ} class="p-3" value="➖">Belum</Radio></li>
@@ -133,14 +133,17 @@ const updateData = async (e) => {
  
 
 <div class="container">
-  <Heading tag="h3" customSize="text-3xl text-left font-extrabold  md:text-3xl lg:text-4xl">Update Checklist Laporan LPPD dan LKPJ Tahun 2024</Heading>
-  <br/><br/>
-  <div class="modern-box">
-    <div class="contentbox">
-      <label>Berikut adalah pembaruan Checklist pengiriman Laporan LPPD dan LKPJ oleh Pemerintah Kabupaten/Kota Provinsi Sulawesi Tenggara. Setiap perubahan data pada halaman ini akan terupdate secara otomatis di halaman publik untuk <a href="/penyampaian-lppd" class="font-semibold underline text-blue-400 hover:text-blue-600 dark:hover:text-yellow-900">Pengiriman LPPD dan LKPJ</a>.</label>
-    </div>
-  </div>
-  <br/><br/><br/>
+  <Heading tag="h3" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl">Daftar Periksa (Checklist) Pengiriman Laporan LPPD dan LKPJ Akhir Tahun Kabupaten/Kota Sulawesi Tenggara</Heading>
+  <br/>
+
+  {#if $user.prefs['Role'] !== 'PIC Otonomi'}
+        <Alert color="yellow">
+            <span class="font-medium" style="font-weight:600;"
+                >Halaman ini hanya bisa di Update oleh PIC Otonomi Daerah</span
+            >
+        </Alert>
+        <br />
+    {/if}
 
 <section>
 
@@ -182,7 +185,7 @@ const updateData = async (e) => {
         <TableBodyCell class="whitespace-break-spaces"><FileLinesOutline style="display:inline-flex;vertical-align:sub;" class="w-5 h-5" /> Document: {cetakTabel.SLPKJ}  <br/><ClockOutline style="display:inline-flex;vertical-align:sub;" class="w-5 h-5" /> Pengiriman: {cetakTabel.PengirimanLKPJ}</TableBodyCell>
         {#if $user.prefs['Role'] === "PIC Otonomi"}
         <TableBodyCell class="whitespace-break-spaces"><ButtonGroup class="*:!ring-primary-700">
-          <Button style="color:blue;" on:click={() => getDataDocumentLPPD(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Edit</Button>
+          <Button style="color:blue;" on:click={() => getDataDocumentLPPD(cetakTabel.$id)}><EditOutline class="w-4 h-4 me-2" />Update</Button>
         </ButtonGroup></TableBodyCell>
         {/if}
       </TableBodyRow>
@@ -203,64 +206,5 @@ const updateData = async (e) => {
 </div>
 
 <style>
-  .modern-box {
-    position: relative;
-    display: inline-block;
-    padding: 12px;
-  }
-  
-  .modern-box::before,
-  .modern-box::after,
-  .contentbox::before,
-  .contentbox::after {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 4px solid #c7c7e7;
-  }
-  
-  /* Top left corner */
-  .modern-box::before {
-    top: 0;
-    left: 0;
-    border-right: none;
-    border-bottom: none;
-  }
-  
-  /* Top right corner */
-  .modern-box::after {
-    top: 0;
-    right: 0;
-    border-left: none;
-    border-bottom: none;
-  }
 
-  .contentbox {
-    background: white;
-    padding: 6px 12px;
-    border-radius: 8px;
-  }
-  
-  /* Bottom left corner */
-  .contentbox::before {
-    bottom: 0;
-    left: 0;
-    border-right: none;
-    border-top: none;
-  }
-  
-  /* Bottom right corner */
-  .contentbox::after {
-    bottom: 0;
-    right: 0;
-    border-left: none;
-    border-top: none;
-  }
-  
-  .contentbox label {
-    font-size: 0.94rem;
-    margin: 0;
-    padding: 0;
-  }
 </style>

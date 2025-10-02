@@ -1166,7 +1166,7 @@ function prevQuote() {
 	  </AccordionItem>
 	  <AccordionItem class="font-semibold text-lg">
 		<span slot="header">Terdapat Bidang apa saja di Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara, sehubungan dengan layanan Pemerintahan</span>
-		<p class="mb-2 text-gray-500 dark:text-gray-400">Pada Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara, terdapat 3 Bidang yaitu: Bidang Bagian Kerjasama, Bidang Koordinator Pemerintahan dan Bidang Koordinator Otonomi Daerah, yang berhubungan dengan layanan Pemerintahan.</p>
+		<p class="mb-2 text-gray-500 dark:text-gray-400">Pada Biro Pemerintahan dan Otonomi Daerah Sulawesi Tenggara, terdapat 3 Bidang yaitu: Bagian Kerjasama, Bagian Koordinator Pemerintahan dan Bagian Koordinator Otonomi Daerah, yang berhubungan dengan layanan Pemerintahan.</p>
 	  </AccordionItem>
   </Accordion>
 	<br/><br/>

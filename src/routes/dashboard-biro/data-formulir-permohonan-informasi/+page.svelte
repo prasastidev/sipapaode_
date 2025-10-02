@@ -197,7 +197,7 @@ const updateStatusPengajuan = async (e) => {
 
 <div class="container mx-auto px-4 py-8">
 
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl">Data Pengajuan Permohonan Informasi</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl">Pengelolaan Data Pengajuan Permohonan Informasi - Biro Pemerintahan dan Otonomi Daerah</Heading>
     <br/>
 
     <form class="flex items-center w-full" on:submit|preventDefault>

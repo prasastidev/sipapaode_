@@ -44,7 +44,7 @@ border-bottom-left-radius: 24px;border-bottom-right-radius: 24px;">
       <Dropdown class="w-64 z-20" style="width:320px;">
 		<DropdownItem href="/daftar-informasi-publik" class="text-[#4a494d]">Daftar Informasi Publik</DropdownItem>
 		 <DropdownItem href="/formulir-pengajuan-informasi-publik" class="text-[#4a494d]">Formulir Permohonan Informasi Publik</DropdownItem>
-        <DropdownItem href="/penyampaian-lppd" class="text-[#4a494d]">Informasi Laporan LPPD dan LPKJ</DropdownItem>
+        <DropdownItem href="/penyampaian-lppd" class="text-[#4a494d]">Informasi Pengiriman Laporan LPPD dan LPKJ</DropdownItem>
         <DropdownItem href="/pengiriman-evaluasi-kerjasama" class="text-[#4a494d]">Informasi Laporan Evaluasi Kerjasama</DropdownItem>
         <DropdownItem href="/data-pegawai" class="text-[#4a494d]">Infografis Data Pegawai</DropdownItem>
 		<DropdownDivider />

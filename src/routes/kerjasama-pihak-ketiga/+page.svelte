@@ -1,7 +1,7 @@
 <script>
     /** @type {import('./$types').PageData} */
-    import { Heading, StepIndicator, Indicator, Toast, Avatar, Button, Chart, Modal, Select, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Checkbox, Card, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
-    import { BuildingOutline, BuildingSolid, CheckCircleSolid, ArrowRightAltSolid } from 'flowbite-svelte-icons';
+    import { Heading, StepIndicator, Indicator, Toast, Button, Chart, Modal, Select, Fileupload, Textarea, Radio, Alert, FloatingLabelInput, Checkbox, Card, Badge, GradientButton, Tooltip } from 'flowbite-svelte';
+    import { SearchSolid, InfoCircleSolid, BuildingSolid, CheckCircleSolid, ArrowRightAltSolid, ArrowUpRightFromSquareOutline } from 'flowbite-svelte-icons';
     import TataCaraKerjasama from '$lib/documents/Peraturan-Menteri-Dalam-Negeri-No-22-Tahun-2020.pdf';
     import { storage, databases } from '$lib/appwrite';
     import { invalidateAll } from '$app/navigation';
@@ -367,6 +367,11 @@ const procedure = {
     </nav>
 </div>
 
+<br/>
+ <Alert color="yellow">
+    <span class="font-medium" style="font-weight:600;">Pengajuan kerjasama Antar Pemerintah Daerah dan Kementerian/Lembaga Dapat Dilakukan Pada <a href="/kerjasama-antar-pemerintah-daerah-kl" style="text-decoration:underline;">Halaman Berikut <ArrowUpRightFromSquareOutline class="w-4 h-4 align-middle inline-flex" /></a></span>
+ </Alert>
+
 
 <Modal title="Prosedure Kerjasama" bind:open={ModalProsedure} size="xl" autoclose={false}>
   <div class="procedure">
@@ -386,7 +391,7 @@ const procedure = {
   </svelte:fragment>
 </Modal>
 
-<Modal title="Formulir Permohonan dan Pengajuan Kerjasama" bind:open={ModalFormulir} size="xl" autoclose={false}>
+<Modal title="Formulir Permohonan dan Pengajuan Kerjasama Dengan Pihak Ketiga/Swasta" bind:open={ModalFormulir} size="xl" autoclose={false}>
   <form class="space-y-6" on:submit={addDataFormtoTable}>
     <h2 style="font-weight:600;margin-bottom:8px;color:green;">Silahkan mengisi data Formulir dengan lengkap di bawah berikut:</h2>
     Pengiriman Dokumen Pengajuan Kerjasama dilakukan melalui formulir ini, Pastikan untuk mengisi setiap bagian dengan tepat. Siapkan semua dokumen yang akan dilampirkan sebelum mengirim pengajuan.
@@ -515,13 +520,13 @@ Bagi Pihak Ketiga/Swasta yang ingin mengajukan dokumen kerja sama dengan Pemprov
 
         <div class="space-y-4">
             <a href="#" on:click={() => (ModalProsedure = true)} class="block text-blue-600 hover:underline hover:text-blue-800 transition-colors">
-                Baca Prosedur Kerjasama
+                <InfoCircleSolid class="w-5 h-5 align-middle inline-flex" /> Baca Prosedur Kerjasama
             </a>   
             <a href={ TataCaraKerjasama } class="block text-blue-600 hover:underline hover:text-blue-800 transition-colors">
-                Baca Permendagri Tentang Kerjasama
+                <InfoCircleSolid class="w-5 h-5 align-middle inline-flex" /> Baca Permendagri Tentang Kerjasama
             </a>  
-             <a href="/tracking-pengajuan-kerjasama" class="block text-blue-600 hover:underline hover:text-blue-800 transition-colors">
-                Tracking Status Pengajuan Kerjasama
+             <a href="/tracking-pengajuan-kerjasama" class="block text-red-600 hover:underline hover:text-red-800 transition-colors">
+                <SearchSolid class="w-5 h-5 align-middle inline-flex" /> Tracking Status Pengajuan Kerjasama
             </a>    
         </div>
     </div>

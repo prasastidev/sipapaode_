@@ -95,7 +95,7 @@ function showimage(id) {
 
   
   <div class="container">
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Photo Profile Pegawai - Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Penelusuran Foto Pegawai - Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
     <br/>
 
      {#if $user.prefs['Role'] !== "PIC Tata Usaha"}

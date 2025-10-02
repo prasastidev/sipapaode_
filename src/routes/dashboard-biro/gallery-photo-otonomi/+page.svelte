@@ -173,7 +173,7 @@ function showimage(id) {
   </svelte:head>
 
  <div class="container">
-  <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profile dan Photo Gallery - Bidang Koordinator Otonomi Daerah</Heading>
+  <Heading tag="h3" customSize="text-2xl text-left font-extrabold  md:text-2xl lg:text-3xl">Profil dan Galeri Foto - Bagian Koordinator Otonomi Daerah</Heading>
  <br/>
 
  <div class="flex justify-start space-x-4">

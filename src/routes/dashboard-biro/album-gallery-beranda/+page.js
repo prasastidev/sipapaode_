@@ -16,7 +16,7 @@ export async function load({ parent }) {
         
         const galleryData = await getTableGalleryDokumentasi();
         
-        console.log('Gallery data from function:', galleryData);
+      //  console.log('Gallery data from function:', galleryData);
         
         return {
             DatasGallery: galleryData || { files: [], total: 0 }

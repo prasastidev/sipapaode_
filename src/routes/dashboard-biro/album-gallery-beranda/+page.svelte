@@ -34,13 +34,13 @@
     // Safe data handling
     $: {
         try {
-            console.log('Data received:', data);
+          //  console.log('Data received:', data);
             if (data?.DatasGallery) {
-                console.log('DatasGallery:', data.DatasGallery);
-                console.log('DatasGallery keys:', Object.keys(data.DatasGallery));
+              //  console.log('DatasGallery:', data.DatasGallery);
+              //  console.log('DatasGallery keys:', Object.keys(data.DatasGallery));
             }
         } catch (e) {
-            console.error('Error in data logging:', e);
+          //  console.error('Error in data logging:', e);
         }
     }
     
@@ -58,7 +58,7 @@
             
             return [];
         } catch (e) {
-            console.error('Error processing posts:', e);
+           // console.error('Error processing posts:', e);
             return [];
         }
     })();
@@ -87,7 +87,7 @@
             const formData = new FormData(formEl);
             const customImageId = ID.unique();
             
-            console.log('Uploading with file ID:', customImageId);
+          //  console.log('Uploading with file ID:', customImageId);
             
             // Upload file to storage
             await storage.createFile(
@@ -134,7 +134,7 @@
     }
 
     function openDeleteModal(item) {
-        console.log('Opening delete modal for item:', item);
+     //   console.log('Opening delete modal for item:', item);
         
         const docId = item.$id || item.id;
         
@@ -151,8 +151,8 @@
             fileId = docId;
         }
         
-        console.log('Document ID:', docId);
-        console.log('File ID:', fileId);
+      //  console.log('Document ID:', docId);
+      //  console.log('File ID:', fileId);
         
         if (!docId) {
             alert('Tidak dapat menghapus: ID tidak valid');
@@ -172,23 +172,23 @@
         let databaseDeleted = false;
         
         try {
-            console.log('🗑️ DELETE PROCESS START');
-            console.log('Document ID:', docId);
-            console.log('File ID:', fileId);
-            console.log('Bucket ID:', STORAGE_BUCKET_ID);
+        //    console.log('🗑️ DELETE PROCESS START');
+         //   console.log('Document ID:', docId);
+        //    console.log('File ID:', fileId);
+        //    console.log('Bucket ID:', STORAGE_BUCKET_ID);
             
             // STEP 1: Delete from storage first (safer approach)
-            console.log('Step 1: Deleting from storage...');
+       //     console.log('Step 1: Deleting from storage...');
             try {
                 await storage.deleteFile(STORAGE_BUCKET_ID, fileId);
                 storageDeleted = true;
-                console.log('✅ Storage deletion successful');
+             //   console.log('✅ Storage deletion successful');
             } catch (storageError) {
                 console.error('❌ Storage deletion failed:', storageError);
                 
                 // Jika file tidak ditemukan di storage, lanjutkan ke database
                 if (storageError.code === 404 || storageError.message.includes('not found')) {
-                    console.log('⚠️ File not found in storage, continuing to delete database record');
+                 //   console.log('⚠️ File not found in storage, continuing to delete database record');
                     storageDeleted = true; // Consider it deleted since it doesn't exist
                 } else {
                     // Jika error lain, stop proses
@@ -198,17 +198,17 @@
             
             // STEP 2: Delete from database (only if storage delete succeeded or file not found)
             if (storageDeleted) {
-                console.log('Step 2: Deleting from database...');
+              //  console.log('Step 2: Deleting from database...');
                 await deleteGalleryAlbumDepan(docId);
                 databaseDeleted = true;
-                console.log('✅ Database deletion successful');
+              //  console.log('✅ Database deletion successful');
             }
             
             // STEP 3: Close modal and refresh
             ConfirmDeleteModal = false;
             await invalidateAll();
             
-            console.log('✅ Delete process completed successfully');
+         //   console.log('✅ Delete process completed successfully');
             
         } catch (error) {
             console.error('❌ Delete process failed:', error);
@@ -242,7 +242,7 @@
 </script>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl">Halaman Penerbitan TimeLine Journal Kegiatan Biro Pemerintahan dan Otonomi Daerah Sultra</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold md:text-2xl lg:text-3xl">Timeline Aktivitas Biro Pemerintahan dan Otonomi Provinsi Sulawesi Tenggara</Heading>
     <br/>
     <br/>
   
@@ -297,7 +297,7 @@
     <center><hr style="width:80%;height:2px;background:#d6d6d6;"/></center>
     <br/><br/> 
 
-    <Heading tag="h4" customSize="text-xl text-left font-extrabold md:text-xl lg:text-2xl">🖼️ Daftar Kegiatan Biro Pemerintahan dan Otonomi Daerah Prov. Sultra</Heading>
+    <Heading tag="h4" customSize="text-xl text-left font-extrabold md:text-xl lg:text-2xl">🖼️ Dokumentasi Aktivitas Biro Pemerintahan dan Otonomi Daerah Prov. Sultra</Heading>
     <br/>
     
     <!-- Debug info 

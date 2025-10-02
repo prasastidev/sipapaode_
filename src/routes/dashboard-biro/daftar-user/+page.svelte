@@ -175,7 +175,7 @@ function startEdit(user) {
   </svelte:head>
   
   <div class="container">
-      <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Manajemen User Sipapaode</Heading>
+      <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Pengelolaan Akun User Sipapaode</Heading>
       <br/>
       {#if $user.prefs['Role'] !== "PIC Tata Usaha"}
     <Alert color="yellow">

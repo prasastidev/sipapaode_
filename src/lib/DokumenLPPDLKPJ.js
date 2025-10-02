@@ -31,15 +31,11 @@ export async function getTableDataDokLKPJ() {
 }
 
 
-export async function addTableDokLPPDLKPJ(Kabupaten_Kota, Jenis_laporan, Tahun, Nama_Pengirim, Contac_Person, NIP_pengirim, Instansi_Pengirim, generateid) {
+export async function addTableDokLPPDLKPJ(Kabupaten_Kota, Jenis_laporan, Tahun, generateid) {
     await databases.createDocument(IDEAS_DATABASE_ID, IDEAS_COLLECTION_ID, generateid, {
         Kabupaten_Kota,
         Jenis_laporan,
-        Tahun,
-        Nama_Pengirim,
-        Contac_Person,
-        NIP_pengirim,
-        Instansi_Pengirim
+        Tahun
     });
 }
 

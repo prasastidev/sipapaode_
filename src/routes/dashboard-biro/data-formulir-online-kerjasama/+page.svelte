@@ -205,7 +205,7 @@ const remove = async (id) => {
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Informasi Data Submit Pengajuan Kerjasama</Heading>
+  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Riwayat Status Pengajuan Kerjasama Provinsi Sulawesi Tenggara</Heading>
   <br/>
  
   {#if $user.prefs['Role'] !== "PIC Kerjasama"}

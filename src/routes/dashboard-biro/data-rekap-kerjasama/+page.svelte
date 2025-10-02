@@ -351,7 +351,7 @@ $: years = [...new Set(allPosts.map(item => item.TahunMulai))].sort((a, b) => b 
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Data Arsip File Dokumen Kerjasama - Prov. Sulawesi Tenggara</Heading>
+  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Manajemen Arsip Dokumen Kerjasama Provinsi Sulawesi Tenggara</Heading>
   <br/>
 
     {#if $user.prefs['Role'] !== "PIC Kerjasama"}

@@ -90,7 +90,7 @@ function upadateAktivasiBanner(Status_banner, id) {
 </svelte:head>
 
 <div class="container">
-    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Halaman Pengeditan dan Aktivasi Text Banner</Heading>
+    <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Pengeditan dan Aktivasi Banner Teks</Heading>
     <br/>
 
     Contoh Tampilan pada halaman Beranda:<br/> <br/>

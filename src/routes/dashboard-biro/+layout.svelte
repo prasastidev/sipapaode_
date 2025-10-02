@@ -37,62 +37,62 @@
                   <svelte:fragment slot="icon">
                     <UsersSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                   <SidebarDropdownItem label="📁 Data Arsip File Dokumen Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
-                  <SidebarDropdownItem label="📩 Data Submit Pengajuan Kerjasama" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
+                   <SidebarDropdownItem label="📁 Manajemen Arsip Dokumen Kerjasama" href="/dashboard-biro/data-rekap-kerjasama" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="📩 Daftar Pengajuan Kerjasama Masuk" href="/dashboard-biro/data-formulir-online-kerjasama" class="pl-4 ps-8"/>
                  <!--  <SidebarDropdownItem label="✅ Update Checklist Laporan Evaluasi Kerjasama" href="/dashboard-biro/laporan-evaluasi-kerjasama" class="pl-4 ps-8"/> -->
-                  <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="🖼️ Profil dan Galeri Foto Bag. Kerjasama" href="/dashboard-biro/gallery-photo-kerjasama" class="pl-4 ps-8"/>
                 </SidebarDropdownWrapper>
                 <SidebarDropdownWrapper label="Koord. Pemerintahan" {spanClass} style="text-align: left;background:#ffeacd;">
                   <svelte:fragment slot="icon">
                     <LandmarkSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>
-                  <SidebarDropdownItem label="🗺️ Data Pemerintahan, Kode Wilayah, Pulau dan Rupa Bumi" href="/dashboard-biro/lanskap-sultra" class="pl-4 ps-8" />
-                  <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Pemerintahan" href="/dashboard-biro/gallery-photo-pemerintahan" class="pl-4 ps-8"/>
+                  <SidebarDropdownItem label="🗺️ Data Geospasial dan Administrasi Provinsi Sulawesi Tenggara" href="/dashboard-biro/lanskap-sultra" class="pl-4 ps-8" />
+                  <SidebarDropdownItem label="🖼️ Profil dan Galeri Foto Bag. Koordinator Pemerintahan" href="/dashboard-biro/gallery-photo-pemerintahan" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
                   <SidebarDropdownWrapper label="Koord. Otonomi Daerah" {spanClass} style="text-align: left;background:#ffeacd;">
                     <svelte:fragment slot="icon">
                       <BuildingSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
-                    <SidebarDropdownItem label="✅ Update Checklist Laporan LPPD & LKPJ" href="/dashboard-biro/laporan-lppd" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="📁 Data Dokumen LPPD & LKPJ" href="/dashboard-biro/rekap-lppd-lkpj" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="🗂️ Data Dokumen SK" href="/dashboard-biro/arsip-sk" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Otonomi Daerah" href="/dashboard-biro/gallery-photo-otonomi" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="📁 Manajemen Arsip Dokumen LPPD dan LKPJ" href="/dashboard-biro/rekap-lppd-lkpj" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="✅ Checklist Pengiriman LPPD & LKPJ Akhir Tahun" href="/dashboard-biro/laporan-lppd" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="🗂️ Manajemen Arsip SK Pemerintahan" href="/dashboard-biro/arsip-sk" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="🖼️ Profil dan Galeri Foto Bag. Otonomi Daerah" href="/dashboard-biro/gallery-photo-otonomi" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
                   <SidebarDropdownWrapper label="Tata Usaha" {spanClass} style="text-align:left;background:#ffeacd;">
                     <svelte:fragment slot="icon">
                       <ObjectsColumnSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
-                    <SidebarDropdownItem label="👤 Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
-                    <SidebarDropdownItem label="📷 Browse Photo Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
-                    <SidebarDropdownItem label="🖼️ Profile dan Photo Gallery Tata Usaha" href="/dashboard-biro/gallery-photo-tatausaha" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="👤 Informasi Data Pegawai" href="/dashboard-biro/data-pegawai-biro" class="pl-4 ps-8" />
+                    <SidebarDropdownItem label="📷 Penelusuran Foto Pegawai" href="/dashboard-biro/photo-pegawai" class="pl-4 ps-8"/>
+                    <SidebarDropdownItem label="🖼️ Profil dan Galeri Foto Subag. Tata Usaha" href="/dashboard-biro/gallery-photo-tatausaha" class="pl-4 ps-8"/>
                   </SidebarDropdownWrapper>
-                  <SidebarItem label="TimeLine Journal Kegiatan" href="/dashboard-biro/album-gallery-beranda">
+                  <SidebarItem label="TimeLine Jurnal Kegiatan" href="/dashboard-biro/album-gallery-beranda">
                     <svelte:fragment slot="icon">
                       <FileImageSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                   <SidebarItem label="Data Pengajuan Permohonan Informasi" href="/dashboard-biro/data-formulir-permohonan-informasi">
+                   <SidebarItem label="Rekap Data Permohonan Informasi" href="/dashboard-biro/data-formulir-permohonan-informasi">
                     <svelte:fragment slot="icon">
                       <AddressBookSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                    <SidebarItem label="Text Banner" href="/dashboard-biro/banner-info">
+                    <SidebarItem label="Banner Teks" href="/dashboard-biro/banner-info">
                     <svelte:fragment slot="icon">
                       <BullhornSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Visibility Formulir" href="/dashboard-biro/status-layanan">
+                  <SidebarItem label="Visibilitas Formulir Layanan" href="/dashboard-biro/status-layanan">
                     <svelte:fragment slot="icon">
                       <BadgeCheckSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
-                  <SidebarItem label="Info User PIC" href="/dashboard-biro/info-pic">
+                  <SidebarItem label="Informasi User PIC" href="/dashboard-biro/info-pic">
                     <svelte:fragment slot="icon">
                       <UserHeadsetSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                     </svelte:fragment>
                   </SidebarItem>
                  
-                <SidebarItem label="Manajemen Users" href="/dashboard-biro/daftar-user">
+                <SidebarItem label="Manajemen Akun Users" href="/dashboard-biro/daftar-user">
                   <svelte:fragment slot="icon">
                     <UsersGroupSolid class="w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" />
                   </svelte:fragment>

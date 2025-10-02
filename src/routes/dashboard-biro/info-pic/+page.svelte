@@ -63,7 +63,7 @@
 </svelte:head>
 
 <div class="container">
-  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Daftar Informasi User PIC Bidang</Heading>
+  <Heading tag="h3" customSize="text-xl text-left font-extrabold  md:text-2xl lg:text-3xl">Daftar Informasi User PIC - Biro Pemerintahan dan Otonomi Daerah</Heading>
   <br/><br/>
 
    <!-- Filter Buttons -->
