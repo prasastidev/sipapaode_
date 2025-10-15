@@ -1,15 +1,15 @@
-// since there's no dynamic data here, we can prerender
-// it so that it gets served as a static asset in production
-export const prerender = true;
+import { redirect } from "@sveltejs/kit";
+
+// Halaman ini tidak bisa di-prerender karena bergantung pada status login pengguna
 export const ssr = true;
 export const csr = true;
 
-import { redirect } from "@sveltejs/kit";
-
 export const load = async ({ parent }) => {
-  // Gets the data returned from the root layout
+  // Mengambil data sesi dari layout utama
   const { account } = await parent();
+
+  // Jika pengguna sudah login (ada data 'account'), alihkan ke dashboard
   if (account) {
-    redirect(303, "/dashboard-biro");
+    throw redirect(303, "/dashboard-biro");
   }
 };

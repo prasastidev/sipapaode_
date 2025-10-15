@@ -18,28 +18,51 @@
 
      let copiedId = null; // Untuk melacak ID gambar yang URL-nya baru saja disalin
 
-    async function copyUrlToClipboard(id) {
-        // 1. Dapatkan URL gambar dalam bentuk teks
-        const urlToCopy = showimage(id).href;
+   async function copyUrlToClipboard(id) {
+    console.log("Mencoba menyalin URL untuk ID:", id);
 
-        try {
-            // 2. Gunakan Clipboard API untuk menyalin teks
-            await navigator.clipboard.writeText(urlToCopy);
-
-            // 3. Beri tahu pengguna bahwa penyalinan berhasil
-            copiedId = id; // Set ID yang baru disalin
-            
-            // 4. Kembalikan teks tombol ke semula setelah 2 detik
-            setTimeout(() => {
-                copiedId = null;
-            }, 2000);
-
-        } catch (err) {
-            console.error('Gagal menyalin URL:', err);
-            // Beri tahu pengguna jika terjadi error (misalnya di koneksi http)
-            alert('Gagal menyalin URL. Pastikan Anda mengakses halaman ini melalui koneksi aman (HTTPS).');
-        }
+    if (!id) {
+        console.error("Proses dibatalkan: ID file tidak valid.");
+        return;
     }
+
+    try {
+        // 1. Dapatkan objek URL dari Appwrite SDK
+        const urlObject = storage.getFileView('67999587003989233678', id);
+        
+        // 2. Cetak objek mentah untuk diagnosis
+        console.log("Objek URL yang diterima dari Appwrite:", urlObject);
+
+        // 3. Konversi objek ke string menggunakan .toString()
+        // Ini adalah perbaikan utama.
+        const urlToCopy = urlObject.toString();
+
+        // 4. Pastikan string URL yang dihasilkan valid
+        if (!urlToCopy || !urlToCopy.startsWith('http')) {
+            console.error("Gagal mengubah objek URL menjadi string yang valid. Hasil:", urlToCopy);
+            alert("Gagal memproses URL gambar. Silakan periksa console log.");
+            return;
+        }
+        
+        console.log("URL yang akan disalin:", urlToCopy);
+
+        // 5. Gunakan Clipboard API untuk menyalin teks
+        await navigator.clipboard.writeText(urlToCopy);
+        console.log("Berhasil disalin ke clipboard!");
+
+        // Beri tahu pengguna bahwa penyalinan berhasil
+        copiedId = id;
+        
+        // Kembalikan teks tombol ke semula setelah 2 detik
+        setTimeout(() => {
+            copiedId = null;
+        }, 2000);
+
+    } catch (err) {
+        console.error('Terjadi kesalahan saat menyalin URL:', err);
+        alert('Gagal menyalin URL. Pastikan Anda berada di koneksi HTTPS atau localhost.');
+    }
+}
 
 
 function showimage(id) {
