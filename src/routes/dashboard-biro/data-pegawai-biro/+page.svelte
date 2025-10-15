@@ -67,11 +67,15 @@
     { value: 'ANALISIS KEBIJAKAN AHLI MADYA', name: 'ANALISIS KEBIJAKAN AHLI MADYA' },
     { value: 'KABAG KERJASAMA', name: 'KABAG KERJASAMA' },
     { value: 'ANALISIS KEBIJAKAN AHLI MUDA', name: 'ANALISIS KEBIJAKAN AHLI MUDA' },
+    { value: 'ANALISIS KEBIJAKAN AHLI PERTAMA', name: 'ANALISIS KEBIJAKAN AHLI PERTAMA' },
     { value: 'KASUBAG TATA USAHA BIRO', name: 'KASUBAG TATA USAHA BIRO' },
     { value: 'PENELAAH TEKNIS KEBIJAKAN', name: 'PENELAAH TEKNIS KEBIJAKAN' },
     { value: 'PENATA KELOLA PEMERINTAHAN', name: 'PENATA KELOLA PEMERINTAHAN' },
+    { value: 'PENATA LAYANAN OPERASIONAL', name: 'PENATA LAYANAN OPERASIONAL' },
     { value: 'PENGOLAH DATA DAN INFORMASI', name: 'PENGOLAH DATA DAN INFORMASI' },
-    { value: 'PENGADMINISTRASI PERKANTORAN', name: 'PENGADMINISTRASI PERKANTORAN' }
+    { value: 'PENGADMINISTRASI PERKANTORAN', name: 'PENGADMINISTRASI PERKANTORAN' },
+    { value: 'PRANATA KEWILAYAHAN', name: 'PRANATA KEWILAYAHAN' },
+    { value: 'FASILITATOR PEMERINTAHAN', name: 'FASILITATOR PEMERINTAHAN' }
   ]; 
 
   // DAFTAR BARU: 14 Jabatan Organisasi
@@ -101,7 +105,6 @@ let getJabatanOrganisasi = '';
 
   // Items per page options
   let itemsPerPageOptions = [
-    { value: 5, name: '5 per halaman' },
     { value: 10, name: '10 per halaman' },
     { value: 20, name: '20 per halaman' },
     { value: 50, name: '50 per halaman' },
@@ -240,7 +243,7 @@ let getJabatanOrganisasi = '';
 
   // Pagination - menggunakan reactive statement
   let currentPage = 1;
-  let postsPerPage = 20;
+  let postsPerPage = 50;
 
   // Reactive statement untuk memastikan data selalu ter-update
   // $: allPosts = data.TableDataPegawai?.documents || [];
@@ -1057,8 +1060,8 @@ onMount(() => {
                       <b>NIP:</b><br/>{cetakTabel.NIP}<br/>
                       <br/><b>Golongan:</b><br/>{cetakTabel.Golongan}<br/>
                       <br/><b>Jabatan:</b><br/>{cetakTabel.Jabatan}<br/>
-                       <br/><b>Jabatan Struktur Organisasi:</b><br/>
-                              {#if cetakTabel.jabatanOrganisasi === 'TIDAK_DITAMPILKAN'}
+                       <br/><b>Jabatan Struktur Organisasi:</b>
+                              <br/>{#if cetakTabel.jabatanOrganisasi === 'TIDAK_DITAMPILKAN'}
                               Tidak Ditampilkan
                                {:else}
                                {cetakTabel.jabatanOrganisasi || 'Belum Diatur'}
